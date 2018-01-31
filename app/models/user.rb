@@ -10,4 +10,27 @@ class User < ApplicationRecord
 
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
+
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)                                                    
+  end
+
+  def password=(password)
+    self.password_digest = BCrypt::Password.create(password)
+  end
+
+  # def is_password?(password)
+  #   BCrypt::Password.new(self.password_digest).is_password(password)
+  # end
+
+  def self.find_by_email(email, password)
+    user = User.find_by_email(email)
+    if user && user.authenticate(password)
+      user
+    end
+    nil
+  end
+
 end
