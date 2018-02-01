@@ -1,6 +1,7 @@
 import React from 'react';
 import Books from './Books';
 import Flash from './Flash';
+import Home from './Home';
 import NoMatch from './NoMatch';
 import NavBar from './NavBar';
 import Login from '../auth/Login';
@@ -14,7 +15,7 @@ class App extends React.Component {
         <Flash />
         <NavBar />
         <Switch>
-          <Route exact path='/' component={Books} />
+          <Route exact path='/' component={Home} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/register' component={Register} />
           <Route component={NoMatch} />
