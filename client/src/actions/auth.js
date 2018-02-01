@@ -13,7 +13,7 @@ const logout = () => {
 
 export const registerUser = (email, password, passwordConfirmation, history, name) => {
   return dispatch => {
-    axios.post('/api/user', { email, password, password_confirmation: passwordConfirmation, name })
+    axios.post('/api/users', {user: { email: email, password: password, password_confirmation: passwordConfirmation, name: name }})
       .then(res => {
         const { data: { data: user }, headers } = res;
         dispatch(login(user));
@@ -21,8 +21,9 @@ export const registerUser = (email, password, passwordConfirmation, history, nam
         history.push('/');
       })
       .catch(res => {
+        debugger
         const messages =
-          res.response.data.errors.full_messages.map(message =>
+          res.response.data.errors.map(message =>
             <div>{message}</div>);
         const { headers } = res;
         // dispatch(setHeaders(headers));
