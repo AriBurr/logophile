@@ -4,6 +4,7 @@ import { Grid } from 'semantic-ui-react';
 
 const Books = ({ books }) => (
   books.map( book => {
+    debugger
     return (
       <Grid.Column>
         <Book key={book.id} book={book} />

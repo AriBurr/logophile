@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { searchAll } from '../actions/books';
 import Books from './Books';
 import SearchBar from './SearchBar';
 import styled from 'styled-components';
@@ -13,27 +14,27 @@ import {
 const EnlargeGrid = styled(Grid)`
   height: 100vh;
 `
-
 class Home extends React.Component {
-  state = { books: [] }
+  state = { searchLoaded: false }
 
-  bookSearch = (term) => {
-    axios.get(`https://www.googleapis.com/books/v1/volumes?q=${term}&startIndex=0&maxResults=15`)
-      .then( res => {
-        this.setState({ books: res.data.items })
-      });
+  setSearchLoaded = () => this.setState({ searchLoaded: true });
+
+  handleSearch = (term) => {
+    const { search } = this.state;
+    this.props.dispatch(searchAll(term, this.setSearchLoaded));
   }
 
   render() {
-    const { books } = this.state;
+    const { books } = this.props;
     return (
       <Container>
         <Header as='h1' textAlign='center' block>Search Books</Header>
-        <SearchBar onSearchTermChange={this.bookSearch} />
+        <SearchBar onSearchTermChange={this.handleSearch} />
         <Grid
           as={EnlargeGrid}
-          columns={5}>
-          <Books books={books} />
+          columns={5}
+        >
+          { books && <Books books={books} /> }
         </Grid>
       </Container>
     );
@@ -41,4 +42,8 @@ class Home extends React.Component {
 
 }
 
-export default connect()(Home);
+const mapStateToProps = (state) => {
+  return { books: state.books }
+}
+
+export default connect(mapStateToProps)(Home);
