@@ -1,12 +1,14 @@
 class UsersController < ApplicationController
+  protect_from_forgery except: [:create]
+
   def new
     @user = User.new
   end
 
   def create
+    binding.pry
     @user = User.new(user_params)
     if @user.save
-      log_in @user
       render json: @user
     else
       render json: errors.full_messages
