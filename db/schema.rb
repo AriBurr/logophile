@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20180202043811) do
+=======
+ActiveRecord::Schema.define(version: 20180202181352) do
+>>>>>>> user-auth
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +29,10 @@ ActiveRecord::Schema.define(version: 20180202043811) do
     t.datetime "token_created_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["token", "token_created_at"], name: "index_users_on_token_and_token_created_at"
+<<<<<<< HEAD
+=======
+    t.index ["token"], name: "index_users_on_token"
+>>>>>>> user-auth
   end
 
 end

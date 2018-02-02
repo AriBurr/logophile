@@ -25,15 +25,9 @@ class ApiController < ApplicationController
 
     private
 
-    def authenticate_token
-      authenticate_with_http_token do |token, options|
-        if user = User.with_unexpired_token(token, 2.days.ago)
-        # Compare the tokens in a time-constant manner, to mitigate timing attacks.
-          ActiveSupport::SecurityUtils.secure_compare(
-                          ::Digest::SHA256.hexdigest(token),
-                          ::Digest::SHA256.hexdigest(user.token))
-          user
+      def authenticate_token
+        authenticate_with_http_token do |token, options|
+          User.find_by(token: token)
         end
       end
-    end
 end

@@ -11,14 +11,19 @@ class Api::SessionsController < ApiController
   end
 
   def destroy
-    binding.pry
-    current_user.logout
-    head :ok
+    if current_user
+      current_user.logout
+      head :ok
+    else
+      binding.pry
+      render json: [ 'No users are logged in.' ], status: 422
+    end
   end
 
   private
 
+  # user with token
   def send_auth_token_for_valid_login_of(user)
-    render json: { token: user.token }
+    render json: user
   end
 end
