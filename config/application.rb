@@ -22,9 +22,9 @@ module Logophile
     config.load_defaults 5.1
 
     # allows for cookies to store in rails API mode
-    # config.session_store :cookie_store, key: "_YOUR_APP_session_#{Rails.env}"
-    # config.middleware.use ActionDispatch::Cookies # Required for all session management
-    # config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
+    config.session_store :cookie_store, key: "_YOUR_APP_session_#{Rails.env}"
+    config.middleware.use ActionDispatch::Cookies # Required for all session management
+    config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

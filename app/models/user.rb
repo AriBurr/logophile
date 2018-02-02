@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_secure_password
   has_secure_token
 
+  attr_accessor :password, :password_confirmation
+
   before_save { email.downcase! }
 
   validates :name, presence: true, length: { maximum: 50 }

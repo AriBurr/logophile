@@ -14,7 +14,7 @@ const logout = () => {
 export const registerUser = (email, password, passwordConfirmation, history, name) => {
   return dispatch => {
     debugger
-    axios.post('/api/users', { email, password, password_confirmation: passwordConfirmation, name })
+    axios.post('/api/users', {user: { email: email, password: password, password_confirmation: passwordConfirmation, name: name }})
       .then(res => {
         handleLogin()
         dispatch(login(res.data));
