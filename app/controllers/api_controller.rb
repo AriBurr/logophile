@@ -5,7 +5,6 @@ class ApiController < ApplicationController
   end
 
   def current_user
-    binding.pry
     @current_user ||= authenticate_token
   end
 

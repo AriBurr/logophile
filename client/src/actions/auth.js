@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { setFlash } from '../actions/flash';
-// import { setHeaders } from '../actions/headers';
+import { setHeaders } from '../actions/headers';
 
 const login = user => {
   return { type: 'LOGIN', user };
@@ -15,28 +15,29 @@ export const registerUser = (email, password, passwordConfirmation, history, nam
   return dispatch => {
     axios.post('/api/users', {user: { email: email, password: password, password_confirmation: passwordConfirmation, name: name }})
       .then(res => {
-        debugger
+        const { headers } = res;
+
+        dispatch(setHeaders(headers));
         dispatch(handleLogin(email, password, history))
-        // dispatch(setHeaders(headers));
         // history.push('/');
       })
       .catch(res => {
         const messages =
           res.response.data.errors.map(message =>
             <div>{message}</div>);
-        // const { headers } = res;
-        // dispatch(setHeaders(headers));
+        const { headers } = res;
+        dispatch(setHeaders(headers));
         dispatch(setFlash(messages, 'red'));
       });
   };
 };
 
-export const handleLogout = history => {
+export const handleLogout = (user, history) => {
   return dispatch => {
-    axios.delete('/api/logout.json')
+    axios.delete('/api/logout.json', { headers: { Authorization: `Token token=${user.token}`} })
       .then(res => {
-        // const { headers } = res;
-        // dispatch(setHeaders(headers));
+        const { headers } = res;
+        dispatch(setHeaders(headers));
         dispatch(logout());
         dispatch(setFlash('Logged out successfully!', 'green'));
         history.push('/login');
@@ -46,7 +47,7 @@ export const handleLogout = history => {
           res.response.data.errors.map(message =>
             <div>{message}</div>);
         const { headers } = res;
-        // dispatch(setHeaders(headers));
+        dispatch(setHeaders(headers));
         dispatch(setFlash(messages, 'red'));
       });
   };
@@ -56,7 +57,8 @@ export const handleLogin = (email, password, history) => {
   return dispatch => {
     axios.post('/api/login.json', { email, password })
       .then(res => {
-        // dispatch(setHeaders(headers));
+        const { headers } = res;
+        dispatch(setHeaders(headers));
         debugger
         dispatch(login(res.data));
         history.push('/');
@@ -66,7 +68,7 @@ export const handleLogin = (email, password, history) => {
           res.response.data.errors.map(message =>
             <div>{message}</div>);
         const { headers } = res;
-        // dispatch(setHeaders(headers));
+        dispatch(setHeaders(headers));
         dispatch(setFlash(messages, 'red'));
       });
   };
