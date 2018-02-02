@@ -18,7 +18,8 @@ class Api::SessionsController < ApiController
 
   private
 
+  # user with token
   def send_auth_token_for_valid_login_of(user)
-    render json: { token: user.token }
+    render json: user
   end
 end
