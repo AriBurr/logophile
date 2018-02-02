@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import { searchAll } from '../actions/books';
 import Banner from './Banner';
 import BookDescription from './BookDescription';
 import Book from './Book';
+import Books from './Books';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 import {
   Grid,
   Header,
@@ -43,7 +44,6 @@ class Home extends React.Component {
   render() {
     const { searchLoaded, activeBook } = this.state;
     const { books } = this.props;
-    console.log(activeBook)
     return (
       <div>
         <Banner searchTerms={this.handleSearch} />
@@ -54,17 +54,7 @@ class Home extends React.Component {
               as={EnlargeGrid}
               columns={5}
             >
-              { books &&
-                books.map( book => {
-                  return (
-                    <Grid.Column onClick={ () => this.toggleDescription(book) }>
-                      <Book
-                        key={book.id}
-                        book={book}
-                      />
-                    </Grid.Column>
-                  )
-                })}
+              { books && <Books toggleDescription={this.toggleDescription} /> }
             </Grid>
           </Grid.Column>
           <Grid.Column width={6}>

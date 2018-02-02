@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {paginateText} from '../utils/modules';
 import noCover from '../assets/default.jpg';
 import styled from 'styled-components';
 import {
   Grid,
+  List,
  } from 'semantic-ui-react';
 
 const Image = styled.img`
@@ -17,20 +19,28 @@ class BookDescription extends React.Component {
     const { book } = this.props;
     return (
       <Grid>
-        <Grid.Row>
-          { book.volumeInfo.imageLinks ?
-            <Image
-              src={ book.volumeInfo.imageLinks.thumbnail }
-              alt={`${book.volumeInfo.title} cover`}
-            /> :
-            <Image
-              src={ noCover }
-              alt={`${book.volumeInfo.title} cover`}
-            />
-          }
-        </Grid.Row>
-        <Grid.Row>
-          { book.volumeInfo.description }
+        <Grid.Row columns={2}>
+          <Grid.Column>
+            { book.volumeInfo.imageLinks ?
+              <Image
+                src={book.volumeInfo.imageLinks.thumbnail}
+                alt={'book cover'}
+              /> :
+              <Image
+                src={noCover}
+                alt={'book cover'}
+              />
+            }
+            <List>
+              <List.Item>Title: {book.volumeInfo.title}</List.Item>
+              <List.Item>Author: {book.volumeInfo.authors[0]}</List.Item>
+              <List.Item>Pages: {book.volumeInfo.pageCount} pgs</List.Item>
+              <List.Item>Published: {book.volumeInfo.publisher}, {book.volumeInfo.publishedDate}</List.Item>
+            </List>
+          </Grid.Column>
+          <Grid.Column>
+            {paginateText(book.volumeInfo.description)}
+          </Grid.Column>
         </Grid.Row>
       </Grid>
     )
