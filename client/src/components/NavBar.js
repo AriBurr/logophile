@@ -8,23 +8,28 @@ class NavBar extends Component {
   rightNavs = () => {
     const { user, dispatch, history } = this.props;
 
-
-    return (
-      <Menu.Menu position='right'>
-        <Menu.Item
-          name='Logout'
-          onClick={() => dispatch(handleLogout(user, history))}
-        />
-        <Link to='/register'>
-          <Menu.Item name='Register' />
-        </Link>
-        <Link to='/login'>
-          <Menu.Item name='Login' />
-        </Link>
-      </Menu.Menu>
-    );
-
+    if(user.id){
+      return (
+        <Menu.Menu position='right'>
+          <Menu.Item
+            name='Logout'
+            onClick={() => dispatch(handleLogout(user, history))}
+          />
+        </Menu.Menu>
+      )
+    }else{
+      return (
+        <Menu.Menu position='right'>
+          <Link to='/register'>
+            <Menu.Item name='Register' />
+          </Link>
+          <Link to='/login'>
+            <Menu.Item name='Login' />
+          </Link>
+        </Menu.Menu>
+      );
     }
+  }
 
   render() {
     return (

@@ -43,7 +43,6 @@ export const handleLogout = (user, history) => {
         history.push('/login');
       })
       .catch(res => {
-        // debugger
         // const messages =
         //   res.response.data.errors.map(message =>
         //     <div>{message}</div>);

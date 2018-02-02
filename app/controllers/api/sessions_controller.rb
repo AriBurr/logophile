@@ -1,5 +1,5 @@
 class Api::SessionsController < ApiController
-  skip_before_action :require_login, only: [:create], raise: false
+  skip_before_action :require_login, only: [:create, :destroy], raise: false
 
   def create
     if user = User.valid_login?(params[:email], params[:password])
@@ -15,8 +15,7 @@ class Api::SessionsController < ApiController
       current_user.logout
       head :ok
     else
-      binding.pry
-      render json: [ 'No users are logged in.' ], status: 422
+      render json: { errors: ['User must be logged in'] }, status: 418
     end
   end
 
