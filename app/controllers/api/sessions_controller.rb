@@ -14,6 +14,7 @@ class Api::SessionsController < ApplicationController
   end
 
   def destroy
+    binding.pry
     if current_user
       log_out
       render json: {}

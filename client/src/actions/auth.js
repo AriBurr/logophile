@@ -15,17 +15,16 @@ export const registerUser = (email, password, passwordConfirmation, history, nam
   return dispatch => {
     axios.post('/api/users', {user: { email: email, password: password, password_confirmation: passwordConfirmation, name: name }})
       .then(res => {
-        const { data: { data: user }, headers } = res;
-        dispatch(login(user));
+        debugger
+        dispatch(login(res.data));
         // dispatch(setHeaders(headers));
         history.push('/');
       })
       .catch(res => {
-        debugger
         const messages =
           res.response.data.errors.map(message =>
             <div>{message}</div>);
-        const { headers } = res;
+        // const { headers } = res;
         // dispatch(setHeaders(headers));
         dispatch(setFlash(messages, 'red'));
       });
@@ -34,9 +33,9 @@ export const registerUser = (email, password, passwordConfirmation, history, nam
 
 export const handleLogout = history => {
   return dispatch => {
-    axios.delete('/api/auth/sign_out')
+    axios.delete('/api/session')
       .then(res => {
-        const { headers } = res;
+        // const { headers } = res;
         // dispatch(setHeaders(headers));
         dispatch(logout());
         dispatch(setFlash('Logged out successfully!', 'green'));

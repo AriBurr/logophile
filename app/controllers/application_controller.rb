@@ -1,7 +1,14 @@
 class ApplicationController < ActionController::API
 
+  helper_method :current_user, :logged_in?
+
   def log_in(user)
     session[:session_token] = user.id
+  end
+
+
+  def current_user
+    @current_user ||= User.find_by_id(session[:user])
   end
 
   def remember(user)
@@ -10,17 +17,17 @@ class ApplicationController < ActionController::API
     cookies.permanent[:remember_token] = user.remember_token
   end
 
-  def current_user
-    if (user_id = session[:user_id])
-      @current_user ||= User.find_by(id: user_id)
-    elsif (user_id = cookies.signed[:user_id])
-      user = User.find_by(id: user_id)
-      if user && user.authenticated?(cookies[:remember_token])
-        log_in user
-        @current_user = user
-      end
-    end
-  end
+  # def current_user
+  #   if (user_id = session[:user_id])
+  #     @current_user ||= User.find_by(id: user_id)
+  #   elsif (user_id = cookies.signed[:user_id])
+  #     user = User.find_by(id: user_id)
+  #     if user && user.authenticated?(cookies[:remember_token])
+  #       log_in user
+  #       @current_user = user
+  #     end
+  #   end
+  # end
 
   def forget(user)
     user.forget

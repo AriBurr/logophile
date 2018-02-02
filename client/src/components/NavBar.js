@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Menu } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { handleLogout } from '../actions/auth';
+import { handleLogout } from '../actions/auth';
 
 class NavBar extends Component {
   rightNavs = () => {
@@ -13,7 +13,7 @@ class NavBar extends Component {
       <Menu.Menu position='right'>
         <Menu.Item
           name='Logout'
-          onClick={() => console.log('logout')}
+          onClick={() => dispatch(handleLogout(history))}
         />
         <Link to='/register'>
           <Menu.Item name='Register' />

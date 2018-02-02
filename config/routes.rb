@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :users, only: [:new, :create]
-    resources :sessions, only: [:create, :destroy]
+    resource :session, only: [:create, :destroy]
   end
 
   #Do not place any routes below this one

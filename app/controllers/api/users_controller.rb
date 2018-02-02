@@ -12,7 +12,6 @@ class Api::UsersController < ApplicationController
       log_in @user
       render json: @user
     else
-      binding.pry
       render json: { errors: @user.errors.full_messages }, status: 422
     end
   end
