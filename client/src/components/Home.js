@@ -1,12 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import { searchAll } from '../actions/books';
-import Books from './Books';
-import SearchBar from './SearchBar';
+import Banner from './Banner';
+import BookDescription from './BookDescription';
+import Book from './Book';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import {
-  Container,
   Grid,
   Header,
  } from 'semantic-ui-react';
@@ -14,29 +14,64 @@ import {
 const EnlargeGrid = styled(Grid)`
   height: 100vh;
 `
+
 class Home extends React.Component {
-  state = { searchLoaded: false }
+  state = { searchLoaded: false, terms: {}, activeBook: {} }
 
   setSearchLoaded = () => this.setState({ searchLoaded: true });
 
-  handleSearch = (term) => {
-    const { search } = this.state;
-    this.props.dispatch(searchAll(term, this.setSearchLoaded));
+  handleSearch = (terms) => {
+    const { dispatch } = this.props;
+    this.setState({terms: terms})
+    dispatch(searchAll(this.setSearchLoaded, terms));
+  }
+
+  searchTerms = () => {
+    const { terms } = this.state;
+    let results = ''
+    if (terms.title.length > 0) results += `${terms.title} `
+    if (terms.author.length > 0) results += `${terms.author} `
+    if (terms.ibsn.length > 0) results += terms.ibsn
+    return results
+  }
+
+  toggleDescription = (book) => {
+    const { activeBook } = this.state;
+    this.setState({ activeBook: book });
   }
 
   render() {
+    const { searchLoaded, activeBook } = this.state;
     const { books } = this.props;
+    console.log(activeBook)
     return (
-      <Container>
-        <Header as='h1' textAlign='center' block>Search Books</Header>
-        <SearchBar onSearchTermChange={this.handleSearch} />
-        <Grid
-          as={EnlargeGrid}
-          columns={5}
-        >
-          { books && <Books books={books} /> }
+      <div>
+        <Banner searchTerms={this.handleSearch} />
+        <Grid divided>
+          <Grid.Column width={10}>
+            { searchLoaded && <Header>Your Search Results for { this.searchTerms() }...</Header> }
+            <Grid
+              as={EnlargeGrid}
+              columns={5}
+            >
+              { books &&
+                books.map( book => {
+                  return (
+                    <Grid.Column onClick={ () => this.toggleDescription(book) }>
+                      <Book
+                        key={book.id}
+                        book={book}
+                      />
+                    </Grid.Column>
+                  )
+                })}
+            </Grid>
+          </Grid.Column>
+          <Grid.Column width={6}>
+            { Object.keys(activeBook).length !== 0 && <BookDescription book={this.state.activeBook} /> }
+          </Grid.Column>
         </Grid>
-      </Container>
+      </div>
     );
   }
 

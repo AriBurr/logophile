@@ -1,10 +1,9 @@
 import React from 'react';
 import Book from './Book';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Header } from 'semantic-ui-react';
 
-const Books = ({ books }) => (
+const Books = ({ books, terms }) => (
   books.map( book => {
-    debugger
     return (
       <Grid.Column>
         <Book key={book.id} book={book} />
