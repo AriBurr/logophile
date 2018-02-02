@@ -1,31 +1,24 @@
-class Api::SessionsController < ApplicationController
-  def create
-    email = params[:session][:email].downcase
-    password = params[:session][:password]
-    user = User.find_by_email(email, password )
-    if user
-      log_in(user)
+class Api::SessionsController < ApiController
+  skip_before_action :require_login, only: [:create], raise: false
 
   def create
-    email = params[:session][:email].downcase
-    password = params[:session][:password]
-    user = User.find_by_email(email, password)
-    if user
-      log_in(user)
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      render json: user
+    if user = User.valid_login?(params[:email], params[:password])
+      user.allow_token_to_be_used_only_once
+      send_auth_token_for_valid_login_of(user)
     else
-      render json: ['Invalid Credentials'], status: 401
+      render_unauthorized("Error with your login or password")
     end
   end
 
   def destroy
     binding.pry
-    if current_user
-      log_out
-      render json: {}
-    else
-      render json: ['There is no user logged in.'], status: 404
-    end
+    current_user.logout
+    head :ok
+  end
+
+  private
+
+  def send_auth_token_for_valid_login_of(user)
+    render json: { token: user.token }
   end
 end
