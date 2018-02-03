@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :bookshelves, except: [:new, :edit, :show]
     resources :books, only: [:index, :destroy]
     post '/shelf/:shelf_id/book/:id', to: 'books#add_book_to_bookshelf'
+    get '/users/find', to: 'users#logged_in_user'
     # resource :session, only: [:create, :destroy]
   end
 

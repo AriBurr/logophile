@@ -1,9 +1,11 @@
-class Api::UsersController < ApplicationController
-
-
+class Api::UsersController < ApiController
 
   def new
     @user = User.new
+  end
+
+  def logged_in_user
+    render json: current_user
   end
 
   def create
