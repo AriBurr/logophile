@@ -3,7 +3,6 @@ class User < ApplicationRecord
   has_secure_token
 
   has_many :bookshelves
-  has_many :books, through: :bookshelves
   has_many :reviews
 
   before_save { email.downcase! }
