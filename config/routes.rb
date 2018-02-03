@@ -7,7 +7,10 @@ Rails.application.routes.draw do
       post   "/login"       => "sessions#create"
       delete "/logout"      => "sessions#destroy"
     end
-    resources :users, only: [:new, :create]
+    resources :users, only: :create
+    resources :bookshelves, except: [:new, :edit, :show]
+    resources :books, only: [:index, :destroy]
+    post '/shelf/:shelf_id/book/:id', to: 'books#add_book_to_bookshelf'
     # resource :session, only: [:create, :destroy]
   end
 
