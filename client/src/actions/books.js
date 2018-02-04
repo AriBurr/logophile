@@ -14,11 +14,11 @@ export const searchAll = (callback, terms) => {
   return(dispatch) => {
     axios.get(`${getUrl(terms)}&startIndex=0&maxResults=15`)
       .then( res => {
-        dispatch({ type: 'SEARCH_ALL', books: res.data.items })
+        dispatch({ type: 'SEARCH_ALL', books: res.data.items });
       })
       .then( callback() )
       .catch( err => {
-        dispatch(setFlash('Invalid Search, Please Try Again!', 'red'))
+        dispatch(setFlash('Invalid Search, Please Try Again!', 'red'));
       });
   }
 }

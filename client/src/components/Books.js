@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Book from './Book';
-import { Grid, Header } from 'semantic-ui-react';
+import BookCover from './BookCover';
+import { Grid } from 'semantic-ui-react';
 
 const Books = ({ books, toggleDescription }) => (
   books.map( book => {
     return (
       <Grid.Column onClick={ () => toggleDescription(book) }>
-        <Book
+        <BookCover
           key={book.id}
           book={book}
         />

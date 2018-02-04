@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {paginateText} from '../utils/modules';
 import noCover from '../assets/default.jpg';
 import styled from 'styled-components';
@@ -40,6 +41,7 @@ class BookDescription extends React.Component {
           </Grid.Column>
           <Grid.Column>
             {paginateText(book.volumeInfo.description)}
+            <Link to={`/books/${book.id}`}>Read More</Link>
           </Grid.Column>
         </Grid.Row>
       </Grid>

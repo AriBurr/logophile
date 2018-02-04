@@ -1,4 +1,5 @@
 import React from 'react';
+import BookView from './BookView';
 import Books from './Books';
 import Flash from './Flash';
 import Home from './Home';
@@ -14,17 +15,16 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <FetchUser>
-          <Flash />
-          <NavBar />
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/library' component={Library} />
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/register' component={Register} />
-            <Route component={NoMatch} />
-          </Switch>
-        </FetchUser>
+        <Flash />
+        <NavBar />
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/library' component={Library} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/register' component={Register} />
+          <Route exact path='/books/:id' component={BookView} />
+          <Route component={NoMatch} />
+        </Switch>
       </div>
     );
   }

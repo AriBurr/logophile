@@ -2,9 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { searchAll } from '../actions/books';
+import { setActiveBook } from '../actions/activeBook';
 import Banner from './Banner';
 import BookDescription from './BookDescription';
-import Book from './Book';
+import BookCover from './BookCover';
 import Books from './Books';
 import styled from 'styled-components';
 import {
@@ -39,6 +40,7 @@ class Home extends React.Component {
   toggleDescription = (book) => {
     const { activeBook } = this.state;
     this.setState({ activeBook: book });
+    this.props.dispatch(setActiveBook(book));
   }
 
   render() {
