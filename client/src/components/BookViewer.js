@@ -6,10 +6,14 @@ const EmbeddedViewer = styled.div`
   width: 600px;
 `
 
-const BookViewer = () => (
-
-  <div id='viewerCanvas'style={{width: '600px', height: '500px'}}></div>
-
-)
+class BookViewer extends React.Component {
+  render () {
+    return(
+      <div id='viewerCanvas'style={{width: '600px', height: '500px'}}>
+        
+      </div>
+    )
+  }
+}
 
 export default BookViewer;
