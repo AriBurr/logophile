@@ -7,7 +7,7 @@ const Header = styled.div`
   background-image: url(${banner});
   background-size: cover;
   background-position: center;
-  height: 30vh;
+  height: 200px;
   width: 100%;
 `
 
