@@ -54,6 +54,8 @@ class BookView extends React.Component {
             <BookViewer />
           </Grid.Row>
         </Grid>
+        <div id='viewerCanvas'style={{width: '600px', height: '500px'}}>
+        </div>
       </Container>
     )
   }
