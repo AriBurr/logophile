@@ -5,7 +5,7 @@ import Home from './Home';
 import NoMatch from './NoMatch';
 import NavBar from './NavBar';
 import FetchUser from './FetchUser';
-import Library from './Library';
+import Library from './library/Library';
 import Login from '../auth/Login';
 import Register from '../auth/Register';
 import { Switch, Route } from 'react-router-dom';
