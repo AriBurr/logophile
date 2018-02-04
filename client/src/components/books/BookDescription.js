@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { addBook } from '../../actions/book.js';
 import noCover from '../../assets/default.jpg';
 import styled from 'styled-components';
 import {
@@ -44,8 +45,10 @@ class BookDescription extends React.Component {
     });
   }
 
-  addBook =(book) => {
-    window.confirm(`Add '${book.title}' by ${book.authors[0]} to your bookshelf?`)
+  handleSelection = (e, { value }) =>  {
+    const { book, bookshelves, dispatch } = this.props;
+    const shelf = bookshelves.filter( shelf => shelf.name === value );
+    dispatch(addBook(book, shelf[0]));
   }
 
   handleSelection = (e, { value }) => {

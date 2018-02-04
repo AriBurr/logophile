@@ -1,5 +1,4 @@
 import React from 'react';
-import Books from './books/Books';
 import Flash from './Flash';
 import Home from './Home';
 import NoMatch from './NoMatch';

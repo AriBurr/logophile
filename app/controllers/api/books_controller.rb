@@ -1,4 +1,4 @@
-class Api::BooksController < ApplicationController
+class Api::BooksController < ApiController
   before_action :require_login
   before_action :set_bookshelf, only: :add_book_to_bookshelf
 
@@ -7,16 +7,21 @@ class Api::BooksController < ApplicationController
   end
 
   def create
-    # a user can create a book in not already existing in google API
+    book = Book.create(item: params[:book][:item])
+    if book.save
+      render json: book
+    else
+      render json: { errors: book.full_messages.join(',') }, status: 422
+    end
   end
 
-  # book will come in as json
   def add_book_to_bookshelf
+    binding.pry
     shelving = @bookshelf.shelvings.create(book_id: params[:id])
     if shelving.save
-      render json: Book.find(params[:id])
+      render json: shelving
     else
-      render json: { errors: book.full_messages }, status: 422
+      render json: { errors: shelving.full_messages }, status: 422
     end
   end
 
@@ -30,7 +35,7 @@ class Api::BooksController < ApplicationController
     end
 
     def set_bookshelf
-      @bookshelf = current_user.bookshelf.find(params[:shelf_id])
+      @bookshelf = current_user.bookshelves.find(params[:id])
     end
 
     def set_book

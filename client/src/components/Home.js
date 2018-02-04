@@ -4,7 +4,6 @@ import { searchAll } from '../actions/books';
 import { setActiveBook } from '../actions/activeBook';
 import Banner from './Banner';
 import BookDescription from './books/BookDescription';
-import BookCover from './books/BookCover';
 import Books from './books/Books';
 import Welcome from './Welcome';
 import styled from 'styled-components';
