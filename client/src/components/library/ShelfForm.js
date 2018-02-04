@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { addBookshelf } from '../../actions/bookshelves';
 import { Menu, Form, Input } from 'semantic-ui-react';
 import { connect } from 'react-redux';

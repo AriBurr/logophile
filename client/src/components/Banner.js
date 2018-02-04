@@ -2,9 +2,6 @@ import React from 'react';
 import SearchBar from './SearchBar';
 import banner from '../assets/book-banner.jpg';
 import styled from 'styled-components';
-import {
-  Container,
- } from 'semantic-ui-react';
 
 const Header = styled.div`
   background-image: url(${banner});
