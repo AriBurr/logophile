@@ -24,7 +24,6 @@ const GridContainer = styled(Grid)`
   margin: 2rem !important;
 `
 const RightGrid = styled(Grid.Column)`
-
 `
 
 class Home extends React.Component {
