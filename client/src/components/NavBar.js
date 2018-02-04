@@ -8,15 +8,17 @@ class NavBar extends Component {
   rightNavs = () => {
     const { user, dispatch, history } = this.props;
 
-    if(user.id){
-      return (
-        <Menu.Menu position='right'>
-          <Menu.Item
-            name='Logout'
-            onClick={() => dispatch(handleLogout(user, history))}
-          />
-        </Menu.Menu>
-      )
+    if(user){
+      if(user.id){
+        return (
+          <Menu.Menu position='right'>
+            <Menu.Item
+              name='Logout'
+              onClick={() => dispatch(handleLogout(user, history))}
+              />
+          </Menu.Menu>
+        )
+      }
     }else{
       return (
         <Menu.Menu position='right'>

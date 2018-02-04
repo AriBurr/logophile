@@ -9,14 +9,14 @@ class FetchUser extends React.Component {
   state = { loggedIn: false }
 
   componentWillReceiveProps = (nextProps) => {
-    this.props.dispatch(fetchBookshelves(this.shelfCallback))
+    this.props.dispatch(fetchBookshelves())
   }
 
   componentDidMount(){
     const { dispatch } = this.props
     const token = localStorage.getItem('userToken');
     if (token.length > 1)
-      dispatch(fetchBookshelves(this.shelfCallback))
+      dispatch(fetchBookshelves())
       dispatch(fetchUser(token))
   }
 

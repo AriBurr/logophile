@@ -21,6 +21,10 @@ const Image = styled.img`
 const ImgGrid = styled(Grid.Column)`
   margin: 0 -50px;
 `
+const DropdownStyle = styled(Button.Group)`
+  margin: 0 auto !important;
+  width: 50%;
+`
 const DescContainer = styled.div`
   margin-left: 5% !important;
 `
@@ -44,11 +48,16 @@ class BookDescription extends React.Component {
     window.confirm(`Add '${book.title}' by ${book.authors[0]} to your bookshelf?`)
   }
 
-  handleSelection = (e, { value }) => this.setState({ bookshelf: value });
+  handleSelection = (e, { value }) => {
+    this.setState({ bookshelf: value });
+    const t = this.props
+    debugger
+    this.props.history.push('/library');
+  }
 
   getIBSN = (book) => {
     return book.industryIdentifiers.map( ibsn => {
-      return (<div>{ibsn.type}: {ibsn.identifier}</div>)
+      return (<div key={ibsn.identifier}>{ibsn.type}: {ibsn.identifier}</div>)
     });
   }
 
@@ -58,11 +67,11 @@ class BookDescription extends React.Component {
         <List.Item as='h3'>
           Title: {book.title}
         </List.Item>
-        <Divider basic />
+        <Divider />
         { book.authors && <List.Item>Author: {book.authors[0]}</List.Item> }
         <List.Item>Pages: {book.pageCount} pgs</List.Item>
         <List.Item>Published: {book.publisher}, {book.publishedDate}</List.Item>
-        <List.Item>{this.getIBSN(book)}</List.Item>
+        { book.industryIdentifiers && <List.Item>{this.getIBSN(book)}</List.Item> }
       </List>
     )
   }
@@ -73,12 +82,6 @@ class BookDescription extends React.Component {
       <Divider />
       {book.description}
     </Segment>
-  )
-
-  trigger = () => (
-    <Button color='blue'>
-      Add To Bookshelf
-    </Button>
   )
 
   render () {
@@ -105,15 +108,14 @@ class BookDescription extends React.Component {
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Button.Group color='teal'>
+          <Button.Group as={DropdownStyle} color='teal'>
             <Button>Save to bookshelf</Button>
             <Dropdown
               floating button className='icon'
               placeholder='Add to Bookshelf'
               options={this.bookshelfOptions()}
               onChange={this.handleSelection}
-              >
-            </Dropdown>
+            />
           </Button.Group>
         </Grid.Row>
         <Grid.Row as={DescContainer} >
