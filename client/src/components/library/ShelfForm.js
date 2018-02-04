@@ -1,28 +1,41 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Menu, Form, Input } from 'semantic-ui-react'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { addBookshelf } from '../../actions/bookshelves';
+import { Menu, Form, Input } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
 
 class ShelfForm extends React.Component {
-  state = { bookshelf: ''}
+  state = { name: ''}
 
-  handleSubmit = () => {
-
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const { name } = this.state
+    const bookshelf = { name }
+    this.props.dispatch(addBookshelf(bookshelf))
   }
 
-  handleChange = () => {
-
+  handleChange = (e) => {
+    const { name, value } = e.target
+    this.setState({ [name]: value })
   }
 
   render () {
+    const { name } = this.state
     return(
       <Menu.Item>
-        <Form onSumbit={this.handleSubmit}>
-          <Input onChange={this.handleChange} name='bookshelf' icon='book' placeholder='Create Bookshelf' />
+        <Form onSubmit={this.handleSubmit}>
+          <Input
+            onChange={this.handleChange}
+            name='name'
+            value={name}
+            icon='book'
+            placeholder='Create Bookshelf'
+          />
         </Form>
       </Menu.Item>
     )
   }
 }
 
-export default ShelfForm;
+export default connect()(ShelfForm);

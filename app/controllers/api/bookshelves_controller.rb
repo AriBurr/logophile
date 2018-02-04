@@ -1,13 +1,14 @@
-class Api::BookshelvesController < ApplicationController
+class Api::BookshelvesController < ApiController
   before_action :require_login
-  before_action :set_bookshelf, only [:update, :destroy]
+  before_action :set_bookshelf, only: [:update, :destroy]
 
   def index
     render json: current_user.bookshelves.all.order(created_at: :desc)
   end
 
   def create
-    shelf = current_user.booksheves.new(bookshelf_params)
+    binding.pry
+    shelf = current_user.bookshelves.new(bookshelf_params)
     if shelf.save
       render json: shelf
     else
@@ -29,7 +30,7 @@ class Api::BookshelvesController < ApplicationController
 
   private
     def bookshelf_params
-      params.require(:bookshef).permit(:name)
+      params.require(:bookshelf).permit(:name)
     end
 
     def set_bookshelf

@@ -1,3 +1,4 @@
-export const setHeaders = headers => {
-  return { type: 'SET_HEADERS', headers };
+export const setHeaders = () => {
+  const token = localStorage.getItem('userToken');
+  return { headers: { Authorization: `Token token=${token}`} };
 };
