@@ -18,14 +18,13 @@ const EnlargeGrid = styled(Grid)`
 `
 
 class Home extends React.Component {
-  state = { searchLoaded: false, terms: {}, activeBook: {} }
+  state = { searchLoaded: false, terms: {} }
 
   setSearchLoaded = () => this.setState({ searchLoaded: true });
 
   handleSearch = (terms) => {
-    const { dispatch } = this.props;
     this.setState({terms: terms})
-    dispatch(searchAll(this.setSearchLoaded, terms));
+    this.props.dispatch(searchAll(this.setSearchLoaded, terms));
   }
 
   searchTerms = () => {
@@ -37,15 +36,11 @@ class Home extends React.Component {
     return results
   }
 
-  toggleDescription = (book) => {
-    const { activeBook } = this.state;
-    this.setState({ activeBook: book });
-    this.props.dispatch(setActiveBook(book));
-  }
+  toggleDescription = (book) => this.props.dispatch(setActiveBook(book))
 
   render() {
-    const { searchLoaded, activeBook } = this.state;
-    const { books } = this.props;
+    const { searchLoaded } = this.state;
+    const { book, books } = this.props;
     return (
       <div>
         <Banner searchTerms={this.handleSearch} />
@@ -60,7 +55,7 @@ class Home extends React.Component {
             </Grid>
           </Grid.Column>
           <Grid.Column width={6}>
-            { Object.keys(activeBook).length !== 0 && <BookDescription book={this.state.activeBook} /> }
+            { Object.keys(book).length !== 0 && <BookDescription /> }
           </Grid.Column>
         </Grid>
       </div>
@@ -70,7 +65,7 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { books: state.books }
+  return { books: state.books, book: state.activeBook }
 }
 
 export default connect(mapStateToProps)(Home);
