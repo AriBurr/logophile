@@ -15,16 +15,18 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Flash />
-        <NavBar />
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/library' component={Library} />
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/register' component={Register} />
-          <Route exact path='/books/:id' component={BookView} />
-          <Route component={NoMatch} />
-        </Switch>
+        <FetchUser>
+          <Flash />
+          <NavBar />
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/library' component={Library} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/register' component={Register} />
+            <Route exact path='/books/:id' component={BookView} />
+            <Route component={NoMatch} />
+          </Switch>
+        </FetchUser>
       </div>
     );
   }

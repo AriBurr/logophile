@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchBar from './SearchBar';
-import banner from '../assets/banner.png';
+import banner from '../assets/book-banner.jpg';
 import styled from 'styled-components';
 import {
   Container,
@@ -8,7 +8,9 @@ import {
 
 const Header = styled.div`
   background-image: url(${banner});
-  height: 50vh;
+  background-size: cover;
+  background-position: center;
+  height: 30vh;
   width: 100%;
 `
 

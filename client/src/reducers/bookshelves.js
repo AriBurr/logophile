@@ -4,6 +4,8 @@ const bookshelves = (state = [], action) => {
       return [...state, action.bookshelf];
     case 'GET_BOOKSHELVES':
       return action.bookshelves;
+    case 'REMOVE_BOOKSHELVES':
+      return [];
     default:
       return state;
   }

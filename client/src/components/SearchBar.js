@@ -4,6 +4,16 @@ import {
   Form,
   Segment,
 } from 'semantic-ui-react';
+import styled from 'styled-components'
+
+const Container = styled.div`
+  max-width: 75%;
+  margin: 0 auto;
+  text-align: center;
+`
+const FormInput = styled(Form.Input)`
+  max-width: 20% !important;
+`
 
 class SearchBar extends React.Component {
   state = { title: '', author: '', ibsn: '' }
@@ -24,10 +34,11 @@ class SearchBar extends React.Component {
   render () {
     const { title, author, ibsn } = this.state;
     return (
-      <Segment basic textAlign='center'>
+      <Segment as={Container} basic>
         <Form onSubmit={ this.handleSubmit }>
           <Form.Group widths='equal'>
             <Form.Input
+              as={FormInput}
               name='title'
               value={ title }
               onChange={ this.handleChange }
@@ -35,6 +46,7 @@ class SearchBar extends React.Component {
             >
             </Form.Input>
             <Form.Input
+              as={FormInput}
               name='author'
               value={ author }
               onChange={ this.handleChange }
@@ -42,6 +54,7 @@ class SearchBar extends React.Component {
             >
             </Form.Input>
             <Form.Input
+              as={FormInput}
               name='ibsn'
               value={ ibsn }
               onChange={ this.handleChange }

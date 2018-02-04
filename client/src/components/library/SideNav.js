@@ -19,9 +19,9 @@ class SideNav extends React.Component {
     activeItem: '',
   }
 
-  componentDidMount(){
-    this.props.dispatch(fetchBookshelves())
-  }
+  // componentDidMount(){
+  //   this.props.dispatch(fetchBookshelves())
+  // }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 

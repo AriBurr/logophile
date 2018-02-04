@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { setFlash } from '../actions/flash';
 import { setHeaders } from '../actions/headers';
+import { set } from '../actions/headers';
 
 const login = user => {
   return { type: 'LOGIN', user };
@@ -19,7 +20,6 @@ export const registerUser = (email, password, passwordConfirmation, history, nam
   return dispatch => {
     axios.post('/api/users', {user: { email: email, password: password, password_confirmation: passwordConfirmation, name: name }})
       .then(res => {
-
         dispatch(handleLogin(email, password, history))
       })
       .catch(res => {
@@ -36,6 +36,7 @@ export const handleLogout = (user, history) => {
     axios.delete('/api/logout.json', setHeaders())
       .then(res => {
         dispatch(logout());
+        dispatch({type: 'REMOVE_BOOKSHELVES'})
         storeToken('')
         dispatch(setFlash('Logged out successfully!', 'green'));
         history.push('/login');
