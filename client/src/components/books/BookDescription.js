@@ -14,6 +14,7 @@ const Image = styled.img`
 `
 
 class BookDescription extends React.Component {
+  state = { bookshelf: '' }
 
   bookshelfOptions = () => {
     const { bookshelves } = this.props;
@@ -25,6 +26,8 @@ class BookDescription extends React.Component {
   addBook =(book) => {
     window.confirm(`Add '${book.title}' by ${book.authors[0]} to your bookshelf?`)
   }
+
+  handleSelection = (e, { value }) => this.setState({ bookshelf: value });
 
   getIBSN = (book) => {
     return book.industryIdentifiers.map( ibsn => {
@@ -48,7 +51,6 @@ class BookDescription extends React.Component {
                 alt={'book cover'}
               />
             }
-            <Dropdown options={this.bookshelfOptions()}></Dropdown>
           </Grid.Column>
             <List>
               <List.Item>Title: {book.title}</List.Item>
@@ -56,6 +58,12 @@ class BookDescription extends React.Component {
               <List.Item>Pages: {book.pageCount} pgs</List.Item>
               <List.Item>Published: {book.publisher}, {book.publishedDate}</List.Item>
               <List.Item>{this.getIBSN(book)}</List.Item>
+              <Dropdown
+                placeholder='Add to Bookshelf'
+                options={this.bookshelfOptions()}
+                onChange={this.handleSelection}
+              >
+              </Dropdown>
             </List>
           <Grid.Column>
           </Grid.Column>
