@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import noCover from '../../assets/default.jpg';
 import styled from 'styled-components';
 import {
-  Button,
+  Dropdown,
   Grid,
   List,
  } from 'semantic-ui-react';
@@ -15,30 +14,37 @@ const Image = styled.img`
 `
 
 class BookDescription extends React.Component {
+  state = { bookshelf: '' }
 
-  addBook =(book) => {
-    window.confirm(`Add '${book.volumeInfo.title}' by ${book.volumeInfo.authors[0]} to your bookshelf?`)
+  bookshelfOptions = () => {
+    const { bookshelves } = this.props;
+    return bookshelves.map ( (shelf, i) => {
+      return { key: i, text: shelf.name, value: shelf.name }
+    });
   }
 
+  addBook =(book) => {
+    window.confirm(`Add '${book.title}' by ${book.authors[0]} to your bookshelf?`)
+  }
+
+  handleSelection = (e, { value }) => this.setState({ bookshelf: value });
+
   getIBSN = (book) => {
-    return book.volumeInfo.industryIdentifiers.map( ibsn => {
-      return (
-        <div>
-          {ibsn.type}: {ibsn.identifier}
-        </div>
-      )
-    })
+    return book.industryIdentifiers.map( ibsn => {
+      return (<div>{ibsn.type}: {ibsn.identifier}</div>)
+    });
   }
 
   render () {
-    const { book } = this.props;
+    const book = this.props.book.volumeInfo;
+    debugger
     return (
       <Grid>
         <Grid.Row columns={2}>
           <Grid.Column textAlign='center'>
-            { book.volumeInfo.imageLinks ?
+            { book.imageLinks ?
               <Image
-                src={book.volumeInfo.imageLinks.thumbnail}
+                src={book.imageLinks.thumbnail}
                 alt={'book cover'}
               /> :
               <Image
@@ -46,20 +52,25 @@ class BookDescription extends React.Component {
                 alt={'book cover'}
               />
             }
-            <Button onClick={ () => this.addBook(book) }>Add to Bookshelf</Button>
           </Grid.Column>
             <List>
-              <List.Item>Title: {book.volumeInfo.title}</List.Item>
-              <List.Item>Author: {book.volumeInfo.authors[0]}</List.Item>
-              <List.Item>Pages: {book.volumeInfo.pageCount} pgs</List.Item>
-              <List.Item>Published: {book.volumeInfo.publisher}, {book.volumeInfo.publishedDate}</List.Item>
+              <List.Item>Title: {book.title}</List.Item>
+              <List.Item>Author: {book.authors[0]}</List.Item>
+              <List.Item>Pages: {book.pageCount} pgs</List.Item>
+              <List.Item>Published: {book.publisher}, {book.publishedDate}</List.Item>
               <List.Item>{this.getIBSN(book)}</List.Item>
+              <Dropdown
+                placeholder='Add to Bookshelf'
+                options={this.bookshelfOptions()}
+                onChange={this.handleSelection}
+              >
+              </Dropdown>
             </List>
           <Grid.Column>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          {book.volumeInfo.description}
+          {book.description}
         </Grid.Row>
       </Grid>
     )
@@ -67,7 +78,7 @@ class BookDescription extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { books: state.books }
+  return { book: state.activeBook, bookshelves: state.bookshelves }
 }
 
 export default connect(mapStateToProps)(BookDescription);
