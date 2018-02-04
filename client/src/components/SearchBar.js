@@ -6,13 +6,12 @@ import {
 } from 'semantic-ui-react';
 import styled from 'styled-components'
 
-const Container = styled.div`
-  max-width: 75%;
-  margin: 0 auto;
+const FormContainer = styled(Form)`
+  width: 60%;
+  margin: 5% auto 0 auto !important;
   text-align: center;
 `
 const FormInput = styled(Form.Input)`
-  max-width: 20% !important;
 `
 
 class SearchBar extends React.Component {
@@ -34,8 +33,8 @@ class SearchBar extends React.Component {
   render () {
     const { title, author, ibsn } = this.state;
     return (
-      <Segment as={Container} basic>
-        <Form onSubmit={ this.handleSubmit }>
+      <Segment basic>
+        <Form as={FormContainer} onSubmit={ this.handleSubmit }>
           <Form.Group widths='equal'>
             <Form.Input
               as={FormInput}
