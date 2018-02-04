@@ -10,10 +10,21 @@ import styled from 'styled-components';
 import {
   Grid,
   Header,
+  Segment,
  } from 'semantic-ui-react';
 
 const EnlargeGrid = styled(Grid)`
   height: 100vh;
+`
+
+const LeftGrid = styled(Grid.Column)`
+
+`
+const GridContainer = styled(Grid)`
+  margin: 2rem !important;
+`
+const RightGrid = styled(Grid.Column)`
+
 `
 
 class Home extends React.Component {
@@ -37,15 +48,23 @@ class Home extends React.Component {
 
   toggleDescription = (book) => this.props.dispatch(setActiveBook(book))
 
+  renderHeader = () => {
+    return(
+      <Segment textAlign='center'>
+        <Header>Your Search Results for { this.searchTerms() }...</Header>
+      </Segment>
+    )
+  }
+
   render() {
     const { searchLoaded } = this.state;
     const { book, books } = this.props;
     return (
       <div>
         <Banner searchTerms={this.handleSearch} />
-        <Grid divided>
-          <Grid.Column width={10}>
-            { searchLoaded && <Header>Your Search Results for { this.searchTerms() }...</Header> }
+        <Grid divided as={GridContainer}>
+          <Grid.Column as={LeftGrid} width={10}>
+              { searchLoaded && this.renderHeader() }
             <Grid
               as={EnlargeGrid}
               columns={5}
@@ -53,8 +72,8 @@ class Home extends React.Component {
               { books && <Books toggleDescription={this.toggleDescription} /> }
             </Grid>
           </Grid.Column>
-          <Grid.Column width={6}>
-            { Object.keys(book).length !== 0 && <BookDescription /> }
+          <Grid.Column as={RightGrid} width={6}>
+            { Object.keys(activeBook).length !== 0 && <BookDescription book={this.state.activeBook} /> }
           </Grid.Column>
         </Grid>
       </div>
