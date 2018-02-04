@@ -6,6 +6,7 @@ import Banner from './Banner';
 import BookDescription from './books/BookDescription';
 import BookCover from './books/BookCover';
 import Books from './books/Books';
+import Welcome from './Welcome';
 import styled from 'styled-components';
 import {
   Grid,
@@ -55,26 +56,32 @@ class Home extends React.Component {
     )
   }
 
+  renderSearched = (searchLoaded) => {
+    const { book, books } = this.props
+    return(
+      <Grid divided as={GridContainer}>
+        <Grid.Column as={LeftGrid} width={10}>
+          { searchLoaded && this.renderHeader() }
+          <Grid
+            as={EnlargeGrid}
+            columns={5}
+            >
+            { books && <Books toggleDescription={this.toggleDescription} /> }
+          </Grid>
+        </Grid.Column>
+        <Grid.Column as={RightGrid} width={6}>
+          { Object.keys(book).length !== 0 && <BookDescription/> }
+        </Grid.Column>
+      </Grid>
+    )
+  }
+
   render() {
     const { searchLoaded } = this.state;
-    const { book, books } = this.props;
     return (
       <div>
         <Banner searchTerms={this.handleSearch} />
-        <Grid divided as={GridContainer}>
-          <Grid.Column as={LeftGrid} width={10}>
-              { searchLoaded && this.renderHeader() }
-            <Grid
-              as={EnlargeGrid}
-              columns={5}
-            >
-              { books && <Books toggleDescription={this.toggleDescription} /> }
-            </Grid>
-          </Grid.Column>
-          <Grid.Column as={RightGrid} width={6}>
-            { Object.keys(book).length !== 0 && <BookDescription/> }
-          </Grid.Column>
-        </Grid>
+        { searchLoaded ? this.renderSearched(searchLoaded) : <Welcome /> }
       </div>
     );
   }

@@ -4,6 +4,7 @@ import Flash from './Flash';
 import Home from './Home';
 import NoMatch from './NoMatch';
 import NavBar from './NavBar';
+import Footer from './Footer';
 import FetchUser from './FetchUser';
 import Library from './library/Library';
 import Login from '../auth/Login';
@@ -24,6 +25,7 @@ class App extends React.Component {
             <Route exact path='/register' component={Register} />
             <Route component={NoMatch} />
           </Switch>
+          <Footer />
         </FetchUser>
       </div>
     );
