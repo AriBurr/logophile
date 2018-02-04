@@ -19,7 +19,19 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+
+    <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
+        <script type="text/javascript">
+          google.books.load();
+
+          function initialize() {
+            var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
+            viewer.load('ISBN:0738531367');
+          }
+
+          google.books.setOnLoadCallback(initialize);
+        </script>
+    <title>Book App</title>
   </head>
   <body>
     <noscript>
