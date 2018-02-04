@@ -8,10 +8,19 @@ export const addBookshelf = (bookshelf) => {
       .then( res => {
         debugger
         dispatch({ type: 'ADD_BOOKSHELF', bookshelf: res.data })
+
       })
-      .catch( err => {
-        debugger
-        dispatch(setFlash(`Trouble creating ${bookshelf.name}`, 'red'))
-      });
+      .catch( err => dispatch(setFlash(`Trouble creating ${bookshelf.name}`, 'red')));
+  }
+}
+//
+export const fetchBookshelves = () => {
+  return dispatch => {
+    axios.get('/api/bookshelves/', setHeaders())
+    .then( res => {
+      debugger
+      dispatch({type: 'GET_BOOKSHELVES', bookshelves: res.data})
+    })
+    .catch( err => setFlash('Troubles retreiving bookshelves', 'red'))
   }
 }

@@ -2,6 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import ShelfForm from './ShelfForm'
 import { Menu, Label, Input } from 'semantic-ui-react'
+import { fetchBookshelves } from '../../actions/bookshelves';
+import { connect } from 'react-redux'
+import axios from 'axios'
+
 
 const MenuStyle =  styled(Menu)`
   padding-top: 85px;
@@ -13,44 +17,49 @@ const MenuStyle =  styled(Menu)`
 
 class SideNav extends React.Component {
   state = {
-    activeItem: 'inbox',
-    bookshelves: [],
+    activeItem: '',
+    loaded: false
   }
 
   componentDidMount(){
-    //fetch the users bookshelves
+    this.props.dispatch(fetchBookshelves())
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
-  mapBookshelves = () => {
-
+  mapBookshelves = (activeItem) => {
+    const { bookshelves } = this.props
+    debugger
+    return bookshelves.map( shelf => {
+      return(
+        <Menu.Item
+          key={shelf.id}
+          name={shelf.name}
+          active={activeItem === `${shelf.name}`}
+          onClick={this.handleItemClick}
+        >
+          <Label color='teal'>1</Label>
+          {shelf.name}
+        </Menu.Item>
+      )
+    })
   }
 
 
   render() {
-    const { activeItem } = this.state
+    const { activeItem, loaded } = this.state
 
     return (
       <Menu vertical basic as={MenuStyle}>
-        <Menu.Item name='inbox' active={activeItem === 'inbox'} onClick={this.handleItemClick}>
-          <Label color='teal'>1</Label>
-          Inbox
-        </Menu.Item>
-
-        <Menu.Item name='spam' active={activeItem === 'spam'} onClick={this.handleItemClick}>
-          <Label>51</Label>
-          Spam
-        </Menu.Item>
-
-        <Menu.Item name='updates' active={activeItem === 'updates'} onClick={this.handleItemClick}>
-          <Label>1</Label>
-          Updates
-        </Menu.Item>
+        { this.mapBookshelves(activeItem) }
         <ShelfForm />
       </Menu>
     )
   }
 }
 
-export default SideNav;
+const mapStateToProps = (state) => {
+  return { bookshelves: state.bookshelves}
+}
+
+export default connect(mapStateToProps)(SideNav);

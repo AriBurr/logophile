@@ -16,11 +16,19 @@ class User < ApplicationRecord
 
   # validates :password, presence: true, length: { minimum: 5 }
 
+  after_create :build_default_bookshelves
+
   def self.valid_login?(email, password)
    user = find_by(email: email)
    if user && user.authenticate(password)
      user
    end
+ end
+
+ def build_default_bookshelves
+   binding.pry
+   Bookshelf.create(name: 'Read', user_id: self.id)
+   Bookshelf.create(name: 'Will Read', user_id: self.id)
  end
 
  def allow_token_to_be_used_only_once

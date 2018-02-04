@@ -12,6 +12,7 @@ class ShelfForm extends React.Component {
     e.preventDefault()
     const { name } = this.state
     const bookshelf = { name }
+    this.setState({ name: '' })
     this.props.dispatch(addBookshelf(bookshelf))
   }
 

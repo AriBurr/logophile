@@ -3,11 +3,10 @@ class Api::BookshelvesController < ApiController
   before_action :set_bookshelf, only: [:update, :destroy]
 
   def index
-    render json: current_user.bookshelves.all.order(created_at: :desc)
+    render json: current_user.bookshelves.all.order(created_at: :asc)
   end
 
   def create
-    binding.pry
     shelf = current_user.bookshelves.new(bookshelf_params)
     if shelf.save
       render json: shelf

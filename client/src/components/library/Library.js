@@ -8,6 +8,8 @@ class Library extends React.Component {
     return(
       <div>
         <SideNav />
+        <div id='viewerCanvas'style={{width: '600px', height: '500px'}}>
+        </div>
       </div>
     )
   }
