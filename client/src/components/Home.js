@@ -73,7 +73,7 @@ class Home extends React.Component {
             </Grid>
           </Grid.Column>
           <Grid.Column as={RightGrid} width={6}>
-            { Object.keys(activeBook).length !== 0 && <BookDescription book={this.state.activeBook} /> }
+            { Object.keys(book).length !== 0 && <BookDescription/> }
           </Grid.Column>
         </Grid>
       </div>
