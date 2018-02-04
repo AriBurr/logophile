@@ -22,7 +22,6 @@ class App extends React.Component {
             <Route exact path='/library' component={Library} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/register' component={Register} />
-            <Route exact path='/books/:id' component={BookView} />
             <Route component={NoMatch} />
           </Switch>
         </FetchUser>
