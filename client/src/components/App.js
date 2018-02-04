@@ -1,6 +1,5 @@
 import React from 'react';
-import BookView from './BookView';
-import Books from './Books';
+import Books from './books/Books';
 import Flash from './Flash';
 import Home from './Home';
 import NoMatch from './NoMatch';

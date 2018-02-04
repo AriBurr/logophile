@@ -1,5 +1,5 @@
 import React from 'react';
-import noCover from '../assets/default.jpg';
+import noCover from '../../assets/default.jpg';
 import styled from 'styled-components';
 import { Container } from 'semantic-ui-react';
 
