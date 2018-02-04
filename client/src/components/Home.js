@@ -1,11 +1,9 @@
 import React from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { searchAll } from '../actions/books';
 import { setActiveBook } from '../actions/activeBook';
 import Banner from './Banner';
 import BookDescription from './books/BookDescription';
-import BookCover from './books/BookCover';
 import Books from './books/Books';
 import styled from 'styled-components';
 import {

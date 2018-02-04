@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import noCover from '../../assets/default.jpg';
 import styled from 'styled-components';
 import {
@@ -18,8 +17,8 @@ class BookDescription extends React.Component {
 
   bookshelfOptions = () => {
     const { bookshelves } = this.props;
-    const options = bookshelves.map ( shelf => {
-      return { key: shelf.name, text: shelf.name, value: shelf.name }
+    return bookshelves.map ( (shelf, i) => {
+      return { key: i, text: shelf.name, value: shelf.name }
     });
   }
 

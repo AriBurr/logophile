@@ -1,18 +1,10 @@
-import React from 'react'
-import styled from 'styled-components'
-import SideNav from './SideNav'
-import { Segment } from 'semantic-ui-react'
+import React from 'react';
+import SideNav from './SideNav';
 
-class Library extends React.Component {
-  render(){
-    return(
-      <div>
-        <SideNav />
-        <div id='viewerCanvas'style={{width: '600px', height: '500px'}}>
-        </div>
-      </div>
-    )
-  }
-}
+const Library = () => (
+  <div>
+    <SideNav />
+  </div>
+)
 
 export default Library;

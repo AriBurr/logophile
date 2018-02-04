@@ -6,11 +6,11 @@ import { Grid } from 'semantic-ui-react';
 const Books = ({ books, toggleDescription }) => (
   books.map( book => {
     return (
-      <Grid.Column onClick={ () => toggleDescription(book) }>
-        <BookCover
-          key={book.id}
-          book={book}
-        />
+      <Grid.Column
+        key={book.id}
+        onClick={ () => toggleDescription(book) }
+      >
+        <BookCover book={book} />
       </Grid.Column>
     )
   })

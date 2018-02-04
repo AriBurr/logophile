@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import { setFlash } from '../actions/flash';
 import { setHeaders } from '../actions/headers';
-import { set } from '../actions/headers';
 
 const login = user => {
   return { type: 'LOGIN', user };

@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import ShelfForm from './ShelfForm'
 import { Menu, Label } from 'semantic-ui-react'
-import { fetchBookshelves } from '../../actions/bookshelves';
 import { connect } from 'react-redux'
 
 
@@ -18,11 +17,7 @@ class SideNav extends React.Component {
   state = {
     activeItem: '',
   }
-
-  // componentDidMount(){
-  //   this.props.dispatch(fetchBookshelves())
-  // }
-
+  
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   mapBookshelves = (activeItem) => {
