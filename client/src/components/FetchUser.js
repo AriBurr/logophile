@@ -15,12 +15,8 @@ class FetchUser extends React.Component {
   }
 
   render() {
-    return this.props.children
+    return this.props.children;
   }
-}
-
-const mapStateToProps = (state) => {
-  return { user: state.user }
 }
 
 export default withRouter(connect()(FetchUser));

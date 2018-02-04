@@ -1,10 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import ShelfForm from './ShelfForm'
-import { Menu, Label, Input } from 'semantic-ui-react'
+import { Menu, Label } from 'semantic-ui-react'
 import { fetchBookshelves } from '../../actions/bookshelves';
 import { connect } from 'react-redux'
-import axios from 'axios'
 
 
 const MenuStyle =  styled(Menu)`
@@ -18,7 +17,6 @@ const MenuStyle =  styled(Menu)`
 class SideNav extends React.Component {
   state = {
     activeItem: '',
-    loaded: false
   }
 
   componentDidMount(){
@@ -29,7 +27,6 @@ class SideNav extends React.Component {
 
   mapBookshelves = (activeItem) => {
     const { bookshelves } = this.props
-    debugger
     return bookshelves.map( shelf => {
       return(
         <Menu.Item
@@ -47,10 +44,10 @@ class SideNav extends React.Component {
 
 
   render() {
-    const { activeItem, loaded } = this.state
+    const { activeItem } = this.state
 
     return (
-      <Menu vertical basic as={MenuStyle}>
+      <Menu vertical as={MenuStyle}>
         { this.mapBookshelves(activeItem) }
         <ShelfForm />
       </Menu>

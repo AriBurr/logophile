@@ -6,7 +6,6 @@ export const addBookshelf = (bookshelf) => {
   return dispatch => {
     axios.post('/api/bookshelves', { bookshelf }, setHeaders() )
       .then( res => {
-        debugger
         dispatch({ type: 'ADD_BOOKSHELF', bookshelf: res.data })
 
       })
@@ -18,7 +17,6 @@ export const fetchBookshelves = () => {
   return dispatch => {
     axios.get('/api/bookshelves/', setHeaders())
     .then( res => {
-      debugger
       dispatch({type: 'GET_BOOKSHELVES', bookshelves: res.data})
     })
     .catch( err => setFlash('Troubles retreiving bookshelves', 'red'))
