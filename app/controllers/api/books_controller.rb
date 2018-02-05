@@ -1,9 +1,9 @@
 class Api::BooksController < ApiController
   before_action :require_login
-  before_action :set_bookshelf, only: :add_book_to_bookshelf
+  before_action :set_bookshelf, only: [:index, :add_book_to_bookshelf]
 
   def index
-    @bookshelf.books
+    render json: @bookshelf.books
   end
 
   def create

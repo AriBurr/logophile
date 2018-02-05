@@ -15,3 +15,13 @@ export const addBook = (book, shelf) => {
       .catch( err => dispatch(setFlash(`Invalid entry, please try again!`, 'red')));
   }
 }
+
+export const fetchBooks = (shelf) => {
+  return dispatch => {
+    axios.get(`/api/shelf/${shelf.id}/books`, setHeaders() )
+      .then(res => {
+        dispatch({ type: 'FETCH_SHELVING', shelvings: res.data });
+      })
+      .catch( err => dispatch(setFlash(`Error fetching books, please try again!`, 'red')));
+  }
+}

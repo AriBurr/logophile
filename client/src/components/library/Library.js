@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { fetchBooks } from '../../actions/shelvings';
 import SideNav from './SideNav';
 
 class Library extends React.Component {
+  
   render() {
     return (
       <div>
@@ -12,8 +14,4 @@ class Library extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { shelvings: state.shelvings }
-}
-
-export default connect(mapStateToProps)(Library);
+export default connect()(Library);
