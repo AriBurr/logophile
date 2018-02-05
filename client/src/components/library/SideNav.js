@@ -26,9 +26,10 @@ class SideNav extends React.Component {
     this.setState({ edit: !edit })
   }
 
-  handleItemClick = (shelf) => this.props.dispatch(fetchShelvings(shelf));
-
-  setActiveItemCb = (item) => this.setState({ activeItem: item })
+  handleItemClick = (shelf , e) => {
+    this.props.dispatch(fetchShelvings(shelf));
+    this.setState({ activeItem: shelf.name })
+  }
 
   mapBookshelves = (activeItem) => {
     const { edit } = this.state;
