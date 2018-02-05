@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import ShelfForm from './ShelfForm'
-import { fetchBooks } from '../../actions/shelvings';
+import Bookshelf from './Bookshelf'
 import { Menu, Label } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
@@ -19,7 +19,7 @@ class SideNav extends React.Component {
     activeItem: '',
   }
 
-  handleItemClick = (shelf) => this.props.dispatch(fetchBooks(shelf));
+  setActiveItemCb = (item) => this.setState({ activeItem: item })
 
   mapBookshelves = (activeItem) => {
     const { bookshelves } = this.props
@@ -52,7 +52,10 @@ class SideNav extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { bookshelves: state.bookshelves}
+  return {
+    bookshelves: state.bookshelves,
+    shelvings: state.shelvings,
+  }
 }
 
 export default connect(mapStateToProps)(SideNav);

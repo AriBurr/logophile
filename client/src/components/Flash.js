@@ -2,6 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Message, Container, Header } from 'semantic-ui-react';
 import { clearFlash } from '../actions/flash';
+import styled from 'styled-components'
+
+const FlashStyle = styled(Container)`
+  
+`
 
 const fadeFlash = dispatch => {
   setTimeout(() => {

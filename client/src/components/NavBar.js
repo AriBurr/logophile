@@ -5,10 +5,24 @@ import { connect } from 'react-redux';
 import { handleLogout } from '../actions/auth';
 
 class NavBar extends Component {
-  rightNavs = () => {
-    const { user, dispatch, history } = this.props;
+  state = {
+    user: {},
+  }
 
-    if(user){
+  componentWillReceiveProps = (nextProps) => {
+    const user = nextProps.user
+    if (user !== null)
+      this.setState({ user: nextProps.user })
+  }
+
+  componentDidMount = () => {
+    this.setState({ user: this.props.user })
+  }
+
+  rightNavs = () => {
+    const { dispatch, history } = this.props;
+    const { user } = this.state
+    if(Object.keys(user).length !== 0){
       if(user.id){
         return (
           <Menu.Menu position='right'>

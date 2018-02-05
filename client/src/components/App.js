@@ -16,8 +16,8 @@ class App extends React.Component {
     return (
       <div>
         <FetchUser>
-          <Flash />
           <NavBar />
+          <Flash />
           <Switch>
             <Route exact path='/' component={Home} />
             <ProtectedRoute exact path='/library' component={Library} />
