@@ -5,7 +5,10 @@ import { clearFlash } from '../actions/flash';
 import styled from 'styled-components'
 
 const FlashStyle = styled(Container)`
-  
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
 `
 
 const fadeFlash = dispatch => {
@@ -17,7 +20,7 @@ const fadeFlash = dispatch => {
 const Flash = ({ flash, dispatch }) => {
   if (flash.message) {
     return (
-      <Container>
+      <Container as={FlashStyle}>
         <Message
           onDismiss={() => dispatch(clearFlash())}
           color={flash.color}

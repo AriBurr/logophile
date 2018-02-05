@@ -20,8 +20,8 @@ class SideNav extends React.Component {
   }
 
   handleItemClick = (shelf) => this.props.dispatch(fetchShelvings(shelf));
-  
-  setActiveItemCb = (item) => this.setState({ activeItem: item })
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   mapBookshelves = (activeItem) => {
     const { bookshelves } = this.props
@@ -31,7 +31,7 @@ class SideNav extends React.Component {
           key={shelf.id}
           name={shelf.name}
           active={activeItem === `${shelf.name}`}
-          onClick={() => this.handleItemClick(shelf)}
+          onClick={this.handleItemClick}
         >
           <Label color='teal'>1</Label>
           {shelf.name}
