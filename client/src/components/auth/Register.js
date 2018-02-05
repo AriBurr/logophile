@@ -3,6 +3,20 @@ import { Header, Form, Button, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/auth';
 import { setFlash } from '../../actions/flash';
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+
+
+const FormStyle = styled(Form)`
+  width: 40% !important;
+  margin: 0 auto !important;
+`
+const ComponentStyle = styled(Segment)`
+  span{
+    color: #FC7753;
+    font-size: 10px;
+  }
+`
 
 class Register extends Component {
   state = { email: '', password: '', passwordConfirmation: '', name: '' };
@@ -28,12 +42,22 @@ class Register extends Component {
     const { email, password, passwordConfirmation, name } = this.state;
 
     return (
-      <Segment basic>
-        <Header as='h1' textAlign='center'>Register Component</Header>
-        <Form onSubmit={this.handleSubmit}>
+      <Segment className='container' basic as={ComponentStyle}>
+        <Segment textAlign='center' basic>
+          <Header as='h1'>
+            Awesome! Let's create your account.
+          </Header>
+          <p>
+            Sign up and become part of this united reading community.
+          </p>
+        </Segment>
+        <Form onSubmit={this.handleSubmit} as={FormStyle}>
           <Form.Field>
-            <label htmlFor='name'>Name</label>
+            <label htmlFor='name'>
+              Name <span>(required)</span>
+            </label>
             <input
+              autoFocus
               id='name'
               placeholder='Name'
               required
@@ -42,7 +66,9 @@ class Register extends Component {
               />
           </Form.Field>
           <Form.Field>
-            <label htmlFor='email'>Email</label>
+            <label htmlFor='email'>
+              Email <span>(required)</span>
+            </label>
             <input
               id='email'
               placeholder='Email'
@@ -52,7 +78,9 @@ class Register extends Component {
             />
           </Form.Field>
           <Form.Field>
-            <label htmlFor='password'>Password</label>
+            <label htmlFor='password'>
+              Password <span>(required)</span>
+            </label>
             <input
               id='password'
               placeholder='Password'
@@ -63,7 +91,9 @@ class Register extends Component {
             />
           </Form.Field>
           <Form.Field>
-            <label htmlFor='passwordConfirmation'>Password Confirmation</label>
+            <label htmlFor='passwordConfirmation'>
+              Password passwordConfirmation <span>(required)</span>
+            </label>
             <input
               id='passwordConfirmation'
               placeholder='Password Confirmation'
@@ -73,8 +103,9 @@ class Register extends Component {
               onChange={this.handleChange}
             />
           </Form.Field>
+          <Link to='/login'>Already a member? Sign in!</Link>
           <Segment basic textAlign='center'>
-            <Button type='submit'>Submit</Button>
+            <Button color='green' type='submit'>Submit</Button>
           </Segment>
         </Form>
       </Segment>
