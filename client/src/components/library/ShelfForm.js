@@ -38,7 +38,7 @@ class ShelfForm extends React.Component {
             onChange={this.handleChange}
             name='name'
             value={name}
-            icon='book'
+            icon='plus'
             placeholder={
               edit && !objectCheck(active) ? 'Select Bookshelf' :
               edit && objectCheck(active) ? `Edit ${active.name}` : 'Create Bookshelf' }
