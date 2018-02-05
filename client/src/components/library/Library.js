@@ -2,16 +2,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchBooks } from '../../actions/shelvings';
 import SideNav from './SideNav';
+import Bookshelf from './Bookshelf';
+import { Grid } from 'semantic-ui-react';
 
 class Library extends React.Component {
-  
+
   render() {
+    const { shelvings } = this.props;
     return (
-      <div>
-        <SideNav />
-      </div>
+      <Grid>
+        <Grid.Column width={4}>
+          <SideNav />
+        </Grid.Column>
+        <Grid.Column width={12}>
+          { shelvings && <Bookshelf /> }
+        </Grid.Column>
+      </Grid>
     )
   }
 }
 
-export default connect()(Library);
+const mapStateToProps = (state) => {
+  return { shelvings: state.shelvings }
+}
+
+export default connect(mapStateToProps)(Library);
