@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import noCover from '../../assets/default.jpg';
+import { deleteShelving } from '../../actions/shelvings';
 import styled from 'styled-components';
-import { Grid } from 'semantic-ui-react';
+import { Button, Grid, Icon, Segment } from 'semantic-ui-react';
 
 const Image = styled.img`
   height: 198px;
@@ -15,9 +16,16 @@ const Image = styled.img`
 `
 
 class Bookshelf extends React.Component {
+  state = { edit: false }
+
+  toggleEdit = () => {
+    const { edit } = this.state;
+    this.setState({ edit: !edit })
+  }
 
   shelvings = () => {
-    const { shelvings } = this.props;
+    const { edit } = this.state;
+    const { dispatch, shelvings } = this.props;
     return shelvings.map( book => {
       return (
         <Grid.Column key={book.id}>
@@ -31,6 +39,7 @@ class Bookshelf extends React.Component {
               alt={`${book.item.volumeInfo.title} cover`}
             />
           }
+          { edit && <Icon onClick={ () => dispatch(deleteShelving(book)) } name='trash'></Icon> }
         </Grid.Column>
       )
     });
@@ -38,9 +47,12 @@ class Bookshelf extends React.Component {
 
   render () {
     return (
-      <Grid columns={5}>
-        { this.shelvings() }
-      </Grid>
+      <Segment basic>
+        <Button color ='teal' onClick={() => this.toggleEdit()}>Edit Bookshelves</Button>
+        <Grid columns={5}>
+          { this.shelvings() }
+        </Grid>
+      </Segment>
     )
   }
 }

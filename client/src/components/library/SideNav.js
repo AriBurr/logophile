@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import ShelfForm from './ShelfForm'
-import Bookshelf from './Bookshelf'
+import { fetchShelvings } from '../../actions/shelvings';
 import { Menu, Label } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
@@ -19,6 +19,8 @@ class SideNav extends React.Component {
     activeItem: '',
   }
 
+  handleItemClick = (shelf) => this.props.dispatch(fetchShelvings(shelf));
+  
   setActiveItemCb = (item) => this.setState({ activeItem: item })
 
   mapBookshelves = (activeItem) => {

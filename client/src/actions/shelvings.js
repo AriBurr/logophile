@@ -16,12 +16,18 @@ export const addBook = (book, shelf) => {
   }
 }
 
-export const fetchBooks = (shelf) => {
+export const fetchShelvings = (shelf) => {
   return dispatch => {
     axios.get(`/api/shelf/${shelf.id}/books`, setHeaders() )
-      .then(res => {
-        dispatch({ type: 'FETCH_SHELVING', shelvings: res.data });
-      })
+      .then(res => dispatch({type: 'FETCH_SHELVING', shelvings: res.data }))
       .catch( err => dispatch(setFlash(`Error fetching books, please try again!`, 'red')));
+  }
+}
+
+export const deleteShelving = (shelving) => {
+  debugger
+  return (dispatch) => {
+    axios.delete(`/api/books/${shelving.id}`, setHeaders() )
+      .then( () => dispatch({ type: 'DELETE_SHELVING', shelving }) )
   }
 }

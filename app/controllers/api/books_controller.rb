@@ -25,7 +25,7 @@ class Api::BooksController < ApiController
   end
 
   def destroy
-    Shelving.find_by_bookshelf_id(params[:shelf_id]).destroy
+    Book.find(params[:id]).destroy
   end
 
   private
