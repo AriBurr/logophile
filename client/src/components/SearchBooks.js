@@ -26,7 +26,7 @@ const GridContainer = styled(Grid)`
 const RightGrid = styled(Grid.Column)`
 `
 
-class Home extends React.Component {
+class SearchBooks extends React.Component {
   state = { searchLoaded: false, terms: {} }
 
   setSearchLoaded = () => this.setState({ searchLoaded: true });
@@ -80,7 +80,7 @@ class Home extends React.Component {
     return (
       <div>
         <Banner searchTerms={this.handleSearch} />
-        { searchLoaded ? this.renderSearched(searchLoaded) : <Welcome /> }
+        { searchLoaded && this.renderSearched(searchLoaded) }
       </div>
     );
   }
@@ -94,4 +94,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(SearchBooks);

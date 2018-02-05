@@ -1,9 +1,10 @@
 import React from 'react';
 import Flash from './Flash';
-import Home from './Home';
+import SearchBooks from './SearchBooks';
 import NoMatch from './NoMatch';
 import NavBar from './NavBar';
 import Footer from './Footer';
+import Welcome from './Welcome';
 import FetchUser from './FetchUser';
 import Library from './library/Library';
 import Login from './auth/Login';
@@ -19,7 +20,8 @@ class App extends React.Component {
           <NavBar />
           <Flash />
           <Switch>
-            <Route exact path='/' component={Home} />
+            <Route exact path='/' component={Welcome} />
+            <Route exact path='/books' component={SearchBooks} />
             <ProtectedRoute exact path='/library' component={Library} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/register' component={Register} />
