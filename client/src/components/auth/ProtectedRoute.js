@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { setFlash } from '../../actions/flash'
 import { Redirect, Route } from 'react-router-dom';
 import { connect } from 'react-redux'

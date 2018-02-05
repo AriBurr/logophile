@@ -26,7 +26,6 @@ class User < ApplicationRecord
  end
 
  def build_default_bookshelves
-   binding.pry
    Bookshelf.create(name: 'Read', user_id: self.id)
    Bookshelf.create(name: 'Will Read', user_id: self.id)
  end
