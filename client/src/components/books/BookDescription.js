@@ -56,8 +56,8 @@ class BookDescription extends React.Component {
   handleSubmit = () => {
     const { bookshelf } = this.state;
     const { book, bookshelves, dispatch } = this.props;
-    const shelf = bookshelves.filter( shelf => shelf.name === bookshelf );
-    dispatch(addBook(book, shelf[0]));
+    const shelf = bookshelves.filter( shelf => shelf.shelf.name === bookshelf );
+    dispatch(addBook(book, shelf[0].shelf));
   }
 
   getIBSN = (book) => {
@@ -92,7 +92,7 @@ class BookDescription extends React.Component {
   bookshelfOptions = () => {
     const { bookshelves } = this.props;
     return bookshelves.map ( shelf => {
-      return { key: shelf.id, text: shelf.name, value: shelf.name }
+      return { key: shelf.shelf.id, text: shelf.shelf.name, value: shelf.shelf.name }
     });
   }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import SideNav from './SideNav';
 import Bookshelf from './Bookshelf';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Segment } from 'semantic-ui-react';
 
 class Library extends React.Component {
 
@@ -10,10 +10,10 @@ class Library extends React.Component {
     const { shelvings } = this.props;
     return (
       <Grid>
-        <Grid.Column width={4}>
+        <Grid.Column width={3}>
           <SideNav />
         </Grid.Column>
-        <Grid.Column width={12}>
+        <Grid.Column width={13}>
           { shelvings && <Bookshelf /> }
         </Grid.Column>
       </Grid>
@@ -22,7 +22,9 @@ class Library extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { shelvings: state.shelvings }
+  return {
+    shelvings: state.shelvings,
+   }
 }
 
 export default connect(mapStateToProps)(Library);
