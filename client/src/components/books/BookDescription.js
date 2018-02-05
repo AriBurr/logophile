@@ -80,6 +80,23 @@ class BookDescription extends React.Component {
     </Segment>
   )
 
+  isLoggedIn = () => {
+    const token = localStorage.getItem('userToken');
+    return token ? true : false
+  }
+
+  renderDropdown = () => (
+    <Button.Group as={DropdownStyle} color='teal'>
+      <Button>Save to bookshelf</Button>
+      <Dropdown
+        floating button className='icon'
+        placeholder='Add to Bookshelf'
+        options={this.bookshelfOptions()}
+        onChange={this.handleSelection}
+        />
+    </Button.Group>
+  )
+
   render () {
     const book = this.props.book.volumeInfo;
     return (
@@ -104,18 +121,10 @@ class BookDescription extends React.Component {
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Button.Group as={DropdownStyle} color='teal'>
-            <Button>Save to bookshelf</Button>
-            <Dropdown
-              floating button className='icon'
-              placeholder='Add to Bookshelf'
-              options={this.bookshelfOptions()}
-              onChange={this.handleSelection}
-            />
-          </Button.Group>
+          { this.isLoggedIn() && this.renderDropdown() }
         </Grid.Row>
         <Grid.Row as={DescContainer} >
-          {book.description && this.renderDescription(book)}
+          { book.description && this.renderDescription(book) }
         </Grid.Row>
       </Grid>
     )
