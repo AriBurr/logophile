@@ -15,14 +15,8 @@ import {
 const EnlargeGrid = styled(Grid)`
   height: 100vh;
 `
-
-const LeftGrid = styled(Grid.Column)`
-
-`
 const GridContainer = styled(Grid)`
   margin: 2rem !important;
-`
-const RightGrid = styled(Grid.Column)`
 `
 
 class SearchBooks extends React.Component {
@@ -58,7 +52,7 @@ class SearchBooks extends React.Component {
     const { book, books } = this.props
     return(
       <Grid divided as={GridContainer}>
-        <Grid.Column as={LeftGrid} width={10}>
+        <Grid.Column width={10}>
           { searchLoaded && this.renderHeader() }
           <Grid
             as={EnlargeGrid}
@@ -67,7 +61,7 @@ class SearchBooks extends React.Component {
             { books && <Books toggleDescription={this.toggleDescription} /> }
           </Grid>
         </Grid.Column>
-        <Grid.Column as={RightGrid} width={6}>
+        <Grid.Column width={6}>
           { Object.keys(book).length !== 0 && <BookDescription/> }
         </Grid.Column>
       </Grid>

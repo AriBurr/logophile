@@ -6,13 +6,11 @@ import { fetchShelvings } from '../../actions/shelvings';
 import { Icon, Menu, Label } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
-
 const MenuStyle =  styled(Menu)`
   padding-top: 85px;
   border: none !important;
   border-radius: 0px !important;
   box-shadow: none !important;
-
 `
 
 class SideNav extends React.Component {
@@ -35,7 +33,7 @@ class SideNav extends React.Component {
     const { edit } = this.state;
     const { bookshelves, dispatch } = this.props
     return bookshelves.map( shelf => {
-      return(
+      return (
         <Menu.Item
           key={shelf.id}
           name={shelf.name}
@@ -54,7 +52,6 @@ class SideNav extends React.Component {
       )
     })
   }
-
 
   render() {
     const { activeItem } = this.state
