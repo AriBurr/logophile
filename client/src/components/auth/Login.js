@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import { Header, Segment, Form, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { handleLogin } from '../../actions/auth';
+import styled from 'styled-components'
+
+const FormStyle = styled(Form)`
+  width: 40% !important;
+  margin: 0 auto !important;
+`
+
+const ComponentStyle = styled(Segment)`
+  span{
+    color: #FC7753;
+    font-size: 10px;
+  }
+`
 
 class Login extends Component {
   state = { email: '', password: '' };
@@ -21,12 +34,22 @@ class Login extends Component {
   render() {
     const { email, password } = this.state;
     return (
-      <Segment basic>
-        <Header as='h1' textAlign='center'>Login</Header>
-        <Form onSubmit={this.handleSubmit}>
+      <Segment basic className='container' as={ComponentStyle}>
+        <Segment textAlign='center' basic>
+          <Header as='h1'>
+            Please sign in (it makes life more fun)
+          </Header>
+          <p>
+            Unite with the greater logophile ecosystem: Log Books, Local Book Clubs, Read, and more!
+          </p>
+        </Segment>
+        <Form onSubmit={this.handleSubmit} as={FormStyle}>
           <Form.Field>
-            <label htmlFor='email'>Email</label>
+            <label htmlFor='email'>
+              Email <span>(required)</span>
+            </label>
             <input
+              autoFocus
               required
               id='email'
               value={email}
@@ -35,7 +58,9 @@ class Login extends Component {
             />
           </Form.Field>
           <Form.Field>
-            <label htmlFor='password'>Password</label>
+            <label htmlFor='password'>
+              Password <span>(required)</span>
+            </label>
             <input
               required
               id='password'
@@ -46,7 +71,7 @@ class Login extends Component {
             />
           </Form.Field>
           <Segment textAlign='center' basic>
-            <Button primary type='submit'>Submit</Button>
+            <Button color='green' type='submit'>Submit</Button>
           </Segment>
         </Form>
       </Segment>
