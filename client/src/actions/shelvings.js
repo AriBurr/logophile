@@ -25,7 +25,6 @@ export const fetchShelvings = (shelf) => {
 }
 
 export const deleteShelving = (shelving) => {
-  debugger
   return (dispatch) => {
     axios.delete(`/api/books/${shelving.id}`, setHeaders() )
       .then( () => dispatch({ type: 'DELETE_SHELVING', shelving }) )

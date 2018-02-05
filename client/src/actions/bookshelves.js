@@ -22,3 +22,10 @@ export const fetchBookshelves = () => {
     .catch( err => setFlash('Troubles retreiving bookshelves', 'red'))
   }
 }
+
+export const deleteBookshelf = (shelf) => {
+  return (dispatch) => {
+    axios.delete(`/api/bookshelves/${shelf.id}`, setHeaders() )
+      .then( () => dispatch({ type: 'DELETE_BOOKSHELF', shelf }) )
+  }
+}

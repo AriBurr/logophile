@@ -4,8 +4,8 @@ const bookshelves = (state = [], action) => {
       return [...state, action.bookshelf];
     case 'GET_BOOKSHELVES':
       return action.bookshelves;
-    case 'REMOVE_BOOKSHELVES':
-      return [];
+    case 'DELETE_BOOKSHELF':
+      return state.filter( s => s.id !== action.shelf.id);
     default:
       return state;
   }
