@@ -91,7 +91,6 @@ const mapStateToProps = (state) => {
   return {
     books: state.books,
     book: state.activeBook,
-    shelvings: state.shelvings
   }
 }
 

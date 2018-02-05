@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addBook } from '../../actions/book.js';
+import { addBook } from '../../actions/shelvings.js';
 import noCover from '../../assets/default.jpg';
 import styled from 'styled-components';
 import {

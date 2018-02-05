@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import activeBook from './activeBook';
-import shelvings from './book';
+import shelvings from './shelvings';
 import books from './books';
 import flash from './flash';
 import user from './user';

@@ -11,7 +11,7 @@ class Api::BooksController < ApiController
     if book.save
       render json: book
     else
-      render json: { errors: book.full_messages.join(',') }, status: 422
+      render json: { errors: book.errors.full_messages.join(',') }, status: 422
     end
   end
 
@@ -20,7 +20,7 @@ class Api::BooksController < ApiController
     if shelving.save
       render json: shelving
     else
-      render json: { errors: shelving.full_messages }, status: 422
+      render json: { errors: shelving.errors.full_messages.join(', ')}, status: 422
     end
   end
 

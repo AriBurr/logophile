@@ -1,10 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import SideNav from './SideNav';
 
-const Library = () => (
-  <div>
-    <SideNav />
-  </div>
-)
+class Library extends React.Component {
+  render() {
+    return (
+      <div>
+        <SideNav />
+      </div>
+    )
+  }
+}
 
-export default Library;
+const mapStateToProps = (state) => {
+  return { shelvings: state.shelvings }
+}
+
+export default connect(mapStateToProps)(Library);
