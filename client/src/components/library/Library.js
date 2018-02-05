@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchShelvings } from '../../actions/shelvings';
 import SideNav from './SideNav';
 import Bookshelf from './Bookshelf';
 import { Grid } from 'semantic-ui-react';

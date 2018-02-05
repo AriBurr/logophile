@@ -1,5 +1,5 @@
 import React from 'react';
-import { Segment, Header } from 'semantic-ui-react';
+import { Header } from 'semantic-ui-react';
 import styled from 'styled-components'
 import landing from '../assets/landing.jpg'
 

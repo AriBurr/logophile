@@ -22,9 +22,8 @@ const Image = styled.img`
 const ImgGrid = styled(Grid.Column)`
   margin: 0 -50px;
 `
-const DropdownStyle = styled(Button.Group)`
+const DropdownStyle = styled.div`
   margin: 0 auto !important;
-  width: 50%;
 `
 const DescContainer = styled.div`
   margin-left: 5% !important;
@@ -38,6 +37,11 @@ const PageContain = styled(Grid)`
 class BookDescription extends React.Component {
   state = { bookshelf: '' }
 
+  isLoggedIn = () => {
+    const token = localStorage.getItem('userToken');
+    return token ? true : false
+  }
+
   bookshelfOptions = () => {
     const { bookshelves } = this.props;
     return bookshelves.map ( shelf => {
@@ -46,8 +50,13 @@ class BookDescription extends React.Component {
   }
 
   handleSelection = (e, { value }) =>  {
+    this.setState({ bookshelf: value });
+  }
+
+  handleSubmit = () => {
+    const { bookshelf } = this.state;
     const { book, bookshelves, dispatch } = this.props;
-    const shelf = bookshelves.filter( shelf => shelf.name === value );
+    const shelf = bookshelves.filter( shelf => shelf.name === bookshelf );
     dispatch(addBook(book, shelf[0]));
   }
 
@@ -80,21 +89,25 @@ class BookDescription extends React.Component {
     </Segment>
   )
 
-  isLoggedIn = () => {
-    const token = localStorage.getItem('userToken');
-    return token ? true : false
+  bookshelfOptions = () => {
+    const { bookshelves } = this.props;
+    return bookshelves.map ( shelf => {
+      return { key: shelf.id, text: shelf.name, value: shelf.name }
+    });
   }
 
   renderDropdown = () => (
-    <Button.Group as={DropdownStyle} color='teal'>
-      <Button>Save to bookshelf</Button>
-      <Dropdown
-        floating button className='icon'
-        placeholder='Add to Bookshelf'
-        options={this.bookshelfOptions()}
-        onChange={this.handleSelection}
+    <DropdownStyle>
+      <span>
+        <Button color='teal' onClick={ () => this.handleSubmit() }>Select Bookshelf</Button>
+        <Dropdown
+          placeholder='Will Read'
+          selection
+          options={this.bookshelfOptions()}
+          onChange={this.handleSelection}
         />
-    </Button.Group>
+      </span>
+    </DropdownStyle>
   )
 
   render () {
