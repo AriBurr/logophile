@@ -6,7 +6,8 @@ export const addBookshelf = (bookshelf) => {
   return dispatch => {
     axios.post('/api/bookshelves', { bookshelf }, setHeaders() )
       .then( res => {
-        dispatch({ type: 'ADD_BOOKSHELF', bookshelf: res.data })
+        debugger
+        dispatch({ type: 'ADD_BOOKSHELF', bookshelf: {shelf: res.data, count: 0} })
 
       })
       .catch( err => dispatch(setFlash(`Trouble creating ${bookshelf.name}`, 'red')));
