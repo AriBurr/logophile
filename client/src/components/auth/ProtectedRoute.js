@@ -1,7 +1,6 @@
 import React from 'react'
 import { setFlash } from '../../actions/flash'
 import { Redirect, Route } from 'react-router-dom';
-import { connect } from 'react-redux'
 
 class ProtectedRoute extends React.Component {
 
@@ -15,17 +14,17 @@ class ProtectedRoute extends React.Component {
     );
   }
 
+  isLoggedIn = () => {
+    const token = localStorage.getItem('userToken');
+    return token ? true : false
+  }
+
   render() {
-    if(this.props.loggedIn)
+
+    if(this.isLoggedIn())
       return <Route {...this.props}/>
     return this.unpermitted();
   }
 }
 
-  const mapStateToProps = (state) => {
-    return {
-      loggedIn: state.user.id,
-    }
-  }
-
-export default connect(mapStateToProps)(ProtectedRoute);
+export default ProtectedRoute;
