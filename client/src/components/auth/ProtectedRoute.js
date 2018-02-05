@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { setFlash } from '../../actions/flash'
 import { Redirect, Route } from 'react-router-dom';
 
@@ -27,4 +28,4 @@ class ProtectedRoute extends React.Component {
   }
 }
 
-export default ProtectedRoute;
+export default connect()(ProtectedRoute);
