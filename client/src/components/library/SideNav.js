@@ -38,6 +38,27 @@ class SideNav extends React.Component {
   state = {
     activeItem: {},
     edit: false,
+    loaded: 0,
+  }
+
+  // componentDidReceiveProps = () => {
+  //   debugger
+  // }
+  //
+  componentDidMount = () => {
+    this.setState({ loaded: 0 })
+  }
+
+  setDefaultShelf = (nextProps) => {
+    const { dispatch } = this.props
+    const { loaded } = this.state
+    if(loaded === 0)
+      this.handleItemClick(nextProps.bookshelves[0].shelf)
+      this.setState({ loaded: loaded + 1 })
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    this.setDefaultShelf(nextProps)
   }
 
   toggleEdit = () => {
@@ -45,7 +66,7 @@ class SideNav extends React.Component {
     this.setState({ edit: !edit })
   }
 
-  handleItemClick = (shelf , e) => {
+  handleItemClick = (shelf , e = null) => {
     this.props.dispatch(fetchShelvings(shelf));
     this.props.dispatch(fetchShelf(shelf));
     this.setState({ activeItem: shelf })
