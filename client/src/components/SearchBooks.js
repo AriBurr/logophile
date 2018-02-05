@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { objectCheck } from '../utils/modules';
 import { searchAll } from '../actions/books';
 import { setActiveBook } from '../actions/activeBook';
 import Banner from './Banner';
@@ -62,7 +63,7 @@ class SearchBooks extends React.Component {
           </Grid>
         </Grid.Column>
         <Grid.Column width={6}>
-          { Object.keys(book).length !== 0 && <BookDescription/> }
+          { objectCheck(book) && <BookDescription/> }
         </Grid.Column>
       </Grid>
     )

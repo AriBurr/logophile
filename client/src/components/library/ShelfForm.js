@@ -1,12 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { objectCheck } from '../../utils/modules';
 import { addBookshelf } from '../../actions/bookshelves';
 import { editBookshelf } from '../../actions/bookshelves';
-import { Menu, Form, Input } from 'semantic-ui-react';
-import { connect } from 'react-redux';
+import { Menu, Form, Icon, Input } from 'semantic-ui-react';
+import styled from 'styled-components';
 
+const IconStyle = styled(Icon)`
+  color: white !important;
+  padding: 5%;
+`
 
 class ShelfForm extends React.Component {
-  state = { name: ''}
+  state = { name: '' }
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -33,8 +39,16 @@ class ShelfForm extends React.Component {
             name='name'
             value={name}
             icon='book'
-            placeholder={ edit ? `Edit ${active.name}` : 'Create Bookshelf' }
+            placeholder={
+              edit && !objectCheck(active) ? 'Select Bookshelf' :
+              edit && objectCheck(active) ? `Edit ${active.name}` : 'Create Bookshelf' }
           />
+          <Icon
+            as={IconStyle}
+            size='large'
+            onClick={ () => this.props.toggleEdit() }
+            name='edit'>
+          </Icon>
         </Form>
       </Menu.Item>
     )

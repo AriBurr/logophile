@@ -1,17 +1,29 @@
 import React from 'react'
-import styled from 'styled-components'
-import ShelfForm from './ShelfForm'
+import { connect } from 'react-redux'
 import { deleteBookshelf } from '../../actions/bookshelves';
 import { fetchShelvings } from '../../actions/shelvings';
 import { fetchShelf } from '../../actions/bookshelf';
+import ShelfForm from './ShelfForm'
+import bookshelf from '../../assets/bookshelf-component.svg'
+import styled from 'styled-components'
 import { Icon, Menu, Label } from 'semantic-ui-react'
-import { connect } from 'react-redux'
 
-const MenuStyle =  styled(Menu)`
-  padding-top: 85px;
+const EnlargeMenu = styled(Menu.Item)`
+  background-color: #223843 !important;
   border: none !important;
   border-radius: 0px !important;
   box-shadow: none !important;
+  color: white;
+  height: 100vh;
+  width: 20rem !important;
+  padding: 5%;
+`
+const MenuStyle = styled(Menu)`
+  color: white !important;
+`
+const Image = styled.img`
+  height: 175px;
+  width: 175px;
 `
 
 class SideNav extends React.Component {
@@ -37,6 +49,7 @@ class SideNav extends React.Component {
     return bookshelves.map( shelf => {
       return (
         <Menu.Item
+          as={MenuStyle}
           key={shelf.shelf.id}
           name={shelf.shelf.name}
           active={activeItem === shelf.shelf}
@@ -56,12 +69,16 @@ class SideNav extends React.Component {
   }
 
   render() {
-    const { activeItem } = this.state
+    const { edit, activeItem } = this.state
     return (
-      <Menu vertical as={MenuStyle}>
-        <Icon onClick={ () => this.toggleEdit() } name='edit'></Icon>
+      <Menu vertical as={EnlargeMenu}>
+        <Image src={bookshelf}></Image>
+        <ShelfForm
+          toggleEdit={this.toggleEdit}
+          edit={edit}
+          active={activeItem}
+        />
         { this.mapBookshelves(activeItem) }
-        <ShelfForm edit={this.state.edit} active={this.state.activeItem} />
       </Menu>
     )
   }
