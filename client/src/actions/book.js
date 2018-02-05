@@ -2,20 +2,16 @@ import axios from 'axios';
 import { setHeaders } from '../actions/headers';
 import { setFlash } from '../actions/flash';
 
-export const addBook = (book, bookshelf) => {
+export const addBook = (book, shelf) => {
   return dispatch => {
     axios.post(`/api/books`, { book: {item: book} }, setHeaders() )
       .then( res => {
+        const shelfId = shelf.id;
         const bookId = res.data.id;
-        addShelf(bookshelf.id, bookId)
+        axios.post(`api/shelf/${shelfId}/book/${bookId}`, { data: shelfId, bookId } , setHeaders() )
+        .then( res => dispatch({ type: 'ADD_SHELVING', shelving: res.data }))
+        .catch( err => dispatch(setFlash(`Invalid entry, please try again!`, 'red')));
       })
-      .catch( err => dispatch(setFlash(`Error`, 'red')));
+      .catch( err => dispatch(setFlash(`Invalid entry, please try again!`, 'red')));
   }
-}
-
-export const addShelf = (shelfId, bookId) => {
-  axios.post(`api/shelf/${shelfId}/add`, { data: shelfId, bookId } , setHeaders() )
-    .then( res => {
-      debugger
-    })
 }

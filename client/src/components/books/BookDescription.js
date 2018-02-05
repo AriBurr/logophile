@@ -51,13 +51,6 @@ class BookDescription extends React.Component {
     dispatch(addBook(book, shelf[0]));
   }
 
-  handleSelection = (e, { value }) => {
-    this.setState({ bookshelf: value });
-    const t = this.props
-    debugger
-    this.props.history.push('/library');
-  }
-
   getIBSN = (book) => {
     return book.industryIdentifiers.map( ibsn => {
       return (<div key={ibsn.identifier}>{ibsn.type}: {ibsn.identifier}</div>)

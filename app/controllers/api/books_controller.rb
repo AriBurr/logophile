@@ -16,8 +16,7 @@ class Api::BooksController < ApiController
   end
 
   def add_book_to_bookshelf
-    binding.pry
-    shelving = @bookshelf.shelvings.create(book_id: params[:id])
+    shelving = @bookshelf.shelvings.create(book_id: params[:book_id])
     if shelving.save
       render json: shelving
     else

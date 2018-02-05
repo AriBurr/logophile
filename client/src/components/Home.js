@@ -88,7 +88,11 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { books: state.books, book: state.activeBook }
+  return {
+    books: state.books,
+    book: state.activeBook,
+    shelvings: state.shelvings
+  }
 }
 
 export default connect(mapStateToProps)(Home);
