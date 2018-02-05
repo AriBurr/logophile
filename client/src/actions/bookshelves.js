@@ -29,3 +29,10 @@ export const deleteBookshelf = (shelf) => {
       .then( () => dispatch({ type: 'DELETE_BOOKSHELF', shelf }) )
   }
 }
+
+export const editBookshelf = (shelf) => {
+  return (dispatch) => {
+    axios.put(`/api/bookshelves/${shelf.id}`, { shelf }, setHeaders() )
+      .then( res => dispatch({ type: 'EDIT_BOOKSHELF', shelf: res.data }) )
+  }
+}

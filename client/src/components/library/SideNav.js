@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import ShelfForm from './ShelfForm'
+import { editBookshelf } from '../../actions/bookshelves';
 import { deleteBookshelf } from '../../actions/bookshelves';
 import { fetchShelvings } from '../../actions/shelvings';
 import { Icon, Menu, Label } from 'semantic-ui-react'
@@ -42,7 +43,12 @@ class SideNav extends React.Component {
           active={activeItem === `${shelf.name}`}
           onClick={() => this.handleItemClick(shelf)}
         >
-          { edit && <Icon onClick={ () => dispatch(deleteBookshelf(shelf)) } name='trash'></Icon> }
+          { edit &&
+            <div>
+              <Icon onClick={ () => dispatch(deleteBookshelf(shelf)) } name='trash'></Icon>
+              <Icon onClick={ () => dispatch(editBookshelf(shelf)) } name='pencil'></Icon>
+            </div>
+          }
           <Label color='teal'>1</Label>
           {shelf.name}
         </Menu.Item>
