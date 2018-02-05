@@ -6,8 +6,9 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 import FetchUser from './FetchUser';
 import Library from './library/Library';
-import Login from '../auth/Login';
-import Register from '../auth/Register';
+import Login from './auth/Login';
+import ProtectedRoute from './auth/ProtectedRoute';
+import Register from './auth/Register';
 import { Switch, Route } from 'react-router-dom';
 
 class App extends React.Component {
@@ -19,7 +20,7 @@ class App extends React.Component {
           <NavBar />
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route exact path='/library' component={Library} />
+            <ProtectedRoute exact path='/library' component={Library} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/register' component={Register} />
             <Route component={NoMatch} />

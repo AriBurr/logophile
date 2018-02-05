@@ -33,16 +33,23 @@ class NavBar extends Component {
     }
   }
 
+  loggedInLinks = () => {
+    return(
+      <Link to='/library'>
+        <Menu.Item name='Bookshelves' />
+      </Link>
+    )
+  }
+
   render() {
+    const { user } = this.props
     return (
       <div>
         <Menu pointing secondary>
           <Link to='/'>
             <Menu.Item name='home' />
           </Link>
-          <Link to='/library'>
-            <Menu.Item name='Bookshelves' />
-          </Link>
+          { user && this.loggedInLinks()}
           { this.rightNavs() }
         </Menu>
       </div>
