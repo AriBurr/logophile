@@ -16,7 +16,7 @@ class Api::BookshelvesController < ApiController
   end
 
   def update
-    if @shelf.update(params[:bookshelf])
+    if @shelf.update(bookshelf_params)
       render json: @shelf
     else
       render json: { errors: @shelf.full_messages }, status: 422

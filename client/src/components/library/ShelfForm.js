@@ -1,5 +1,6 @@
 import React from 'react';
 import { addBookshelf } from '../../actions/bookshelves';
+import { editBookshelf } from '../../actions/bookshelves';
 import { Menu, Form, Input } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
@@ -10,9 +11,10 @@ class ShelfForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const { name } = this.state
+    const { active, dispatch, edit } = this.props
     const bookshelf = { name }
     this.setState({ name: '' })
-    this.props.dispatch(addBookshelf(bookshelf))
+    edit ? dispatch(editBookshelf(active.id, bookshelf)) : dispatch(addBookshelf(bookshelf))
   }
 
   handleChange = (e) => {
@@ -22,6 +24,7 @@ class ShelfForm extends React.Component {
 
   render () {
     const { name } = this.state
+    const { active, edit } = this.props
     return(
       <Menu.Item>
         <Form onSubmit={this.handleSubmit}>
@@ -30,7 +33,7 @@ class ShelfForm extends React.Component {
             name='name'
             value={name}
             icon='book'
-            placeholder='Create Bookshelf'
+            placeholder={ edit ? `Edit ${active.name}` : 'Create Bookshelf' }
           />
         </Form>
       </Menu.Item>

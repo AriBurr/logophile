@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import ShelfForm from './ShelfForm'
-import { editBookshelf } from '../../actions/bookshelves';
 import { deleteBookshelf } from '../../actions/bookshelves';
 import { fetchShelvings } from '../../actions/shelvings';
 import { Icon, Menu, Label } from 'semantic-ui-react'
@@ -18,7 +17,7 @@ const MenuStyle =  styled(Menu)`
 
 class SideNav extends React.Component {
   state = {
-    activeItem: '',
+    activeItem: {},
     edit: false,
   }
 
@@ -29,7 +28,7 @@ class SideNav extends React.Component {
 
   handleItemClick = (shelf , e) => {
     this.props.dispatch(fetchShelvings(shelf));
-    this.setState({ activeItem: shelf.name })
+    this.setState({ activeItem: shelf })
   }
 
   mapBookshelves = (activeItem) => {
@@ -40,13 +39,13 @@ class SideNav extends React.Component {
         <Menu.Item
           key={shelf.id}
           name={shelf.name}
-          active={activeItem === `${shelf.name}`}
+          active={activeItem === shelf}
           onClick={() => this.handleItemClick(shelf)}
         >
           { edit &&
             <div>
               <Icon onClick={ () => dispatch(deleteBookshelf(shelf)) } name='trash'></Icon>
-              <Icon onClick={ () => dispatch(editBookshelf(shelf)) } name='pencil'></Icon>
+              <Icon onClick={ () => this.handleItemClick(shelf) } name='pencil'></Icon>
             </div>
           }
           <Label color='teal'>1</Label>
@@ -59,12 +58,11 @@ class SideNav extends React.Component {
 
   render() {
     const { activeItem } = this.state
-
     return (
       <Menu vertical as={MenuStyle}>
         <Icon onClick={ () => this.toggleEdit() } name='edit'></Icon>
         { this.mapBookshelves(activeItem) }
-        <ShelfForm />
+        <ShelfForm edit={this.state.edit} active={this.state.activeItem} />
       </Menu>
     )
   }
