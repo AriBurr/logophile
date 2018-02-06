@@ -20,7 +20,6 @@ class Book < ApplicationRecord
       when 'inc'
         bookshelf.update(book_count: bookshelf.book_count += 1)
       when 'dec'
-        binding.pry
         bookshelf.update(book_count: bookshelf.book_count -= 1)
     end
   end

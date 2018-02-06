@@ -56,7 +56,6 @@ class BookDescription extends React.Component {
   }
 
   handleSelection = (e, { value }) =>  {
-    debugger
     this.setState({ bookshelf: value });
   }
 

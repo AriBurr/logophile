@@ -4,7 +4,6 @@ import noCover from '../../assets/default.jpg';
 import { deleteShelving } from '../../actions/shelvings';
 import styled from 'styled-components';
 import BookModal from '../BookModal'
-import BookCover from '../books/BookCover'
 import {
   Button,
   Grid,

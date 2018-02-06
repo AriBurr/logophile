@@ -52,7 +52,6 @@ class SideNav extends React.Component {
   }
 
   setDefaultShelf = (nextProps) => {
-    const { dispatch } = this.props
     const { loaded } = this.state
     if(loaded === 0)
       this.handleItemClick(nextProps.bookshelves[0])

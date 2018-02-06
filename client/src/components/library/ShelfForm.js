@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { objectCheck } from '../../utils/modules';
 import { addBookshelf } from '../../actions/bookshelves';
 import { editBookshelf } from '../../actions/bookshelves';
-import { Menu, Form, Icon, Input } from 'semantic-ui-react';
+import { Menu, Form, Input } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const MenuStyle = styled(Menu.Item)`
