@@ -10,8 +10,8 @@ Rails.application.routes.draw do
     resources :users, only: :create
     resources :bookshelves, except: [:new, :edit, :show]
     resources :books, only: [:create, :destroy]
-    post '/shelf/:id/book/:book_id', to: 'books#add_book_to_bookshelf'
-    get '/shelf/:id/books', to: 'books#index'
+    post '/shelf/:shelf_id/book/:book_id', to: 'books#add_book_to_bookshelf'
+    get '/shelf/:shelf_id/books', to: 'books#index'
     get '/users/find', to: 'users#logged_in_user'
     # resource :session, only: [:create, :destroy]
   end

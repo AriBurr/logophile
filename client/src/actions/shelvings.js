@@ -29,9 +29,9 @@ export const fetchShelvings = (shelf) => {
   }
 }
 
-export const deleteShelving = (shelving) => {
+export const deleteShelving = (shelving, shelfId) => {
   return (dispatch) => {
-    axios.delete(`/api/books/${shelving.id}`, setHeaders() )
+    axios.delete(`/api/books/${shelving.id}?shelf_id=${shelfId}`, setHeaders() )
       .then( () => dispatch({ type: 'DELETE_SHELVING', shelving }) )
   }
 }

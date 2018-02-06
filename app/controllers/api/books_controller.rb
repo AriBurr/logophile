@@ -1,6 +1,6 @@
 class Api::BooksController < ApiController
   before_action :require_login
-  before_action :set_bookshelf, only: [:index, :add_book_to_bookshelf]
+  before_action :set_bookshelf, only: [:index, :add_book_to_bookshelf, :destroy]
 
   def index
     render json: @bookshelf.books
@@ -36,7 +36,7 @@ class Api::BooksController < ApiController
     end
 
     def set_bookshelf
-      @bookshelf = current_user.bookshelves.find(params[:id])
+      @bookshelf = current_user.bookshelves.find(params[:shelf_id])
     end
 
     def set_book

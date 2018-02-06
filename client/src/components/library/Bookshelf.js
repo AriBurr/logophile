@@ -14,6 +14,16 @@ import {
   Modal,
 } from 'semantic-ui-react';
 
+const Image = styled.img`
+  height: 198px;
+  width: 128px;
+  margin: 0 auto;
+  box-shadow: 0 1px 2px #999;
+  transition: box-shadow 0.25s;
+    &:hover {
+      box-shadow: 0 1px 20px #999;
+    }
+`
 const Banner = styled(Segment)`
   margin-right: 6.5% !important;
 `
@@ -26,17 +36,27 @@ class Bookshelf extends React.Component {
     this.setState({ edit: !edit })
   }
 
+  modalTrigger = (volumeInfo, title) => (
+    <Image
+      src={ volumeInfo.imageLinks ? volumeInfo.imageLinks.thumbnail : noCover }
+      alt={`${title} cover`}
+    />
+  )
+
   shelvings = () => {
     const { edit } = this.state;
-    const { dispatch, shelvings } = this.props;
+    const { dispatch, shelvings, bookshelf } = this.props;
     return shelvings.map( book => {
       const { volumeInfo, title } = book.item
       return (
         <Grid.Column key={book.id}>
-          <Modal trigger={<BookCover book={book}/>}>
+          <Modal trigger={this.modalTrigger(volumeInfo, title)}>
             <BookModal book={book}/>
           </Modal>
-          { edit && <Icon onClick={ () => dispatch(deleteShelving(book)) } name='trash'></Icon> }
+          { edit && <Icon
+                      onClick={ () => dispatch(deleteShelving(book, bookshelf.id)) }
+                      name='trash'>
+                    </Icon> }
         </Grid.Column>
       )
     });
