@@ -17,6 +17,9 @@ const EnlargeMenu = styled(Menu.Item)`
   height: 100vh;
   width: 18rem !important;
   padding: 5%;
+  .ui.menu .active.item:hover, .ui.vertical.menu .active.item:hover{
+    background-color: white !important;
+  }
 `
 const MenuStyle = styled(Menu)`
   color: white !important;
@@ -24,6 +27,9 @@ const MenuStyle = styled(Menu)`
     &:hover {
 
     }
+`
+const LabelStyle = styled(Label)`
+  margin-right: 7% !important;
 `
 const Image = styled.img`
   height: 175px;
@@ -80,7 +86,7 @@ class SideNav extends React.Component {
           active={activeItem === shelf}
           onClick={() => this.handleItemClick(shelf)}
         >
-        <Label corner='left' color='yellow'>{shelf.book_count}</Label>
+          <Label as={LabelStyle} color='yellow'>{shelf.book_count}</Label>
         {shelf.name}
         { edit &&
           <span>
