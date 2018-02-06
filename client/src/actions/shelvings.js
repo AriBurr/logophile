@@ -6,13 +6,21 @@ export const addBook = (book, shelf) => {
   return dispatch => {
     axios.post(`/api/books`, { book: {item: book} }, setHeaders() )
       .then( res => {
+        debugger
         const shelfId = shelf.id;
         const bookId = res.data.id;
         axios.post(`api/shelf/${shelfId}/book/${bookId}`, { data: shelfId, bookId } , setHeaders() )
-        .then( res => dispatch(setFlash(`Added "${book.volumeInfo.title}" to your ${shelf.name} bookshelf!`, 'green')))
+        .then( res => {
+          debugger
+          dispatch(setFlash(`Added "${book.volumeInfo.title}" to your ${shelf.name} bookshelf!`, 'green'))
+        })
         .catch( err => dispatch(setFlash(`Invalid entry, please try again!`, 'red')));
       })
-      .catch( err => dispatch(setFlash(`Invalid entry, please try again!`, 'red')));
+      .catch( err => {
+        debugger
+        dispatch(setFlash(`Invalid entry, please try again!`, 'red'));
+
+      })
   }
 }
 
