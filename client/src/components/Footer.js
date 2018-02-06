@@ -4,7 +4,6 @@ import styled from 'styled-components'
 
 export const FooterStyled = styled.div`
   flex-shrink: 0;
-  position: fixed;
   bottom: 0px;
   left: 0px;
   right: 0px;
