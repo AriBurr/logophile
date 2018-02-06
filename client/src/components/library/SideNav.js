@@ -15,15 +15,23 @@ const EnlargeMenu = styled(Menu.Item)`
   box-shadow: none !important;
   color: white;
   height: 100vh;
-  width: 20rem !important;
+  width: 18rem !important;
   padding: 5%;
 `
 const MenuStyle = styled(Menu)`
   color: white !important;
+  font-size: 18px !important;
+    &:hover {
+      
+    }
 `
 const Image = styled.img`
   height: 175px;
   width: 175px;
+`
+const IconStyle = styled(Icon)`
+  color: white !important;
+  padding: 5%;
 `
 
 class SideNav extends React.Component {
@@ -55,14 +63,15 @@ class SideNav extends React.Component {
           active={activeItem === shelf.shelf}
           onClick={() => this.handleItemClick(shelf.shelf)}
         >
-          { edit &&
-            <div>
-              <Icon onClick={ () => dispatch(deleteBookshelf(shelf.shelf)) } name='trash'></Icon>
-              <Icon onClick={ () => this.handleItemClick(shelf.shelf) } name='pencil'></Icon>
-            </div>
-          }
-          <Label color='teal'>{shelf.count}</Label>
-          {shelf.shelf.name}
+        <Label corner='left' color='yellow'>{shelf.count}</Label>
+        {shelf.shelf.name}
+        { edit &&
+          <span>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <Icon circular inverted onClick={ () => dispatch(deleteBookshelf(shelf.shelf)) } name='trash'></Icon>
+            <Icon circular inverted onClick={ () => this.handleItemClick(shelf.shelf) } name='pencil'></Icon>
+          </span>
+        }
         </Menu.Item>
       )
     })
@@ -74,11 +83,16 @@ class SideNav extends React.Component {
       <Menu vertical as={EnlargeMenu}>
         <Image src={bookshelf}></Image>
         <ShelfForm
-          toggleEdit={this.toggleEdit}
           edit={edit}
           active={activeItem}
         />
         { this.mapBookshelves(activeItem) }
+        <Icon
+          as={IconStyle}
+          size='large'
+          onClick={() => this.toggleEdit()}
+          name='edit'
+        />
       </Menu>
     )
   }

@@ -6,9 +6,8 @@ import { editBookshelf } from '../../actions/bookshelves';
 import { Menu, Form, Icon, Input } from 'semantic-ui-react';
 import styled from 'styled-components';
 
-const IconStyle = styled(Icon)`
-  color: white !important;
-  padding: 5%;
+const MenuStyle = styled(Menu.Item)`
+  margin-bottom: 8%;
 `
 
 class ShelfForm extends React.Component {
@@ -32,7 +31,7 @@ class ShelfForm extends React.Component {
     const { name } = this.state
     const { active, edit } = this.props
     return(
-      <Menu.Item>
+      <Menu.Item as={MenuStyle}>
         <Form onSubmit={this.handleSubmit}>
           <Input
             onChange={this.handleChange}
@@ -43,12 +42,6 @@ class ShelfForm extends React.Component {
               edit && !objectCheck(active) ? 'Select Bookshelf' :
               edit && objectCheck(active) ? `Edit ${active.name}` : 'Create Bookshelf' }
           />
-          <Icon
-            as={IconStyle}
-            size='large'
-            onClick={ () => this.props.toggleEdit() }
-            name='edit'>
-          </Icon>
         </Form>
       </Menu.Item>
     )
