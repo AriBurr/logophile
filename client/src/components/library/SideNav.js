@@ -91,8 +91,20 @@ class SideNav extends React.Component {
         { edit &&
           <span>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <Icon circular inverted onClick={ () => dispatch(deleteBookshelf(shelf)) } name='trash'></Icon>
-            <Icon circular inverted onClick={ () => this.handleItemClick(shelf) } name='pencil'></Icon>
+            <Icon
+              size='tiny'
+              circular
+              inverted
+              onClick={ () => dispatch(deleteBookshelf(shelf)) }
+              name='trash'>
+            </Icon>
+            <Icon
+              size='tiny'
+              circular
+              inverted
+              onClick={ () => this.handleItemClick(shelf) }
+              name='pencil'>
+            </Icon>
           </span>
         }
         </Menu.Item>

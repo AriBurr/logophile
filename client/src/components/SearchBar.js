@@ -12,6 +12,16 @@ const FormContainer = styled(Form)`
   text-align: center;
   position: relative;
 `
+const ButtonStyle = styled(Button)`
+  &&& {
+    background-color: #E6C229;
+    color: white;
+      &:hover {
+        background-color: #223843;
+        color: white;
+      }
+  }
+`
 
 class SearchBar extends React.Component {
   state = { title: '', author: '', ibsn: '' }
@@ -56,7 +66,7 @@ class SearchBar extends React.Component {
               placeholder='IBSN'
             >
             </Form.Input>
-            <Button className='ui primary button' type='submit'>Submit</Button>
+            <Button as={ButtonStyle} type='submit'>Submit</Button>
           </Form.Group>
         </Form>
       </Segment>

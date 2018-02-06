@@ -33,6 +33,16 @@ const PageContain = styled(Grid)`
     width: 67% !important;
   }
 `
+const ButtonStyle = styled(Button)`
+  &&& {
+    background-color: #E6C229;
+    color: white;
+      &:hover {
+        background-color: #223843;
+        color: white;
+      }
+  }
+`
 
 class BookDescription extends React.Component {
   state = { bookshelf: '' }
@@ -70,12 +80,12 @@ class BookDescription extends React.Component {
     return(
       <List>
         <List.Item as='h3'>
-          Title: {book.title}
+          {book.title}
         </List.Item>
+        { book.authors && <List.Item><strong>Written by</strong> {book.authors[0]}</List.Item> }
         <Divider />
-        { book.authors && <List.Item>Author: {book.authors[0]}</List.Item> }
-        <List.Item>Pages: {book.pageCount} pgs</List.Item>
-        <List.Item>Published: {book.publisher}, {book.publishedDate}</List.Item>
+        <List.Item>{book.pageCount} pages</List.Item>
+        <List.Item>Published {book.publishedDate} by {book.publisher}</List.Item>
         { book.industryIdentifiers && <List.Item>{this.getIBSN(book)}</List.Item> }
       </List>
     )
@@ -83,7 +93,7 @@ class BookDescription extends React.Component {
 
   renderDescription = (book) => (
     <Segment>
-      <Header textAlign='center' as='h4'>About: "<em>{book.title}</em>"</Header>
+      <Header textAlign='center' as='h4'>About "<em>{book.title}</em>"</Header>
       <Divider />
       {book.description}
     </Segment>
@@ -99,7 +109,7 @@ class BookDescription extends React.Component {
   renderDropdown = () => (
     <DropdownStyle>
       <span>
-        <Button color='teal' onClick={ () => this.handleSubmit() }>Select Bookshelf</Button>
+        <Button as={ButtonStyle} onClick={ () => this.handleSubmit() }>Select Bookshelf</Button>
         <Dropdown
           placeholder='Will Read'
           selection
@@ -115,6 +125,11 @@ class BookDescription extends React.Component {
     return (
       <Grid as={PageContain}>
         <Grid.Row columns={2}>
+          <Grid.Column id='desc-container'>
+            <Segment basic >
+              { this.bookDescriptionList(book) }
+            </Segment>
+          </Grid.Column>
           <Grid.Column as={ImgGrid} textAlign='center'>
             { book.imageLinks ?
               <Image
@@ -126,11 +141,6 @@ class BookDescription extends React.Component {
                 alt={'book cover'}
               />
             }
-          </Grid.Column>
-          <Grid.Column id='desc-container'>
-            <Segment basic >
-              { this.bookDescriptionList(book) }
-            </Segment>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
