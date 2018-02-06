@@ -8,7 +8,7 @@ class Book < ApplicationRecord
   def self.check_if_duplicate(book_params)
     book = Book.where("item->>'etag' = ?", book_params['etag'])
     if book.empty?
-      Book.create(item: book_params) && nil
+      Book.create(item: book_params)
     else
       book[0]
     end

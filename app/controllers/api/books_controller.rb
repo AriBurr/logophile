@@ -9,7 +9,6 @@ class Api::BooksController < ApiController
   def create
     book = Book.check_if_duplicate(params[:book][:item])
     if !book.nil?
-      binding.pry
       render json: book
     else
       render json: ['Trouble Creating this book'], status: 422
@@ -18,8 +17,6 @@ class Api::BooksController < ApiController
 
   def add_book_to_bookshelf
     shelving = @bookshelf.shelvings.create(book_id: params[:book_id])
-    # search through pre-existing books, if it exists use that one
-    binding.pry
     Book.change_count('inc', @bookshelf)
     if shelving.save
       render json: shelving
