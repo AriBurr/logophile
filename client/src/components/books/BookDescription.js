@@ -35,7 +35,11 @@ const PageContain = styled(Grid)`
 `
 
 class BookDescription extends React.Component {
-  state = { bookshelf: '' }
+  state = { bookshelf: 'Read' }
+
+  componentDidMount = () => {
+    this.handleSelection({ value: 'Read' })
+  }
 
   isLoggedIn = () => {
     const token = localStorage.getItem('userToken');
@@ -49,7 +53,7 @@ class BookDescription extends React.Component {
     });
   }
 
-  handleSelection = (e, { value }) =>  {
+  handleSelection = ({ value },e = null) =>  {
     this.setState({ bookshelf: value });
   }
 
@@ -103,6 +107,7 @@ class BookDescription extends React.Component {
         <Dropdown
           placeholder='Will Read'
           selection
+          value={this.state.bookshelf}
           options={this.bookshelfOptions()}
           onChange={this.handleSelection}
         />
