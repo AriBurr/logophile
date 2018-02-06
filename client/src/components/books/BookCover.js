@@ -13,19 +13,19 @@ const Image = styled.img`
     }
 `
 
-const BookCover = ({ book }) => (
-  <Container>
-    { book.volumeInfo.imageLinks ?
+const BookCover = ({ book }) => {
+  let data = null;
+  book.item ? data = book.item: data = book
+  
+  const { volumeInfo } = data
+  return(
+    <Container>
       <Image
-        src={ book.volumeInfo.imageLinks.thumbnail }
-        alt={`${book.volumeInfo.title} cover`}
-      /> :
-      <Image
-        src={ noCover }
-        alt={`${book.volumeInfo.title} cover`}
+        src={ volumeInfo.imageLinks ? volumeInfo.imageLinks.thumbnail : noCover }
+        alt={`${volumeInfo.title} cover`}
       />
-    }
-  </Container>
-)
+    </Container>
+  )
+}
 
 export default BookCover;
