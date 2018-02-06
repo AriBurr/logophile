@@ -3,11 +3,22 @@ import { Menu } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleLogout } from '../actions/auth';
+import styled from 'styled-components';
+
+const MenuStyle = styled(Menu)`
+  background-color: rgba(0, 0, 0, .5) !important;
+  padding-top: 1%;
+  position: fixed !important;
+  width: 100%;
+  z-index: 50 !important;
+`
+
+const MenuItem = styled(Menu.Item)`
+  color: white !important;
+`
 
 class NavBar extends Component {
-  state = {
-    user: {},
-  }
+  state = { user: {} }
 
   componentWillReceiveProps = (nextProps) => {
     const user = nextProps.user
@@ -27,6 +38,7 @@ class NavBar extends Component {
         return (
           <Menu.Menu position='right'>
             <Menu.Item
+              as={MenuItem}
               name='Logout'
               onClick={() => dispatch(handleLogout(user, history))}
               />
@@ -37,10 +49,10 @@ class NavBar extends Component {
       return (
         <Menu.Menu position='right'>
           <Link to='/register'>
-            <Menu.Item name='Register' />
+            <Menu.Item as={MenuItem} name='Register' />
           </Link>
           <Link to='/login'>
-            <Menu.Item name='Login' />
+            <Menu.Item as={MenuItem} name='Login' />
           </Link>
         </Menu.Menu>
       );
@@ -50,7 +62,7 @@ class NavBar extends Component {
   loggedInLinks = () => {
     return(
       <Link to='/library'>
-        <Menu.Item name='Bookshelves' />
+        <Menu.Item as={MenuItem} name='Bookshelves' />
       </Link>
     )
   }
@@ -59,12 +71,16 @@ class NavBar extends Component {
     const { user } = this.props
     return (
       <div>
-        <Menu pointing secondary>
+        <Menu
+          as={MenuStyle}
+          pointing
+          secondary
+        >
           <Link to='/'>
-            <Menu.Item name='home' />
+            <Menu.Item as={MenuItem} name='home' />
           </Link>
           <Link to='/books'>
-            <Menu.Item name='Find Books' />
+            <Menu.Item as={MenuItem} name='Find Books' />
           </Link>
           { user && this.loggedInLinks()}
           { this.rightNavs() }
