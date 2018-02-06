@@ -1,17 +1,17 @@
 class Api::BooksController < ApiController
   before_action :require_login
-  before_action :set_bookshelf, only: [:index, :add_book_to_bookshelf]
+  before_action :set_bookshelf, only: [:index, :add_book_to_bookshelf, :destroy]
 
   def index
     render json: @bookshelf.books
   end
 
   def create
-    book = Book.create(item: params[:book][:item])
-    if book.save
+    book = Book.check_if_duplicate(params[:book][:item])
+    if !book.nil?
       render json: book
     else
-      render json: { errors: book.errors.full_messages.join(',') }, status: 422
+      render json: ['Trouble Creating this book'], status: 422
     end
   end
 
@@ -36,7 +36,7 @@ class Api::BooksController < ApiController
     end
 
     def set_bookshelf
-      @bookshelf = current_user.bookshelves.find(params[:id])
+      @bookshelf = current_user.bookshelves.find(params[:shelf_id])
     end
 
     def set_book

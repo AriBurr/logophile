@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import noCover from '../../assets/default.jpg';
 import { deleteShelving } from '../../actions/shelvings';
 import styled from 'styled-components';
+import BookModal from '../BookModal'
 import {
   Button,
   Grid,
   Icon,
   Segment,
   Header,
+  Modal,
 } from 'semantic-ui-react';
 
 const Image = styled.img`
@@ -33,23 +35,27 @@ class Bookshelf extends React.Component {
     this.setState({ edit: !edit })
   }
 
+  modalTrigger = (volumeInfo, title) => (
+    <Image
+      src={ volumeInfo.imageLinks ? volumeInfo.imageLinks.thumbnail : noCover }
+      alt={`${title} cover`}
+    />
+  )
+
   shelvings = () => {
     const { edit } = this.state;
-    const { dispatch, shelvings } = this.props;
+    const { dispatch, shelvings, bookshelf } = this.props;
     return shelvings.map( book => {
+      const { volumeInfo, title } = book.item
       return (
         <Grid.Column key={book.id}>
-          { book.item.volumeInfo.imageLinks ?
-            <Image
-              src={ book.item.volumeInfo.imageLinks.thumbnail }
-              alt={`${book.item.volumeInfo.title} cover`}
-            /> :
-            <Image
-              src={ noCover }
-              alt={`${book.item.volumeInfo.title} cover`}
-            />
-          }
-          { edit && <Icon onClick={ () => dispatch(deleteShelving(book)) } name='trash'></Icon> }
+          <Modal trigger={this.modalTrigger(volumeInfo, title)}>
+            <BookModal book={book}/>
+          </Modal>
+          { edit && <Icon
+                      onClick={ () => dispatch(deleteShelving(book, bookshelf.id)) }
+                      name='trash'>
+                    </Icon> }
         </Grid.Column>
       )
     });

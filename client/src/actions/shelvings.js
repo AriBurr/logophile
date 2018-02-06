@@ -9,10 +9,15 @@ export const addBook = (book, shelf) => {
         const shelfId = shelf.id;
         const bookId = res.data.id;
         axios.post(`api/shelf/${shelfId}/book/${bookId}`, { data: shelfId, bookId } , setHeaders() )
-        .then( res => dispatch(setFlash(`Added "${book.volumeInfo.title}" to your ${shelf.name} bookshelf!`, 'green')))
-        .catch( err => dispatch(setFlash(`Invalid entry, please try again!`, 'red')));
+        .then( res => {
+          dispatch(setFlash(`Added "${book.volumeInfo.title}" to your ${shelf.name} bookshelf!`, 'green'))
+        })
+        .catch( err => dispatch(setFlash(`${book.volumeInfo.title} is already on bookshelf: ${shelf.name}`, 'red')));
       })
-      .catch( err => dispatch(setFlash(`Invalid entry, please try again!`, 'red')));
+      .catch( err => {
+        dispatch(setFlash(`Troubles with this request`, 'red'));
+
+      })
   }
 }
 
@@ -24,9 +29,9 @@ export const fetchShelvings = (shelf) => {
   }
 }
 
-export const deleteShelving = (shelving) => {
+export const deleteShelving = (shelving, shelfId) => {
   return (dispatch) => {
-    axios.delete(`/api/books/${shelving.id}`, setHeaders() )
+    axios.delete(`/api/books/${shelving.id}?shelf_id=${shelfId}`, setHeaders() )
       .then( () => dispatch({ type: 'DELETE_SHELVING', shelving }) )
   }
 }
