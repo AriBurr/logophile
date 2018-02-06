@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20180202234400) do
 
   create_table "bookshelves", force: :cascade do |t|
     t.string "name", null: false
+    t.integer "book_count", default: 0
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

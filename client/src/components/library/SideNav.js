@@ -22,7 +22,7 @@ const MenuStyle = styled(Menu)`
   color: white !important;
   font-size: 18px !important;
     &:hover {
-      
+
     }
 `
 const Image = styled.img`
@@ -41,10 +41,6 @@ class SideNav extends React.Component {
     loaded: 0,
   }
 
-  // componentDidReceiveProps = () => {
-  //   debugger
-  // }
-  //
   componentDidMount = () => {
     this.setState({ loaded: 0 })
   }
@@ -53,7 +49,7 @@ class SideNav extends React.Component {
     const { dispatch } = this.props
     const { loaded } = this.state
     if(loaded === 0)
-      this.handleItemClick(nextProps.bookshelves[0].shelf)
+      this.handleItemClick(nextProps.bookshelves[0])
       this.setState({ loaded: loaded + 1 })
   }
 

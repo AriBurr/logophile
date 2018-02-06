@@ -17,6 +17,7 @@ class Api::BooksController < ApiController
 
   def add_book_to_bookshelf
     shelving = @bookshelf.shelvings.create(book_id: params[:book_id])
+    Book.change_count('inc', @bookshelf)
     if shelving.save
       render json: shelving
     else
@@ -25,6 +26,7 @@ class Api::BooksController < ApiController
   end
 
   def destroy
+    Book.change_count('dec', @bookshelf)
     Book.find(params[:id]).destroy
   end
 

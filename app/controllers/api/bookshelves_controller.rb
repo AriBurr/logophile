@@ -3,7 +3,7 @@ class Api::BookshelvesController < ApiController
   before_action :set_bookshelf, only: [:update, :destroy]
 
   def index
-    render json: Bookshelf.with_book_count(current_user)
+    render json: current_user.bookshelves.all.order(created_at: :asc)
   end
 
   def create
@@ -29,7 +29,7 @@ class Api::BookshelvesController < ApiController
 
   private
     def bookshelf_params
-      params.require(:bookshelf).permit(:name)
+      params.require(:bookshelf).permit(:name, :count)
     end
 
     def set_bookshelf

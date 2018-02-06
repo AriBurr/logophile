@@ -1,7 +1,6 @@
 const bookshelves = (state = [], action) => {
   switch(action.type){
     case 'ADD_BOOKSHELF':
-    debugger
       return [...state, action.bookshelf];
     case 'GET_BOOKSHELVES':
       return action.bookshelves;
