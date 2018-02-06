@@ -75,18 +75,18 @@ class SideNav extends React.Component {
       return (
         <Menu.Item
           as={MenuStyle}
-          key={shelf.shelf.id}
-          name={shelf.shelf.name}
-          active={activeItem === shelf.shelf}
-          onClick={() => this.handleItemClick(shelf.shelf)}
+          key={shelf.id}
+          name={shelf.name}
+          active={activeItem === shelf}
+          onClick={() => this.handleItemClick(shelf)}
         >
-        <Label corner='left' color='yellow'>{shelf.count}</Label>
-        {shelf.shelf.name}
+        <Label corner='left' color='yellow'>{shelf.book_count}</Label>
+        {shelf.name}
         { edit &&
           <span>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <Icon circular inverted onClick={ () => dispatch(deleteBookshelf(shelf.shelf)) } name='trash'></Icon>
-            <Icon circular inverted onClick={ () => this.handleItemClick(shelf.shelf) } name='pencil'></Icon>
+            <Icon circular inverted onClick={ () => dispatch(deleteBookshelf(shelf)) } name='trash'></Icon>
+            <Icon circular inverted onClick={ () => this.handleItemClick(shelf) } name='pencil'></Icon>
           </span>
         }
         </Menu.Item>
