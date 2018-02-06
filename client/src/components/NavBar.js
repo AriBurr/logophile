@@ -1,24 +1,44 @@
 import React, { Component } from 'react';
-import { Menu } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleLogout } from '../actions/auth';
 import styled from 'styled-components';
+import { Menu } from 'semantic-ui-react';
 
-const MenuStyle = styled(Menu)`
-  background-color: rgba(0, 0, 0, .5) !important;
-  padding-top: 1%;
-  position: fixed !important;
-  width: 100%;
-  z-index: 50 !important;
+const ComponentStyle = styled.div`
+  .ui.menu .active.item {
+    background-color: #1DD3B0 !important;
+  }
 `
-
-const MenuItem = styled(Menu.Item)`
+const Header = styled.div`
+  background-color: #1DD3B0;
+  color: white;
+  height: 75px;
+  padding: 20px 0;
+  position: relative;
+    h1 {
+      margin-left: 30px;
+    }
+`
+const MenuStyle = styled(Menu)`
+  &&& {
+    background-color: #223843;
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
+    margin: 0;
+  }
+`
+const MenuTheme = styled(Menu.Item)`
   color: white !important;
+  background-color: ${props => props.active ? '#1DD3B0' : '#223843'} !important;
+  &: hover {
+    background-color: #1DD3B0 !important;
+  }
 `
 
 class NavBar extends Component {
-  state = { user: {} }
+  state = { activeItem: '', user: {} }
 
   componentWillReceiveProps = (nextProps) => {
     const user = nextProps.user
@@ -30,68 +50,55 @@ class NavBar extends Component {
     this.setState({ user: this.props.user })
   }
 
-  rightNavs = () => {
-    const { dispatch, history } = this.props;
-    const { user } = this.state
-    if(Object.keys(user).length !== 0){
-      if(user.id){
-        return (
-          <Menu.Menu position='right'>
-            <Menu.Item
-              as={MenuItem}
-              name='Logout'
-              onClick={() => dispatch(handleLogout(user, history))}
-              />
-          </Menu.Menu>
-        )
-      }
-    }else{
-      return (
-        <Menu.Menu position='right'>
-          <Link to='/register'>
-            <Menu.Item as={MenuItem} name='Register' />
-          </Link>
-          <Link to='/login'>
-            <Menu.Item as={MenuItem} name='Login' />
-          </Link>
-        </Menu.Menu>
-      );
-    }
-  }
+  setActiveItem = (e, { name }) => this.setState({ activeItem: name })
 
   loggedInLinks = () => {
-    return(
+    return (
       <Link to='/library'>
-        <Menu.Item as={MenuItem} name='Bookshelves' />
+        <Menu.Item
+          as={MenuTheme}
+          onClick={this.setActiveItem}
+          name='Bookshelves'
+          active={this.state.activeItem === 'Bookshelves'}
+        />
       </Link>
-    )
+    );
   }
 
   render() {
-    const { user } = this.props
+    const { user } = this.props;
+    const { activeItem } = this.state;
     return (
-      <div>
-        <Menu
-          as={MenuStyle}
-          pointing
-          secondary
-        >
+      <ComponentStyle>
+        <Menu as={MenuStyle}>
           <Link to='/'>
-            <Menu.Item as={MenuItem} name='home' />
+            <Menu.Item
+              as={MenuTheme}
+              onClick={this.setActiveItem}
+              name='Home'
+              active={this.state.activeItem === 'Home'}
+            />
           </Link>
           <Link to='/books'>
-            <Menu.Item as={MenuItem} name='Find Books' />
+            <Menu.Item
+              as={MenuTheme}
+              onClick={this.setActiveItem}
+              name='Find Books'
+              active={this.state.activeItem === 'Find Books'}
+            />
           </Link>
-          { user && this.loggedInLinks()}
-          { this.rightNavs() }
+          { user && this.loggedInLinks() }
         </Menu>
-      </div>
+        <Header>
+          <h1>{ activeItem }</h1>
+        </Header>
+      </ComponentStyle>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return { user: state.user };
-};
+  return { user: state.user }
+}
 
 export default withRouter(connect(mapStateToProps)(NavBar));

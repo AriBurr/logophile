@@ -10,11 +10,11 @@ import { injectGlobal } from 'styled-components';
 
 injectGlobal`
 @font-face {
-  @import url('https://fonts.googleapis.com/css?family=Vollkorn');
+  @import url('https://fonts.googleapis.com/css?family=Lato:400,900');
 }
 
 html :not(i) {
-  font-family: 'Vollkorn', serif !important;
+  font-family: 'Lato', sans-serif !important;
 }
 `
 

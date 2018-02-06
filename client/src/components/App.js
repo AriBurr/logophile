@@ -2,6 +2,7 @@ import React from 'react';
 import Flash from './Flash';
 import SearchBooks from './SearchBooks';
 import NoMatch from './NoMatch';
+import UserNavBar from './UserNavBar';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import Welcome from './Welcome';
@@ -17,6 +18,7 @@ class App extends React.Component {
     return (
       <div>
         <FetchUser>
+          <UserNavBar />
           <NavBar />
           <Flash />
           <Switch>
