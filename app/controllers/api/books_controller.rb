@@ -27,7 +27,7 @@ class Api::BooksController < ApiController
 
   def destroy
     Book.change_count('dec', @bookshelf)
-    Book.find(params[:id]).destroy
+    @bookshelf.destroy
   end
 
   private
