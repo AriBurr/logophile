@@ -1,8 +1,19 @@
-import React from 'react'
-import BookCover from './books/BookCover'
-import { connect } from 'react-redux'
-import { addRating } from '../actions/ratings'
-import { Header, Modal, Rating } from 'semantic-ui-react'
+import React from 'react';
+import BookCover from './books/BookCover';
+import { connect } from 'react-redux';
+import { addRating } from '../actions/ratings';
+import styled from 'styled-components';
+import {
+  Divider,
+  Grid,
+  List,
+  Modal,
+  Rating,
+} from 'semantic-ui-react';
+
+const Wrapper = styled.div`
+  margin: 5%;
+`
 
 class BookModal extends React.Component {
 
@@ -11,26 +22,59 @@ class BookModal extends React.Component {
     dispatch(addRating(data.rating, book.id))
   }
 
+  getIBSN = (book) => {
+    return book.industryIdentifiers.map( ibsn => {
+      return (<div key={ibsn.identifier}>{ibsn.type}: {ibsn.identifier}</div>)
+    });
+  }
+
+  description = (volumeInfo) => {
+    return (
+      <Wrapper>
+        <Grid>
+          <Grid.Row>
+            <Modal.Header as='h1'><em>{volumeInfo.title}</em></Modal.Header>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={3}>
+              <BookCover book={this.props.book} />
+              <Rating
+                onRate={this.handleChange}
+                maxRating={5}
+                defaultRating={3}
+                icon='star'
+                size='small'
+              />
+            </Grid.Column>
+            <Grid.Column width={13}>
+              <Grid.Row>
+                {volumeInfo.description}
+              </Grid.Row>
+              <br />
+              <Grid.Row>
+                <List>
+                  <List.Item>
+                    { volumeInfo.authors && <List.Item><strong>Written by</strong> {volumeInfo.authors[0]}</List.Item> }
+                  </List.Item>
+                  <Divider />
+                  <List.Item>{volumeInfo.pageCount} pages</List.Item>
+                  <List.Item>Published {volumeInfo.publishedDate} by {volumeInfo.publisher}</List.Item>
+                  { volumeInfo.industryIdentifiers && <List.Item>{this.getIBSN(volumeInfo)}</List.Item> }
+                </List>
+              </Grid.Row>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Wrapper>
+    );
+  }
+
   render () {
-    const { volumeInfo } = this.props.book.item
+    const { volumeInfo } = this.props.book.item;
     return(
       <div>
-        <Modal.Header>{volumeInfo.title}</Modal.Header>
         <Modal.Content image>
-          <BookCover book={this.props.book} />
-          <Modal.Description>
-            <Rating
-              onRate={this.handleChange}
-              maxRating={5}
-              defaultRating={3}
-              icon='star'
-              size='small'
-            />
-
-            <Header>Default Profile Image</Header>
-            <p>We've found the following gravatar image associated with your e-mail address.</p>
-            <p>Is it okay to use this photo?</p>
-          </Modal.Description>
+          {this.description(volumeInfo)}
         </Modal.Content>
       </div>
     )

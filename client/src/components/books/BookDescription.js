@@ -64,12 +64,6 @@ class BookDescription extends React.Component {
     dispatch(addBook(book, shelf[0]));
   }
 
-  getIBSN = (book) => {
-    return book.industryIdentifiers.map( ibsn => {
-      return (<div key={ibsn.identifier}>{ibsn.type}: {ibsn.identifier}</div>)
-    });
-  }
-
   bookDescriptionList = (book) => {
     return(
       <List>
@@ -80,7 +74,6 @@ class BookDescription extends React.Component {
         <Divider />
         <List.Item>{book.pageCount} pages</List.Item>
         <List.Item>Published {book.publishedDate} by {book.publisher}</List.Item>
-        { book.industryIdentifiers && <List.Item>{this.getIBSN(book)}</List.Item> }
       </List>
     )
   }
