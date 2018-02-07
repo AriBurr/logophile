@@ -1,15 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { objectCheck } from '../utils/modules';
-import { searchAll } from '../actions/books';
-import { setActiveBook } from '../actions/activeBook';
-import Banner from './Banner';
-import BookDescription from './books/BookDescription';
-import Books from './books/Books';
+import { objectCheck } from '../../utils/modules';
+import { searchAll } from '../../actions/books';
+import { setActiveBook } from '../../actions/activeBook';
+import Banner from '../Banner';
+import TopReviewed from './TopReviewed';
+import BookDescription from '../books/BookDescription';
+import Books from '../books/Books';
 import styled from 'styled-components';
-import {
-  Grid,
- } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 
 const EnlargeGrid = styled(Grid)`
   height: 100vh;
@@ -60,7 +59,7 @@ class SearchBooks extends React.Component {
     return (
       <Wrapper>
         <Banner searchTerms={this.handleSearch} />
-        { searchLoaded && this.renderSearched(searchLoaded) }
+        { searchLoaded ? this.renderSearched(searchLoaded) : <TopReviewed /> }
       </Wrapper>
     );
   }

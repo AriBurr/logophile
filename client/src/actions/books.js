@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { setFlash } from './flash';
+import { setHeaders } from './headers';
+
 
 const getUrl = (terms) => {
   const BASE_URL='https://www.googleapis.com/books/v1/volumes'
@@ -19,6 +21,18 @@ export const searchAll = (callback, terms) => {
       .then( callback() )
       .catch( err => {
         dispatch(setFlash('Invalid Search, Please Try Again!', 'red'));
+      });
+  }
+}
+
+export const booksWithRatings = () => {
+  return(dispatch) => {
+    axios.get(`/api/books/with_ratings`, setHeaders())
+      .then( res => {
+        dispatch({ type: 'GET_TOP_RATED', topBooks: res.data });
+      })
+      .catch( err => {
+        dispatch(setFlash('We cannot find the top books, try again!', 'red'));
       });
   }
 }

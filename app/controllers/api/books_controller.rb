@@ -30,6 +30,10 @@ class Api::BooksController < ApiController
     @bookshelf.destroy
   end
 
+  def all_books_with_ratings
+    render json: Book.only_with_ratings
+  end
+
   private
     def book_params
       params.require(:book).permit(:item)

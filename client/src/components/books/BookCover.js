@@ -16,7 +16,7 @@ const Image = styled.img`
 const BookCover = ({ book }) => {
   let data = null;
   book.item ? data = book.item: data = book
-  
+
   const { volumeInfo } = data
   return(
     <Container>

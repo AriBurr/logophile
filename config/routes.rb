@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     post '/shelf/:shelf_id/book/:book_id', to: 'books#add_book_to_bookshelf'
     get '/shelf/:shelf_id/books', to: 'books#index'
     get '/users/find', to: 'users#logged_in_user'
+    get '/books/with_ratings', to: 'books#all_books_with_ratings'
     # resource :session, only: [:create, :destroy]
   end
 
