@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_secure_token
 
   has_many :bookshelves, dependent: :destroy
-  has_many :reviews
+  has_many :ratings
 
   before_save { email.downcase! }
 

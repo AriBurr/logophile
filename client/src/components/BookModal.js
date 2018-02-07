@@ -1,8 +1,16 @@
 import React from 'react'
 import BookCover from './books/BookCover'
-import { Button, Header, Image, Modal } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { addRating } from '../actions/ratings'
+import { Button, Header, Image, Modal, Rating } from 'semantic-ui-react'
 
 class BookModal extends React.Component {
+
+  handleChange = (event: e, data: data) =>{
+    const { book, dispatch } = this.props
+    dispatch(addRating(data.rating, book.id))
+  }
+
   render () {
     const { volumeInfo } = this.props.book.item
     return(
@@ -11,6 +19,14 @@ class BookModal extends React.Component {
         <Modal.Content image>
           <BookCover book={this.props.book} />
           <Modal.Description>
+            <Rating
+              onRate={this.handleChange}
+              maxRating={5}
+              defaultRating={3}
+              icon='star'
+              size='small'
+            />
+
             <Header>Default Profile Image</Header>
             <p>We've found the following gravatar image associated with your e-mail address.</p>
             <p>Is it okay to use this photo?</p>
@@ -21,4 +37,4 @@ class BookModal extends React.Component {
   }
 }
 
-export default BookModal;
+export default connect()(BookModal);
