@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { objectCheck } from '../utils/modules';
-import { searchAll } from '../actions/books';
+import { searchAll, booksWithRatings } from '../actions/books';
 import { setActiveBook } from '../actions/activeBook';
 import Banner from './Banner';
 import BookDescription from './books/BookDescription';
@@ -11,6 +11,7 @@ import {
   Grid,
   Header,
   Segment,
+  Button,
  } from 'semantic-ui-react';
 
 const EnlargeGrid = styled(Grid)`
@@ -37,6 +38,10 @@ class SearchBooks extends React.Component {
 
   toggleDescription = (book) => this.props.dispatch(setActiveBook(book))
 
+  displayReviewedBooks = () => {
+    this.props.dispatch(booksWithRatings())
+  }
+
   renderSearched = (searchLoaded) => {
     const { book, books } = this.props
     return(
@@ -61,6 +66,8 @@ class SearchBooks extends React.Component {
     return (
       <Wrapper>
         <Banner searchTerms={this.handleSearch} />
+        <Button onClick={this.displayReviewedBooks}>
+        </Button>
         { searchLoaded && this.renderSearched(searchLoaded) }
       </Wrapper>
     );
