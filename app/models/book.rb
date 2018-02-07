@@ -14,20 +14,11 @@ class Book < ApplicationRecord
     end
   end
 
-  # select DISTINCT books.item, r.book_id, count(r.book_id), AVG(r.value)
-  # FROM books
-  # INNER JOIN ratings as r on books.id = r.book_id
-  # GROUP BY r.book_id, books.item
-  # ORDER BY r.book_id ASC
-
   def self.only_with_ratings
-    Book.select(
-      [
-        Book.arel_table[:item], R.arel_table[:book_id], R.arel_table[:book_id].count, R.arel_table[:value].average
-      ]
-    ).joins(
-      Book.arel_table.join(Rating.arel_table).on(Book.arel_table[:id].eq(R.arel_table[:book_id])).join_sources
-    ).order(R.arel_table[:book_id]).group(R.arel_table[:book_id], Book.arel_table[:item]).uniq
+    distinct.select('books.item, r.book_id, COUNT(r.book_id) AS review_count, AVG(r.value)')
+    .joins('INNER JOIN ratings AS r ON books.id = r.book_id')
+    .group('r.book_id, books.item')
+    .order('avg DESC')
   end
 
 

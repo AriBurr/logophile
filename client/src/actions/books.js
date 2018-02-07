@@ -29,11 +29,10 @@ export const booksWithRatings = () => {
   return(dispatch) => {
     axios.get(`/api/books/with_ratings`, setHeaders())
       .then( res => {
-        debugger
-        dispatch({ type: 'SEARCH_ALL', books: res.data.items });
+        dispatch({ type: 'GET_TOP_RATED', topBooks: res.data });
       })
       .catch( err => {
-        dispatch(setFlash('Invalid Search, Please Try Again!', 'red'));
+        dispatch(setFlash('We cannot find the top books, try again!', 'red'));
       });
   }
 }

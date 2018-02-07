@@ -1,6 +1,6 @@
 import React from 'react';
 import Flash from './Flash';
-import SearchBooks from './SearchBooks';
+import SearchBooks from './books/SearchBooks';
 import NoMatch from './NoMatch';
 import UserNavBar from './UserNavBar';
 import NavBar from './NavBar';

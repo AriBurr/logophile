@@ -31,7 +31,6 @@ class Api::BooksController < ApiController
   end
 
   def all_books_with_ratings
-    binding.pry
     render json: Book.only_with_ratings
   end
 
