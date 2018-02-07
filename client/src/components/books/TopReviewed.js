@@ -14,7 +14,7 @@ class TopReviewed extends React.Component {
   mapTopBooks = () => {
     const { topBooks } = this.props
     return topBooks.map(book => (
-      <Grid.Column>
+      <Grid.Column key={book.item.id}>
         <BookCover book={book} />
         <Header>{ paginateText(book.item.volumeInfo.title, 20) }</Header>
         <Rating icon='star' defaultRating={book.avg} maxRating={5} disabled />

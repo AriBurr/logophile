@@ -3,7 +3,8 @@ class Api::BooksController < ApiController
   before_action :set_bookshelf, only: [:index, :add_book_to_bookshelf, :destroy]
 
   def index
-    render json: @bookshelf.books
+    binding.pry
+    render json: @bookshelf.shelvings.joins(:books)
   end
 
   def create
@@ -26,8 +27,13 @@ class Api::BooksController < ApiController
   end
 
   def destroy
-    Book.change_count('dec', @bookshelf)
-    @bookshelf.destroy
+    shelf = Shelving.find(params[:id].to_i)
+    if shelf.destroy
+      Book.change_count('dec', @bookshelf)
+    else
+      render json: { errors: shelf.errors.full_messages.join(', ')}, status: 422
+    end
+
   end
 
   def all_books_with_ratings
