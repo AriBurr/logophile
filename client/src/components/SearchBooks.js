@@ -17,7 +17,12 @@ const EnlargeGrid = styled(Grid)`
   height: 100vh;
 `
 const GridContainer = styled(Grid)`
-  margin: 2rem !important;
+  &&& {
+    margin: 2rem;
+  }
+`
+const Wrapper = styled.div`
+  height: 100vh;
 `
 
 class SearchBooks extends React.Component {
@@ -54,10 +59,10 @@ class SearchBooks extends React.Component {
   render() {
     const { searchLoaded } = this.state;
     return (
-      <div>
+      <Wrapper>
         <Banner searchTerms={this.handleSearch} />
         { searchLoaded && this.renderSearched(searchLoaded) }
-      </div>
+      </Wrapper>
     );
   }
 

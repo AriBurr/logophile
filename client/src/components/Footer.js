@@ -3,10 +3,6 @@ import { Grid, Segment } from 'semantic-ui-react';
 import styled from 'styled-components'
 
 export const FooterStyled = styled.div`
-  flex-shrink: 0;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
   background-color: #424242
 `;
 
@@ -39,8 +35,8 @@ const Footer = (props) => (
 const styles = {
   footer: {
     backgroundColor: '#424242',
-    position: 'relative',
     border: 'none',
+    flex: 'none',
   },
   container: {
     padding: '0',

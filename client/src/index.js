@@ -9,19 +9,21 @@ import 'semantic-ui-css/semantic.min.css';
 import { injectGlobal } from 'styled-components';
 
 injectGlobal`
-@font-face {
-  @import url('https://fonts.googleapis.com/css?family=Lato:400,900');
-}
+  @font-face {
+    @import url('https://fonts.googleapis.com/css?family=Lato:400,900');
+  }
 
-html :not(i) {
-  font-family: 'Lato', sans-serif !important;
-}
+  html :not(i) {
+    font-family: 'Lato', sans-serif !important;
+  }
 `
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <div id='content'>
+        <App />
+      </div>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')

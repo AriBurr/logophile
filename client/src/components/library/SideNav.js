@@ -59,7 +59,8 @@ class SideNav extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    this.setDefaultShelf(nextProps)
+    const { bookshelves } = this.props;
+    bookshelves && this.setDefaultShelf(nextProps)
   }
 
   toggleEdit = () => {
@@ -68,9 +69,10 @@ class SideNav extends React.Component {
   }
 
   handleItemClick = (shelf , e = null) => {
-    this.props.dispatch(fetchShelvings(shelf));
-    this.props.dispatch(fetchShelf(shelf));
-    this.setState({ activeItem: shelf })
+    const { dispatch } = this.props;
+    dispatch(fetchShelvings(shelf));
+    dispatch(fetchShelf(shelf));
+    this.setState({ activeItem: shelf });
   }
 
   mapBookshelves = (activeItem) => {
@@ -112,7 +114,9 @@ class SideNav extends React.Component {
   }
 
   render() {
-    const { edit, activeItem } = this.state
+    const { edit, activeItem } = this.state;
+    const { bookshelves } = this.props;
+    debugger
     return (
       <Menu vertical as={EnlargeMenu}>
         <Image src={bookshelf}></Image>
@@ -120,7 +124,7 @@ class SideNav extends React.Component {
           edit={edit}
           active={activeItem}
         />
-        { this.mapBookshelves(activeItem) }
+      { this.mapBookshelves(activeItem) }
         <Icon
           as={IconStyle}
           size='large'

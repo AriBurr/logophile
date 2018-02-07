@@ -60,6 +60,15 @@ class NavBar extends Component {
     );
   }
 
+  renderHeader = () => {
+    const path = this.props.location.pathname;
+    const { activeItem } = this.state;
+    if (path === '/login' || path === '/register' || path === '/')
+      return ''
+    else
+      return activeItem
+  }
+
   render() {
     const { user } = this.props;
     const { activeItem } = this.state;
@@ -85,7 +94,7 @@ class NavBar extends Component {
           { user && this.loggedInLinks() }
         </Menu>
         <Header>
-          <h1>{ activeItem }</h1>
+          <h1>{this.renderHeader()}</h1>
         </Header>
       </ComponentStyle>
     );

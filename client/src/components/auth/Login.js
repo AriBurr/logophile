@@ -10,7 +10,8 @@ const FormStyle = styled(Form)`
 `
 
 const ComponentStyle = styled(Segment)`
-  span{
+  height: 100vh;
+  span {
     color: #FC7753;
     font-size: 10px;
   }
