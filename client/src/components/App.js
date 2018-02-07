@@ -2,8 +2,7 @@ import React from 'react';
 import Flash from './Flash';
 import SearchBooks from './books/SearchBooks';
 import NoMatch from './NoMatch';
-import UserNavBar from './UserNavBar';
-import NavBar from './NavBar';
+import Navigation from './Navigation';
 import Footer from './Footer';
 import Welcome from './Welcome';
 import FetchUser from './FetchUser';
@@ -18,8 +17,7 @@ class App extends React.Component {
     return (
       <div>
         <FetchUser>
-          <UserNavBar />
-          <NavBar />
+          <Navigation />
           <Flash />
           <Switch>
             <Route exact path='/' component={Welcome} />

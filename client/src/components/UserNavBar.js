@@ -50,6 +50,12 @@ class UserNavBar extends Component {
     this.setState({ user: this.props.user });
   }
 
+  handleClick = (user) => {
+    const {clearActiveItem, dispatch, history} = this.props;
+    dispatch(handleLogout(user, history));
+    clearActiveItem();
+  }
+
   userNavs = () => {
     const { dispatch, history } = this.props;
     const { user } = this.state;
@@ -60,7 +66,7 @@ class UserNavBar extends Component {
             <Menu.Item
               as={MenuItem}
               name='Logout'
-              onClick={() => dispatch(handleLogout(user, history))}
+              onClick={() => this.handleClick(user)}
             />
           </Menu.Menu>
         );

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { objectCheck } from '../utils/modules';
 import styled from 'styled-components';
 import { Menu } from 'semantic-ui-react';
 
@@ -37,21 +38,19 @@ const LinkStyle = styled(Link)`
 `
 
 class NavBar extends Component {
-  state = { activeItem: '', user: {} }
+  state = { user: {} }
 
   componentDidMount = () => {
     this.setState({ user: this.props.user })
   }
 
-  setActiveItem = (e, { name }) => this.setState({ activeItem: name })
-
   loggedInLinks = () => {
-    const { activeItem } = this.state;
+    const { activeItem } = this.props;
     return (
       <Menu.Item
         as={LinkStyle}
         to='/library'
-        onClick={this.setActiveItem}
+        onClick={this.props.setActiveItem}
         name='Bookshelves'
         active={activeItem === 'Bookshelves'}
       />
@@ -60,34 +59,30 @@ class NavBar extends Component {
 
   renderHeader = () => {
     const path = this.props.location.pathname;
-    const { activeItem } = this.state;
-    if (path === '/login' || path === '/register' || path === '/')
-      return ''
-    else
-      return activeItem
+    const { activeItem } = this.props;
+    return path === '/' ? 'Welcome' : activeItem
   }
 
   render() {
-    const { user } = this.props;
-    const { activeItem } = this.state;
+    const { setActiveItem, activeItem, user } = this.props;
     return (
       <ComponentStyle>
         <Menu as={MenuStyle}>
           <Menu.Item
             as={LinkStyle}
             to='/'
-            onClick={this.setActiveItem}
+            onClick={setActiveItem}
             name='Home'
             active={activeItem === 'Home'}
           />
           <Menu.Item
             as={LinkStyle}
             to='/books'
-            onClick={this.setActiveItem}
+            onClick={setActiveItem}
             name='Search Books'
             active={activeItem === 'Search Books'}
           />
-          { user && this.loggedInLinks() }
+        { user && this.loggedInLinks() }
         </Menu>
         <Header>
           <h1>{this.renderHeader()}</h1>
