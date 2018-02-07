@@ -48,12 +48,6 @@ const ButtonStyle = styled(Button)`
 class BookDescription extends React.Component {
   state = { bookshelf: '' }
 
-  // componentDidMount = () => {
-  //   const { bookshelves } = this.props
-  //   if(bookshelves)
-  //     this.setState({ bookshelf: bookshelves[0].name })
-  // }
-
   isLoggedIn = () => {
     const token = localStorage.getItem('userToken');
     return token ? true : false
