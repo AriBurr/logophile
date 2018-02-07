@@ -115,8 +115,6 @@ class SideNav extends React.Component {
 
   render() {
     const { edit, activeItem } = this.state;
-    const { bookshelves } = this.props;
-    debugger
     return (
       <Menu vertical as={EnlargeMenu}>
         <Image src={bookshelf}></Image>

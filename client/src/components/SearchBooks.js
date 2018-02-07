@@ -9,8 +9,6 @@ import Books from './books/Books';
 import styled from 'styled-components';
 import {
   Grid,
-  Header,
-  Segment,
  } from 'semantic-ui-react';
 
 const EnlargeGrid = styled(Grid)`
@@ -23,6 +21,7 @@ const GridContainer = styled(Grid)`
 `
 const Wrapper = styled.div`
   height: 100vh;
+  overflow: auto;
 `
 
 class SearchBooks extends React.Component {

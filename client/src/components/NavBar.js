@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { handleLogout } from '../actions/auth';
 import styled from 'styled-components';
 import { Menu } from 'semantic-ui-react';
 
@@ -30,9 +29,8 @@ const MenuStyle = styled(Menu)`
     margin: 0;
   }
 `
-const MenuTheme = styled(Menu.Item)`
+const LinkStyle = styled(Link)`
   color: white !important;
-  background-color: ${props => props.active ? '#1DD3B0' : '#223843'} !important;
   &: hover {
     background-color: #1DD3B0 !important;
   }
@@ -48,15 +46,15 @@ class NavBar extends Component {
   setActiveItem = (e, { name }) => this.setState({ activeItem: name })
 
   loggedInLinks = () => {
+    const { activeItem } = this.state;
     return (
-      <Link to='/library'>
-        <Menu.Item
-          as={MenuTheme}
-          onClick={this.setActiveItem}
-          name='Bookshelves'
-          active={this.state.activeItem === 'Bookshelves'}
-        />
-      </Link>
+      <Menu.Item
+        as={LinkStyle}
+        to='/library'
+        onClick={this.setActiveItem}
+        name='Bookshelves'
+        active={activeItem === 'Bookshelves'}
+      />
     );
   }
 
@@ -75,22 +73,20 @@ class NavBar extends Component {
     return (
       <ComponentStyle>
         <Menu as={MenuStyle}>
-          <Link to='/'>
-            <Menu.Item
-              as={MenuTheme}
-              onClick={this.setActiveItem}
-              name='Home'
-              active={this.state.activeItem === 'Home'}
-            />
-          </Link>
-          <Link to='/books'>
-            <Menu.Item
-              as={MenuTheme}
-              onClick={this.setActiveItem}
-              name='Find Books'
-              active={this.state.activeItem === 'Find Books'}
-            />
-          </Link>
+          <Menu.Item
+            as={LinkStyle}
+            to='/'
+            onClick={this.setActiveItem}
+            name='Home'
+            active={activeItem === 'Home'}
+          />
+          <Menu.Item
+            as={LinkStyle}
+            to='/books'
+            onClick={this.setActiveItem}
+            name='Search Books'
+            active={activeItem === 'Search Books'}
+          />
           { user && this.loggedInLinks() }
         </Menu>
         <Header>

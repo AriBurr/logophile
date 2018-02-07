@@ -12,7 +12,7 @@ const getUrl = (terms) => {
 
 export const searchAll = (callback, terms) => {
   return(dispatch) => {
-    axios.get(`${getUrl(terms)}&startIndex=0&maxResults=20`)
+    axios.get(`${getUrl(terms)}&startIndex=0&maxResults=12`)
       .then( res => {
         dispatch({ type: 'SEARCH_ALL', books: res.data.items });
       })

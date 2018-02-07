@@ -5,12 +5,10 @@ import { deleteShelving } from '../../actions/shelvings';
 import styled from 'styled-components';
 import BookModal from '../BookModal'
 import {
-  Button,
   Divider,
   Grid,
   Icon,
   Segment,
-  Header,
   Modal,
 } from 'semantic-ui-react';
 

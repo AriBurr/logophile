@@ -2,7 +2,7 @@ import React from 'react'
 import BookCover from './books/BookCover'
 import { connect } from 'react-redux'
 import { addRating } from '../actions/ratings'
-import { Button, Header, Image, Modal, Rating } from 'semantic-ui-react'
+import { Header, Modal, Rating } from 'semantic-ui-react'
 
 class BookModal extends React.Component {
 

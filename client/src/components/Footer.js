@@ -8,7 +8,7 @@ export const FooterStyled = styled.div`
 
 const Footer = (props) => (
   <FooterStyled>
-    <Segment style={styles.footer} attached='top'>
+    <Segment style={styles.footer} attached='bottom'>
       <Grid columns={2}>
         <Grid.Column textAlign='left'>
           <h5 style={styles.text}>

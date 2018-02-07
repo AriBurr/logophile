@@ -28,6 +28,14 @@ const Image = styled.img`
   margin-bottom: 1px;
   height: 60px;
 `
+const LinkStyle = styled(Link)`
+  letter-spacing: 3px;
+  margin-right: 50px;
+  &:hover {
+    background-color: #223843 !important;
+    color: white !important;
+  }
+`
 
 class UserNavBar extends Component {
   state = { user: {} }
@@ -60,19 +68,22 @@ class UserNavBar extends Component {
     } else {
         return (
           <Menu.Menu position='right'>
-            <Link to='/register'>
-              <Menu.Item as={MenuItem} name='Register' />
-            </Link>
-            <Link to='/login'>
-              <Menu.Item as={MenuItem} name='Login' />
-            </Link>
+            <Menu.Item
+              as={LinkStyle}
+              to='/register'
+              name='Register'
+            />
+            <Menu.Item
+              as={LinkStyle}
+              to='/login'
+              name='Login'
+            />
           </Menu.Menu>
       );
     }
   }
 
   render() {
-    const { user } = this.props;
     return (
       <Menu
         as={MenuStyle}

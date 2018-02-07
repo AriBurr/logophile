@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addBook } from '../../actions/shelvings.js';
-import noCover from '../../assets/default.jpg';
 import styled from 'styled-components';
 import BookCover from './BookCover'
 import {
@@ -14,12 +13,6 @@ import {
   Button,
  } from 'semantic-ui-react';
 
-const Image = styled.img`
-  height: 198px;
-  width: 128px;
-  border: 1px solid black;
-  margin-right: -50px;
-`
 const ImgGrid = styled(Grid.Column)`
   margin: 0 -50px;
 `
