@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { addBook } from '../../actions/shelvings.js';
 import noCover from '../../assets/default.jpg';
 import styled from 'styled-components';
+import BookCover from './BookCover'
 import {
   Dropdown,
   Grid,
@@ -47,11 +48,11 @@ const ButtonStyle = styled(Button)`
 class BookDescription extends React.Component {
   state = { bookshelf: '' }
 
-  componentDidMount = () => {
-    const { bookshelves } = this.props
-    if(bookshelves)
-      this.setState({ bookshelf: bookshelves[0].name })
-  }
+  // componentDidMount = () => {
+  //   const { bookshelves } = this.props
+  //   if(bookshelves)
+  //     this.setState({ bookshelf: bookshelves[0].name })
+  // }
 
   isLoggedIn = () => {
     const token = localStorage.getItem('userToken');
@@ -115,7 +116,13 @@ class BookDescription extends React.Component {
   renderDropdown = () => (
     <DropdownStyle>
       <span>
-        <Button as={ButtonStyle} onClick={ () => this.handleSubmit() }>Select Bookshelf</Button>
+        <Button
+          as={ButtonStyle}
+          onClick={ () => this.handleSubmit() }
+          disabled={this.state.bookshelf.length < 1 ? true : false}
+        >
+          Select Bookshelf
+        </Button>
         <Dropdown
           placeholder='Will Read'
           selection
@@ -137,16 +144,7 @@ class BookDescription extends React.Component {
             </Segment>
           </Grid.Column>
           <Grid.Column as={ImgGrid} textAlign='center'>
-            { book.imageLinks ?
-              <Image
-                src={book.imageLinks.thumbnail}
-                alt={'book cover'}
-              /> :
-              <Image
-                src={noCover}
-                alt={'book cover'}
-              />
-            }
+            <BookCover book={this.props.book} />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
