@@ -13,6 +13,7 @@ const ComponentStyle = styled.div`
 const Header = styled.div`
   background-color: #1DD3B0;
   color: white;
+  letter-spacing: 1px;
   height: 75px;
   padding: 20px 0;
   position: relative;
@@ -39,12 +40,6 @@ const MenuTheme = styled(Menu.Item)`
 
 class NavBar extends Component {
   state = { activeItem: '', user: {} }
-
-  componentWillReceiveProps = (nextProps) => {
-    const user = nextProps.user
-    if (user !== null)
-      this.setState({ user: nextProps.user })
-  }
 
   componentDidMount = () => {
     this.setState({ user: this.props.user })

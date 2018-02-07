@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import BookModal from '../BookModal'
 import {
   Button,
+  Divider,
   Grid,
   Icon,
   Segment,
@@ -23,8 +24,9 @@ const Image = styled.img`
       box-shadow: 0 1px 20px #999;
     }
 `
-const Banner = styled(Segment)`
-  margin-right: 6.5% !important;
+const Banner = styled.div`
+  letter-spacing: 1px;
+  margin-left: 5px;
 `
 
 class Bookshelf extends React.Component {
@@ -63,15 +65,20 @@ class Bookshelf extends React.Component {
 
   renderBanner = (bookshelf) => (
     <Banner>
-      <Header textAlign='center' as='h1'>
-        { bookshelf.name }
-      </Header>
-      <Button color ='teal' onClick={this.toggleEdit}>Edit Bookshelves</Button>
+      <Grid columns={2}>
+        <Grid.Column>
+          <h2><em>{ bookshelf.name }</em></h2>
+        </Grid.Column>
+        <Grid.Column textAlign='right'>
+          <Icon size='large' onClick={this.toggleEdit} name='edit'></Icon>
+        </Grid.Column>
+      </Grid>
+      <Divider />
     </Banner>
   )
 
   render () {
-    const { bookshelf } = this.props
+    const { bookshelf } = this.props;
     return (
       <Segment basic>
         { bookshelf && this.renderBanner(bookshelf) }
