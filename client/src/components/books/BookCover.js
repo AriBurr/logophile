@@ -1,7 +1,7 @@
 import React from 'react';
 import noCover from '../../assets/default.jpg';
 import styled from 'styled-components';
-import { Container } from 'semantic-ui-react';
+import { Container, Rating } from 'semantic-ui-react';
 
 const Image = styled.img`
   height: 198px;
