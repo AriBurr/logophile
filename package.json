@@ -8,5 +8,18 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AriBurr/logophile.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AriBurr/logophile/issues"
+  },
+  "homepage": "https://github.com/AriBurr/logophile#readme"
 }

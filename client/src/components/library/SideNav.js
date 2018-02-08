@@ -52,10 +52,18 @@ class SideNav extends React.Component {
   }
 
   setDefaultShelf = (nextProps) => {
-    const { loaded } = this.state
+    const { loaded } = this.state;
     if(loaded === 0)
       this.handleItemClick(nextProps.bookshelves[0])
       this.setState({ loaded: loaded + 1 })
+  }
+
+  beforeFetchShelvings = (shelf) => {
+    const { bookshelves, dispatch } = this.props;
+    if(bookshelves.length > 0){
+      dispatch(fetchShelvings(shelf));
+      dispatch(fetchShelf(shelf));
+    }
   }
 
   componentWillReceiveProps = (nextProps) => {
@@ -70,8 +78,7 @@ class SideNav extends React.Component {
 
   handleItemClick = (shelf , e = null) => {
     const { dispatch } = this.props;
-    dispatch(fetchShelvings(shelf));
-    dispatch(fetchShelf(shelf));
+    this.beforeFetchShelvings(shelf)
     this.setState({ activeItem: shelf });
   }
 
@@ -122,7 +129,7 @@ class SideNav extends React.Component {
           edit={edit}
           active={activeItem}
         />
-      { this.mapBookshelves(activeItem) }
+        { this.mapBookshelves(activeItem) }
         <Icon
           as={IconStyle}
           size='large'

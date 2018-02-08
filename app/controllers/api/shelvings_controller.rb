@@ -8,7 +8,6 @@ class Api::ShelvingsController < ApiController
 
   def create
     shelving = @bookshelf.shelvings.new(shelving_params)
-    binding.pry
     Bookshelf.change_count('inc', @bookshelf)
     if shelving.save
       render json: shelving
