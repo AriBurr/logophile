@@ -8,8 +8,11 @@ const FlashStyle = styled(Container)`
   left: 10%;
 `
 const ContainerFlash = styled(Sticky)`
-  z-index: 100000000 !important;
-  position: relative;
+  z-index: 10 !important;
+  width: 70%;
+  position: absolute;
+  left: 50%;
+  margin-left: -35%;
 `
 
 
@@ -18,7 +21,7 @@ class Flash extends React.Component{
   fadeFlash = dispatch => {
     setTimeout(() => {
       dispatch(clearFlash());
-    }, 5500);
+    }, 3500);
   };
 
   handleContextRef = contextRef => this.setState({ contextRef })

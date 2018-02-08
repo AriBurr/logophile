@@ -17,16 +17,10 @@ const EnlargeMenu = styled(Menu.Item)`
   height: 100vh;
   width: 16rem !important;
   padding: 5%;
-  .ui.menu .active.item:hover, .ui.vertical.menu .active.item:hover{
-    background-color: white !important;
-  }
 `
 const MenuStyle = styled(Menu)`
   color: white !important;
   font-size: 18px !important;
-    &:hover {
-
-    }
 `
 const LabelStyle = styled(Label)`
   margin-right: 7% !important;
@@ -88,6 +82,7 @@ class SideNav extends React.Component {
     return bookshelves.map( shelf => {
       return (
         <Menu.Item
+          className='myMenu'
           as={MenuStyle}
           key={shelf.id}
           name={shelf.name}
