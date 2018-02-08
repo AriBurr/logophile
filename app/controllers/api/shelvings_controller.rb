@@ -1,15 +1,15 @@
 class Api::ShelvingsController < ApiController
   before_action :require_login
-  before_action :set_bookshelf, only: [:index, :add_book_to_bookshelf, :destroy]
+  before_action :set_bookshelf, only: [:index, :create, :destroy]
 
   def index
-    render json: @bookshelf.shelvings
+    render json: Shelving.with_book(@bookshelf.id)
   end
 
-  def add_book_to_bookshelf
-    shelving = @bookshelf.shelvings.create(book_id: params[:book_id])
-    Bookshelf.change_count('inc', @bookshelf)
+  def create
+    shelving = @bookshelf.shelvings.new(shelving_params)
     binding.pry
+    Bookshelf.change_count('inc', @bookshelf)
     if shelving.save
       render json: shelving
     else
@@ -29,7 +29,7 @@ class Api::ShelvingsController < ApiController
   private
 
     def shelving_params
-      params.require(:book).permit(:name, :count)
+      params.require(:shelving).permit(:name, :book_id)
     end
 
     def set_bookshelf
