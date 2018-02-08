@@ -17,6 +17,7 @@ const Header = styled.div`
   height: 75px;
   padding: 20px 0;
   position: relative;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
     h1 {
       margin-left: 30px;
     }
@@ -60,6 +61,8 @@ class NavBar extends Component {
   renderHeader = () => {
     const path = this.props.location.pathname;
     const { activeItem } = this.props;
+    if (path === '/login') return 'Sign In'
+    if (path === '/register') return 'Register'
     return path === '/' ? 'Welcome' : activeItem
   }
 

@@ -1,26 +1,17 @@
 import React from 'react';
+import styled from 'styled-components'
+import { ButtonStyle } from '../styles/styles';
 import {
   Button,
   Form,
   Segment,
 } from 'semantic-ui-react';
-import styled from 'styled-components'
 
 const FormContainer = styled(Form)`
   width: 60%;
   margin: 5% auto 0 auto !important;
   text-align: center;
   position: relative;
-`
-const ButtonStyle = styled(Button)`
-  &&& {
-    background-color: #E6C229;
-    color: white;
-      &:hover {
-        background-color: #223843;
-        color: white;
-      }
-  }
 `
 
 class SearchBar extends React.Component {

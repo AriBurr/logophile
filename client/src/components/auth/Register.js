@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { registerUser } from '../../actions/auth';
 import { setFlash } from '../../actions/flash';
 import { Link } from 'react-router-dom'
+import { ButtonStyle } from '../../styles/styles';
 import styled from 'styled-components'
 
 
@@ -31,8 +32,6 @@ class Register extends Component {
   }
 
   handleChange = event => {
-    // use e to grab the id off the element also the value and set state
-    // const { id, value } = event.target;
     const id = event.target.id;
     const value = event.target.value;
     this.setState({ [id]: value });
@@ -48,7 +47,7 @@ class Register extends Component {
             Awesome! Let's create your account.
           </Header>
           <p>
-            Sign up and become part of this united reading community.
+            Sign up and become part of a united reading community!
           </p>
         </Segment>
         <Form onSubmit={this.handleSubmit} as={FormStyle}>
@@ -105,7 +104,7 @@ class Register extends Component {
           </Form.Field>
           <Link to='/login'>Already a member? Sign in!</Link>
           <Segment basic textAlign='center'>
-            <Button color='green' type='submit'>Submit</Button>
+            <Button as={ButtonStyle} type='submit'>Submit</Button>
           </Segment>
         </Form>
       </Segment>

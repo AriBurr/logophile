@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addBook } from '../../actions/shelvings.js';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import BookCover from './BookCover'
 import ShelfForm from '../library/ShelfForm';
+import { ButtonStyle } from '../../styles/styles';
 import {
   Dropdown,
   Grid,
@@ -31,20 +33,9 @@ const DescContainer = styled.div`
 const CreateBook = styled.div`
   margin: 0 auto;
 `
-
 const PageContain = styled(Grid)`
   #desc-container {
     width: 67% !important;
-  }
-`
-const ButtonStyle = styled(Button)`
-  &&& {
-    background-color: #E6C229;
-    color: white;
-      &:hover {
-        background-color: #223843;
-        color: white;
-      }
   }
 `
 
@@ -140,9 +131,10 @@ class BookDescription extends React.Component {
             <BookCover book={this.props.book} />
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row>
+        <Grid.Row centered>
+          { !this.isLoggedIn() && <em><Link to='/login'>Sign in</Link> to add this book to your bookshelf!</em> }
           { this.isLoggedIn() && this.renderDropdown() }
-          <Icon name='book' onClick={() => this.toggleEdit()}></Icon>
+          { this.isLoggedIn() && <Icon name='book' onClick={() => this.toggleEdit()}></Icon> }
         </Grid.Row>
         <Grid.Row as={DescContainer} >
           { edit && <CreateBook><ShelfForm /></CreateBook> }

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Header, Segment, Form, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 import { handleLogin } from '../../actions/auth';
+import { ButtonStyle } from '../../styles/styles';
 import styled from 'styled-components'
+import { Header, Segment, Form, Button } from 'semantic-ui-react';
 
 const FormStyle = styled(Form)`
   width: 40% !important;
@@ -41,7 +43,7 @@ class Login extends Component {
             Please sign in (it makes life more fun)
           </Header>
           <p>
-            Unite with the greater logophile ecosystem: Log Books, Local Book Clubs, Read, and more!
+            Unite with the greater logophile ecosystem: log books, get user recommendations, and more!
           </p>
         </Segment>
         <Form onSubmit={this.handleSubmit} as={FormStyle}>
@@ -71,8 +73,9 @@ class Login extends Component {
               onChange={this.handleChange}
             />
           </Form.Field>
+          <Link to='/register'>Not a member? Register today!</Link>
           <Segment textAlign='center' basic>
-            <Button color='green' type='submit'>Submit</Button>
+            <Button as={ButtonStyle} type='submit'>Submit</Button>
           </Segment>
         </Form>
       </Segment>

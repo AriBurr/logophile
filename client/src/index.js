@@ -16,19 +16,6 @@ injectGlobal`
   html :not(i) {
     font-family: 'Lato', sans-serif !important;
   }
-
-  #site {
-    display: flex;
-    flex-direction: column;
-    height: 100%; /* 1, 3 */
-  }
-
-  #content {
-    flex: 1 0 auto; /* 2 */
-    padding: var(--space) var(--space) 0;
-    width: 100%;
-  }
-
 `
 
 ReactDOM.render(

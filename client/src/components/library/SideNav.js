@@ -15,7 +15,7 @@ const EnlargeMenu = styled(Menu.Item)`
   box-shadow: none !important;
   color: white;
   height: 100vh;
-  width: 18rem !important;
+  width: 16rem !important;
   padding: 5%;
   .ui.menu .active.item:hover, .ui.vertical.menu .active.item:hover{
     background-color: white !important;

@@ -54,8 +54,7 @@ const Welcome = (props) => {
   return (
       <WelcomeWrapper>
         <Transparent>
-          <Header as='h1'>Join the community of word lovers and book enthusiasts</Header>
-          <Header as="h2">Keep track of your book archives </Header>
+          <Header as='h1'>Join a <em>community</em> of word lovers and book enthusiasts</Header>
           <Logos>
             <LogoContain>
               <Image src={bookshelf} alt="logo"></Image>
