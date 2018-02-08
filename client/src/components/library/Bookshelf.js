@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import noCover from '../../assets/default.jpg';
 import { deleteShelving } from '../../actions/shelvings';
+import { objectCheck } from '../../utils/modules'
 import styled from 'styled-components';
 import BookModal from '../BookModal'
 import {
@@ -79,7 +80,7 @@ class Bookshelf extends React.Component {
     const { bookshelf } = this.props;
     return (
       <Segment basic>
-        { bookshelf && this.renderBanner(bookshelf) }
+        { objectCheck(bookshelf) && this.renderBanner(bookshelf) }
         <Grid columns={5}>
           { this.shelvings() }
         </Grid>

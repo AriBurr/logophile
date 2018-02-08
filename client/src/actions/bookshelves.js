@@ -23,7 +23,11 @@ export const fetchBookshelves = () => {
 export const deleteBookshelf = (shelf) => {
   return (dispatch) => {
     axios.delete(`/api/bookshelves/${shelf.id}`, setHeaders() )
-      .then( () => dispatch({ type: 'DELETE_BOOKSHELF', shelf }) )
+      .then( () => {
+        dispatch({ type: 'DELETE_BOOKSHELF', shelf })
+        dispatch({ type: 'DELETE_SHELF' })
+
+      })
   }
 }
 
