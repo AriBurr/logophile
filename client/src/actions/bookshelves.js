@@ -32,6 +32,7 @@ export const editBookshelf = (id, bookshelf) => {
     axios.put(`/api/bookshelves/${id}`, { bookshelf }, setHeaders() )
       .then( res => {
         dispatch({ type: 'EDIT_BOOKSHELF', bookshelf: res.data })
+        dispatch({ type: 'FETCH_SHELF', bookshelf: res.data });
       })
   }
 }
