@@ -82,7 +82,7 @@ class NavBar extends Component {
             name='Search Books'
             active={activeItem === 'Search Books'}
           />
-        { user && this.loggedInLinks() }
+        { user !== null && objectCheck(user) && this.loggedInLinks() }
         </Menu>
         <Header>
           <h1>{this.renderHeader()}</h1>

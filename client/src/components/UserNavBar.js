@@ -56,8 +56,9 @@ class UserNavBar extends Component {
     clearActiveItem();
   }
 
+  handlePath = () => this.props.clearActiveItem();
+
   userNavs = () => {
-    const { dispatch, history } = this.props;
     const { user } = this.state;
     if (objectCheck(user)) {
       if (user.id) {
@@ -78,11 +79,13 @@ class UserNavBar extends Component {
               as={LinkStyle}
               to='/register'
               name='Register'
+              onClick={() => this.handlePath()}
             />
             <Menu.Item
               as={LinkStyle}
               to='/login'
               name='Login'
+              onClick={() => this.handlePath()}
             />
           </Menu.Menu>
       );

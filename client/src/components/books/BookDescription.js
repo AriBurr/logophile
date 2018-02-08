@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import { addBook } from '../../actions/shelvings.js';
 import styled from 'styled-components';
 import BookCover from './BookCover'
+import ShelfForm from '../library/ShelfForm';
 import {
   Dropdown,
   Grid,
+  Icon,
   List,
   Segment,
   Header,
@@ -17,13 +19,21 @@ const ImgGrid = styled(Grid.Column)`
   margin: 0 -50px;
 `
 const DropdownStyle = styled.div`
-  margin: 0 auto !important;
+  &&& {
+    margin: 0 auto;
+  }
 `
 const DescContainer = styled.div`
-  margin-left: 5% !important;
+  &&& {
+    margin-left: 5%;
+  }
 `
+const CreateBook = styled.div`
+  margin: 0 auto;
+`
+
 const PageContain = styled(Grid)`
-  #desc-container{
+  #desc-container {
     width: 67% !important;
   }
 `
@@ -39,12 +49,14 @@ const ButtonStyle = styled(Button)`
 `
 
 class BookDescription extends React.Component {
-  state = { bookshelf: '' }
+  state = { bookshelf: '', edit: false }
 
   isLoggedIn = () => {
     const token = localStorage.getItem('userToken');
     return token ? true : false
   }
+
+  toggleEdit = () => this.setState({ edit: !this.state.edit });
 
   bookshelfOptions = () => {
     const { bookshelves } = this.props;
@@ -114,6 +126,7 @@ class BookDescription extends React.Component {
   )
 
   render () {
+    const { edit } = this.state;
     const book = this.props.book.volumeInfo;
     return (
       <Grid as={PageContain}>
@@ -129,8 +142,10 @@ class BookDescription extends React.Component {
         </Grid.Row>
         <Grid.Row>
           { this.isLoggedIn() && this.renderDropdown() }
+          <Icon name='book' onClick={() => this.toggleEdit()}></Icon>
         </Grid.Row>
         <Grid.Row as={DescContainer} >
+          { edit && <CreateBook><ShelfForm /></CreateBook> }
           { book.description && this.renderDescription(book) }
         </Grid.Row>
       </Grid>
