@@ -42,45 +42,20 @@ class SideNav extends React.Component {
     loaded: 0,
   }
 
-  // componentDidMount = () => {
-  //   this.setState({ loaded: 0 })
-  // }
-
   componentWillReceiveProps = (nextProps) => {
     if(!objectCheck(this.state.activeItem)){
       if(nextProps.bookshelves.length > 0)
         this.handleItemClick(nextProps.bookshelves[0], 'allow')
-      // this.setState({ activeItem: nextProps.bookshelves[0] });
     }
   }
-
-  // setDefaultShelf = (nextProps) => {
-  //   const { loaded } = this.state;
-  //   const shelf = nextProps.bookshelves[0]
-  //   if(loaded === 0)
-  //   debugger
-  //     this.props.dispatch(fetchShelvings(shelf));
-  //     this.props.dispatch(fetchShelf(shelf));
-  //
-  //     this.setState({ activeItem: shelf });
-  //     // this.handleItemClick(nextProps.bookshelves[0])
-  //     // this.beforeFetchShelvings(nextProps.bookshelves[0])
-  //     this.setState({ loaded: loaded + 1 })
-  // }
 
   beforeFetchShelvings = (shelf, event = null) => {
     const { bookshelves, dispatch } = this.props;
     if(bookshelves.length > 0 || event === 'allow'){
-      debugger
       dispatch(fetchShelvings(shelf));
       dispatch(fetchShelf(shelf));
     }
   }
-
-  // componentWillReceiveProps = (nextProps) => {
-  //   const { bookshelves } = this.props;
-  //   bookshelves && this.setDefaultShelf(nextProps)
-  // }
 
   toggleEdit = () => {
     const { edit } = this.state;
@@ -90,6 +65,10 @@ class SideNav extends React.Component {
   handleItemClick = (shelf , e = null) => {
     this.beforeFetchShelvings(shelf, e)
     this.setState({ activeItem: shelf });
+  }
+
+  handleClick = (shelf) => {
+    this.state.editing && this.handleItemClick(shelf)
   }
 
   mapBookshelves = (activeItem) => {
@@ -104,7 +83,7 @@ class SideNav extends React.Component {
           key={shelf.id}
           name={shelf.name}
           active={activeItem === shelf}
-          onClick={() => this.handleItemClick(shelf)}
+          onClick={() => !edit && this.handleItemClick(shelf)}
         >
           <Label as={LabelStyle} color='yellow'>{shelf.book_count}</Label>
         {shelf.name}
@@ -134,6 +113,7 @@ class SideNav extends React.Component {
 
   render() {
     const { edit, activeItem } = this.state;
+    const { bookshelves } = this.props
     return (
       <Menu vertical as={EnlargeMenu}>
         <Image src={bookshelf}></Image>
