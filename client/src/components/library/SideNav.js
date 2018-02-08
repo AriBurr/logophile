@@ -39,7 +39,6 @@ class SideNav extends React.Component {
   state = {
     activeItem: {},
     edit: false,
-    loaded: 0,
   }
 
   componentWillReceiveProps = (nextProps) => {
