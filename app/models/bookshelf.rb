@@ -12,6 +12,7 @@ class Bookshelf < ApplicationRecord
       when 'dec'
         bookshelf.update(book_count: bookshelf.book_count -= 1)
     end
+    bookshelf
   end
 
 end

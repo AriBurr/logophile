@@ -1,4 +1,4 @@
-const bookshelf = (state = null, action) => {
+const bookshelf = (state = [], action) => {
   switch(action.type){
     case "FETCH_SHELF":
       return action.bookshelf;

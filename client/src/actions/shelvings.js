@@ -16,7 +16,7 @@ export const addBook = (book, shelf) => {
       })
       .catch( err => {
         dispatch(setFlash(`Troubles with this request`, 'red'));
-      })
+      });
   }
 }
 
@@ -31,6 +31,9 @@ export const fetchShelvings = (shelf) => {
 export const deleteShelving = (shelving, shelfId) => {
   return (dispatch) => {
     axios.delete(`/api/shelvings/${shelving.id}?shelf_id=${shelfId}`, setHeaders() )
-      .then( () => dispatch({ type: 'DELETE_SHELVING', shelving }) )
+      .then( res => {
+        dispatch({ type: 'DELETE_SHELVING', shelving });
+        dispatch({ type: 'EDIT_BOOKSHELF', bookshelf: res.data });
+    });
   }
 }

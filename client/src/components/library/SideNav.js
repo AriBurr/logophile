@@ -77,7 +77,6 @@ class SideNav extends React.Component {
   }
 
   handleItemClick = (shelf , e = null) => {
-    const { dispatch } = this.props;
     this.beforeFetchShelvings(shelf)
     this.setState({ activeItem: shelf });
   }
@@ -85,6 +84,7 @@ class SideNav extends React.Component {
   mapBookshelves = (activeItem) => {
     const { edit } = this.state;
     const { bookshelves, dispatch } = this.props
+
     return bookshelves.map( shelf => {
       return (
         <Menu.Item
@@ -143,6 +143,7 @@ class SideNav extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    bookshelf: state.bookshelf,
     bookshelves: state.bookshelves,
     shelvings: state.shelvings,
   }

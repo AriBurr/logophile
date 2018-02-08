@@ -19,7 +19,7 @@ class Api::ShelvingsController < ApiController
   def destroy
     shelf = Shelving.find(params[:id].to_i)
     if shelf.destroy
-      Bookshelf.change_count('dec', @bookshelf)
+      render json: Bookshelf.change_count('dec', @bookshelf)
     else
       render json: { errors: shelf.errors.full_messages.join(', ')}, status: 422
     end
