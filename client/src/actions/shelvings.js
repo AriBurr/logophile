@@ -23,7 +23,9 @@ export const addBook = (book, shelf) => {
 export const fetchShelvings = (shelf) => {
   return dispatch => {
     axios.get(`/api/shelvings?shelf_id=${shelf.id}`, setHeaders() )
-      .then(res => dispatch({type: 'FETCH_SHELVING', shelvings: res.data }))
+      .then(res => {
+        dispatch({type: 'FETCH_SHELVING', shelvings: res.data })
+      })
       .catch( err => dispatch(setFlash(`Error fetching books, please try again!`, 'red')));
   }
 }
