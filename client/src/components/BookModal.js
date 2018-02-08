@@ -2,9 +2,11 @@ import React from 'react';
 import BookCover from './books/BookCover';
 import { connect } from 'react-redux';
 import { addRating } from '../actions/ratings';
+import { editShelving } from '../actions/shelvings';
 import styled from 'styled-components';
 import {
   Divider,
+  Dropdown,
   Grid,
   List,
   Modal,
@@ -16,6 +18,7 @@ const Wrapper = styled.div`
 `
 
 class BookModal extends React.Component {
+  state = { bookshelf: '' }
 
   handleChange = (event: e, data: data) =>{
     const { book, dispatch } = this.props
@@ -25,6 +28,20 @@ class BookModal extends React.Component {
   getIBSN = (book) => {
     return book.industryIdentifiers.map( ibsn => {
       return (<div key={ibsn.identifier}>{ibsn.type}: {ibsn.identifier}</div>)
+    });
+  }
+
+  handleSelection = (e, { value }) =>  {
+    const { book, bookshelves, dispatch } = this.props;
+    const shelf = (bookshelves.filter( shelf => shelf.name === value ))[0];
+    const shelving = { id: book.shelving_id, book_id: book.id, bookshelf_id: shelf.id };
+    dispatch(editShelving(shelf, shelving));
+  }
+
+  bookshelfOptions = () => {
+    const { bookshelves } = this.props;
+    return bookshelves.map ( shelf => {
+      return { key: shelf.id, text: shelf.name, value: shelf.name }
     });
   }
 
@@ -61,6 +78,13 @@ class BookModal extends React.Component {
                   <List.Item>Published {volumeInfo.publishedDate} by {volumeInfo.publisher}</List.Item>
                   { volumeInfo.industryIdentifiers && <List.Item>{this.getIBSN(volumeInfo)}</List.Item> }
                 </List>
+                <strong>Move to </strong>
+                <Dropdown
+                  placeholder='Will Read'
+                  selection
+                  options={this.bookshelfOptions()}
+                  onChange={this.handleSelection}
+                />
               </Grid.Row>
             </Grid.Column>
           </Grid.Row>
@@ -81,4 +105,8 @@ class BookModal extends React.Component {
   }
 }
 
-export default connect()(BookModal);
+const mapStateToProps = (state) => {
+  return { bookshelves: state.bookshelves, shelvings: state.shelvings }
+}
+
+export default connect(mapStateToProps)(BookModal);

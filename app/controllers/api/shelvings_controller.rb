@@ -1,6 +1,6 @@
 class Api::ShelvingsController < ApiController
   before_action :require_login
-  before_action :set_bookshelf, only: [:index, :create, :destroy]
+  before_action :set_bookshelf, only: [:index, :create, :update, :destroy]
 
   def index
     render json: Shelving.with_book(@bookshelf.id)
@@ -16,9 +16,18 @@ class Api::ShelvingsController < ApiController
     end
   end
 
+  def update
+    shelving = Shelving.find(params[:id])
+    if shelving.update(shelving_params)
+      render json: Shelving.with_book(@bookshelf.id)
+    else
+      render json: { errors: shelving.full_messages }, status: 422
+    end
+  end
+
   def destroy
-    shelf = Shelving.find(params[:id].to_i)
-    if shelf.destroy
+    shelving = Shelving.find(params[:id].to_i)
+    if shelving.destroy
       render json: Bookshelf.change_count('dec', @bookshelf)
     else
       render json: { errors: shelf.errors.full_messages.join(', ')}, status: 422
@@ -28,7 +37,7 @@ class Api::ShelvingsController < ApiController
   private
 
     def shelving_params
-      params.require(:shelving).permit(:name, :book_id)
+      params.require(:shelving).permit(:name, :book_id, :bookshelf_id)
     end
 
     def set_bookshelf
