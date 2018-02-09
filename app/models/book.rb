@@ -21,7 +21,6 @@ class Book < ApplicationRecord
     .order('avg DESC')
   end
 
-
   def self.change_count(action, bookshelf)
     case action
       when 'inc'

@@ -21,5 +21,4 @@ class Bookshelf < ApplicationRecord
     end
     bookshelf
   end
-
 end

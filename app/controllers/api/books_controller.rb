@@ -1,6 +1,6 @@
 class Api::BooksController < ApiController
   before_action :require_login
-  
+
   def create
     book = Book.check_if_duplicate(params[:book][:item])
     if !book.nil?
@@ -15,7 +15,6 @@ class Api::BooksController < ApiController
   end
 
   private
-
     def book_params
       params.require(:book).permit(:item)
     end

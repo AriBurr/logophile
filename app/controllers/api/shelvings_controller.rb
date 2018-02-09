@@ -47,7 +47,6 @@ class Api::ShelvingsController < ApiController
   end
 
   private
-
     def shelving_params
       params.require(:shelving).permit(:name, :book_id, :bookshelf_id)
     end
