@@ -1,26 +1,32 @@
 import React, { Component } from 'react';
-import { Header, Form, Button, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { registerUser } from '../../actions/auth';
 import { setFlash } from '../../actions/flash';
-import { Link } from 'react-router-dom'
+import styled from 'styled-components';
 import { ButtonStyle } from '../../styles/styles';
-import styled from 'styled-components'
+import {
+  Button,
+  Form,
+  Header,
+  Segment,
+} from 'semantic-ui-react';
 
-
-const FormStyle = styled(Form)`
-  width: 40% !important;
-  margin: 0 auto !important;
-`
 const ComponentStyle = styled(Segment)`
-  span{
+  span {
     color: #FC7753;
     font-size: 10px;
   }
 `
+const FormStyle = styled(Form)`
+  &&& {
+    margin: 0 auto;
+    width: 40%;
+  }
+`
 
 class Register extends Component {
-  state = { email: '', password: '', passwordConfirmation: '', name: '' };
+  state = { email: '', password: '', passwordConfirmation: '', name: '' }
 
   handleSubmit = event => {
     event.preventDefault();
@@ -39,7 +45,6 @@ class Register extends Component {
 
   render() {
     const { email, password, passwordConfirmation, name } = this.state;
-
     return (
       <Segment className='container' basic as={ComponentStyle}>
         <Segment textAlign='center' basic>
@@ -62,7 +67,7 @@ class Register extends Component {
               required
               value={name}
               onChange={this.handleChange}
-              />
+            />
           </Form.Field>
           <Form.Field>
             <label htmlFor='email'>

@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { handleLogin } from '../../actions/auth';
-import { ButtonStyle } from '../../styles/styles';
 import styled from 'styled-components'
-import { Header, Segment, Form, Button } from 'semantic-ui-react';
-
-const FormStyle = styled(Form)`
-  width: 40% !important;
-  margin: 0 auto !important;
-`
+import { ButtonStyle } from '../../styles/styles';
+import {
+  Button,
+  Form,
+  Header,
+  Segment,
+} from 'semantic-ui-react';
 
 const ComponentStyle = styled(Segment)`
   height: 100vh;
@@ -18,9 +18,15 @@ const ComponentStyle = styled(Segment)`
     font-size: 10px;
   }
 `
+const FormStyle = styled(Form)`
+  &&& {
+    margin: 0 auto;
+    width: 40%;
+  }
+`
 
 class Login extends Component {
-  state = { email: '', password: '' };
+  state = { email: '', password: '' }
 
   handleChange = event => {
     const { id, value } = event.target;

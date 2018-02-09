@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { setFlash } from '../../actions/flash'
 import { Redirect, Route } from 'react-router-dom';
+import { setFlash } from '../../actions/flash'
 
 class ProtectedRoute extends React.Component {
 
@@ -21,9 +21,8 @@ class ProtectedRoute extends React.Component {
   }
 
   render() {
-
-    if(this.isLoggedIn())
-      return <Route {...this.props}/>
+    if (this.isLoggedIn())
+      return <Route { ...this.props }/>
     return this.unpermitted();
   }
 }
