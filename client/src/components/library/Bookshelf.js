@@ -1,23 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import noCover from '../../assets/default.jpg';
-import { deleteShelving } from '../../actions/shelvings';
 import { objectCheck } from '../../utils/modules'
-import styled from 'styled-components';
+import { deleteShelving } from '../../actions/shelvings';
 import BookModal from '../books/BookModal';
+import noCover from '../../assets/default.jpg';
+import styled from 'styled-components';
 import {
   Divider,
   Grid,
   Icon,
-  Segment,
   Modal,
+  Segment,
 } from 'semantic-ui-react';
 
 const Image = styled.img`
   height: 198px;
   width: 128px;
-  margin: 0 auto;
   box-shadow: 0 1px 2px #999;
+  margin: 0 auto;
   transition: box-shadow 0.25s;
     &:hover {
       box-shadow: 0 1px 20px #999;
@@ -58,7 +58,7 @@ class Bookshelf extends React.Component {
                       name='trash'>
                     </Icon> }
         </Grid.Column>
-      )
+      );
     });
   }
 
@@ -85,7 +85,7 @@ class Bookshelf extends React.Component {
           { this.shelvings() }
         </Grid>
       </Segment>
-    )
+    );
   }
 }
 
