@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { objectCheck } from '../../utils/modules';
-import { searchAll } from '../../actions/books';
+import { searchAll, clearBooks } from '../../actions/books';
 import { setActiveBook } from '../../actions/activeBook';
 import Banner from '../Banner';
-import TopReviewed from './TopReviewed';
+import BooksCarousel from './BooksCarousel';
 import BookDescription from '../books/BookDescription';
 import Books from '../books/Books';
 import styled from 'styled-components';
@@ -30,7 +30,11 @@ class SearchBooks extends React.Component {
 
   handleSearch = (terms) => {
     this.setState({terms: terms})
-    this.props.dispatch(searchAll(this.setSearchLoaded, terms));
+    this.props.dispatch(searchAll(terms, this.setSearchLoaded));
+  }
+
+  componentWillUnmount = () => {
+    this.props.dispatch({ type: 'CLEAR_BOOKS', action: [] })
   }
 
   toggleDescription = (book) => this.props.dispatch(setActiveBook(book))
@@ -56,10 +60,11 @@ class SearchBooks extends React.Component {
 
   render() {
     const { searchLoaded } = this.state;
+    const { books } = this.props;
     return (
       <Wrapper>
         <Banner searchTerms={this.handleSearch} />
-        { searchLoaded ? this.renderSearched(searchLoaded) : <TopReviewed /> }
+        { searchLoaded || books.length > 0 ? this.renderSearched(searchLoaded) : <BooksCarousel /> }
       </Wrapper>
     );
   }

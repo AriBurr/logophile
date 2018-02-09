@@ -11,6 +11,9 @@ const Image = styled.img`
     &:hover {
       box-shadow: 0 1px 20px #999;
     }
+  img{
+    margin: 0 auto;
+  }
 `
 
 const BookCover = ({ book }) => {
