@@ -12,7 +12,6 @@ import {
   List,
   Modal,
   Rating,
-  Segment,
 } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
