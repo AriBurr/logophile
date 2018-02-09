@@ -1,16 +1,16 @@
 import React from 'react';
-import Flash from './Flash';
-import SearchBooks from './books/SearchBooks';
-import NoMatch from './NoMatch';
-import Navigation from './Navigation';
-import Footer from './Footer';
-import Welcome from './Welcome';
+import { Switch, Route } from 'react-router-dom';
 import FetchUser from './FetchUser';
+import Flash from './Flash';
+import Footer from './Footer';
 import Library from './library/Library';
 import Login from './auth/Login';
+import Navigation from './Navigation';
+import NoMatch from './NoMatch';
 import ProtectedRoute from './auth/ProtectedRoute';
 import Register from './auth/Register';
-import { Switch, Route } from 'react-router-dom';
+import SearchBooks from './books/SearchBooks';
+import Welcome from './Welcome';
 
 class App extends React.Component {
   render() {

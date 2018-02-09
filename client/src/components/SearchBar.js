@@ -20,7 +20,7 @@ class SearchBar extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { title, author, ibsn } = this.state;
-    const terms = { title, author, ibsn }
+    const terms = { title, author, ibsn };
     this.props.searchTerms(terms);
     this.setState({ title: '', author: '', ibsn: '' });
   }

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Grid, Segment } from 'semantic-ui-react';
 import styled from 'styled-components'
+import { Grid, Segment } from 'semantic-ui-react';
 
 export const FooterStyled = styled.div`
-  background-color: #424242
-`;
+  background-color: #424242;
+`
 
 const Footer = (props) => (
   <FooterStyled>
@@ -52,6 +52,5 @@ const styles = {
     display: 'inline-block',
   },
 }
-
 
 export default Footer;

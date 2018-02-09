@@ -5,8 +5,8 @@ import UserNavBar from './UserNavBar';
 class Navigation extends React.Component {
   state = { activeItem: '' }
 
-  setActiveItem = (e, { name }) => this.setState({ activeItem: name })
-  clearActiveItem = () => this.setState({ activeItem: '' })
+  setActiveItem = (e, { name }) => this.setState({ activeItem: name });
+  clearActiveItem = () => this.setState({ activeItem: '' });
 
   render() {
     const { activeItem } = this.state;

@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Message, Container, Header, Sticky } from 'semantic-ui-react';
 import { clearFlash } from '../actions/flash';
 import styled from 'styled-components'
+import {
+  Container,
+  Header,
+  Message,
+  Sticky
+} from 'semantic-ui-react';
 
-const FlashStyle = styled(Container)`
-  left: 10%;
-`
 const ContainerFlash = styled(Sticky)`
   z-index: 10 !important;
   width: 70%;
@@ -14,9 +16,11 @@ const ContainerFlash = styled(Sticky)`
   left: 50%;
   margin-left: -35%;
 `
+const FlashStyle = styled(Container)`
+  left: 10%;
+`
 
-
-class Flash extends React.Component{
+class Flash extends React.Component {
 
   fadeFlash = dispatch => {
     setTimeout(() => {
@@ -24,11 +28,10 @@ class Flash extends React.Component{
     }, 3500);
   };
 
-  handleContextRef = contextRef => this.setState({ contextRef })
+  handleContextRef = contextRef => this.setState({ contextRef });
 
   render(){
-    const { flash, dispatch, contextRef } = this.props
-
+    const { flash, dispatch, contextRef } = this.props;
     if (flash.message) {
       return (
         <Sticky as={ContainerFlash} context={contextRef} offset={20}>
@@ -36,9 +39,9 @@ class Flash extends React.Component{
             <Message
               onDismiss={() => dispatch(clearFlash())}
               color={flash.color}
-              >
+            >
               <Header as='h5' textAlign='center'>{flash.message}</Header>
-              {this.fadeFlash(dispatch)}
+              { this.fadeFlash(dispatch) }
             </Message>
           </Container>
         </Sticky>

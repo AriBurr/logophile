@@ -7,22 +7,6 @@ import logo from '../assets/logo.jpg';
 import styled from 'styled-components';
 import { Menu } from 'semantic-ui-react';
 
-const MenuStyle = styled(Menu)`
-  &&& {
-    border: none;
-    border-radius: 0px;
-    box-shadow: none;
-    margin-bottom: 0;
-  }
-`
-const MenuItem = styled(Menu.Item)`
-  letter-spacing: 3px;
-  margin-right: 50px;
-  &:hover {
-    background-color: #223843 !important;
-    color: white !important;
-  }
-`
 const Image = styled.img`
   margin-top: 5px;
   margin-bottom: 1px;
@@ -34,6 +18,22 @@ const LinkStyle = styled(Link)`
   &:hover {
     background-color: #223843 !important;
     color: white !important;
+  }
+`
+const MenuItem = styled(Menu.Item)`
+  letter-spacing: 3px;
+  margin-right: 50px;
+  &:hover {
+    background-color: #223843 !important;
+    color: white !important;
+  }
+`
+const MenuStyle = styled(Menu)`
+  &&& {
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
+    margin-bottom: 0;
   }
 `
 

@@ -22,6 +22,12 @@ const Header = styled.div`
       margin-left: 30px;
     }
 `
+const LinkStyle = styled(Link)`
+  color: white !important;
+  &: hover {
+    background-color: #1DD3B0 !important;
+  }
+`
 const MenuStyle = styled(Menu)`
   &&& {
     background-color: #223843;
@@ -31,27 +37,21 @@ const MenuStyle = styled(Menu)`
     margin: 0;
   }
 `
-const LinkStyle = styled(Link)`
-  color: white !important;
-  &: hover {
-    background-color: #1DD3B0 !important;
-  }
-`
 
 class NavBar extends Component {
   state = { user: {} }
 
   componentDidMount = () => {
-    this.setState({ user: this.props.user })
+    this.setState({ user: this.props.user });
   }
 
   loggedInLinks = () => {
-    const { activeItem } = this.props;
+    const { activeItem, setActiveItem } = this.props;
     return (
       <Menu.Item
         as={LinkStyle}
         to='/library'
-        onClick={this.props.setActiveItem}
+        onClick={setActiveItem}
         name='Bookshelves'
         active={activeItem === 'Bookshelves'}
       />

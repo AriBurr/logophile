@@ -11,12 +11,10 @@ const Header = styled.div`
   width: 100%;
 `
 
-const Banner = ({ searchTerms }) => {
-  return (
-    <Header>
-      <SearchBar searchTerms={searchTerms} />
-    </Header>
-  )
-}
+const Banner = ({ searchTerms }) => (
+  <Header>
+    <SearchBar searchTerms={searchTerms} />
+  </Header>
+)
 
 export default Banner;
