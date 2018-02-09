@@ -7,7 +7,11 @@ import { connect } from 'react-redux'
 import BookCover from './BookCover'
 import { paginateText } from '../../utils/modules'
 import { booksWithRatings } from '../../actions/books';
+import { searchAll } from '../../actions/books';
+import { setActiveBook } from '../../actions/activeBook';
 import { Rating, Header } from 'semantic-ui-react'
+import { withRouter } from 'react-router-dom';
+
 
 const Container = styled.div`
   margin: 0 auto;
@@ -60,10 +64,27 @@ class BooksCarousel extends React.Component {
     this.props.dispatch(booksWithRatings())
   }
 
+  callback = () => {
+  }
+
+  handleClick = (book) => {
+    const { dispatch } = this.props
+    const data = {
+      title: book.item.volumeInfo.title,
+      author: '',
+      ibsn: ''
+    }
+    dispatch(searchAll(data, this.callback))
+    dispatch(setActiveBook(book.item))
+  }
+
   mapTopBooks = () => {
     const { topBooks } = this.props
     return topBooks.map(book => (
-      <ImgContainer key={book.item.id}>
+      <ImgContainer
+        key={book.item.id}
+        onClick={() => this.handleClick(book)}
+      >
         <BookCover style={{margin: '0 auto'}} book={book} />
         <Header>{ paginateText(book.item.volumeInfo.title, 15) }</Header>
         <Rating icon='star' defaultRating={book.avg} maxRating={5} disabled />
@@ -124,4 +145,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(BooksCarousel);
+export default withRouter(connect(mapStateToProps)(BooksCarousel));

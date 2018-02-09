@@ -12,7 +12,7 @@ const getUrl = (terms) => {
   return url
 }
 
-export const searchAll = (callback, terms) => {
+export const searchAll = (terms, callback = {}) => {
   return(dispatch) => {
     axios.get(`${getUrl(terms)}&startIndex=0&maxResults=12`)
       .then( res => {
