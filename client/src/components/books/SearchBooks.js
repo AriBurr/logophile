@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { objectCheck } from '../../utils/modules';
-import { searchAll, clearBooks } from '../../actions/books';
+import { searchAll } from '../../actions/books';
 import { setActiveBook } from '../../actions/activeBook';
 import Banner from '../Banner';
 import BooksCarousel from './BooksCarousel';
