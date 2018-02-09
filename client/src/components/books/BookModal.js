@@ -1,19 +1,40 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import BookCover from './BookCover';
 import BookshelfDropdown from './BookshelfDropdown';
-import { connect } from 'react-redux';
 import { addRating } from '../../actions/ratings';
 import styled from 'styled-components';
 import {
   Divider,
   Grid,
+  Header,
+  Icon,
   List,
   Modal,
   Rating,
+  Segment,
 } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   margin: 5%;
+`
+const Description = styled(Grid.Row)`
+  &&& {
+    background-color: #F8F9FD;
+    border-top: 1px solid rgba(87, 97, 122, 0.1);
+    border-bottom: 1px solid rgba(87, 97, 122, 0.1);
+    line-height: 25px;
+    padding: 5% !important;
+    width: 100%;
+  }
+  .ui.header {
+    color: #223845;
+    border-bottom: 3px solid #1DD3B0;
+  }
+`
+const BookDetail = styled.p`
+  color: rgba(87, 97, 122, 0.5);
+  display: inline;
 `
 
 class BookModal extends React.Component {
@@ -33,49 +54,49 @@ class BookModal extends React.Component {
     return (
       <Wrapper>
         <Grid>
-          <Grid.Row>
-            <Modal.Header as='h1'><em>{volumeInfo.title}</em></Modal.Header>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column width={3}>
-              <BookCover book={this.props.book} />
+          <Grid.Column width={4}>
+            <BookCover book={this.props.book} />
+          </Grid.Column>
+          <Grid.Column width={12}>
+            <Grid.Row>
+              <Modal.Header as='h1'><em>{volumeInfo.title}</em></Modal.Header>
+              { volumeInfo.authors && <List.Item><strong>by</strong> {volumeInfo.authors[0]}</List.Item> }
+              <Divider />
+            </Grid.Row>
+            <Grid.Row>
               <Rating
                 onRate={this.handleChange}
                 maxRating={5}
                 defaultRating={3}
                 icon='star'
-                size='small'
+                size='huge'
               />
-            </Grid.Column>
-            <Grid.Column width={13}>
-              <Grid.Row>
-                {volumeInfo.description}
-              </Grid.Row>
-              <br />
-              <Grid.Row>
-                <List>
-                  <List.Item>
-                    { volumeInfo.authors && <List.Item><strong>Written by</strong> {volumeInfo.authors[0]}</List.Item> }
-                  </List.Item>
-                  <Divider />
-                  <List.Item>{volumeInfo.pageCount} pages</List.Item>
-                  <List.Item>Published {volumeInfo.publishedDate} by {volumeInfo.publisher}</List.Item>
-                  { volumeInfo.industryIdentifiers && <List.Item>{this.getIBSN(volumeInfo)}</List.Item> }
-                </List>
-                <BookshelfDropdown editBook={this.props.book} />
-              </Grid.Row>
-            </Grid.Column>
+            <BookDetail>
+              <em>&nbsp;|&nbsp;{volumeInfo.pageCount} pages</em>&nbsp;|&nbsp;
+            </BookDetail>
+            <a href={volumeInfo.previewLink} target='_blank'><Icon color='green' name='google'></Icon></a>
+            </Grid.Row>
+            <Grid.Row>
+              <Divider hidden />
+              <BookshelfDropdown editBook={this.props.book} />
+            </Grid.Row>
+          </Grid.Column>
+          <Grid.Row as={Description}>
+            <Header as='h3'>About</Header>
+            <Divider />
+            {volumeInfo.description}
+            <Divider />
           </Grid.Row>
         </Grid>
       </Wrapper>
-    );
+    )
   }
 
   render () {
     const { volumeInfo } = this.props.book.item;
     return(
       <div>
-        <Modal.Content image>
+        <Modal.Content scrolling image>
           {this.description(volumeInfo)}
         </Modal.Content>
       </div>

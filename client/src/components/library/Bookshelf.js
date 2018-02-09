@@ -50,7 +50,7 @@ class Bookshelf extends React.Component {
       const { volumeInfo, title } = book.item
       return (
         <Grid.Column key={book.id}>
-          <Modal trigger={this.modalTrigger(volumeInfo, title)}>
+          <Modal size='large' trigger={this.modalTrigger(volumeInfo, title)}>
             <BookModal book={book}/>
           </Modal>
           { edit && <Icon
