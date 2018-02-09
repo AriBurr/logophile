@@ -1,29 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addBook } from '../../actions/shelvings.js';
 import { Link } from 'react-router-dom';
+import BookshelfDropdown from './BookshelfDropdown';
 import styled from 'styled-components';
 import BookCover from './BookCover'
 import ShelfForm from '../library/ShelfForm';
-import { ButtonStyle } from '../../styles/styles';
 import {
-  Dropdown,
   Grid,
   Icon,
   List,
   Segment,
   Header,
   Divider,
-  Button,
  } from 'semantic-ui-react';
 
 const ImgGrid = styled(Grid.Column)`
   margin: 0 -50px;
-`
-const DropdownStyle = styled.div`
-  &&& {
-    margin: 0 auto;
-  }
 `
 const DescContainer = styled.div`
   &&& {
@@ -40,7 +32,7 @@ const PageContain = styled(Grid)`
 `
 
 class BookDescription extends React.Component {
-  state = { bookshelf: '', edit: false }
+  state = { edit: false }
 
   isLoggedIn = () => {
     const token = localStorage.getItem('userToken');
@@ -48,24 +40,6 @@ class BookDescription extends React.Component {
   }
 
   toggleEdit = () => this.setState({ edit: !this.state.edit });
-
-  bookshelfOptions = () => {
-    const { bookshelves } = this.props;
-    return bookshelves.map ( shelf => {
-      return { key: shelf.id, text: shelf.name, value: shelf.name }
-    });
-  }
-
-  handleSelection = (e, { value }) =>  {
-    this.setState({ bookshelf: value });
-  }
-
-  handleSubmit = () => {
-    const { bookshelf } = this.state;
-    const { book, bookshelves, dispatch } = this.props;
-    const shelf = bookshelves.filter( shelf => shelf.name === bookshelf );
-    dispatch(addBook(book, shelf[0]));
-  }
 
   bookDescriptionList = (book) => {
     return(
@@ -96,26 +70,6 @@ class BookDescription extends React.Component {
     });
   }
 
-  renderDropdown = () => (
-    <DropdownStyle>
-      <span>
-        <Button
-          as={ButtonStyle}
-          onClick={ () => this.handleSubmit() }
-          disabled={this.state.bookshelf.length < 1 ? true : false}
-        >
-          Select Bookshelf
-        </Button>
-        <Dropdown
-          placeholder='Will Read'
-          selection
-          options={this.bookshelfOptions()}
-          onChange={this.handleSelection}
-        />
-      </span>
-    </DropdownStyle>
-  )
-
   render () {
     const { edit } = this.state;
     const book = this.props.book.volumeInfo;
@@ -133,7 +87,7 @@ class BookDescription extends React.Component {
         </Grid.Row>
         <Grid.Row centered>
           { !this.isLoggedIn() && <em><Link to='/login'>Sign in</Link> to add this book to your bookshelf!</em> }
-          { this.isLoggedIn() && this.renderDropdown() }
+          { this.isLoggedIn() && <BookshelfDropdown /> }
           { this.isLoggedIn() && <Icon name='book' onClick={() => this.toggleEdit()}></Icon> }
         </Grid.Row>
         <Grid.Row as={DescContainer} >

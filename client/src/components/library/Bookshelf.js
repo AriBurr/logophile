@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import noCover from '../../assets/default.jpg';
 import { deleteShelving } from '../../actions/shelvings';
 import styled from 'styled-components';
-import BookModal from '../BookModal'
+import BookModal from '../books/BookModal';
 import {
   Divider,
   Grid,
