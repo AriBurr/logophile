@@ -33,7 +33,10 @@ export const fetchShelvings = (shelf) => {
 export const editShelving = (shelf, shelving) => {
   return dispatch => {
     axios.put(`/api/shelvings/${shelving.id}?shelf_id=${shelf.id}`, {shelving}, setHeaders() )
-    .then( res => dispatch({type: 'EDIT_SHELVING', shelvings: res.data }))
+    .then( res => {
+      dispatch({type: 'EDIT_SHELVING', shelvings: res.data })
+      dispatch({ type: 'FETCH_SHELF', bookshelf: shelf })
+    })
     .catch( err => dispatch(setFlash(`Error updating bookshelf, please try again!`, 'red')));
   }
 }
@@ -44,6 +47,7 @@ export const deleteShelving = (shelving, shelfId) => {
       .then( res => {
         dispatch({ type: 'DELETE_SHELVING', shelving });
         dispatch({ type: 'EDIT_BOOKSHELF', bookshelf: res.data });
-    });
+      })
+      .catch( err => dispatch(setFlash(`Error removing book, please try again!`, 'red')));
   }
 }
