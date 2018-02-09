@@ -29,19 +29,19 @@ class SearchBooks extends React.Component {
   setSearchLoaded = () => this.setState({ searchLoaded: true });
 
   handleSearch = (terms) => {
-    this.setState({terms: terms})
+    this.setState({ terms: terms });
     this.props.dispatch(searchAll(terms, this.setSearchLoaded));
   }
 
   componentWillUnmount = () => {
-    this.props.dispatch({ type: 'CLEAR_BOOKS', action: [] })
+    this.props.dispatch({ type: 'CLEAR_BOOKS', action: [] });
   }
 
-  toggleDescription = (book) => this.props.dispatch(setActiveBook(book))
+  toggleDescription = (book) => this.props.dispatch(setActiveBook(book));
 
   renderSearched = (searchLoaded) => {
-    const { book, books } = this.props
-    return(
+    const { book, books } = this.props;
+    return (
       <Grid divided as={GridContainer}>
         <Grid.Column width={10}>
           <Grid
@@ -55,7 +55,7 @@ class SearchBooks extends React.Component {
           { objectCheck(book) && <BookDescription/> }
         </Grid.Column>
       </Grid>
-    )
+    );
   }
 
   render() {

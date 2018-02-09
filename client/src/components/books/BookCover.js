@@ -7,28 +7,26 @@ const Image = styled.img`
   height: 198px;
   width: 128px;
   box-shadow: 0 1px 2px #999;
+  margin: 0 auto;
   transition: box-shadow 0.25s;
     &:hover {
       box-shadow: 0 1px 20px #999;
     }
-  img{
-    margin: 0 auto;
-  }
 `
 
 const BookCover = ({ book }) => {
   let data = null;
-  book.item ? data = book.item: data = book
+  book.item ? data = book.item: data = book;
 
-  const { volumeInfo } = data
-  return(
+  const { volumeInfo } = data;
+  return (
     <Container>
       <Image
         src={ volumeInfo.imageLinks ? volumeInfo.imageLinks.thumbnail : noCover }
         alt={`${volumeInfo.title} cover`}
       />
     </Container>
-  )
+  );
 }
 
 export default BookCover;

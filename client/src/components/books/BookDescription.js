@@ -1,29 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import BookshelfDropdown from './BookshelfDropdown';
-import styled from 'styled-components';
 import BookCover from './BookCover'
+import BookshelfDropdown from './BookshelfDropdown';
 import ShelfForm from '../library/ShelfForm';
+import styled from 'styled-components';
 import {
+  Divider,
   Grid,
+  Header,
   Icon,
   List,
   Segment,
-  Header,
-  Divider,
  } from 'semantic-ui-react';
 
-const ImgGrid = styled(Grid.Column)`
-  margin: 0 -50px;
+const CreateBook = styled.div`
+margin: 0 auto;
 `
 const DescContainer = styled.div`
   &&& {
     margin-left: 5%;
   }
 `
-const CreateBook = styled.div`
-  margin: 0 auto;
+const ImgGrid = styled(Grid.Column)`
+margin: 0 -50px;
 `
 const PageContain = styled(Grid)`
   #desc-container {
@@ -36,13 +36,13 @@ class BookDescription extends React.Component {
 
   isLoggedIn = () => {
     const token = localStorage.getItem('userToken');
-    return token ? true : false
+    return token ? true : false;
   }
 
   toggleEdit = () => this.setState({ edit: !this.state.edit });
 
   bookDescriptionList = (book) => {
-    return(
+    return (
       <List>
         <List.Item as='h3'>
           {book.title}
@@ -52,7 +52,7 @@ class BookDescription extends React.Component {
         <List.Item>{book.pageCount} pages</List.Item>
         <List.Item>Published {book.publishedDate} by {book.publisher}</List.Item>
       </List>
-    )
+    );
   }
 
   renderDescription = (book) => (
@@ -95,7 +95,7 @@ class BookDescription extends React.Component {
           { book.description && this.renderDescription(book) }
         </Grid.Row>
       </Grid>
-    )
+    );
   }
 }
 

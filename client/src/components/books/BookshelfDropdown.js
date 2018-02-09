@@ -37,7 +37,7 @@ class BookshelfDropdown extends React.Component {
       dispatch(addBook(book, shelf[0]));
     } else {
       const shelf = (bookshelves.filter( shelf => shelf.name === bookshelf ))[0];
-      const fromShelf = editBook.bookshelf_id
+      const fromShelf = editBook.bookshelf_id;
       const shelving = { id: editBook.shelving_id, book_id: editBook.id, bookshelf_id: shelf.id };
       dispatch(editShelving(shelf, shelving, fromShelf));
     }
@@ -51,7 +51,7 @@ class BookshelfDropdown extends React.Component {
             as={ButtonStyle}
             onClick={ () => this.handleSubmit() }
             disabled={this.state.bookshelf.length < 1 ? true : false}
-            >
+          >
             Select Bookshelf
           </Button>
           <Dropdown
@@ -59,7 +59,7 @@ class BookshelfDropdown extends React.Component {
             selection
             options={this.bookshelfOptions()}
             onChange={this.handleSelection}
-            />
+          />
         </span>
       </DropdownStyle>
     )
@@ -67,7 +67,11 @@ class BookshelfDropdown extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { book: state.activeBook, bookshelves: state.bookshelves, shelvings: state.shelvings }
+  return {
+    book: state.activeBook,
+    bookshelves: state.bookshelves,
+    shelvings: state.shelvings,
+  }
 }
 
 export default connect(mapStateToProps)(BookshelfDropdown);
