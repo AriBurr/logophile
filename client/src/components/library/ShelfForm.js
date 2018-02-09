@@ -9,6 +9,16 @@ import { Form, Input, Menu,  } from 'semantic-ui-react';
 const MenuStyle = styled(Menu.Item)`
   margin-bottom: 8%;
 `
+const InputStyle = styled.div`
+
+  input{
+    color: black !important;
+    background: ${props => props.children[2].props.placeholder.substring(0,4) === 'Edit' && '#F0CF65'} !important;
+  }
+  input::placeholder{
+    color: ${props => props.children[2].props.placeholder.substring(0,4) === 'Edit' ? 'white' : 'grey'} !important;
+  }
+`
 
 class ShelfForm extends React.Component {
   state = { name: '' }
@@ -34,6 +44,7 @@ class ShelfForm extends React.Component {
       <Menu.Item as={MenuStyle}>
         <Form onSubmit={this.handleSubmit}>
           <Input
+            as={InputStyle}
             onChange={this.handleChange}
             name='name'
             value={name}
@@ -41,7 +52,7 @@ class ShelfForm extends React.Component {
             placeholder={
               edit && !objectCheck(active) ? 'Select Bookshelf' :
               edit && objectCheck(active) ? `Edit ${active.name}` : 'Create Bookshelf' }
-          />
+          ></Input>
         </Form>
       </Menu.Item>
     )

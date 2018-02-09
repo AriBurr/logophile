@@ -12,29 +12,34 @@ import { Icon, Label, Menu } from 'semantic-ui-react';
 const EnlargeMenu = styled(Menu.Item)`
   &&& {
     color: white;
-    background-color: #223843 !important;
+    background-color: #35596b !important;
     border: none;
     border-radius: 0px;
     box-shadow: none;
+    width: 16rem !important;
     height: 100vh;
     padding: 5%;
+    #MenuStyle{
+      padding-left: 14px !important;
+    }
   }
 `
 const IconStyle = styled(Icon)`
   color: white;
   padding: 5%;
 `
+const LabelStyle = styled(Label)`
+  margin-right: 7% !important;
+`
 const Image = styled.img`
   height: 175px;
   width: 175px;
-`
-const LabelStyle = styled(Label)`
-  margin-right: 7% !important;
 `
 const MenuStyle = styled(Menu)`
   &&& {
     color: white !important;
     font-size: 18px;
+    text-align: left !important;
   }
 `
 
@@ -73,14 +78,21 @@ class SideNav extends React.Component {
     this.state.editing && this.handleItemClick(shelf);
   }
 
+  handleDelete = (shelf) => {
+    debugger
+    const { dispatch } = this.props
+    dispatch(deleteBookshelf(shelf))
+    dispatch({ type: 'CLEAR_SHELVINGS' })
+  }
+
   mapBookshelves = (activeItem) => {
     const { edit } = this.state;
-    const { bookshelves, dispatch } = this.props;
+    const { bookshelves } = this.props
 
     return bookshelves.map( shelf => {
       return (
         <Menu.Item
-          className='myMenu'
+          id='MenuStyle'
           as={MenuStyle}
           key={shelf.id}
           name={shelf.name}
@@ -88,26 +100,26 @@ class SideNav extends React.Component {
           onClick={ () => !edit && this.handleItemClick(shelf) }
         >
           <Label as={LabelStyle} color='yellow'>{shelf.book_count}</Label>
-        {shelf.name}
-        { edit &&
-          <span>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <Icon
-              size='tiny'
-              circular
-              inverted
-              onClick={ () => dispatch(deleteBookshelf(shelf)) }
-              name='trash'>
-            </Icon>
-            <Icon
-              size='tiny'
-              circular
-              inverted
-              onClick={ () => this.handleItemClick(shelf) }
-              name='pencil'>
-            </Icon>
-          </span>
-        }
+          {shelf.name}
+          { edit &&
+            <span>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <Icon
+                size='tiny'
+                circular
+                inverted
+                onClick={() => this.handleDelete(shelf)}
+                name='trash'>
+              </Icon>
+              <Icon
+                size='tiny'
+                circular
+                inverted
+                onClick={ () => this.handleItemClick(shelf) }
+                name='pencil'>
+              </Icon>
+            </span>
+          }
         </Menu.Item>
       );
     });
@@ -119,6 +131,7 @@ class SideNav extends React.Component {
       <Menu vertical as={EnlargeMenu}>
         <Image src={bookshelf}></Image>
         <ShelfForm
+          theme='yes'
           edit={edit}
           active={activeItem}
         />
