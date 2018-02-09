@@ -4,7 +4,7 @@ import { objectCheck } from '../../utils/modules';
 import { searchAll } from '../../actions/books';
 import { setActiveBook } from '../../actions/activeBook';
 import Banner from '../Banner';
-import TopReviewed from './TopReviewed';
+import BooksCarousel from './BooksCarousel';
 import BookDescription from '../books/BookDescription';
 import Books from '../books/Books';
 import styled from 'styled-components';
@@ -59,7 +59,7 @@ class SearchBooks extends React.Component {
     return (
       <Wrapper>
         <Banner searchTerms={this.handleSearch} />
-        { searchLoaded ? this.renderSearched(searchLoaded) : <TopReviewed /> }
+        { searchLoaded ? this.renderSearched(searchLoaded) : <BooksCarousel /> }
       </Wrapper>
     );
   }
