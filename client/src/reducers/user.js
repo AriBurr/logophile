@@ -7,6 +7,6 @@ const user = (state = {}, action) => {
     default:
       return state;
   }
-};
+}
 
 export default user;

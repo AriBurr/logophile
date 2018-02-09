@@ -10,7 +10,7 @@ const bookshelves = (state = [], action) => {
       return state.map( s => {
         if (s.id === action.bookshelf.id)
           return action.bookshelf;
-        return s
+        return s;
       });
     case 'DELETE_BOOKSHELF':
       return state.filter( s => s.id !== action.shelf.id);
