@@ -4,6 +4,8 @@ const bookshelves = (state = [], action) => {
       return [...state, action.bookshelf];
     case 'GET_BOOKSHELVES':
       return action.bookshelves;
+    case 'FULL_EDIT_BOOKSHELF':
+      return action.bookshelves;
     case 'EDIT_BOOKSHELF':
       return state.map( s => {
         if (s.id === action.bookshelf.id)

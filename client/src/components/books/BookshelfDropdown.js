@@ -37,8 +37,9 @@ class BookshelfDropdown extends React.Component {
       dispatch(addBook(book, shelf[0]));
     } else {
       const shelf = (bookshelves.filter( shelf => shelf.name === bookshelf ))[0];
+      const fromShelf = editBook.bookshelf_id
       const shelving = { id: editBook.shelving_id, book_id: editBook.id, bookshelf_id: shelf.id };
-      dispatch(editShelving(shelf, shelving));
+      dispatch(editShelving(shelf, shelving, fromShelf));
     }
   }
 

@@ -3,7 +3,6 @@ const books = (state = [], action) => {
     case 'SEARCH_ALL':
       return action.books;
     case 'CLEAR_BOOKS':
-      debugger
       return [];
     default:
       return state;

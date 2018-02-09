@@ -16,10 +16,22 @@ class Api::ShelvingsController < ApiController
     end
   end
 
+  def create_return
+    current_user.bookshelves
+    response = {
+      shelves: current_user.bookshelves,
+      shelvings: Shelving.with_book(@bookshelf.id)
+    }
+  end
+
   def update
     shelving = Shelving.find(params[:id])
+    Bookshelf.handle_count(params[:shelf_id],params[:from_shelf].to_i)
     if shelving.update(shelving_params)
-      render json: Shelving.with_book(@bookshelf.id)
+      render json: {
+                      shelves: current_user.bookshelves.order(created_at: :asc),
+                      shelvings: Shelving.with_book(@bookshelf.id)
+                    }
     else
       render json: { errors: shelving.full_messages }, status: 422
     end

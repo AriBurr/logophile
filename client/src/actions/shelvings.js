@@ -30,12 +30,15 @@ export const fetchShelvings = (shelf) => {
   }
 }
 
-export const editShelving = (shelf, shelving) => {
+export const editShelving = (shelf, shelving, fromShelf) => {
   return dispatch => {
-    axios.put(`/api/shelvings/${shelving.id}?shelf_id=${shelf.id}`, {shelving}, setHeaders() )
+    axios.put(`/api/shelvings/${shelving.id}?shelf_id=${shelf.id}&from_shelf=${fromShelf}`,
+              {shelving}, setHeaders() )
     .then( res => {
-      dispatch({type: 'EDIT_SHELVING', shelvings: res.data })
+      console.log(res.data.shelves)
+      dispatch({type: 'EDIT_SHELVING', shelvings: res.data.shelvings })
       dispatch({ type: 'FETCH_SHELF', bookshelf: shelf })
+      dispatch({ type: 'FULL_EDIT_BOOKSHELF', bookshelves: res.data.shelves });
     })
     .catch( err => dispatch(setFlash(`Error updating bookshelf, please try again!`, 'red')));
   }
