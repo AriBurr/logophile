@@ -37,6 +37,7 @@ const Image = styled.img`
 `
 const MenuStyle = styled(Menu)`
   &&& {
+    height: auto;
     color: white !important;
     font-size: 18px;
     text-align: left !important;

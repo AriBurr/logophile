@@ -102,7 +102,7 @@ class BooksCarousel extends React.Component {
       prevArrow: <Arrow />,
       slidesToShow: 7,
       slidesToScroll: 7,
-      initialSlide: 4,
+      initialSlide: 0,
       responsive: [{
         breakpoint: 1024,
         settings: {
