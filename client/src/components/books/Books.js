@@ -7,6 +7,7 @@ const Books = ({ books, toggleDescription }) => (
   books.map( book => {
     return (
       <Grid.Column
+        mobile='8' tablet='5' computer='4' largeScreen='3'
         key={book.id}
         onClick={ () => toggleDescription(book) }
       >
