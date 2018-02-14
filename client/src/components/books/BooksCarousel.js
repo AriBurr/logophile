@@ -83,7 +83,7 @@ class BooksCarousel extends React.Component {
     const { topBooks } = this.props;
     return topBooks.map(book => (
       <ImgContainer
-        key={book.item.id}
+        key={book.book_id}
         onClick={() => this.handleClick(book)}
       >
         <BookCover style={{margin: '0 auto'}} book={book} />

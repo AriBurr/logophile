@@ -1,5 +1,5 @@
 class Api::BooksController < ApiController
-  before_action :require_login
+  before_action :require_login, except: :all_books_with_ratings
 
   def create
     book = Book.check_if_duplicate(params[:book][:item])
