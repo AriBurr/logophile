@@ -19,6 +19,7 @@ class Book < ApplicationRecord
     .joins('INNER JOIN ratings AS r ON books.id = r.book_id')
     .group('r.book_id, books.item')
     .order('avg DESC')
+    .limit('20')
   end
 
   def self.change_count(action, bookshelf)

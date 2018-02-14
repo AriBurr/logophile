@@ -1,5 +1,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+require 'simplecov'
 require 'spec_helper'
+SimpleCov.start
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
@@ -9,6 +11,7 @@ require 'support/controller_macros'
 
 # Should Matchers Configuration
 Shoulda::Matchers.configure do |config|
+
   config.integrate do |with|
     with.test_framework :rspec
     with.library :rails
@@ -36,6 +39,8 @@ end
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+
+  config.extend ControllerMacros, :type => :controller
 
   # Database Cleaner Configuration
    config.before(:suite) do
