@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20180207033605) do
   enable_extension "plpgsql"
 
   create_table "books", force: :cascade do |t|
-    t.jsonb "item"
+    t.jsonb "item", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20180207033605) do
   create_table "bookshelves", force: :cascade do |t|
     t.string "name", null: false
     t.integer "book_count", default: 0
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_bookshelves_on_user_id"
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 20180207033605) do
 
   create_table "ratings", force: :cascade do |t|
     t.integer "value"
-    t.bigint "user_id"
-    t.bigint "book_id"
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_ratings_on_book_id"
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20180207033605) do
   end
 
   create_table "shelvings", force: :cascade do |t|
-    t.bigint "book_id"
-    t.bigint "bookshelf_id"
+    t.bigint "book_id", null: false
+    t.bigint "bookshelf_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_shelvings_on_book_id"
