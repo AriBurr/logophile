@@ -8,6 +8,13 @@ gem 'bcrypt'
 
 group :development, :test do
   gem 'pry', '~> 0.11.3'
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'shoulda-matchers'
+  gem 'database_cleaner'
+  gem 'simplecov'
 end
 
 group :development do
