@@ -43,7 +43,7 @@ class SearchBooks extends React.Component {
     const { book, books } = this.props;
     return (
       <Grid divided as={GridContainer}>
-        <Grid.Column width={10}>
+        <Grid.Column mobile='16' tablet='11' computer='10' largeScreen='11' width={10}>
           <Grid
             as={EnlargeGrid}
             columns={4}
@@ -51,7 +51,7 @@ class SearchBooks extends React.Component {
             { books && <Books toggleDescription={this.toggleDescription} /> }
           </Grid>
         </Grid.Column>
-        <Grid.Column width={6}>
+        <Grid.Column mobile='16' tablet='5' computer='6' largeScreen='5' width={6}>
           { objectCheck(book) && <BookDescription/> }
         </Grid.Column>
       </Grid>

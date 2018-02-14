@@ -6,10 +6,10 @@ import { Grid } from 'semantic-ui-react';
 
 const Library = ({ shelvings }) => (
   <Grid>
-    <Grid.Column width={3}>
+    <Grid.Column mobile='16' tablet='5' computer='4' largeScreen='3' width={3}>
       <SideNav />
     </Grid.Column>
-    <Grid.Column width={13}>
+    <Grid.Column mobile='16' tablet='11' computer='12' largeScreen='13' width={13}>
       { shelvings && <Bookshelf /> }
     </Grid.Column>
   </Grid>
