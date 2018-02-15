@@ -1,24 +1,28 @@
-# README
+# Logophile
+---
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Logophile is a single page web application inspired from 'Goodreads'. Users can search for books and catalogue them into their bookshelves. We utilize the google books API for a massive digital catalog. Users can also give ratings for books, which will be create a feed of top reviewed books visible to all users.
 
-Things you may want to cover:
+[Logophile Live](https://logo-phile.herokuapp.com/books)
 
-* Ruby version
+![](app/images/screen_shot.png?raw=true)
 
-* System dependencies
+# Technology
+---
+Logophile was built with Rails and React/Redux. Accessing data from rails API is protected and requires users to be
+authenticated. Persistant data through postgreSQL database
 
-* Configuration
+# Technology
+---
++ User accounts
++ Search for books
++ Create bookshelves
++ Rate books
++ Feed of top rated books
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Future Features
+---
+[ ] Users can share their bookshelves
+[ ] Community features - Create bookclubs
+[ ] Book of the week voted on by users
+[ ] User dashboard for following other users
