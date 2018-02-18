@@ -2,8 +2,14 @@ class User < ApplicationRecord
   has_secure_password
   has_secure_token
 
+  has_many :announcements
   has_many :bookshelves, dependent: :destroy
+  has_many :comments
+  has_many :discussions
   has_many :ratings
+
+  has_many :memberships, dependent: :destroy
+  has_many :clubs, through: :memberships
 
   before_save { email.downcase! }
 

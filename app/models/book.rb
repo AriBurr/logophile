@@ -3,6 +3,10 @@ class Book < ApplicationRecord
 
   has_many :shelvings, dependent: :destroy
   has_many :bookshelves, through: :shelvings
+
+  has_many :readings, dependent: :destroy
+  has_many :clubs, through: :readings
+
   has_many :ratings, dependent: :destroy
 
   def self.check_if_duplicate(book_params)

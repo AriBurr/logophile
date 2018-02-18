@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180207033605) do
+ActiveRecord::Schema.define(version: 20180218220142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "announcements", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.bigint "user_id", null: false
+    t.bigint "club_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_announcements_on_club_id"
+    t.index ["user_id"], name: "index_announcements_on_user_id"
+  end
 
   create_table "books", force: :cascade do |t|
     t.jsonb "item", null: false
@@ -30,6 +41,42 @@ ActiveRecord::Schema.define(version: 20180207033605) do
     t.index ["user_id"], name: "index_bookshelves_on_user_id"
   end
 
+  create_table "clubs", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content", null: false
+    t.bigint "discussion_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["discussion_id"], name: "index_comments_on_discussion_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "discussions", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.bigint "reading_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reading_id"], name: "index_discussions_on_reading_id"
+    t.index ["user_id"], name: "index_discussions_on_user_id"
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "club_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_memberships_on_club_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
   create_table "ratings", force: :cascade do |t|
     t.integer "value"
     t.bigint "user_id", null: false
@@ -38,6 +85,15 @@ ActiveRecord::Schema.define(version: 20180207033605) do
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_ratings_on_book_id"
     t.index ["user_id"], name: "index_ratings_on_user_id"
+  end
+
+  create_table "readings", force: :cascade do |t|
+    t.bigint "club_id", null: false
+    t.bigint "book_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_readings_on_book_id"
+    t.index ["club_id"], name: "index_readings_on_club_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -73,9 +129,19 @@ ActiveRecord::Schema.define(version: 20180207033605) do
     t.index ["token"], name: "index_users_on_token"
   end
 
+  add_foreign_key "announcements", "clubs"
+  add_foreign_key "announcements", "users"
   add_foreign_key "bookshelves", "users"
+  add_foreign_key "comments", "discussions"
+  add_foreign_key "comments", "users"
+  add_foreign_key "discussions", "readings"
+  add_foreign_key "discussions", "users"
+  add_foreign_key "memberships", "clubs"
+  add_foreign_key "memberships", "users"
   add_foreign_key "ratings", "books"
   add_foreign_key "ratings", "users"
+  add_foreign_key "readings", "books"
+  add_foreign_key "readings", "clubs"
   add_foreign_key "shelvings", "books"
   add_foreign_key "shelvings", "bookshelves"
 end
