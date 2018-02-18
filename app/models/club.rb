@@ -1,4 +1,6 @@
 class Club < ApplicationRecord
+  validates_presence_of :name
+
   has_many :announcements, dependent: :destroy
 
   has_many :memberships, dependent: :destroy
