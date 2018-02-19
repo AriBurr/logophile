@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import ClubHome from './clubs/ClubHome';
 import FetchUser from './FetchUser';
 import Flash from './Flash';
 import Footer from './Footer';
@@ -23,6 +24,7 @@ class App extends React.Component {
             <Route exact path='/' component={Welcome} />
             <Route exact path='/books' component={SearchBooks} />
             <ProtectedRoute exact path='/library' component={Library} />
+            <Route exact path='/clubs' component={ClubHome} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/register' component={Register} />
             <Route component={NoMatch} />
