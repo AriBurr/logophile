@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
 
   namespace :api do
-    
+
     scope :format => true, :constraints => { :format => 'json' } do
       post   "/login"       => "sessions#create"
       delete "/logout"      => "sessions#destroy"
@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     resources :books, only: [:create]
     resources :ratings, only: [:create, :update]
     resources :shelvings, only: [:create, :destroy, :index, :update]
+
+    resources :clubs
 
     get '/users/find', to: 'users#logged_in_user'
     get '/books/with_ratings', to: 'books#all_books_with_ratings'
