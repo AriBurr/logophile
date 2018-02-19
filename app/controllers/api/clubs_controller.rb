@@ -2,8 +2,12 @@ class Api::ClubsController < ApiController
   before_action :require_login
   before_action :set_club, only: [:update, :destroy]
 
+  def index
+    render json: Club.all
+  end
+
   def create
-    club = current_user.clubs.new(club_params)
+    club = Club.new(club_params)
     if club.save
       render json: club
     else
@@ -13,7 +17,7 @@ class Api::ClubsController < ApiController
 
   private
     def club_params
-      params.require(:club).permit(:name)
+      params.require(:club).permit(:name, :description)
     end
 
     def set_club

@@ -2,17 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addClub } from '../../actions/clubs';
 import styled from 'styled-components';
-import { Form, Input, Menu } from 'semantic-ui-react';
+import { Button, Form } from 'semantic-ui-react';
 
 class ClubForm extends React.Component {
-  state = { name: '' };
+  state = { name: '', description: '' };
 
   handleSubmit = e => {
     e.preventDefault();
-    const { name } = this.state;
+    const { name, description } = this.state;
     const { dispatch } = this.props;
-    const club = { name };
-    this.setState({ name: '' });
+    const club = { name, description };
+    this.setState({ name: '', description: '' });
     dispatch(addClub(club));
   };
 
@@ -22,19 +22,26 @@ class ClubForm extends React.Component {
   };
 
   render() {
-    const { name } = this.state;
+    const { name, description } = this.state;
     return (
-      <Menu.Item>
-        <Form onSubmit={this.handleSubmit}>
-          <Input
-            onChange={this.handleChange}
-            name="name"
-            value={name}
-            icon="plus"
-            placeholder={'Create Club'}
-          />
-        </Form>
-      </Menu.Item>
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Input
+          width={5}
+          onChange={this.handleChange}
+          name="name"
+          value={name}
+          placeholder={'Name'}
+        />
+        <Form.TextArea
+          width={5}
+          type='text'
+          onChange={this.handleChange}
+          name="description"
+          value={description}
+          placeholder={'Add a Brief Description'}
+        />
+        <Button type='submit'>Submit</Button>
+      </Form>
     );
   }
 }

@@ -14,3 +14,14 @@ export const addClub = club => {
       );
   };
 };
+
+export const fetchClubs = () => {
+  return dispatch => {
+    axios
+      .get('/api/clubs/', setHeaders())
+      .then(res => dispatch({ type: 'GET_CLUBS', clubs: res.data }))
+      .catch(err =>
+        setFlash('Could not retrieve clubs, please try again!', 'red')
+      );
+  };
+};
