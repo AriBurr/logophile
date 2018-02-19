@@ -3,12 +3,15 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { objectCheck } from '../utils/modules';
 import styled from 'styled-components';
-import { Menu } from 'semantic-ui-react';
+import { Dropdown, Menu } from 'semantic-ui-react';
 
 const ComponentStyle = styled.div`
   .ui.menu .active.item {
     background-color: #1DD3B0 !important;
   }
+`
+const DropdownStyle = styled(Dropdown)`
+  color: white !important;
 `
 const Header = styled.div`
   background-color: #1DD3B0;
@@ -85,6 +88,12 @@ class NavBar extends Component {
             name='Search Books'
             active={activeItem === 'Search Books'}
           />
+        <DropdownStyle item text='Community'>
+          <Dropdown.Menu>
+            <Dropdown.Item>Book Clubs</Dropdown.Item>
+            <Dropdown.Item>Users</Dropdown.Item>
+          </Dropdown.Menu>
+        </DropdownStyle>
         { user !== null && objectCheck(user) && this.loggedInLinks() }
         </Menu>
         <Header>
