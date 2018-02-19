@@ -1,5 +1,3 @@
-require 'simplecov'
-SimpleCov.start
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'simplecov'
 require 'spec_helper'
@@ -9,6 +7,7 @@ require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+require 'support/controller_macros'
 
 # Should Matchers Configuration
 Shoulda::Matchers.configure do |config|
@@ -41,7 +40,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
 
-  config.extend ControllerMacros, :type => :controller
+  config.extend ControllerMacros, :type => :request
 
   # Database Cleaner Configuration
    config.before(:suite) do
