@@ -3,7 +3,6 @@ class Api::BooksController < ApiController
 
   def create
     book = Book.check_if_duplicate(params[:book][:item])
-    binding.pry
     if !book.nil?
       render json: book
     else

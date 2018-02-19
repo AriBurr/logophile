@@ -3,6 +3,15 @@ require 'rails_helper'
 RSpec.describe Api::BooksController, type: :request do
   login_user
 
+  describe 'unauthorized request' do
+
+    it 'returns unauthenticated' do
+      post "/api/books"
+      expect(response).to have_http_status(:unauthorized)
+    end
+
+  end
+
   describe 'POST #create' do
 
     it 'renders json for new book' do
@@ -16,11 +25,13 @@ RSpec.describe Api::BooksController, type: :request do
   end
 
   describe 'GET #all_books_with_ratings' do
+
     it 'renders successful json' do
       get "/api/books/with_ratings"
       expect(response).to have_http_status(:ok)
       expect(response.content_type).to eq("application/json")
     end
+
   end
 
 end
