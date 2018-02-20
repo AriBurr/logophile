@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   get 'users/new'
 
-
   namespace :api do
 
     scope :format => true, :constraints => { :format => 'json' } do

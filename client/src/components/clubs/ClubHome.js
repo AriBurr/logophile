@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { fetchCurrentClub } from '../../actions/clubs';
 import Announcements from './Announcements';
 import ClubBanner from './ClubBanner';
+import ClubForm from './ClubForm';
 import CurrentReading from './CurrentReading';
 import ClubSideNav from './ClubSideNav';
 import DiscussionPreview from './DiscussionPreview';
@@ -15,7 +17,21 @@ const Wrapper = styled.div`
 `;
 
 class ClubHome extends React.Component {
+  state = { edit: false };
+
+  componentDidMount() {
+    const clubID = this.props.match.params.id;
+    this.props.dispatch(fetchCurrentClub(clubID));
+  }
+
+  toggleEdit = () => {
+    const { edit } = this.state;
+    this.setState({ edit: !edit });
+  };
+
   render() {
+    const { edit } = this.state;
+    const { club } = this.props;
     return (
       <Wrapper>
         <ClubBanner />
@@ -37,7 +53,11 @@ class ClubHome extends React.Component {
             width={13}
           >
             <Grid.Row>
-              <Introduction />
+              {edit ? (
+                <ClubForm edit={edit} toggleEdit={this.toggleEdit} />
+              ) : (
+                <Introduction toggleEdit={this.toggleEdit} />
+              )}
             </Grid.Row>
             <Grid.Row>
               <Announcements />
@@ -55,4 +75,8 @@ class ClubHome extends React.Component {
   }
 }
 
-export default connect()(ClubHome);
+const mapStateToProps = state => {
+  return { club: state.club };
+};
+
+export default connect(mapStateToProps)(ClubHome);

@@ -1,9 +1,13 @@
 class Api::ClubsController < ApiController
   before_action :require_login
-  before_action :set_club, only: [:update, :destroy]
+  before_action :set_club, only: [:show, :update, :destroy]
 
   def index
     render json: Club.all
+  end
+
+  def show
+    render json: @club
   end
 
   def create
@@ -15,13 +19,21 @@ class Api::ClubsController < ApiController
     end
   end
 
+  def update
+    if @club.update(club_params)
+      render json: @club
+    else
+      render json: { errors: @club.full_messages }, status: 422
+    end
+  end
+
   private
     def club_params
       params.require(:club).permit(:name, :description)
     end
 
     def set_club
-      @shelf = current_user.bookshelves.find(params[:id])
+      @club = Club.find(params[:id])
     end
 
 end

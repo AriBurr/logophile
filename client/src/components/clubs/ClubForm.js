@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addClub } from '../../actions/clubs';
+import { editClub } from '../../actions/clubs';
 import styled from 'styled-components';
 import { Button, Form } from 'semantic-ui-react';
 
@@ -10,10 +11,11 @@ class ClubForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const { name, description } = this.state;
-    const { dispatch } = this.props;
+    const { edit, dispatch, toggleEdit } = this.props;
     const club = { name, description };
     this.setState({ name: '', description: '' });
-    dispatch(addClub(club));
+    edit ? dispatch(editClub(this.props.club.id, club)) : dispatch(addClub(club));
+    edit && toggleEdit();
   };
 
   handleChange = e => {
@@ -46,4 +48,8 @@ class ClubForm extends React.Component {
   }
 }
 
-export default connect()(ClubForm);
+const mapStateToProps = state => {
+  return { club: state.club };
+};
+
+export default connect(mapStateToProps)(ClubForm);

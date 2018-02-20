@@ -25,3 +25,26 @@ export const fetchClubs = () => {
       );
   };
 };
+
+export const fetchCurrentClub = id => {
+  return dispatch => {
+    axios
+      .get(`/api/clubs/${id}`, setHeaders())
+      .then(res => dispatch({ type: 'GET_CURRENT_CLUB', club: res.data }))
+      .catch(err =>
+        setFlash('Could not retrieve club, please try again!', 'red')
+      );
+  };
+};
+
+export const editClub = (id, club) => {
+  return dispatch => {
+    axios
+      .put(`/api/clubs/${id}`, { club }, setHeaders())
+      .then(res => {
+        dispatch({ type: 'EDIT_CLUB', club: res.data });
+        dispatch({ type: 'GET_CURRENT_CLUB', club: res.data });
+      })
+      .catch(err => setFlash('Could not edit club, please try again!', 'red'));
+  };
+};
