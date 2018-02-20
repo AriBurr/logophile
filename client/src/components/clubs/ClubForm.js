@@ -27,24 +27,24 @@ class ClubForm extends React.Component {
 
   render() {
     const { name, description } = this.state;
+    const { club, edit, toggleEdit } = this.props;
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Input
-          width={5}
           onChange={this.handleChange}
           name="name"
           value={name}
-          placeholder={'Name'}
+          placeholder={edit ? club.name : 'Name'}
         />
         <Form.TextArea
-          width={5}
           type="text"
           onChange={this.handleChange}
           name="description"
           value={description}
-          placeholder={'Add a Brief Description'}
+          placeholder={edit ? club.description : 'Add a brief description'}
         />
         <Button type="submit">Submit</Button>
+        {edit && <Button onClick={() => toggleEdit()}>Cancel</Button>}
       </Form>
     );
   }
