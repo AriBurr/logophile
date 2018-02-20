@@ -2,16 +2,20 @@ import axios from 'axios';
 import { setFlash } from '../actions/flash';
 import { setHeaders } from '../actions/headers';
 
-export const addClub = club => {
+export const addClub = (user, club) => {
   return dispatch => {
     axios
       .post('/api/clubs', { club }, setHeaders())
-      .then(res => dispatch({ type: 'ADD_CLUB', club: res.data }))
-      .catch(err =>
+      .then(res => {
+        dispatch({ type: 'ADD_CLUB', club: res.data });
+        const membership = { club_id: res.data.id, user_id: user.id };
+        axios.post('/api/memberships', { membership }, setHeaders());
+      })
+      .catch(err => {
         dispatch(
           setFlash(`Could not create ${club.name}, please try again!`, 'red')
-        )
-      );
+        );
+      });
   };
 };
 

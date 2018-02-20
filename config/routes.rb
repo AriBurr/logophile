@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :shelvings, only: [:create, :destroy, :index, :update]
 
     resources :clubs
+    resources :memberships
 
     get '/users/find', to: 'users#logged_in_user'
     get '/books/with_ratings', to: 'books#all_books_with_ratings'

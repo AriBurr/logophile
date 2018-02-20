@@ -80,7 +80,6 @@ class SideNav extends React.Component {
   }
 
   handleDelete = (shelf) => {
-    debugger
     const { dispatch } = this.props
     dispatch(deleteBookshelf(shelf))
     dispatch({ type: 'CLEAR_SHELVINGS' })

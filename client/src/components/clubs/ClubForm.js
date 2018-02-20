@@ -11,12 +11,12 @@ class ClubForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const { name, description } = this.state;
-    const { edit, dispatch, toggleEdit } = this.props;
+    const { edit, dispatch, toggleEdit, user } = this.props;
     const club = { name, description };
     this.setState({ name: '', description: '' });
     edit
       ? dispatch(editClub(this.props.club.id, club))
-      : dispatch(addClub(club));
+      : dispatch(addClub(user, club));
     edit && toggleEdit();
   };
 
@@ -51,7 +51,7 @@ class ClubForm extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { club: state.club };
+  return { club: state.club, user: state.user };
 };
 
 export default connect(mapStateToProps)(ClubForm);
