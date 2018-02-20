@@ -11,7 +11,8 @@ class Api::BookshelvesController < ApiController
     if shelf.save
       render json: shelf
     else
-      render json: { errors: shelf.full_messages }, status: 422
+      binding.pry
+      render json: { errors: shelf.errors.messages.values}, status: 422
     end
   end
 
