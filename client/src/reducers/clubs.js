@@ -4,6 +4,8 @@ const clubs = (state = [], action) => {
       return [...state, action.club]
     case 'GET_CLUBS':
       return action.clubs;
+    case 'DELETE_CLUB':
+      return state.filter( c => c.id !== action.club.id);
     default:
       return state;
   }

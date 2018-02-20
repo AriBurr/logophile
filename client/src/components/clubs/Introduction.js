@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { deleteClub } from '../../actions/clubs';
 import styled from 'styled-components';
 import { Button, Divider, Header, Segment } from 'semantic-ui-react';
 
@@ -7,19 +9,27 @@ const Wrapper = styled.div`
   padding: 1%;
 `;
 
-const Introduction = ({ club, toggleEdit }) => (
-  <Wrapper>
-    <Segment>
-      <Header>{club.name}</Header>
-      <p>{club.description}</p>
-      <Divider hidden />
-      <Button onClick={() => toggleEdit()}>Edit</Button>
-    </Segment>
-  </Wrapper>
-);
+const Introduction = ({ club, dispatch, history, toggleEdit }) => {
+  const handleDelete = () => {
+    dispatch(deleteClub(club));
+    history.push('/clubs');
+  };
+
+  return (
+    <Wrapper>
+      <Segment>
+        <Header>{club.name}</Header>
+        <p>{club.description}</p>
+        <Divider hidden />
+        <Button onClick={() => toggleEdit()}>Edit</Button>
+        <Button onClick={() => handleDelete()}>Delete</Button>
+      </Segment>
+    </Wrapper>
+  );
+};
 
 const mapStateToProps = state => {
   return { club: state.club };
 };
 
-export default connect(mapStateToProps)(Introduction);
+export default withRouter(connect(mapStateToProps)(Introduction));

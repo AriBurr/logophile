@@ -21,7 +21,7 @@ export const fetchClubs = () => {
       .get('/api/clubs/', setHeaders())
       .then(res => dispatch({ type: 'GET_CLUBS', clubs: res.data }))
       .catch(err =>
-        setFlash('Could not retrieve clubs, please try again!', 'red')
+        setFlash('Could not retrieve bookclubs, please try again!', 'red')
       );
   };
 };
@@ -32,7 +32,7 @@ export const fetchCurrentClub = id => {
       .get(`/api/clubs/${id}`, setHeaders())
       .then(res => dispatch({ type: 'GET_CURRENT_CLUB', club: res.data }))
       .catch(err =>
-        setFlash('Could not retrieve club, please try again!', 'red')
+        setFlash('Could not retrieve bookclub, please try again!', 'red')
       );
   };
 };
@@ -45,6 +45,21 @@ export const editClub = (id, club) => {
         dispatch({ type: 'EDIT_CLUB', club: res.data });
         dispatch({ type: 'GET_CURRENT_CLUB', club: res.data });
       })
-      .catch(err => setFlash('Could not edit club, please try again!', 'red'));
+      .catch(err =>
+        setFlash('Could not edit bookclub, please try again!', 'red')
+      );
+  };
+};
+
+export const deleteClub = club => {
+  return dispatch => {
+    axios
+      .delete(`/api/clubs/${club.id}`, setHeaders())
+      .then(() => {
+        dispatch({ type: 'DELETE_CLUB', club });
+      })
+      .catch(err =>
+        setFlash('Could not delete bookclub, please try again!', 'red')
+      );
   };
 };

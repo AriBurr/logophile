@@ -27,6 +27,10 @@ class Api::ClubsController < ApiController
     end
   end
 
+  def destroy
+    @club.destroy
+  end
+
   private
     def club_params
       params.require(:club).permit(:name, :description)

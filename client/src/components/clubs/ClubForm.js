@@ -14,7 +14,9 @@ class ClubForm extends React.Component {
     const { edit, dispatch, toggleEdit } = this.props;
     const club = { name, description };
     this.setState({ name: '', description: '' });
-    edit ? dispatch(editClub(this.props.club.id, club)) : dispatch(addClub(club));
+    edit
+      ? dispatch(editClub(this.props.club.id, club))
+      : dispatch(addClub(club));
     edit && toggleEdit();
   };
 
@@ -36,13 +38,13 @@ class ClubForm extends React.Component {
         />
         <Form.TextArea
           width={5}
-          type='text'
+          type="text"
           onChange={this.handleChange}
           name="description"
           value={description}
           placeholder={'Add a Brief Description'}
         />
-        <Button type='submit'>Submit</Button>
+        <Button type="submit">Submit</Button>
       </Form>
     );
   }
