@@ -12,16 +12,13 @@ RSpec.describe Api::BookshelvesController, type: :request do
   }
 
   describe 'unauthorized request' do
-
     it 'returns unauthenticated' do
       get "/api/bookshelves"
       expect(response).to have_http_status(:unauthorized)
     end
-
   end
 
   describe 'GET #index' do
-
     it 'successfully renders json' do
       get "/api/bookshelves", headers: @headers
       expect(response).to have_http_status(:ok)
@@ -32,7 +29,6 @@ RSpec.describe Api::BookshelvesController, type: :request do
       shelf = @user.bookshelves.create(valid_attributes)
       expect(@user.bookshelves.order('created_at asc').last).to eq(shelf)
     end
-
   end
 
   describe 'POST #create' do
@@ -50,6 +46,7 @@ RSpec.describe Api::BookshelvesController, type: :request do
         params: {bookshelf: valid_attributes},
         headers: @headers
         expect(response).to have_http_status(:ok)
+        expect(response.content_type).to eq("application/json")
       end
     end
 
@@ -67,39 +64,67 @@ RSpec.describe Api::BookshelvesController, type: :request do
         params: {bookshelf: invalid_attributes},
         headers: @headers
         expect(response).to have_http_status(422)
+        expect(response.content_type).to eq("application/json")
       end
     end
-
-
-
   end
 
   describe 'PUT #update' do
-
     context 'with valid params' do
       let(:new_attributes) {
         { name: 'new_name' }
       }
+
+      it 'updates the selected bookshelf' do
+        shelf = @user.bookshelves.create! valid_attributes
+        put "/api/bookshelves/#{shelf.id}",
+        params: {bookshelf: new_attributes},
+        headers: @headers
+        shelf.reload
+        expect(@user.bookshelves.last.name).to eq(shelf.name)
+      end
+
+      it 'renders json if update is successful' do
+        shelf = @user.bookshelves.create! valid_attributes
+        put "/api/bookshelves/#{shelf.id}",
+        params: {bookshelf: new_attributes},
+        headers: @headers
+        expect(response).to have_http_status(:ok)
+        expect(response.content_type).to eq("application/json")
+
+      end
     end
 
-    it 'updates the selected bookshelf' do
+    context 'with invalid params' do
+      it 'does not update bookshelf' do
+        shelf = @user.bookshelves.create! valid_attributes
+        put "/api/bookshelves/#{shelf.id}",
+        params: {bookshelf: invalid_attributes},
+        headers: @headers
+        shelf.reload
+        expect(@user.bookshelves.last.name).to_not eq(invalid_attributes[:name])
+      end
+
+      it 'renders error when not updated' do
+        shelf = @user.bookshelves.create! valid_attributes
+        put "/api/bookshelves/#{shelf.id}",
+        params: {bookshelf: invalid_attributes},
+        headers: @headers
+        expect(response).to have_http_status(422)
+        expect(response.content_type).to eq("application/json")
+      end
     end
-
-    it 'renders json if update is successdul' do
-
-    end
-
-    it 'renders error when not updated' do
-
-    end
-
   end
 
   describe 'DELETE #destroy' do
-
     it 'deletes bookshelf record from the databse' do
+      shelf = @user.bookshelves.create! valid_attributes
+      expect {
+        delete "/api/bookshelves/#{shelf.id}",
+        params: {bookshelf: invalid_attributes},
+        headers: @headers
+      }.to change(Bookshelf, :count).by(-1)
+      expect(response).to have_http_status(:no_content)
     end
-
   end
-
 end
