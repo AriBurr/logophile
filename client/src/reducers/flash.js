@@ -7,6 +7,6 @@ const flash = (state = {}, action) => {
     default:
       return state;
   }
-}
+};
 
 export default flash;

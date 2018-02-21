@@ -5,6 +5,6 @@ const topBooks = (state = [], action) => {
     default:
       return state;
   }
-}
+};
 
 export default topBooks;

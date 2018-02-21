@@ -1,5 +1,5 @@
 const club = (state = {}, action) => {
-  switch(action.type){
+  switch (action.type) {
     case 'GET_CURRENT_CLUB':
       return action.club;
     case 'EDIT_CLUB':
@@ -7,6 +7,6 @@ const club = (state = {}, action) => {
     default:
       return state;
   }
-}
+};
 
 export default club;

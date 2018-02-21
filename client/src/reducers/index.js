@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   user,
   bookshelves,
   bookshelf,
-  topBooks,
+  topBooks
 });
 
 export default rootReducer;
