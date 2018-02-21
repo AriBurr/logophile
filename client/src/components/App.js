@@ -22,13 +22,13 @@ class App extends React.Component {
           <Navigation />
           <Flash />
           <Switch>
-            <Route exact path='/' component={Welcome} />
-            <Route exact path='/books' component={SearchBooks} />
-            <ProtectedRoute exact path='/library' component={Library} />
-            <Route exact path='/clubs' component={Clubs} />
-            <Route exact path='/clubs/:id' component={ClubHome} />
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/register' component={Register} />
+            <Route exact path="/" component={Welcome} />
+            <Route exact path="/books" component={SearchBooks} />
+            <ProtectedRoute exact path="/library" component={Library} />
+            <Route exact path="/clubs" component={Clubs} />
+            <Route exact path="/clubs/:id" component={ClubHome} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
             <Route component={NoMatch} />
           </Switch>
           <Footer />

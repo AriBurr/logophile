@@ -9,12 +9,12 @@ const Header = styled.div`
   background-position: center;
   height: 200px;
   width: 100%;
-`
+`;
 
 const Banner = ({ searchTerms }) => (
   <Header>
     <SearchBar searchTerms={searchTerms} />
   </Header>
-)
+);
 
 export default Banner;
