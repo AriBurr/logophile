@@ -12,51 +12,60 @@ import { Grid } from 'semantic-ui-react';
 
 const EnlargeGrid = styled(Grid)`
   height: 100vh;
-`
+`;
 const GridContainer = styled(Grid)`
   &&& {
     margin: 2rem;
   }
-`
+`;
 const Wrapper = styled.div`
   height: 100vh;
   overflow: auto;
-`
+`;
 
 class SearchBooks extends React.Component {
-  state = { searchLoaded: false, terms: {} }
+  state = { searchLoaded: false, terms: {} };
 
   setSearchLoaded = () => this.setState({ searchLoaded: true });
 
-  handleSearch = (terms) => {
+  handleSearch = terms => {
     this.setState({ terms: terms });
     this.props.dispatch(searchAll(terms, this.setSearchLoaded));
-  }
+  };
 
   componentWillUnmount = () => {
     this.props.dispatch({ type: 'CLEAR_BOOKS', action: [] });
-  }
+  };
 
-  toggleDescription = (book) => this.props.dispatch(setActiveBook(book));
+  toggleDescription = book => this.props.dispatch(setActiveBook(book));
 
-  renderSearched = (searchLoaded) => {
+  renderSearched = searchLoaded => {
     const { book, books } = this.props;
     return (
       <Grid divided as={GridContainer}>
-        <Grid.Column mobile='16' tablet='11' computer='10' largeScreen='11' width={10}>
-          <Grid
-            as={EnlargeGrid}
-            columns={4}
-          >
-            { books && <Books toggleDescription={this.toggleDescription} /> }
+        <Grid.Column
+          mobile="16"
+          tablet="11"
+          computer="10"
+          largeScreen="11"
+          width={10}
+        >
+          <Grid as={EnlargeGrid} columns={4}>
+            {books && <Books toggleDescription={this.toggleDescription} />}
           </Grid>
         </Grid.Column>
-        <Grid.Column mobile='16' tablet='5' computer='6' largeScreen='5' width={6}>
-          { objectCheck(book) && <BookDescription/> }
+        <Grid.Column
+          mobile="16"
+          tablet="5"
+          computer="6"
+          largeScreen="5"
+          width={6}
+        >
+          {objectCheck(book) && <BookDescription />}
         </Grid.Column>
       </Grid>
     );
-  }
+  };
 
   render() {
     const { searchLoaded } = this.state;
@@ -64,18 +73,21 @@ class SearchBooks extends React.Component {
     return (
       <Wrapper>
         <Banner searchTerms={this.handleSearch} />
-        { searchLoaded || books.length > 0 ? this.renderSearched(searchLoaded) : <BooksCarousel /> }
+        {searchLoaded || books.length > 0 ? (
+          this.renderSearched(searchLoaded)
+        ) : (
+          <BooksCarousel />
+        )}
       </Wrapper>
     );
   }
-
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     books: state.books,
-    book: state.activeBook,
-  }
-}
+    book: state.activeBook
+  };
+};
 
 export default connect(mapStateToProps)(SearchBooks);

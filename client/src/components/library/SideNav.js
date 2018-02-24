@@ -19,22 +19,22 @@ const EnlargeMenu = styled(Menu.Item)`
     width: 16rem !important;
     height: 100vh;
     padding: 5%;
-    #MenuStyle{
+    #MenuStyle {
       padding-left: 14px !important;
     }
   }
-`
+`;
 const IconStyle = styled(Icon)`
   color: white;
   padding: 5%;
-`
+`;
 const LabelStyle = styled(Label)`
   margin-right: 7% !important;
-`
+`;
 const Image = styled.img`
   height: 175px;
   width: 175px;
-`
+`;
 const MenuStyle = styled(Menu)`
   &&& {
     height: auto;
@@ -42,20 +42,20 @@ const MenuStyle = styled(Menu)`
     font-size: 18px;
     text-align: left !important;
   }
-`
+`;
 
 class SideNav extends React.Component {
   state = {
     activeItem: {},
-    edit: false,
-  }
+    edit: false
+  };
 
-  componentWillReceiveProps = (nextProps) => {
+  componentWillReceiveProps = nextProps => {
     if (!objectCheck(this.state.activeItem)) {
       if (nextProps.bookshelves.length > 0)
         this.handleItemClick(nextProps.bookshelves[0], 'allow');
     }
-  }
+  };
 
   beforeFetchShelvings = (shelf, event = null) => {
     const { bookshelves, dispatch } = this.props;
@@ -63,96 +63,94 @@ class SideNav extends React.Component {
       dispatch(fetchShelvings(shelf));
       dispatch(fetchShelf(shelf));
     }
-  }
+  };
 
   toggleEdit = () => {
     const { edit } = this.state;
     this.setState({ edit: !edit });
-  }
+  };
 
-  handleItemClick = (shelf , e = null) => {
+  handleItemClick = (shelf, e = null) => {
     this.beforeFetchShelvings(shelf, e);
     this.setState({ activeItem: shelf });
-  }
+  };
 
-  handleClick = (shelf) => {
+  handleClick = shelf => {
     this.state.editing && this.handleItemClick(shelf);
-  }
+  };
 
-  handleDelete = (shelf) => {
-    const { dispatch } = this.props
-    dispatch(deleteBookshelf(shelf))
-    dispatch({ type: 'CLEAR_SHELVINGS' })
-  }
+  handleDelete = shelf => {
+    const { dispatch } = this.props;
+    dispatch(deleteBookshelf(shelf));
+    dispatch({ type: 'CLEAR_SHELVINGS' });
+  };
 
-  mapBookshelves = (activeItem) => {
+  mapBookshelves = activeItem => {
     const { edit } = this.state;
-    const { bookshelves } = this.props
+    const { bookshelves } = this.props;
 
-    return bookshelves.map( shelf => {
+    return bookshelves.map(shelf => {
       return (
         <Menu.Item
-          id='MenuStyle'
+          id="MenuStyle"
           as={MenuStyle}
           key={shelf.id}
           name={shelf.name}
           active={activeItem === shelf}
-          onClick={ () => !edit && this.handleItemClick(shelf) }
+          onClick={() => !edit && this.handleItemClick(shelf)}
         >
-          <Label as={LabelStyle} color='yellow'>{shelf.book_count}</Label>
+          <Label as={LabelStyle} color="yellow">
+            {shelf.book_count}
+          </Label>
           {shelf.name}
-          { edit &&
+          {edit && (
             <span>
               &nbsp;&nbsp;&nbsp;&nbsp;
               <Icon
-                size='tiny'
+                size="tiny"
                 circular
                 inverted
                 onClick={() => this.handleDelete(shelf)}
-                name='trash'>
-              </Icon>
+                name="trash"
+              />
               <Icon
-                size='tiny'
+                size="tiny"
                 circular
                 inverted
-                onClick={ () => this.handleItemClick(shelf) }
-                name='pencil'>
-              </Icon>
+                onClick={() => this.handleItemClick(shelf)}
+                name="pencil"
+              />
             </span>
-          }
+          )}
         </Menu.Item>
       );
     });
-  }
+  };
 
   render() {
     const { edit, activeItem } = this.state;
     return (
       <Menu vertical as={EnlargeMenu}>
-        <Image src={bookshelf}></Image>
-        <ShelfForm
-          theme='yes'
-          edit={edit}
-          active={activeItem}
-        />
-        { this.mapBookshelves(activeItem) }
+        <Image src={bookshelf} />
+        <ShelfForm theme="yes" edit={edit} active={activeItem} />
+        {this.mapBookshelves(activeItem)}
         <Icon
           as={IconStyle}
-          size='large'
+          size="large"
           onClick={() => this.toggleEdit()}
-          name='edit'
+          name="edit"
         />
       </Menu>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     bookshelf: state.bookshelf,
     bookshelves: state.bookshelves,
-    shelvings: state.shelvings,
-  }
-}
+    shelvings: state.shelvings
+  };
+};
 
 export default connect(mapStateToProps)(SideNav);

@@ -14,9 +14,7 @@ class CurrentReading extends React.Component {
         <Segment>
           <Header>Currently Reading</Header>
           <Grid columns={2}>
-            <Grid.Column>
-              Book Cover
-            </Grid.Column>
+            <Grid.Column>Book Cover</Grid.Column>
             <Grid.Column>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
               lorem ligula, facilisis vel sollicitudin sit amet, eleifend.

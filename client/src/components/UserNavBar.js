@@ -11,7 +11,7 @@ const Image = styled.img`
   margin-top: 5px;
   margin-bottom: 1px;
   height: 60px;
-`
+`;
 const LinkStyle = styled(Link)`
   letter-spacing: 3px;
   margin-right: 50px;
@@ -19,7 +19,7 @@ const LinkStyle = styled(Link)`
     background-color: #223843 !important;
     color: white !important;
   }
-`
+`;
 const MenuItem = styled(Menu.Item)`
   letter-spacing: 3px;
   margin-right: 50px;
@@ -27,7 +27,7 @@ const MenuItem = styled(Menu.Item)`
     background-color: #223843 !important;
     color: white !important;
   }
-`
+`;
 const MenuStyle = styled(Menu)`
   &&& {
     border: none;
@@ -35,26 +35,25 @@ const MenuStyle = styled(Menu)`
     box-shadow: none;
     margin-bottom: 0;
   }
-`
+`;
 
 class UserNavBar extends Component {
-  state = { user: {} }
+  state = { user: {} };
 
-  componentWillReceiveProps = (nextProps) => {
+  componentWillReceiveProps = nextProps => {
     const user = nextProps.user;
-    if (user !== null)
-      this.setState({ user: nextProps.user });
-  }
+    if (user !== null) this.setState({ user: nextProps.user });
+  };
 
   componentDidMount = () => {
     this.setState({ user: this.props.user });
-  }
+  };
 
-  handleClick = (user) => {
-    const {clearActiveItem, dispatch, history} = this.props;
+  handleClick = user => {
+    const { clearActiveItem, dispatch, history } = this.props;
     dispatch(handleLogout(user, history));
     clearActiveItem();
-  }
+  };
 
   handlePath = () => this.props.clearActiveItem();
 
@@ -63,50 +62,47 @@ class UserNavBar extends Component {
     if (objectCheck(user)) {
       if (user.id) {
         return (
-          <Menu.Menu position='right'>
+          <Menu.Menu position="right">
             <Menu.Item
               as={MenuItem}
-              name='Logout'
+              name="Logout"
               onClick={() => this.handleClick(user)}
             />
           </Menu.Menu>
         );
       }
     } else {
-        return (
-          <Menu.Menu position='right'>
-            <Menu.Item
-              as={LinkStyle}
-              to='/register'
-              name='Register'
-              onClick={() => this.handlePath()}
-            />
-            <Menu.Item
-              as={LinkStyle}
-              to='/login'
-              name='Login'
-              onClick={() => this.handlePath()}
-            />
-          </Menu.Menu>
+      return (
+        <Menu.Menu position="right">
+          <Menu.Item
+            as={LinkStyle}
+            to="/register"
+            name="Register"
+            onClick={() => this.handlePath()}
+          />
+          <Menu.Item
+            as={LinkStyle}
+            to="/login"
+            name="Login"
+            onClick={() => this.handlePath()}
+          />
+        </Menu.Menu>
       );
     }
-  }
+  };
 
   render() {
     return (
-      <Menu
-        as={MenuStyle}
-        borderless
-      >
+      <Menu as={MenuStyle} borderless>
         <Image src={logo} />
-        { this.userNavs() }
+        {this.userNavs()}
       </Menu>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return { user: state.user }
-}
+  return { user: state.user };
+};
 
 export default withRouter(connect(mapStateToProps)(UserNavBar));

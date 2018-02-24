@@ -6,10 +6,9 @@ import { Menu } from 'semantic-ui-react';
 const Wrapper = styled.div`
   height: 100vh;
   padding: 5%;
-`
+`;
 
 class ClubSideNav extends React.Component {
-
   render() {
     return (
       <Wrapper>
@@ -21,7 +20,7 @@ class ClubSideNav extends React.Component {
         </Menu>
         <div>Moderator</div>
       </Wrapper>
-    )
+    );
   }
 }
 

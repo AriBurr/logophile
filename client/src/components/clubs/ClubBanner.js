@@ -8,10 +8,8 @@ const Header = styled.div`
   background-position: center;
   height: 200px;
   width: 100%;
-`
+`;
 
-const Banner = () => (
-  <Header></Header>
-)
+const Banner = () => <Header />;
 
 export default Banner;

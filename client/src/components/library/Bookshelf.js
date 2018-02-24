@@ -43,7 +43,13 @@ class Bookshelf extends React.Component {
     return shelvings.map(book => {
       const { volumeInfo, title } = book.item;
       return (
-        <Grid.Column mobile='8' tablet='5' computer='3' largeScreen='3' key={book.id}>
+        <Grid.Column
+          mobile="8"
+          tablet="5"
+          computer="3"
+          largeScreen="3"
+          key={book.id}
+        >
           <Modal size="large" trigger={this.modalTrigger(volumeInfo, title)}>
             <BookModal book={book} />
           </Modal>

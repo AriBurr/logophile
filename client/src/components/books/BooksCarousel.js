@@ -25,7 +25,7 @@ const Container = styled.div`
     border: none;
     height: 3px;
     width: 25px;
-    background-color: #1DD3B0;
+    background-color: #1dd3b0;
     margin: 0;
   }
   h3 {
@@ -38,60 +38,51 @@ const Container = styled.div`
   .slick-next:before {
     color: black;
   }
-`
+`;
 const ImgContainer = styled.div`
   text-align: center;
-  img{
+  img {
     margin: 0 auto;
   }
-`
+`;
 
 function Arrow(props) {
   const { className, onClick } = props;
   return (
-    <div
-      className={className}
-      style={{display: 'block'}}
-      onClick={onClick}
-    >
-    </div>
+    <div className={className} style={{ display: 'block' }} onClick={onClick} />
   );
 }
 
 class BooksCarousel extends React.Component {
-
   componentDidMount = () => {
     this.props.dispatch(booksWithRatings());
-  }
+  };
 
   callback = () => {
     // non-functional
-  }
+  };
 
-  handleClick = (book) => {
+  handleClick = book => {
     const { dispatch } = this.props;
     const data = {
       title: book.item.volumeInfo.title,
       author: '',
       ibsn: ''
-    }
+    };
     dispatch(searchAll(data, this.callback));
     dispatch(setActiveBook(book.item));
-  }
+  };
 
   mapTopBooks = () => {
     const { topBooks } = this.props;
     return topBooks.map(book => (
-      <ImgContainer
-        key={book.book_id}
-        onClick={() => this.handleClick(book)}
-      >
-        <BookCover style={{margin: '0 auto'}} book={book} />
-        <Header>{ paginateText(book.item.volumeInfo.title, 15) }</Header>
-        <Rating icon='star' defaultRating={book.avg} maxRating={5} disabled />
+      <ImgContainer key={book.book_id} onClick={() => this.handleClick(book)}>
+        <BookCover style={{ margin: '0 auto' }} book={book} />
+        <Header>{paginateText(book.item.volumeInfo.title, 15)}</Header>
+        <Rating icon="star" defaultRating={book.avg} maxRating={5} disabled />
       </ImgContainer>
     ));
-  }
+  };
 
   render() {
     var settings = {
@@ -103,28 +94,32 @@ class BooksCarousel extends React.Component {
       slidesToShow: 7,
       slidesToScroll: 7,
       initialSlide: 0,
-      responsive: [{
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            initialSlide: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
         }
-      }, {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
-        }
-      }, {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }]
+      ]
     };
     return (
       <Container>
@@ -132,16 +127,14 @@ class BooksCarousel extends React.Component {
         <h3>Read like you mean it.</h3>
         <hr />
         <h2>Highest Rated</h2>
-        <Slider { ...settings }>
-          { this.mapTopBooks() }
-        </Slider>
+        <Slider {...settings}>{this.mapTopBooks()}</Slider>
       </Container>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return { topBooks: state.topBooks }
-}
+const mapStateToProps = state => {
+  return { topBooks: state.topBooks };
+};
 
 export default withRouter(connect(mapStateToProps)(BooksCarousel));
