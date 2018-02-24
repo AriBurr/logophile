@@ -14,6 +14,7 @@ import { Grid } from 'semantic-ui-react';
 const Wrapper = styled.div`
   height: 100vh;
   overflow: auto;
+  padding: 1%;
 `;
 
 class ClubHome extends React.Component {

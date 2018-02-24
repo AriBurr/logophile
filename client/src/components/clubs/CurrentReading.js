@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Grid, Header, Segment } from 'semantic-ui-react';
+import { Button, Grid, Header, Segment } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   padding: 1%;
@@ -13,11 +14,11 @@ class CurrentReading extends React.Component {
       <Wrapper>
         <Segment>
           <Header>Currently Reading</Header>
-          <Grid columns={2}>
-            <Grid.Column>Book Cover</Grid.Column>
+          <Grid>
             <Grid.Column>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              lorem ligula, facilisis vel sollicitudin sit amet, eleifend.
+              <Button as={Link} to="/library">
+                Add New Reading
+              </Button>
             </Grid.Column>
           </Grid>
         </Segment>
