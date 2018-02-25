@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchClubs } from '../../actions/clubs';
+import { fetchUserClubs } from '../../actions/clubs';
 import ClubForm from './ClubForm';
 import styled from 'styled-components';
 import { Divider, Grid, Header } from 'semantic-ui-react';
@@ -14,7 +15,9 @@ const Wrapper = styled.div`
 
 class Clubs extends React.Component {
   componentDidMount() {
-    this.props.dispatch(fetchClubs());
+    const { dispatch } = this.props;
+    dispatch(fetchClubs());
+    dispatch(fetchUserClubs());
   }
 
   displayClubs = () => {

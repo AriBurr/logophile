@@ -8,8 +8,12 @@ export const addClub = (user, club) => {
       .post('/api/clubs', { club }, setHeaders())
       .then(res => {
         dispatch({ type: 'ADD_CLUB', club: res.data });
-        const membership = { club_id: res.data.id, user_id: user.id };
-        axios.post('/api/memberships', { membership }, setHeaders());
+        const membership = {
+          club_id: res.data.id,
+          user_id: user.id,
+          is_moderator: true
+        };
+        axios.post('/api/memberships/', { membership }, setHeaders());
       })
       .catch(err => {
         dispatch(
@@ -27,6 +31,17 @@ export const fetchClubs = () => {
       .catch(err =>
         setFlash('Could not retrieve bookclubs, please try again!', 'red')
       );
+  };
+};
+
+export const fetchUserClubs = () => {
+  return dispatch => {
+    axios
+    .get(`/api/clubs/find_current_clubs`, setHeaders())
+    .then(res => dispatch({ type: 'GET_USER_CLUBS', clubs: res.data }))
+    .catch(err =>
+      setFlash('Could not retrieve user bookclubs, please try again!', 'red')
+    );
   };
 };
 

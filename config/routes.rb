@@ -14,7 +14,9 @@ Rails.application.routes.draw do
     resources :ratings, only: [:create, :update]
     resources :shelvings, only: [:create, :destroy, :index, :update]
 
-    resources :clubs
+    resources :clubs, only: [:create, :destroy, :index, :update, :show]
+    get '/clubs/find_current_clubs', to: 'clubs#find_current_clubs'
+
     resources :memberships
 
     get '/users/find', to: 'users#logged_in_user'
