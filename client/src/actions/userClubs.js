@@ -7,8 +7,7 @@ export const joinClub = club => {
     axios
       .post('/api/memberships', { membership: { club_id: club } }, setHeaders())
       .then(res => {
-        debugger
-        dispatch({ type: 'ADD_CLUB', club: res.data });
+        dispatch(setFlash('Club successfully joined', 'green'));
       })
       .catch(err => {
         dispatch(setFlash('Could not join this club', 'red'));
@@ -20,7 +19,10 @@ export const fetchUserClubs = () => {
   return dispatch => {
     axios
       .get(`/api/clubs/find_user_clubs`, setHeaders())
-      .then(res => dispatch({ type: 'GET_USER_CLUBS', userClubs: res.data }))
+      .then(res => {
+        debugger
+        dispatch({ type: 'GET_USER_CLUBS', userClubs: res.data })
+      })
       .catch(err =>
         setFlash('Could not retrieve user bookclubs, please try again!', 'red')
       );

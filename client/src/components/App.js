@@ -6,6 +6,7 @@ import FetchUser from './FetchUser';
 import Flash from './Flash';
 import Footer from './Footer';
 import Library from './library/Library';
+import MyClubs from './library/MyClubs';
 import Login from './auth/Login';
 import Navigation from './Navigation';
 import NoMatch from './NoMatch';
@@ -25,6 +26,7 @@ class App extends React.Component {
             <Route exact path="/" component={Welcome} />
             <Route exact path="/books" component={SearchBooks} />
             <ProtectedRoute exact path="/library" component={Library} />
+            <ProtectedRoute exact path="/my_clubs" component={MyClubs} />
             <Route exact path="/clubs" component={Clubs} />
             <Route exact path="/clubs/:id" component={ClubHome} />
             <Route exact path="/login" component={Login} />

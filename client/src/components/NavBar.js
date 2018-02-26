@@ -51,13 +51,16 @@ class NavBar extends Component {
   loggedInLinks = () => {
     const { activeItem, setActiveItem } = this.props;
     return (
-      <Menu.Item
-        as={LinkStyle}
-        to="/library"
-        onClick={setActiveItem}
-        name="Bookshelves"
-        active={activeItem === 'Bookshelves'}
-      />
+      <DropdownStyle item text="Profile">
+        <Dropdown.Menu>
+          <Dropdown.Item as={Link} to="/library">
+            My Bookshelves
+          </Dropdown.Item>
+          <Dropdown.Item as={Link} to="/my_clubs">
+            My Clubs
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </DropdownStyle>
     );
   };
 
