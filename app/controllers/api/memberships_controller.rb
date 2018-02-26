@@ -2,11 +2,12 @@ class Api::MembershipsController < ApiController
   before_action :require_login
 
   def create
+    binding.pry
     membership = current_user.memberships.new(membership_params)
     if membership.save
       render json: membership
     else
-      render json: { errors: membership.full_messages }, status: 422
+      render json: { errors: membership.errors.full_messages }, status: 422
     end
   end
 

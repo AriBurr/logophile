@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchClubs } from '../../actions/clubs';
-import { fetchUserClubs } from '../../actions/clubs';
+import { fetchUserClubs, joinClub } from '../../actions/userClubs';
 import ClubForm from './ClubForm';
 import styled from 'styled-components';
-import { Divider, Grid, Header } from 'semantic-ui-react';
+import { Divider, Grid, Header, Button } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -19,6 +19,14 @@ class Clubs extends React.Component {
     dispatch(fetchClubs());
     dispatch(fetchUserClubs());
   }
+
+  joinBookClub = (id) => {
+    const { dispatch } = this.props;
+    // which club are you joining? figure it out
+    const t = this.props
+    debugger;
+    dispatch(joinClub(id));
+  };
 
   displayClubs = () => {
     const { clubs } = this.props;
@@ -52,7 +60,11 @@ class Clubs extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { clubs: state.clubs };
+  return {
+
+    clubs: state.clubs,
+    user: state.user
+  };
 };
 
 export default connect(mapStateToProps)(Clubs);

@@ -1,3 +1,9 @@
 User.destroy_all
-User.create(name: 'bugs', email: 'bugs@rubyplus.com', password: '123456', password_confirmation: '123456')
-User.create(name: 'daffy', email: 'daffy@rubyplus.com', password: '123456', password_confirmation: '123456')
+5.times do |n|
+  User.create(
+    name: "Test#{n}",
+    email: "test#{n}@test.com",
+    password: "password",
+    password_confirmation: "password"
+  )
+end

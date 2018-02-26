@@ -34,17 +34,6 @@ export const fetchClubs = () => {
   };
 };
 
-export const fetchUserClubs = () => {
-  return dispatch => {
-    axios
-      .get(`/api/clubs/find_user_clubs`, setHeaders())
-      .then(res => dispatch({ type: 'GET_USER_CLUBS', userClubs: res.data }))
-      .catch(err =>
-        setFlash('Could not retrieve user bookclubs, please try again!', 'red')
-      );
-  };
-};
-
 export const fetchCurrentClub = id => {
   return dispatch => {
     axios
