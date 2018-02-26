@@ -10,16 +10,22 @@ const Wrapper = styled.div`
 `;
 
 class ClubForm extends React.Component {
-  state = { name: '', description: '' };
+  state = {
+    name: '',
+    description: '',
+    nameEdit: this.props.club.name,
+    descEdit: this.props.club.description
+  };
 
   handleSubmit = e => {
     e.preventDefault();
-    const { name, description } = this.state;
+    const { name, description, nameEdit, descEdit } = this.state;
     const { edit, dispatch, toggleEdit, user } = this.props;
     const club = { name, description };
+    const clubEdit = { nameEdit, descEdit };
     this.setState({ name: '', description: '' });
     edit
-      ? dispatch(editClub(this.props.club.id, club))
+      ? dispatch(editClub(this.props.club.id, clubEdit))
       : dispatch(addClub(user, club));
     edit && toggleEdit();
   };
@@ -30,23 +36,21 @@ class ClubForm extends React.Component {
   };
 
   render() {
-    const { name, description } = this.state;
+    const { name, description, nameEdit, descEdit } = this.state;
     const { club, edit, toggleEdit } = this.props;
     return (
       <Wrapper>
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
             onChange={this.handleChange}
-            name="name"
-            value={name}
-            placeholder={edit ? club.name : 'Name'}
+            name={ edit ? "nameEdit" : "name" }
+            value={edit ? nameEdit : name}
           />
           <Form.TextArea
             type="text"
             onChange={this.handleChange}
-            name="description"
-            value={description}
-            placeholder={edit ? club.description : 'Add a brief description'}
+            name={ edit ? "descEdit" : "description" }
+            value={edit ? descEdit : description}
           />
           <Button type="submit">Submit</Button>
           {edit && <Button onClick={() => toggleEdit()}>Cancel</Button>}
@@ -57,7 +61,7 @@ class ClubForm extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { club: state.club, user: state.user };
+  return { club: state.currentClub, user: state.user };
 };
 
 export default connect(mapStateToProps)(ClubForm);

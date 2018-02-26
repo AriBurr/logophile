@@ -24,20 +24,18 @@ class Clubs extends React.Component {
     const { clubs } = this.props;
     return clubs.map(c => {
       return (
-        <Wrapper>
-          <Grid.Column
-            key={c.id}
-            mobile="16"
-            tablet="5"
-            computer="4"
-            largeScreen="3"
-          >
-            <Link to={`/clubs/${c.id}`}>
-              <Header>{c.name}</Header>
-            </Link>
-            <p>{c.description}</p>
-          </Grid.Column>
-        </Wrapper>
+        <Grid.Column
+          key={c.id}
+          mobile="16"
+          tablet="5"
+          computer="4"
+          largeScreen="3"
+        >
+          <Link to={`/clubs/${c.id}`}>
+            <Header>{c.name}</Header>
+          </Link>
+          <p>{c.description}</p>
+        </Grid.Column>
       );
     });
   };

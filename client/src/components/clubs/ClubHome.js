@@ -32,7 +32,6 @@ class ClubHome extends React.Component {
 
   render() {
     const { edit } = this.state;
-    const { club } = this.props;
     return (
       <Wrapper>
         <ClubBanner />

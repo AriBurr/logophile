@@ -61,10 +61,14 @@ export const fetchCurrentClub = id => {
 export const editClub = (id, club) => {
   return dispatch => {
     axios
-      .put(`/api/clubs/${id}`, { club }, setHeaders())
+      .put(
+        `/api/clubs/${id}`,
+        { club: { name: club.nameEdit, description: club.descEdit } },
+        setHeaders()
+      )
       .then(res => {
-        dispatch({ type: 'EDIT_CLUB', club: res.data });
-        dispatch({ type: 'GET_CURRENT_CLUB', club: res.data });
+        dispatch({ type: 'EDIT_CLUB', currentClub: res.data })
+        dispatch({ type: 'GET_CURRENT_CLUB', currentClub: res.data });
       })
       .catch(err =>
         setFlash('Could not edit bookclub, please try again!', 'red')
