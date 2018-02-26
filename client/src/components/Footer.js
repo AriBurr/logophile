@@ -36,18 +36,12 @@ const styles = {
     border: 'none',
     flex: 'none'
   },
-  container: {
-    padding: '0'
-  },
   text: {
     color: 'white'
   },
   leftNav: {
     display: 'inline-block',
     color: 'white'
-  },
-  icons: {
-    display: 'inline-block'
   }
 };
 

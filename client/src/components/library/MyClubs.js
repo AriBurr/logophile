@@ -3,6 +3,11 @@ import { connect } from 'react-redux'
 import { fetchUserClubs } from '../../actions/userClubs'
 import { Link } from 'react-router-dom'
 import { Segment, Grid, Card } from 'semantic-ui-react';
+import styled from 'styled-components'
+
+const Container = styled.div`
+  height: 85vh;
+`
 
 
 class MyClubs extends React.Component {
@@ -14,18 +19,20 @@ class MyClubs extends React.Component {
   mapUserClubs = () => {
     return this.props.userClubs.map(club => {
       return(
-        <Link to={`/clubs/${club.id}`} key={club.id}>
-          <Card>
-            <Card.Content>
-              <Card.Header>
-                { club.name }
-              </Card.Header>
-            </Card.Content>
-            <Card.Content>
-              {club.description}
-            </Card.Content>
-          </Card>
-        </Link>
+        <Container>
+          <Link to={`/clubs/${club.id}`} key={club.id}>
+            <Card>
+              <Card.Content>
+                <Card.Header>
+                  { club.name }
+                </Card.Header>
+              </Card.Content>
+              <Card.Content>
+                {club.description}
+              </Card.Content>
+            </Card>
+          </Link>
+        </Container>
       )
     })
   }
