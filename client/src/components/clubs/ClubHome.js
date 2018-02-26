@@ -77,7 +77,7 @@ class ClubHome extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { club: state.club };
+  return { club: state.currentClub };
 };
 
 export default connect(mapStateToProps)(ClubHome);

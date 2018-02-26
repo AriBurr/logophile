@@ -29,7 +29,7 @@ const Introduction = ({ club, dispatch, history, toggleEdit }) => {
 };
 
 const mapStateToProps = state => {
-  return { club: state.club };
+  return { club: state.currentClub };
 };
 
 export default withRouter(connect(mapStateToProps)(Introduction));
