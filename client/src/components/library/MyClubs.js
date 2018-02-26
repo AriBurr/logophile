@@ -1,19 +1,41 @@
 import React from 'react'
-import { Segment, Divider, Grid, Header, Button } from 'semantic-ui-react';
+import { connect } from 'react-redux'
+import { fetchUserClubs } from '../../actions/userClubs'
+import { Link } from 'react-router-dom'
+import { Segment, Grid, Card } from 'semantic-ui-react';
 
 
 class MyClubs extends React.Component {
 
-  mapUserClubs = () => {
+  componentDidMount(){
+    this.props.dispatch(fetchUserClubs())
+  }
 
+  mapUserClubs = () => {
+    return this.props.userClubs.map(club => {
+      return(
+        <Link to={`/clubs/${club.id}`} key={club.id}>
+          <Card>
+            <Card.Content>
+              <Card.Header>
+                { club.name }
+              </Card.Header>
+            </Card.Content>
+            <Card.Content>
+              {club.description}
+            </Card.Content>
+          </Card>
+        </Link>
+      )
+    })
   }
 
 
   render () {
     return(
-      <Segment basic>
+      <Segment basic className='container'>
         <Grid>
-          HORRAY
+          {this.mapUserClubs()}
         </Grid>
       </Segment>
     )
@@ -24,4 +46,4 @@ const mapStateToProps = (state) => {
   return { userClubs:  state.userClubs}
 }
 
-export default MyClubs;
+export default connect(mapStateToProps)(MyClubs);

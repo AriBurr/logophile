@@ -20,14 +20,6 @@ class Clubs extends React.Component {
     dispatch(fetchUserClubs());
   }
 
-  joinBookClub = (id) => {
-    const { dispatch } = this.props;
-    // which club are you joining? figure it out
-    const t = this.props
-    debugger;
-    dispatch(joinClub(id));
-  };
-
   displayClubs = () => {
     const { clubs } = this.props;
     return clubs.map(c => {

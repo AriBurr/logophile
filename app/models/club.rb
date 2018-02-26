@@ -10,7 +10,7 @@ class Club < ApplicationRecord
   has_many :books, through: :readings
 
   def self.find_user_clubs(user_id)
-    select("clubs.id, clubs.name, memberships.is_moderator")
+    select("clubs.id, clubs.name, clubs.description, memberships.is_moderator")
     .joins("INNER JOIN memberships ON clubs.id = memberships.club_id")
     .joins("INNER JOIN users ON memberships.user_id = users.id")
     .where("users.id = #{user_id}")
