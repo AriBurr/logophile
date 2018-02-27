@@ -37,7 +37,7 @@ class ClubForm extends React.Component {
 
   render() {
     const { name, description, nameEdit, descEdit } = this.state;
-    const { club, edit, toggleEdit } = this.props;
+    const { edit, toggleEdit } = this.props;
     return (
       <Wrapper>
         <Form onSubmit={this.handleSubmit}>

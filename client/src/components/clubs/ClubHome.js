@@ -21,8 +21,9 @@ class ClubHome extends React.Component {
   state = { edit: false };
 
   componentDidMount() {
+    const { dispatch } = this.props;
     const clubID = this.props.match.params.id;
-    this.props.dispatch(fetchCurrentClub(clubID));
+    dispatch(fetchCurrentClub(clubID));
   }
 
   toggleEdit = () => {
@@ -76,7 +77,7 @@ class ClubHome extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { club: state.currentClub };
+  return { club: state.currentClub, userClubs: state.userClubs };
 };
 
 export default connect(mapStateToProps)(ClubHome);

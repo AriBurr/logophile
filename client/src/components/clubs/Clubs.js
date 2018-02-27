@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchClubs } from '../../actions/clubs';
-import { fetchUserClubs, joinClub } from '../../actions/userClubs';
+import { fetchUserClubs } from '../../actions/userClubs';
 import ClubForm from './ClubForm';
 import styled from 'styled-components';
-import { Divider, Grid, Header, Button } from 'semantic-ui-react';
+import { Divider, Grid, Header } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   height: 100vh;
