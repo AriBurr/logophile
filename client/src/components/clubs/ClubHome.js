@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 `;
 
 class ClubHome extends React.Component {
-  state = { edit: false };
+  state = { edit: false, isModerator: false };
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -77,7 +77,7 @@ class ClubHome extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { club: state.currentClub, userClubs: state.userClubs };
+  return { club: state.currentClub };
 };
 
 export default connect(mapStateToProps)(ClubHome);

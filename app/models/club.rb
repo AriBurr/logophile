@@ -15,4 +15,12 @@ class Club < ApplicationRecord
     .joins("INNER JOIN users ON memberships.user_id = users.id")
     .where("users.id = #{user_id}")
   end
+
+  def self.with_moderator_status(user_id, club)
+    select("clubs.id, clubs.name, clubs.description, memberships.is_moderator")
+    .joins("INNER JOIN memberships ON clubs.id = memberships.club_id")
+    .joins("INNER JOIN users ON memberships.user_id = users.id")
+    .where("users.id = #{user_id} AND clubs.id = #{club.id}")
+  end
+
 end

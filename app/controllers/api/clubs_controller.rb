@@ -12,7 +12,7 @@ class Api::ClubsController < ApiController
   end
 
   def show
-    render json: @club
+    render json: Club.with_moderator_status(current_user.id, @club)
   end
 
   def create
