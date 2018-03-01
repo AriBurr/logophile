@@ -10,21 +10,16 @@ export const addReading = (club, reading) => {
         { club_id: club.id, book_id: reading.id },
         setHeaders()
       )
-      .then(res =>
-        dispatch(
-          setFlash(
-            `Added reading!`,
-            'green'
-          )
-        )
-      )
-      .catch(err =>
-        dispatch(
-          setFlash(
-            `Could not add reading!`,
-            'red'
-          )
-        )
-      );
+      .then(res => dispatch(setFlash(`Added reading!`, 'green')))
+      .catch(err => dispatch(setFlash(`Could not add reading!`, 'red')));
+  };
+};
+
+export const fetchReadings = id => {
+  return dispatch => {
+    axios
+      .get(`/api/readings?club_id=${id}`, setHeaders())
+      .then(res => dispatch({ type: 'GET_READINGS', readings: res.data }))
+      .catch(err => dispatch(setFlash('Could not fetch readings!', 'red')));
   };
 };

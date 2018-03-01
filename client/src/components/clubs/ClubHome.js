@@ -62,14 +62,20 @@ class ClubHome extends React.Component {
               {edit ? (
                 <ClubForm edit={edit} toggleEdit={this.toggleEdit} />
               ) : (
-                <Introduction isModerator={isModerator} toggleEdit={this.toggleEdit} />
+                <Introduction
+                  isModerator={isModerator}
+                  toggleEdit={this.toggleEdit}
+                />
               )}
             </Grid.Row>
             <Grid.Row>
               <Announcements />
             </Grid.Row>
             <Grid.Row>
-              <CurrentReading isModerator={isModerator} />
+              <CurrentReading
+                clubID={this.props.match.params.id}
+                isModerator={isModerator}
+              />
             </Grid.Row>
             <Grid.Row>
               <DiscussionPreview />

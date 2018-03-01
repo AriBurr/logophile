@@ -1,6 +1,10 @@
 class Api::ReadingsController < ApplicationController
   before_action :set_club
 
+  def index
+    render json: @club.readings
+  end
+
   def create
     reading = @club.readings.new(reading_params)
     if reading.save
@@ -12,7 +16,7 @@ class Api::ReadingsController < ApplicationController
 
   private
     def reading_params
-      params.require(:reading).permit(:book_id, :club_id)
+      params.require(:reading).permit(:book_id, :club_id, :is_current)
     end
 
     def set_club

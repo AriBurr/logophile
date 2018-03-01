@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { fetchReadings } from '../../actions/readings';
 import SelectReadingDropdown from './SelectReadingDropdown';
 import styled from 'styled-components';
 import { Button, Grid, Header, Modal, Segment } from 'semantic-ui-react';
@@ -9,6 +10,11 @@ const Wrapper = styled.div`
 `;
 
 class CurrentReading extends React.Component {
+  componentDidMount() {
+    const { clubID, dispatch } = this.props;
+    dispatch(fetchReadings(clubID));
+  }
+
   render() {
     const { isModerator } = this.props;
     return (
@@ -32,4 +38,8 @@ class CurrentReading extends React.Component {
   }
 }
 
-export default connect()(CurrentReading);
+const mapStateToProps = state => {
+  return { readings: state.readings };
+};
+
+export default connect(mapStateToProps)(CurrentReading);
