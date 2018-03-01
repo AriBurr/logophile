@@ -2,7 +2,7 @@ class Api::ReadingsController < ApplicationController
   before_action :set_club
 
   def index
-    render json: @club.readings
+    render json: Reading.find_current(@club)
   end
 
   def create

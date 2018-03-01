@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchReadings } from '../../actions/readings';
+import BookCover from '../books/BookCover';
 import SelectReadingDropdown from './SelectReadingDropdown';
 import styled from 'styled-components';
 import { Button, Grid, Header, Modal, Segment } from 'semantic-ui-react';
@@ -16,20 +17,21 @@ class CurrentReading extends React.Component {
   }
 
   render() {
-    const { isModerator } = this.props;
+    const { isModerator, readings } = this.props;
     return (
       <Wrapper>
         <Segment>
           <Header>Currently Reading</Header>
           <Grid>
             <Grid.Column>
-              {isModerator && (
+              {isModerator && [
+                <BookCover book={readings[0]} />,
                 <Modal trigger={<Button>Add New Reading</Button>}>
                   <Modal.Content>
                     <SelectReadingDropdown />
                   </Modal.Content>
                 </Modal>
-              )}
+              ]}
             </Grid.Column>
           </Grid>
         </Segment>
