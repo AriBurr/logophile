@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180224190921) do
+ActiveRecord::Schema.define(version: 20180301175921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20180224190921) do
     t.bigint "club_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_moderator", default: false
+    t.boolean "is_moderator", default: false, null: false
     t.index ["club_id"], name: "index_memberships_on_club_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20180224190921) do
     t.bigint "book_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_current", default: true, null: false
     t.index ["book_id"], name: "index_readings_on_book_id"
     t.index ["club_id"], name: "index_readings_on_club_id"
   end

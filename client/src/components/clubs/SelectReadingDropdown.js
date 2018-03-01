@@ -85,7 +85,7 @@ class SelectReadingDropdown extends React.Component {
         </Grid.Column>
         <Grid.Column textAlign="center">
           {bookLoaded && (
-            [<Header key={1}>Add to {this.props.club.name}</Header>,
+            [<Header key={1}>Add to Club</Header>,
             <Button key={2} as={ButtonStyle} onClick={() => this.handleSubmit()}>
               Go
             </Button>]
