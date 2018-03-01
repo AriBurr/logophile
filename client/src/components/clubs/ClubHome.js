@@ -23,8 +23,13 @@ class ClubHome extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
     const clubID = this.props.match.params.id;
-    dispatch(fetchCurrentClub(clubID));
+    dispatch(fetchCurrentClub(clubID, this.setClubLoaded));
   }
+
+  setClubLoaded = () => {
+    const { club } = this.props;
+    this.setState({ isModerator: club.is_moderator });
+  };
 
   toggleEdit = () => {
     const { edit } = this.state;
@@ -32,7 +37,7 @@ class ClubHome extends React.Component {
   };
 
   render() {
-    const { edit } = this.state;
+    const { edit, isModerator } = this.state;
     return (
       <Wrapper>
         <ClubBanner />
@@ -57,14 +62,14 @@ class ClubHome extends React.Component {
               {edit ? (
                 <ClubForm edit={edit} toggleEdit={this.toggleEdit} />
               ) : (
-                <Introduction toggleEdit={this.toggleEdit} />
+                <Introduction isModerator={isModerator} toggleEdit={this.toggleEdit} />
               )}
             </Grid.Row>
             <Grid.Row>
               <Announcements />
             </Grid.Row>
             <Grid.Row>
-              <CurrentReading />
+              <CurrentReading isModerator={isModerator} />
             </Grid.Row>
             <Grid.Row>
               <DiscussionPreview />

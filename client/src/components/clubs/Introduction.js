@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   padding: 1%;
 `;
 
-const Introduction = ({ club, dispatch, history, toggleEdit }) => {
+const Introduction = ({ club, dispatch, history, isModerator, toggleEdit }) => {
   const handleDelete = () => {
     dispatch(deleteClub(club));
     history.push('/clubs');
@@ -21,8 +21,10 @@ const Introduction = ({ club, dispatch, history, toggleEdit }) => {
         <Header>{club.name}</Header>
         <p>{club.description}</p>
         <Divider hidden />
-        <Button onClick={() => toggleEdit()}>Edit</Button>
-        <Button onClick={() => handleDelete()}>Delete</Button>
+        {isModerator && [
+          <Button onClick={() => toggleEdit()}>Edit</Button>,
+          <Button onClick={() => handleDelete()}>Delete</Button>
+        ]}
       </Segment>
     </Wrapper>
   );

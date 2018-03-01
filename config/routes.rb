@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     get '/find_user_clubs', to: 'clubs#find_user_clubs'
 
     resources :memberships
+    resources :readings
 
     get '/users/find', to: 'users#logged_in_user'
     get '/books/with_ratings', to: 'books#all_books_with_ratings'
