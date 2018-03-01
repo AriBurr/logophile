@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchShelvings } from '../../actions/shelvings';
 import { addReading } from '../../actions/readings';
 import { ButtonStyle } from '../../styles/styles';
-import { Button, Dropdown } from 'semantic-ui-react';
+import { Button, Dropdown, Grid, Header } from 'semantic-ui-react';
 
 class SelectReadingDropdown extends React.Component {
   state = {
@@ -15,27 +15,19 @@ class SelectReadingDropdown extends React.Component {
   };
 
   bookshelfOptions = () => {
-    const { bookshelves } = this.props;
-    return bookshelves.map(shelf => {
+    return this.props.bookshelves.map(shelf => {
       return { key: shelf.id, text: shelf.name, value: shelf.name };
     });
   };
 
   bookOptions = () => {
-    const { bookshelves, shelvings } = this.props;
-    const { bookshelf, shelvingsLoaded } = this.state;
-    const shelf = bookshelves.filter(shelf => shelf.name === bookshelf);
-    if (!shelvingsLoaded) {
-      this.fetchBooks(shelf[0]);
-    } else {
-      return shelvings.map(book => {
-        return {
-          key: book.id,
-          text: book.item.volumeInfo.title,
-          value: book.id
-        };
-      });
-    }
+    return this.props.shelvings.map(book => {
+      return {
+        key: book.id,
+        text: book.item.volumeInfo.title,
+        value: book.id
+      };
+    });
   };
 
   fetchBooks = shelf => {
@@ -44,6 +36,12 @@ class SelectReadingDropdown extends React.Component {
   };
 
   handleShelfSelection = (e, { value }) => {
+    const { bookshelves } = this.props;
+    const { bookshelf } = this.state;
+    if (bookshelf !== value) {
+      const shelf = bookshelves.filter(shelf => shelf.name === value);
+      this.fetchBooks(shelf[0]);
+    }
     this.setState({ bookshelf: value });
     this.setState({ bookshelfLoaded: true });
   };
@@ -56,34 +54,44 @@ class SelectReadingDropdown extends React.Component {
   handleSubmit = () => {
     const { club, dispatch, shelvings } = this.props;
     const { bookID } = this.state;
-    const reading = (shelvings.filter(b => b.id === bookID))[0];
+    const reading = shelvings.filter(b => b.id === bookID)[0];
     dispatch(addReading(club, reading));
   };
 
   render() {
     const { bookLoaded, bookshelfLoaded } = this.state;
     return (
-      <div>
-        <Dropdown
-          placeholder="From Bookshelf"
-          selection
-          options={this.bookshelfOptions()}
-          onChange={this.handleShelfSelection}
-        />
-        {bookshelfLoaded && (
+      <Grid columns="equal">
+        <Grid.Column textAlign="center">
+          <Header>Select Bookshelf</Header>
           <Dropdown
-            placeholder="Book"
+            placeholder="From Bookshelf"
             selection
-            options={this.bookOptions()}
-            onChange={this.handleBookSelection}
+            options={this.bookshelfOptions()}
+            onChange={this.handleShelfSelection}
           />
-        )}
-        {bookLoaded && (
-          <Button as={ButtonStyle} onClick={() => this.handleSubmit()}>
-            Select Reading
-          </Button>
-        )}
-      </div>
+        </Grid.Column>
+        <Grid.Column textAlign="center">
+          {bookshelfLoaded && (
+            [<Header key={1}>Select Reading</Header>,
+            <Dropdown
+              key={2}
+              placeholder="Book"
+              selection
+              options={this.bookOptions()}
+              onChange={this.handleBookSelection}
+            />]
+          )}
+        </Grid.Column>
+        <Grid.Column textAlign="center">
+          {bookLoaded && (
+            [<Header key={1}>Add to {this.props.club.name}</Header>,
+            <Button key={2} as={ButtonStyle} onClick={() => this.handleSubmit()}>
+              Go
+            </Button>]
+          )}
+        </Grid.Column>
+      </Grid>
     );
   }
 }
