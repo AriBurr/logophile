@@ -1,4 +1,7 @@
 import React from 'react';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
 import { connect } from 'react-redux';
 import { fetchShelvings } from '../../actions/shelvings';
 import { addReading } from '../../actions/readings';
@@ -11,7 +14,17 @@ class SelectReadingDropdown extends React.Component {
     bookshelfLoaded: false,
     shelvingsLoaded: false,
     bookID: '',
-    bookLoaded: false
+    bookLoaded: false,
+    startDate: moment(),
+    endDate: moment()
+  };
+
+  handleStartDate = date => {
+    this.setState({ startDate: date });
+  };
+
+  handleEndDate = date => {
+    this.setState({ endDate: date });
   };
 
   bookshelfOptions = () => {
@@ -52,10 +65,11 @@ class SelectReadingDropdown extends React.Component {
   };
 
   handleSubmit = () => {
-    const { club, dispatch, shelvings } = this.props;
+    const { club, dispatch, shelvings, toggleDropdown } = this.props;
     const { bookID } = this.state;
     const reading = shelvings.filter(b => b.id === bookID)[0];
     dispatch(addReading(club, reading));
+    toggleDropdown();
   };
 
   render() {
@@ -72,24 +86,45 @@ class SelectReadingDropdown extends React.Component {
           />
         </Grid.Column>
         <Grid.Column textAlign="center">
-          {bookshelfLoaded && (
-            [<Header key={1}>Select Reading</Header>,
+          {bookshelfLoaded && [
+            <Header key={1}>Select Reading</Header>,
             <Dropdown
               key={2}
               placeholder="Book"
               selection
               options={this.bookOptions()}
               onChange={this.handleBookSelection}
-            />]
-          )}
+            />
+          ]}
         </Grid.Column>
         <Grid.Column textAlign="center">
-          {bookLoaded && (
-            [<Header key={1}>Add to Club</Header>,
-            <Button key={2} as={ButtonStyle} onClick={() => this.handleSubmit()}>
+          {bookLoaded && [
+            <Header key={1}>Select Dates</Header>,
+            <DatePicker
+              key={2}
+              selected={this.state.startDate}
+              onChange={this.handleStartDate}
+              placeholder='Start'
+            />,
+            <DatePicker
+              key={3}
+              selected={this.state.endDate}
+              onChange={this.handleEndDate}
+              placeholder='End'
+            />
+          ]}
+        </Grid.Column>
+        <Grid.Column textAlign="center">
+          {bookLoaded && [
+            <Header key={1}>Add to Club</Header>,
+            <Button
+              key={2}
+              as={ButtonStyle}
+              onClick={() => this.handleSubmit()}
+            >
               Go
-            </Button>]
-          )}
+            </Button>
+          ]}
         </Grid.Column>
       </Grid>
     );

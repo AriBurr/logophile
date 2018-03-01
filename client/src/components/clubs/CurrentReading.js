@@ -4,20 +4,28 @@ import { fetchReadings } from '../../actions/readings';
 import BookCover from '../books/BookCover';
 import SelectReadingDropdown from './SelectReadingDropdown';
 import styled from 'styled-components';
-import { Button, Grid, Header, Modal, Segment } from 'semantic-ui-react';
+import { Button, Grid, Header, Segment } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   padding: 1%;
 `;
 
 class CurrentReading extends React.Component {
+  state = { addingBook: false };
+
   componentDidMount() {
     const { clubID, dispatch } = this.props;
     dispatch(fetchReadings(clubID));
   }
 
+  toggleDropdown = () => {
+    const { addingBook } = this.state;
+    this.setState({ addingBook: !addingBook });
+  };
+
   render() {
     const { isModerator, readings } = this.props;
+    const { addingBook } = this.state;
     return (
       <Wrapper>
         <Segment>
@@ -25,13 +33,14 @@ class CurrentReading extends React.Component {
           <Grid>
             <Grid.Column>
               {isModerator && [
-                <BookCover book={readings[0]} />,
-                <Modal trigger={<Button>Add New Reading</Button>}>
-                  <Modal.Content>
-                    <SelectReadingDropdown />
-                  </Modal.Content>
-                </Modal>
+                readings.length !== 0 && <BookCover book={readings[0]} />,
+                <Button key={1} onClick={this.toggleDropdown}>
+                  Add New Reading
+                </Button>
               ]}
+              {addingBook && (
+                <SelectReadingDropdown toggleDropdown={this.toggleDropdown} />
+              )}
             </Grid.Column>
           </Grid>
         </Segment>
