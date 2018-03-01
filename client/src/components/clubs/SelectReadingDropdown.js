@@ -22,7 +22,7 @@ class SelectReadingDropdown extends React.Component {
   };
 
   bookOptions = () => {
-    const { bookshelves, dispatch, shelvings } = this.props;
+    const { bookshelves, shelvings } = this.props;
     const { bookshelf, shelvingsLoaded } = this.state;
     const shelf = bookshelves.filter(shelf => shelf.name === bookshelf);
     if (!shelvingsLoaded) {
@@ -56,7 +56,7 @@ class SelectReadingDropdown extends React.Component {
   handleSubmit = () => {
     const { club, dispatch, shelvings } = this.props;
     const { bookID } = this.state;
-    const reading = (shelvings.filter(b => b.id == bookID))[0];
+    const reading = (shelvings.filter(b => b.id === bookID))[0];
     dispatch(addReading(club, reading));
   };
 

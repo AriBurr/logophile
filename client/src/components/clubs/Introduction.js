@@ -22,8 +22,8 @@ const Introduction = ({ club, dispatch, history, isModerator, toggleEdit }) => {
         <p>{club.description}</p>
         <Divider hidden />
         {isModerator && [
-          <Button onClick={() => toggleEdit()}>Edit</Button>,
-          <Button onClick={() => handleDelete()}>Delete</Button>
+          <Button key={1} onClick={() => toggleEdit()}>Edit</Button>,
+          <Button key={2} onClick={() => handleDelete()}>Delete</Button>
         ]}
       </Segment>
     </Wrapper>

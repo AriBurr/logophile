@@ -38,10 +38,10 @@ export const fetchCurrentClub = (id, callback = {}) => {
   return dispatch => {
     axios
       .get(`/api/clubs/${id}`, setHeaders())
-      .then(res =>
+      .then(res => {
         dispatch({ type: 'GET_CURRENT_CLUB', currentClub: res.data })
-      )
-      .then(callback())
+        callback()
+      })
       .catch(err =>
         setFlash('Could not retrieve bookclub, please try again!', 'red')
       );
