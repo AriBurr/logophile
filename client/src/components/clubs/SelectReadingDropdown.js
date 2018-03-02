@@ -66,9 +66,9 @@ class SelectReadingDropdown extends React.Component {
 
   handleSubmit = () => {
     const { club, dispatch, shelvings, toggleDropdown } = this.props;
-    const { bookID } = this.state;
+    const { bookID, startDate, endDate } = this.state;
     const reading = shelvings.filter(b => b.id === bookID)[0];
-    dispatch(addReading(club, reading));
+    dispatch(addReading(club, reading, startDate, endDate));
     toggleDropdown();
   };
 

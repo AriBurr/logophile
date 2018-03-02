@@ -15,7 +15,6 @@ const Image = styled.img`
 `;
 
 const BookCover = ({ book }) => {
-  debugger
   let data = null;
   book.item ? (data = book.item) : (data = book);
 

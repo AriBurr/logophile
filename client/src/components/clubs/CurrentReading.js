@@ -28,6 +28,9 @@ class CurrentReading extends React.Component {
     const { addingBook } = this.state;
     return (
       <Wrapper>
+        {addingBook && (
+          <SelectReadingDropdown toggleDropdown={this.toggleDropdown} />
+        )}
         <Segment>
           <Header>Currently Reading</Header>
           <Grid>
@@ -35,12 +38,9 @@ class CurrentReading extends React.Component {
               {isModerator && [
                 readings.length !== 0 && <BookCover book={readings[0]} />,
                 <Button key={1} onClick={this.toggleDropdown}>
-                  Add New Reading
+                  {addingBook ? 'Cancel' : 'Add New Reading'}
                 </Button>
               ]}
-              {addingBook && (
-                <SelectReadingDropdown toggleDropdown={this.toggleDropdown} />
-              )}
             </Grid.Column>
           </Grid>
         </Segment>
