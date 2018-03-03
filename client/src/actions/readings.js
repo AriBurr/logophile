@@ -15,8 +15,7 @@ export const addReading = (club, reading, start, end) => {
         },
         setHeaders()
       )
-      .then(res => dispatch(setFlash(`Added reading!`, 'green')))
-      .then(dispatch(fetchReadings(club.id)))
+      .then(res => dispatch(fetchReadings(club.id)))
       .catch(err => dispatch(setFlash(`Could not add reading!`, 'red')));
   };
 };
@@ -26,7 +25,7 @@ export const fetchReadings = id => {
     axios
       .get(`/api/readings?club_id=${id}`, setHeaders())
       .then(res => {
-        dispatch({ type: 'GET_READINGS', readings: res.data })
+        dispatch({ type: 'GET_READINGS', readings: res.data });
       })
       .catch(err => dispatch(setFlash('Could not fetch readings!', 'red')));
   };
