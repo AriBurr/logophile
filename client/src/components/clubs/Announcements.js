@@ -19,16 +19,13 @@ class Announcements extends React.Component {
   }
 
   render() {
+    const { announcement } = this.props
     return (
       <Wrapper>
         <Segment>
           <Header>Announcements</Header>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-            lorem ligula, facilisis vel sollicitudin sit amet, eleifend nec
-            turpis. Integer ante ex, varius sit amet maximus quis, facilisis eu
-            tellus. Nunc feugiat, tellus at maximus viverra, orci risus auctor
-            dolor, a accumsan mauris sapien quis libero. Nam et rutrum tortor.
+            {announcement.body}
           </p>
         </Segment>
       </Wrapper>
@@ -37,7 +34,7 @@ class Announcements extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { club: state.currentClub };
+  return { announcement: state.announcement };
 };
 
 export default withRouter(connect(mapStateToProps)(Announcements));

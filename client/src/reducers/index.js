@@ -10,6 +10,7 @@ import flash from './flash';
 import readings from './readings';
 import shelvings from './shelvings';
 import topBooks from './topBooks';
+import announcement from './announcement';
 import user from './user';
 
 const rootReducer = combineReducers({
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
   shelvings,
   topBooks,
   user,
-  userClubs
+  userClubs,
+  announcement
 });
 
 export default rootReducer;

@@ -2,8 +2,7 @@ class Api::AnnouncementsController < ApplicationController
   before_action :set_club, only: [:index, :update]
 
   def index
-    binding.pry
-    @club.announcments
+    render json: @club.announcement
   end
 
   def update

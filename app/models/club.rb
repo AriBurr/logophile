@@ -1,7 +1,7 @@
 class Club < ApplicationRecord
   validates_presence_of :name
 
-  has_many :announcements, dependent: :destroy
+  has_one :announcement, dependent: :destroy
 
   has_many :memberships, dependent: :destroy
   has_many :users, through: :memberships
@@ -28,9 +28,7 @@ class Club < ApplicationRecord
   private
 
     def build_default_announcement
-      binding.pry
-      Announcement.create(body: 'Thanks for supporting the logophile community,
-        this is where you can make announcments to the members of your book club',
+      Announcement.create(body: 'Thanks for supporting the logophile community, this is where you can make announcments to the members of your book club',
         club_id: self.id)
     end
 

@@ -7,7 +7,7 @@ export const fetchAnnouncement = (clubId) => {
     debugger
     axios
       .get(`/api/announcements?club_id=${clubId}`, setHeaders())
-      .then(res => dispatch({ type: 'SET_ANNOUNCEMENT', announcement: res.data }))
+      .then(res => dispatch({ type: 'ADD_ANNOUNCEMENT', announcement: res.data }))
       .catch(err =>
         setFlash('Could not retrieve announcement, please try again!', 'red')
       );
@@ -19,7 +19,7 @@ export const editAnnouncement = (id, callback = {}) => {
     axios
       .get(`/api/announcements/${id}`, setHeaders())
       .then(res => {
-        dispatch({ type: 'GET_CURRENT_CLUB', announcement: res.data })
+        dispatch({ type: 'EDIT_ANNOUNCEMENT', announcement: res.data })
         callback()
       })
       .catch(err =>
