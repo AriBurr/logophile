@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { fetchClubs } from '../../actions/clubs';
 import { fetchUserClubs } from '../../actions/userClubs';
+import { joinClub } from '../../actions/userClubs';
 import ClubForm from './ClubForm';
 import styled from 'styled-components';
-import { Divider, Grid, Header } from 'semantic-ui-react';
+import { Button, Divider, Grid, Header } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -27,7 +28,7 @@ class Clubs extends React.Component {
   }
 
   displayClubs = () => {
-    const { clubs, dispatch } = this.props;
+    const { clubs } = this.props;
     return clubs.map(c => {
       return (
         <Grid.Column
