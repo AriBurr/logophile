@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { fetchClubs } from '../../actions/clubs';
 import { fetchUserClubs } from '../../actions/userClubs';
 import ClubForm from './ClubForm';
@@ -20,8 +20,14 @@ class Clubs extends React.Component {
     dispatch(fetchUserClubs());
   }
 
+  handleClubJoin = (clubId) => {
+    const { history, dispatch } = this.props
+    dispatch(joinClub(clubId))
+    history.push('/my_clubs')
+  }
+
   displayClubs = () => {
-    const { clubs } = this.props;
+    const { clubs, dispatch } = this.props;
     return clubs.map(c => {
       return (
         <Grid.Column
@@ -35,6 +41,9 @@ class Clubs extends React.Component {
             <Header>{c.name}</Header>
           </Link>
           <p>{c.description}</p>
+          <Button onClick={() => this.handleClubJoin(c.id)}>
+            Join this club
+          </Button>
         </Grid.Column>
       );
     });
@@ -53,10 +62,9 @@ class Clubs extends React.Component {
 
 const mapStateToProps = state => {
   return {
-
     clubs: state.clubs,
     user: state.user
   };
 };
 
-export default connect(mapStateToProps)(Clubs);
+export default withRouter(connect(mapStateToProps)(Clubs));

@@ -7,6 +7,7 @@ import styled from 'styled-components'
 
 const Container = styled.div`
   height: 85vh;
+
 `
 
 
@@ -19,7 +20,6 @@ class MyClubs extends React.Component {
   mapUserClubs = () => {
     return this.props.userClubs.map(club => {
       return(
-        <Container>
           <Link to={`/clubs/${club.id}`} key={club.id}>
             <Card>
               <Card.Content>
@@ -32,7 +32,6 @@ class MyClubs extends React.Component {
               </Card.Content>
             </Card>
           </Link>
-        </Container>
       )
     })
   }
@@ -40,7 +39,7 @@ class MyClubs extends React.Component {
 
   render () {
     return(
-      <Segment basic className='container'>
+      <Segment as={Container} basic className='container'>
         <Grid>
           {this.mapUserClubs()}
         </Grid>
