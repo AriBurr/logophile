@@ -1,20 +1,14 @@
 class Api::AnnouncementsController < ApplicationController
+  before_action :set_club, only: [:index, :update]
 
   def index
-
-  end
-
-  def create
-    announcement = Announcement.new(announcement_params)
-    if announcment.save
-      render json: announcement
-    else
-      render json: { announcement.errors.full_messages }, status: 422
-    end
+    binding.pry
+    @club.announcments
   end
 
   def update
-    announcment = Announcment.find(params[:id])
+    binding.pry
+    announcment = @club.announcments
     if announcment.update(announcement_params)
       render json: announcement
     else
@@ -26,6 +20,10 @@ class Api::AnnouncementsController < ApplicationController
 
     def announcement_params
       params.require(:announcement).permit(:body, :club_id)
+    end
+
+    def set_club
+      @club = Club.find(params[:club_id])
     end
 
 end

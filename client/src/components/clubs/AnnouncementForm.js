@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Header, Segment, Form, Button } from 'semantic-ui-react';
-import { addAnnouncement, editAnnouncement } from '../../actions/announcements';
+import { editAnnouncement } from '../../actions/announcements';
 
 
 const Wrapper = styled.div`
@@ -11,9 +11,8 @@ const Wrapper = styled.div`
 
 class AnnouncementForm extends React.Component {
   state = {
-    editing: false,
     body: '',
-    bodyEdit: 'edit'
+    bodyEdit: 'change me'
   }
 
   handleChange = (e) => {
@@ -21,21 +20,17 @@ class AnnouncementForm extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleSumbit = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { body, bodyEdit } = this.state;
     const { dispatch, edit, toggleEdit } = this.props;
-    const club = { body };
-    const clubEdit = { bodyEdit };
+    const ann = { body };
+    const annEdit = { bodyEdit };
     this.setState({ name: '', description: '' });
-    edit
-      ? dispatch(editAnnouncement(this.props.club.id, clubEdit))
-      : dispatch(addAnnouncement(club));
+    debugger
+    edit && dispatch(editAnnouncement(this.props.club.id, annEdit))
+
     edit && toggleEdit();
-  }
-
-  editingState = () => {
-
   }
 
   render() {

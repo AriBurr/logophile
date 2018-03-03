@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :users, only: :create
     resources :bookshelves, except: [:new, :edit, :show]
     resources :books, only: [:create]
+    resources :announcements, only: [:index, :update]
     resources :ratings, only: [:create, :update]
     resources :shelvings, only: [:create, :destroy, :index, :update]
 

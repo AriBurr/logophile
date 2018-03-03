@@ -9,6 +9,8 @@ class Club < ApplicationRecord
   has_many :readings, dependent: :destroy
   has_many :books, through: :readings
 
+  after_create :build_default_announcement
+
   def self.find_user_clubs(user_id)
     select("clubs.id, clubs.name, clubs.description, memberships.is_moderator")
     .joins("INNER JOIN memberships ON clubs.id = memberships.club_id")
@@ -22,5 +24,14 @@ class Club < ApplicationRecord
     .joins("INNER JOIN users ON memberships.user_id = users.id")
     .where("users.id = #{user_id} AND clubs.id = #{club.id}")
   end
+
+  private
+
+    def build_default_announcement
+      binding.pry
+      Announcement.create(body: 'Thanks for supporting the logophile community,
+        this is where you can make announcments to the members of your book club',
+        club_id: self.id)
+    end
 
 end

@@ -16,14 +16,11 @@ ActiveRecord::Schema.define(version: 20180301203103) do
   enable_extension "plpgsql"
 
   create_table "announcements", force: :cascade do |t|
-    t.string "title", null: false
-    t.text "content", null: false
-    t.bigint "user_id", null: false
+    t.text "body", null: false
     t.bigint "club_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["club_id"], name: "index_announcements_on_club_id"
-    t.index ["user_id"], name: "index_announcements_on_user_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -74,7 +71,7 @@ ActiveRecord::Schema.define(version: 20180301203103) do
     t.bigint "club_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_moderator", default: false
+    t.boolean "is_moderator", default: false, null: false
     t.index ["club_id"], name: "index_memberships_on_club_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end
@@ -135,7 +132,6 @@ ActiveRecord::Schema.define(version: 20180301203103) do
   end
 
   add_foreign_key "announcements", "clubs"
-  add_foreign_key "announcements", "users"
   add_foreign_key "bookshelves", "users"
   add_foreign_key "comments", "discussions"
   add_foreign_key "comments", "users"
