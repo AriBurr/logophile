@@ -36,8 +36,10 @@ class CurrentReading extends React.Component {
           <Grid>
             <Grid.Column>
               {isModerator && [
-                readings.length !== 0 && <BookCover book={readings[0]} />,
-                <Button key={1} onClick={this.toggleDropdown}>
+                readings.length !== 0 && (
+                  <BookCover key={1} book={readings[0]} />
+                ),
+                <Button key={2} onClick={this.toggleDropdown}>
                   {addingBook ? 'Cancel' : 'Add New Reading'}
                 </Button>
               ]}

@@ -7,6 +7,7 @@ class Api::ReadingsController < ApplicationController
 
   def create
     reading = @club.readings.new(reading_params)
+    Reading.handle_archive(params[:current_id]) if params[:current_id].present?
     if reading.save
       render json: reading
     else

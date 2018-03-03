@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { connect } from 'react-redux';
 import { fetchShelvings } from '../../actions/shelvings';
 import { addReading } from '../../actions/readings';
+import { archiveReading } from '../../actions/readings';
 import { ButtonStyle } from '../../styles/styles';
 import { Button, Dropdown, Grid, Header } from 'semantic-ui-react';
 
@@ -65,10 +66,26 @@ class SelectReadingDropdown extends React.Component {
   };
 
   handleSubmit = () => {
-    const { club, dispatch, shelvings, toggleDropdown } = this.props;
+    const {
+      club,
+      dispatch,
+      readings,
+      shelvings,
+      toggleDropdown
+    } = this.props;
     const { bookID, startDate, endDate } = this.state;
     const reading = shelvings.filter(b => b.id === bookID)[0];
-    dispatch(addReading(club, reading, startDate, endDate));
+    if (readings.length !== 0) {
+      const confirm = window.confirm(
+        'This will archive the current reading. Are you sure?'
+      );
+      confirm &&
+        dispatch(
+          archiveReading(readings[0], club, reading, startDate, endDate)
+        );
+    } else {
+      dispatch(addReading(club, reading, startDate, endDate));
+    }
     toggleDropdown();
   };
 
@@ -104,13 +121,13 @@ class SelectReadingDropdown extends React.Component {
               key={2}
               selected={this.state.startDate}
               onChange={this.handleStartDate}
-              placeholder='Start'
+              placeholder="Start"
             />,
             <DatePicker
               key={3}
               selected={this.state.endDate}
               onChange={this.handleEndDate}
-              placeholder='End'
+              placeholder="End"
             />
           ]}
         </Grid.Column>
@@ -135,6 +152,8 @@ const mapStateToProps = state => {
   return {
     bookshelves: state.bookshelves,
     club: state.currentClub,
+    currentReading: state.currentReading,
+    readings: state.readings,
     shelvings: state.shelvings
   };
 };
