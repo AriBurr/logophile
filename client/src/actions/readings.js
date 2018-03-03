@@ -38,12 +38,13 @@ export const archiveReading = (current, club, reading, start, end) => {
   };
 };
 
-export const fetchReadings = id => {
+export const fetchReadings = (id, callback = {}) => {
   return dispatch => {
     axios
       .get(`/api/readings?club_id=${id}`, setHeaders())
       .then(res => {
         dispatch({ type: 'GET_READINGS', readings: res.data });
+        callback();
       })
       .catch(err => dispatch(setFlash('Could not fetch readings!', 'red')));
   };

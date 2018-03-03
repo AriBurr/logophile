@@ -11,20 +11,31 @@ const Wrapper = styled.div`
 `;
 
 class CurrentReading extends React.Component {
-  state = { addingBook: false };
+  state = { addingBook: false, readingsLoaded: false };
 
   componentDidMount() {
     const { clubID, dispatch } = this.props;
-    dispatch(fetchReadings(clubID));
+    dispatch(fetchReadings(clubID, this.setReadingsLoaded));
   }
+
+  setReadingsLoaded = () => {
+    this.setState({ readingsLoaded: true });
+  };
 
   toggleDropdown = () => {
     const { addingBook } = this.state;
     this.setState({ addingBook: !addingBook });
   };
 
+  displayBookCover = () => {
+    const { readings } = this.props;
+    const { readingsLoaded } = this.state;
+    if (readingsLoaded && readings.length !== 0)
+      return <BookCover book={readings[0]} />;
+  };
+
   render() {
-    const { isModerator, readings } = this.props;
+    const { isModerator } = this.props;
     const { addingBook } = this.state;
     return (
       <Wrapper>
@@ -35,14 +46,12 @@ class CurrentReading extends React.Component {
           <Header>Currently Reading</Header>
           <Grid>
             <Grid.Column>
-              {isModerator && [
-                readings.length !== 0 && (
-                  <BookCover key={1} book={readings[0]} />
-                ),
-                <Button key={2} onClick={this.toggleDropdown}>
+              {this.displayBookCover()}
+              {isModerator && (
+                <Button onClick={this.toggleDropdown}>
                   {addingBook ? 'Cancel' : 'Add New Reading'}
                 </Button>
-              ]}
+              )}
             </Grid.Column>
           </Grid>
         </Segment>
