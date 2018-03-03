@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Header, Segment } from 'semantic-ui-react';
+import { Header, Segment, Button } from 'semantic-ui-react';
 import { fetchAnnouncement } from '../../actions/announcements';
 import { withRouter } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ class Announcements extends React.Component {
   }
 
   render() {
-    const { announcement } = this.props
+    const { announcement, isModerator, toggleEdit } = this.props
     return (
       <Wrapper>
         <Segment>
@@ -27,6 +27,9 @@ class Announcements extends React.Component {
           <p>
             {announcement.body}
           </p>
+          {isModerator &&
+            <Button onClick={() => toggleEdit()}>Edit</Button>
+          }
         </Segment>
       </Wrapper>
     );

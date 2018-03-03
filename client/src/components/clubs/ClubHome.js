@@ -19,7 +19,11 @@ const Wrapper = styled.div`
 `;
 
 class ClubHome extends React.Component {
-  state = { edit: false, isModerator: false };
+  state = {
+      introEdit: false,
+      annEdit: false,
+      isModerator: false
+   };
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -32,13 +36,18 @@ class ClubHome extends React.Component {
     this.setState({ isModerator: club.is_moderator });
   };
 
-  toggleEdit = () => {
-    const { edit } = this.state;
-    this.setState({ edit: !edit });
+  toggleEditIntro = () => {
+    const { introEdit } = this.state;
+    this.setState({ introEdit: !introEdit });
+  };
+
+  toggleEditAnn = () => {
+    const { annEdit } = this.state;
+    this.setState({ annEdit: !annEdit });
   };
 
   render() {
-    const { edit, isModerator } = this.state;
+    const { annEdit, introEdit, isModerator } = this.state;
     return (
       <Wrapper>
         <ClubBanner />
@@ -60,22 +69,22 @@ class ClubHome extends React.Component {
             width={13}
           >
             <Grid.Row>
-              {edit ? (
-                <ClubForm edit={edit} toggleEdit={this.toggleEdit} />
+              {introEdit ? (
+                <ClubForm edit={introEdit} toggleEdit={this.toggleEditIntro} />
               ) : (
                 <Introduction
                   isModerator={isModerator}
-                  toggleEdit={this.toggleEdit}
+                  toggleEdit={this.toggleEditIntro}
                 />
               )}
             </Grid.Row>
             <Grid.Row>
-              {edit ? (
-                <AnnouncementForm edit={edit} toggleEdit={this.toggleEdit} />
+              {annEdit ? (
+                <AnnouncementForm edit={annEdit} toggleEdit={this.toggleEditAnn} />
               ) : (
                 <Announcements
                   isModerator={isModerator}
-                  toggleEdit={this.toggleEdit}
+                  toggleEdit={this.toggleEditAnn}
                 />
               )}
             </Grid.Row>
