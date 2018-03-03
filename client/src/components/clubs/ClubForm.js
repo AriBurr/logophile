@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addClub } from '../../actions/clubs';
-import { editClub } from '../../actions/clubs';
+import { addClub, editClub } from '../../actions/clubs';
 import styled from 'styled-components';
 import { Button, Form } from 'semantic-ui-react';
 

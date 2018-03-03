@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20180301203103) do
     t.bigint "club_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_moderator", default: false, null: false
+    t.boolean "is_moderator", default: false
     t.index ["club_id"], name: "index_memberships_on_club_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end

@@ -4,6 +4,7 @@ import { fetchCurrentClub } from '../../actions/clubs';
 import Announcements from './Announcements';
 import ClubBanner from './ClubBanner';
 import ClubForm from './ClubForm';
+import AnnouncementForm from './AnnouncementForm';
 import CurrentReading from './CurrentReading';
 import ClubSideNav from './ClubSideNav';
 import DiscussionPreview from './DiscussionPreview';
@@ -69,7 +70,14 @@ class ClubHome extends React.Component {
               )}
             </Grid.Row>
             <Grid.Row>
-              <Announcements />
+              {edit ? (
+                <AnnouncementForm edit={edit} toggleEdit={this.toggleEdit} />
+              ) : (
+                <Announcements
+                  isModerator={isModerator}
+                  toggleEdit={this.toggleEdit}
+                />
+              )}
             </Grid.Row>
             <Grid.Row>
               <CurrentReading
