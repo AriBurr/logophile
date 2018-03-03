@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchReadings } from '../../actions/readings';
+import { objectCheck } from '../../utils/modules';
 import BookCover from '../books/BookCover';
 import SelectReadingDropdown from './SelectReadingDropdown';
 import styled from 'styled-components';
@@ -27,15 +28,26 @@ class CurrentReading extends React.Component {
     this.setState({ addingBook: !addingBook });
   };
 
-  displayBookCover = () => {
-    const { readings } = this.props;
+  displayBookCover = (reading) => {
     const { readingsLoaded } = this.state;
-    if (readingsLoaded && readings.length !== 0)
-      return <BookCover book={readings[0]} />;
+    if (readingsLoaded && objectCheck(reading))
+      return <BookCover book={reading} />;
   };
 
+  displayDesc = (reading) => {
+    const { readingsLoaded } = this.state;
+    if (readingsLoaded && objectCheck(reading))
+      return (
+        <div>
+          <b>Start: </b>{reading.start_date}
+          <br />
+          <b>Finish: </b>{reading.finish_date}
+        </div>
+      )
+  }
+
   render() {
-    const { isModerator } = this.props;
+    const { isModerator, readings } = this.props;
     const { addingBook } = this.state;
     return (
       <Wrapper>
@@ -45,8 +57,11 @@ class CurrentReading extends React.Component {
         <Segment>
           <Header>Currently Reading</Header>
           <Grid>
-            <Grid.Column>
-              {this.displayBookCover()}
+            <Grid.Column width={3}>
+              {readings.length !== 0 && this.displayBookCover(readings[0])}
+            </Grid.Column>
+            <Grid.Column width={10}>
+              {readings.length !== 0 && this.displayDesc(readings[0])}
               {isModerator && (
                 <Button onClick={this.toggleDropdown}>
                   {addingBook ? 'Cancel' : 'Add New Reading'}

@@ -10,7 +10,3 @@ export const paginateText = (text, length) => {
       return paginate.slice(0, TEXT_LENGTH) + '...';
   return text;
 };
-
-export const isModerator = user => {
-  return user.is_moderator;
-};

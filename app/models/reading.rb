@@ -14,7 +14,8 @@ class Reading < ApplicationRecord
   end
 
   def self.find_current(club)
-    select("books.item, books.id, readings.id AS reading_id, readings.club_id")
+    select("books.item, books.id, readings.id AS reading_id,
+            readings.club_id, readings.start_date, readings.finish_date")
     .joins("INNER JOIN books ON readings.book_id = books.id")
     .where("readings.club_id = #{club.id} AND readings.is_current = true")
   end

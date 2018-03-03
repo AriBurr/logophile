@@ -119,13 +119,13 @@ class SelectReadingDropdown extends React.Component {
             <Header key={1}>Select Dates</Header>,
             <DatePicker
               key={2}
-              selected={this.state.startDate}
+              selected={moment(this.state.startDate)}
               onChange={this.handleStartDate}
               placeholder="Start"
             />,
             <DatePicker
               key={3}
-              selected={this.state.endDate}
+              selected={moment(this.state.endDate)}
               onChange={this.handleEndDate}
               placeholder="End"
             />
