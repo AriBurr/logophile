@@ -66,11 +66,22 @@ class NavBar extends Component {
   };
 
   renderHeader = () => {
+    //text for the current page - sub header text
     const path = this.props.location.pathname;
-    const { activeItem } = this.props;
-    if (path === '/login') return 'Sign In';
-    if (path === '/register') return 'Register';
-    return path === '/' ? 'Welcome' : activeItem;
+    const data = [
+      { match: '/', text: 'Welcome'},
+      { match: '/login', text: 'Sign In'},
+      { match: '/register', text: 'Register'},
+      { match: '/books', text: 'Search Books'},
+      { match: '/clubs', text: 'Find Book Clubs'},
+      { match: '/library', text: 'Your Bookshelves'},
+      { match: '/my_clubs', text: 'Your Clubs'},
+    ]
+    const headerText =  data.filter((each) => {
+      if(path === each.match)
+        return each.text
+    })
+    return headerText[0].text
   };
 
   render() {
