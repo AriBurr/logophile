@@ -20,15 +20,23 @@ class Clubs extends React.Component {
     dispatch(fetchUserClubs());
   }
 
-  handleClubJoin = (clubId) => {
-    const { history, dispatch } = this.props
-    dispatch(joinClub(clubId))
-    history.push('/my_clubs')
-  }
+  handleClubJoin = clubId => {
+    const { history, dispatch } = this.props;
+    dispatch(joinClub(clubId));
+    history.push('/my_clubs');
+  };
 
-  displayClubs = () => {
-    const { clubs } = this.props;
-    return clubs.map(c => {
+  filterClubs = () => {
+    const { allClubs, userClubs } = this.props;
+    if (userClubs.length != 0) {
+      // return clubs user clubs
+    } else {
+      return allClubs;
+    }
+  };
+
+  displayAllClubs = () => {
+    return this.filterClubs().map(c => {
       return (
         <Grid.Column
           key={c.id}
@@ -49,12 +57,35 @@ class Clubs extends React.Component {
     });
   };
 
+  displayUserClubs = () => {
+    const { userClubs } = this.props;
+    return userClubs.map(c => {
+      return (
+        <Grid.Column
+          key={c.id}
+          mobile="16"
+          tablet="5"
+          computer="4"
+          largeScreen="3"
+        >
+          <Link to={`/clubs/${c.id}`}>
+            <Header>{c.name}</Header>
+          </Link>
+          <p>{c.description}</p>
+        </Grid.Column>
+      );
+    });
+  };
+
   render() {
     return (
       <Wrapper>
         <ClubForm />
         <Divider hidden />
-        <Grid>{this.displayClubs()}</Grid>
+        <Grid>
+          {this.displayAllClubs()}
+          {this.displayUserClubs()}
+        </Grid>
       </Wrapper>
     );
   }
@@ -62,8 +93,9 @@ class Clubs extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    clubs: state.clubs,
-    user: state.user
+    allClubs: state.clubs,
+    user: state.user,
+    userClubs: state.userClubs
   };
 };
 
