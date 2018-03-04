@@ -50,9 +50,7 @@ class NavBar extends Component {
 
   loggedInLinks = () => {
     return (
-      <DropdownStyle
-        item text="Profile"
-      >
+      <DropdownStyle item text="Profile">
         <Dropdown.Menu>
           <Dropdown.Item as={Link} to="/library">
             My Bookshelves
@@ -69,19 +67,24 @@ class NavBar extends Component {
     //text for the current page - sub header text
     const path = this.props.location.pathname;
     const data = [
-      { match: '/', text: 'Welcome'},
-      { match: '/login', text: 'Sign In'},
-      { match: '/register', text: 'Register'},
-      { match: '/books', text: 'Search Books'},
-      { match: '/clubs', text: 'Find Book Clubs'},
-      { match: '/library', text: 'Your Bookshelves'},
-      { match: '/my_clubs', text: 'Your Clubs'},
-    ]
-    const headerText =  data.filter((each) => {
-      if(path === each.match)
-        return each.text
-    })
-    return headerText[0].text
+      { match: '/', text: 'Welcome' },
+      { match: '/login', text: 'Sign In' },
+      { match: '/register', text: 'Register' },
+      { match: '/books', text: 'Search Books' },
+      { match: '/clubs', text: 'Find Book Clubs' },
+      { match: '/library', text: 'Your Bookshelves' },
+      { match: '/my_clubs', text: 'Your Clubs' },
+      { match: '/clubs/', text: 'Your Clubs' }
+    ];
+    const headerText = data.filter(each => {
+      if (path === each.match)
+        return each.text;
+      return null
+    });
+    console.log(headerText)
+    if (headerText.length < 1)
+      return ''
+    return headerText[0].text;
   };
 
   render() {
