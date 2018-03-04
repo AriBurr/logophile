@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 class Announcements extends React.Component {
 
   componentDidMount(){
-    const clubId = parseInt(this.props.match.params.id)
+    const clubId = parseInt(this.props.match.params.id, 10)
     this.props.dispatch(fetchAnnouncement(clubId))
   }
 

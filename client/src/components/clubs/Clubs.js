@@ -28,7 +28,7 @@ class Clubs extends React.Component {
 
   filterClubs = () => {
     const { allClubs, userClubs } = this.props;
-    if (userClubs.length != 0) {
+    if (userClubs.length !== 0) {
       // return clubs user clubs
     } else {
       return allClubs;
