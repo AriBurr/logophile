@@ -26,17 +26,8 @@ class Clubs extends React.Component {
     history.push('/my_clubs');
   };
 
-  filterClubs = () => {
-    const { allClubs, userClubs } = this.props;
-    if (userClubs.length !== 0) {
-      // return clubs user clubs
-    } else {
-      return allClubs;
-    }
-  };
-
   displayAllClubs = () => {
-    return this.filterClubs().map(c => {
+    return this.props.allClubs.map(c => {
       return (
         <Grid.Column
           key={c.id}
@@ -57,26 +48,6 @@ class Clubs extends React.Component {
     });
   };
 
-  displayUserClubs = () => {
-    const { userClubs } = this.props;
-    return userClubs.map(c => {
-      return (
-        <Grid.Column
-          key={c.id}
-          mobile="16"
-          tablet="5"
-          computer="4"
-          largeScreen="3"
-        >
-          <Link to={`/clubs/${c.id}`}>
-            <Header>{c.name}</Header>
-          </Link>
-          <p>{c.description}</p>
-        </Grid.Column>
-      );
-    });
-  };
-
   render() {
     return (
       <Wrapper>
@@ -84,7 +55,6 @@ class Clubs extends React.Component {
         <Divider hidden />
         <Grid>
           {this.displayAllClubs()}
-          {this.displayUserClubs()}
         </Grid>
       </Wrapper>
     );
