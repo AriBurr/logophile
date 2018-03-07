@@ -11,6 +11,13 @@ class Club < ApplicationRecord
 
   after_create :build_default_announcement
 
+  def self.with_current_reading
+    select("clubs.id, clubs.name, clubs.description, books.item")
+    .joins("LEFT JOIN readings ON clubs.id = readings.club_id")
+    .joins("LEFT JOIN books ON readings.book_id = books.id")
+    .where("readings.is_current = true OR readings.is_current IS NULL")
+  end
+
   def self.find_user_clubs(user_id)
     select("clubs.id, clubs.name, clubs.description, memberships.is_moderator")
     .joins("INNER JOIN memberships ON clubs.id = memberships.club_id")

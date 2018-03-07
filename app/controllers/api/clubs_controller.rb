@@ -3,7 +3,7 @@ class Api::ClubsController < ApiController
   before_action :set_club, only: [:show, :update, :destroy], except: [:find_user_clubs]
 
   def index
-    render json: Club.all
+    render json: Club.with_current_reading
   end
 
   def find_user_clubs

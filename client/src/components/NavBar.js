@@ -81,7 +81,6 @@ class NavBar extends Component {
         return each.text;
       return null
     });
-    console.log(headerText)
     if (headerText.length < 1)
       return ''
     return headerText[0].text;

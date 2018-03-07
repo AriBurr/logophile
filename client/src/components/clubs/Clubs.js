@@ -2,11 +2,24 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { fetchClubs } from '../../actions/clubs';
-import { fetchUserClubs, joinClub } from '../../actions/userClubs';
+import { fetchUserClubs } from '../../actions/userClubs';
+import BookCover from '../books/BookCover';
 import ClubForm from './ClubForm';
 import styled from 'styled-components';
-import { Divider, Grid, Header, Button } from 'semantic-ui-react';
+import { Divider, Grid } from 'semantic-ui-react';
 
+const Description = styled.div`
+  background-color: #f8f9fd;
+  border-top: 1px solid rgba(87, 97, 122, 0.1);
+  border-bottom: 1px solid rgba(87, 97, 122, 0.1);
+  line-height: 25px;
+  padding: 5% !important;
+  width: 100%;
+`;
+const Header = styled.h3`
+  line-height: 25px;
+  padding: 1%;
+`;
 const Wrapper = styled.div`
   height: 100vh;
   overflow: auto;
@@ -20,29 +33,28 @@ class Clubs extends React.Component {
     dispatch(fetchUserClubs());
   }
 
-  handleClubJoin = clubId => {
-    const { history, dispatch } = this.props;
-    dispatch(joinClub(clubId));
-    history.push('/my_clubs');
-  };
-
   displayAllClubs = () => {
     return this.props.allClubs.map(c => {
       return (
-        <Grid.Column
-          key={c.id}
-          mobile="16"
-          tablet="5"
-          computer="4"
-          largeScreen="3"
-        >
-          <Link to={`/clubs/${c.id}`}>
-            <Header>{c.name}</Header>
-          </Link>
-          <p>{c.description}</p>
-          <Button onClick={() => this.handleClubJoin(c.id)}>
-            Join this club
-          </Button>
+        <Grid.Column width={8} key={c.id}>
+          <Divider />
+          <Grid>
+            <Grid.Column textAlign="center" width={4}>
+              {c.item && <BookCover book={c} />}
+              <em>Currently reading</em>
+            </Grid.Column>
+            <Grid.Column width={12}>
+              <Grid.Row>
+                <Link to={`/clubs/${c.id}`}>
+                  <Header>{c.name}</Header>
+                </Link>
+              </Grid.Row>
+              <Grid.Row>
+                <Description>{c.description}</Description>
+              </Grid.Row>
+            </Grid.Column>
+          </Grid>
+          <Divider />
         </Grid.Column>
       );
     });
@@ -53,9 +65,7 @@ class Clubs extends React.Component {
       <Wrapper>
         <ClubForm />
         <Divider hidden />
-        <Grid>
-          {this.displayAllClubs()}
-        </Grid>
+        <Grid>{this.displayAllClubs()}</Grid>
       </Wrapper>
     );
   }
