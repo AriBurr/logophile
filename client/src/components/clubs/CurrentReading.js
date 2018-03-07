@@ -5,6 +5,8 @@ import { objectCheck } from '../../utils/modules';
 import BookCover from '../books/BookCover';
 import SelectReadingDropdown from './SelectReadingDropdown';
 import styled from 'styled-components';
+import IntroFull from './IntroFull'
+
 import { Button, Grid, Header, Segment } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
@@ -51,16 +53,14 @@ class CurrentReading extends React.Component {
     const { addingBook } = this.state;
     return (
       <Wrapper>
-        {addingBook && (
-          <SelectReadingDropdown toggleDropdown={this.toggleDropdown} />
-        )}
         <Segment>
-          <Header>Currently Reading</Header>
           <Grid>
-            <Grid.Column width={3}>
+            <Grid.Column width={2}>
               {readings.length !== 0 && this.displayBookCover(readings[0])}
             </Grid.Column>
             <Grid.Column width={10}>
+              <IntroFull />
+
               {readings.length !== 0 && this.displayDesc(readings[0])}
               {isModerator && (
                 <Button onClick={this.toggleDropdown}>
@@ -70,6 +70,9 @@ class CurrentReading extends React.Component {
             </Grid.Column>
           </Grid>
         </Segment>
+        {addingBook && (
+          <SelectReadingDropdown toggleDropdown={this.toggleDropdown} />
+        )}
       </Wrapper>
     );
   }

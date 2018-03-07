@@ -1,16 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCurrentClub } from '../../actions/clubs';
-import Announcements from './Announcements';
 import ClubBanner from './ClubBanner';
 import ClubForm from './ClubForm';
-import AnnouncementForm from './AnnouncementForm';
 import CurrentReading from './CurrentReading';
 import ClubSideNav from './ClubSideNav';
 import DiscussionPreview from './DiscussionPreview';
 import Introduction from './Introduction';
 import styled from 'styled-components';
 import { Grid } from 'semantic-ui-react';
+import IntroFull from './IntroFull'
+import AnnouncementFull from './AnnouncementFull'
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -20,8 +20,6 @@ const Wrapper = styled.div`
 
 class ClubHome extends React.Component {
   state = {
-      introEdit: false,
-      annEdit: false,
       isModerator: false
    };
 
@@ -36,63 +34,23 @@ class ClubHome extends React.Component {
     this.setState({ isModerator: club.is_moderator });
   };
 
-  toggleEditIntro = () => {
-    const { introEdit } = this.state;
-    this.setState({ introEdit: !introEdit });
-  };
-
-  toggleEditAnn = () => {
-    const { annEdit } = this.state;
-    this.setState({ annEdit: !annEdit });
-  };
-
   render() {
     const { annEdit, introEdit, isModerator } = this.state;
     return (
       <Wrapper>
         <ClubBanner />
-        <Grid>
-          <Grid.Column
-            mobile="16"
-            tablet="5"
-            computer="4"
-            largeScreen="3"
-            width={3}
-          >
-            <ClubSideNav />
-          </Grid.Column>
-          <Grid.Column
-            mobile="16"
-            tablet="11"
-            computer="12"
-            largeScreen="13"
-            width={13}
-          >
-            <Grid.Row>
-              {introEdit ? (
-                <ClubForm edit={introEdit} toggleEdit={this.toggleEditIntro} />
-              ) : (
-                <Introduction
-                  isModerator={isModerator}
-                  toggleEdit={this.toggleEditIntro}
-                />
-              )}
-            </Grid.Row>
-            <Grid.Row>
-              {annEdit ? (
-                <AnnouncementForm edit={annEdit} toggleEdit={this.toggleEditAnn} />
-              ) : (
-                <Announcements
-                  isModerator={isModerator}
-                  toggleEdit={this.toggleEditAnn}
-                />
-              )}
-            </Grid.Row>
+        <Grid className='container'>
+          <Grid.Column width={16}>
             <Grid.Row>
               <CurrentReading
                 clubID={this.props.match.params.id}
                 isModerator={isModerator}
               />
+            </Grid.Row>
+            <Grid.Row>
+              <AnnouncementFull />
+            </Grid.Row>
+            <Grid.Row>
             </Grid.Row>
             <Grid.Row>
               <DiscussionPreview />
