@@ -10,6 +10,9 @@ const Wrapper = styled.div`
 `;
 
 const Introduction = ({ club, dispatch, history, isModerator, toggleEdit }) => {
+
+  console.log(club)
+
   const handleDelete = () => {
     dispatch(deleteClub(club));
     history.push('/clubs');
@@ -17,7 +20,8 @@ const Introduction = ({ club, dispatch, history, isModerator, toggleEdit }) => {
 
   return (
     <Wrapper>
-      <Segment>
+      <div>
+        <Header>{club.created_at}</Header>
         <Header>{club.name}</Header>
         <p>{club.description}</p>
         <Divider hidden />
@@ -25,7 +29,7 @@ const Introduction = ({ club, dispatch, history, isModerator, toggleEdit }) => {
           <Button key={1} onClick={() => toggleEdit()}>Edit</Button>,
           <Button key={2} onClick={() => handleDelete()}>Delete</Button>
         ]}
-      </Segment>
+      </div>
     </Wrapper>
   );
 };

@@ -54,9 +54,8 @@ class CurrentReading extends React.Component {
     return (
       <Wrapper>
         <Segment>
-          <Header>Currently Reading</Header>
           <Grid>
-            <Grid.Column width={3}>
+            <Grid.Column width={2}>
               {readings.length !== 0 && this.displayBookCover(readings[0])}
             </Grid.Column>
             <Grid.Column width={10}>

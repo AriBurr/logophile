@@ -39,6 +39,7 @@ export const fetchCurrentClub = (id, callback = {}) => {
     axios
       .get(`/api/clubs/${id}`, setHeaders())
       .then(res => {
+        
         dispatch({ type: 'GET_CURRENT_CLUB', currentClub: res.data });
         callback();
       })

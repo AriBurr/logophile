@@ -12,7 +12,9 @@ class Api::ClubsController < ApiController
   end
 
   def show
-    render json: Club.with_moderator_status(current_user.id, @club)
+    club = Club.with_moderator_status(current_user.id, @club)
+    created = club[0].created_at.strftime('%A %e %Y')
+    render json: club, created_format: created
   end
 
   def create
