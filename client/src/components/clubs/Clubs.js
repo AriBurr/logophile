@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { fetchClubs } from '../../actions/clubs';
 import { fetchUserClubs } from '../../actions/userClubs';
+import { paginateText } from '../../utils/modules';
 import BookCover from '../books/BookCover';
 import ClubForm from './ClubForm';
 import styled from 'styled-components';
@@ -25,6 +26,11 @@ const Wrapper = styled.div`
   overflow: auto;
   padding: 1%;
 `;
+const NoCover = styled.div`
+  height: 198px;
+  width: 128px;
+  padding-top: 25%;
+`;
 
 class Clubs extends React.Component {
   componentDidMount() {
@@ -40,8 +46,15 @@ class Clubs extends React.Component {
           <Divider />
           <Grid>
             <Grid.Column textAlign="center" width={4}>
-              {c.item && <BookCover book={c} />}
-              <em>Currently reading</em>
+              {c.item ? (
+                <BookCover book={c} />
+              ) : (
+                <NoCover>
+                  <Divider />
+                  <em>This club has no reading selected, check back soon!</em>
+                  <Divider />
+                </NoCover>
+              )}
             </Grid.Column>
             <Grid.Column width={12}>
               <Grid.Row>
@@ -50,7 +63,12 @@ class Clubs extends React.Component {
                 </Link>
               </Grid.Row>
               <Grid.Row>
-                <Description>{c.description}</Description>
+                <Description>
+                  {paginateText(c.description, 240)}{" "}
+                  <Link to={`/clubs/${c.id}`}>
+                    (Read More)
+                  </Link>
+                </Description>
               </Grid.Row>
             </Grid.Column>
           </Grid>
@@ -63,7 +81,6 @@ class Clubs extends React.Component {
   render() {
     return (
       <Wrapper>
-        <ClubForm />
         <Divider hidden />
         <Grid>{this.displayAllClubs()}</Grid>
       </Wrapper>
