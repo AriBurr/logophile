@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCurrentClub } from '../../actions/clubs';
-import ClubBanner from './ClubBanner';
 import CurrentReading from './CurrentReading';
 import DiscussionPreview from './DiscussionPreview';
 import styled from 'styled-components';
@@ -32,7 +31,6 @@ class ClubHome extends React.Component {
     const { isModerator } = this.state;
     return (
       <Wrapper>
-        <ClubBanner />
         <Grid className="container">
           <Grid.Column width={16}>
             <Grid.Row>
