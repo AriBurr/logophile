@@ -2,12 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { fetchClubs } from '../../actions/clubs';
-import { fetchUserClubs } from '../../actions/userClubs';
+import { fetchUserClubs, joinClub } from '../../actions/userClubs';
 import { paginateText } from '../../utils/modules';
 import BookCover from '../books/BookCover';
 import ClubForm from './ClubForm';
 import styled from 'styled-components';
-import { Divider, Grid } from 'semantic-ui-react';
+
+import { Divider, Grid, Button } from 'semantic-ui-react';
 
 const Description = styled.div`
   background-color: #f8f9fd;
@@ -60,6 +61,7 @@ class Clubs extends React.Component {
                   <Link to={`/clubs/${c.id}`}>
                     (Read More)
                   </Link>
+                  <Button onClick={() => this.props.dispatch(joinClub(c.id))}>Join this club!</Button>
                 </Description>
               </Grid.Row>
             </Grid.Column>

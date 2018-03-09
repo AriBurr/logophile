@@ -8,16 +8,24 @@ import BookCover from '../books/BookCover';
 
 
 const Container = styled.div`
-  height: 85vh;
+
+  height: 100vh;
+  .parent-column{
+    padding-bottom: 3%;
+  }
   .card{
     border: 1px solid black;
     border-radius: 0 !important;
-
+    width: 100% !important;
     .right-top{
-
+      padding: 2%;
+      font-weight: 800;
+      color: hsl(0, 0%, 13%);
     }
     .right-bottom{
-      background: #E4F1FE !important;
+      background: rgba(0, 0, 0, 0.025) !important;
+      color: hsl(0, 0%, 45%);
+      color: black;
     }
   }
   .columns{
@@ -39,14 +47,14 @@ class MyClubs extends React.Component {
   mapUserClubs = () => {
     return this.props.userClubs.map(club => {
       return(
-        <Grid.Column>
+        <Grid.Column className='parent-column'>
           <Link to={`/clubs/${club.id}`} key={club.id}>
           <Grid className='card' columns={2}>
               <Grid.Row stretched className='row-style'>
-                <Grid.Column className='columns'>
+                <Grid.Column width={4} className='columns'>
                   <BookCover book={club} />
                 </Grid.Column>
-                <Grid.Column className='columns'>
+                <Grid.Column width={12} className='columns'>
                   <Header className='right-top'>{club.description}</Header>
                   <Segment basic className='right-bottom'>{ club.name }</Segment>
                 </Grid.Column>
