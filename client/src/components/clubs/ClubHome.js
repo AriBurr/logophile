@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCurrentClub } from '../../actions/clubs';
+import AnnouncementHome from './AnnouncementHome';
 import CurrentReading from './CurrentReading';
 import DiscussionPreview from './DiscussionPreview';
+import IntroductionHome from './IntroductionHome';
 import styled from 'styled-components';
 import { Grid } from 'semantic-ui-react';
-import AnnouncementFull from './AnnouncementFull';
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -32,21 +33,26 @@ class ClubHome extends React.Component {
     return (
       <Wrapper>
         <Grid className="container">
-          <Grid.Column width={16}>
-            <Grid.Row>
-              <CurrentReading
-                clubID={this.props.match.params.id}
-                isModerator={isModerator}
-              />
-            </Grid.Row>
-            <Grid.Row>
-              <AnnouncementFull />
-            </Grid.Row>
-            <Grid.Row />
-            <Grid.Row>
-              <DiscussionPreview />
-            </Grid.Row>
-          </Grid.Column>
+          <Grid.Row>
+            <Grid columns={2}>
+              <Grid.Column>
+                <CurrentReading
+                  clubID={this.props.match.params.id}
+                  isModerator={isModerator}
+                />
+              </Grid.Column>
+              <Grid.Column>
+                <IntroductionHome />
+              </Grid.Column>
+            </Grid>
+          </Grid.Row>
+          <Grid.Row>
+            <AnnouncementHome />
+          </Grid.Row>
+          <Grid.Row />
+          <Grid.Row>
+            <DiscussionPreview />
+          </Grid.Row>
         </Grid>
       </Wrapper>
     );

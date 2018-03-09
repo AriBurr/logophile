@@ -89,8 +89,10 @@ class Clubs extends React.Component {
           <Grid.Column>
             <FormAccordion />
           </Grid.Column>
-          <Grid.Column textAlign='right'>
-            <Button onClick={() => this.toggleClubView()}>My Clubs</Button>
+          <Grid.Column textAlign="right">
+            <Button onClick={() => this.toggleClubView()}>
+              {viewAll ? 'My Clubs' : 'All Clubs'}
+            </Button>
           </Grid.Column>
         </Grid>
         <Grid>{viewAll ? this.displayAllClubs() : <MyClubs />}</Grid>
@@ -102,7 +104,7 @@ class Clubs extends React.Component {
 const mapStateToProps = state => {
   return {
     allClubs: state.clubs,
-    user: state.user,
+    user: state.user
   };
 };
 

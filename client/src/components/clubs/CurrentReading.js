@@ -5,7 +5,6 @@ import { objectCheck } from '../../utils/modules';
 import BookCover from '../books/BookCover';
 import SelectReadingDropdown from './SelectReadingDropdown';
 import styled from 'styled-components';
-import IntroFull from './IntroFull'
 
 import { Button, Grid, Segment } from 'semantic-ui-react';
 
@@ -30,23 +29,25 @@ class CurrentReading extends React.Component {
     this.setState({ addingBook: !addingBook });
   };
 
-  displayBookCover = (reading) => {
+  displayBookCover = reading => {
     const { readingsLoaded } = this.state;
     if (readingsLoaded && objectCheck(reading))
       return <BookCover book={reading} />;
   };
 
-  displayDesc = (reading) => {
+  displayDesc = reading => {
     const { readingsLoaded } = this.state;
     if (readingsLoaded && objectCheck(reading))
       return (
         <div>
-          <b>Start: </b>{reading.start_date}
+          <b>Start: </b>
+          {reading.start_date}
           <br />
-          <b>Finish: </b>{reading.finish_date}
+          <b>Finish: </b>
+          {reading.finish_date}
         </div>
-      )
-  }
+      );
+  };
 
   render() {
     const { isModerator, readings } = this.props;
@@ -54,13 +55,11 @@ class CurrentReading extends React.Component {
     return (
       <Wrapper>
         <Segment>
-          <Grid>
-            <Grid.Column width={2}>
+          <Grid columns={2}>
+            <Grid.Column textAlign='center'>
               {readings.length !== 0 && this.displayBookCover(readings[0])}
             </Grid.Column>
-            <Grid.Column width={10}>
-              <IntroFull />
-
+            <Grid.Column>
               {readings.length !== 0 && this.displayDesc(readings[0])}
               {isModerator && (
                 <Button onClick={this.toggleDropdown}>

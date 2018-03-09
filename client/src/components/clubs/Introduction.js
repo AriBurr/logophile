@@ -18,7 +18,6 @@ const Introduction = ({ club, dispatch, history, isModerator, toggleEdit }) => {
   return (
     <Wrapper>
       <div>
-        <Header>{club.created_at}</Header>
         <Header>{club.name}</Header>
         <p>{club.description}</p>
         <Divider hidden />

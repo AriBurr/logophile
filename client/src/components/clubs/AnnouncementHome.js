@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import { fetchCurrentClub } from '../../actions/clubs';
 import { withRouter } from 'react-router-dom';
 
-class AnnouncementFull extends React.Component {
-  state = { annEdit: false, isModerator: false };
+class AnnouncementHome extends React.Component {
+  state = { edit: false, isModerator: false };
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -20,21 +20,21 @@ class AnnouncementFull extends React.Component {
     this.setState({ isModerator: club.is_moderator });
   };
 
-  toggleEditAnn = () => {
-    const { annEdit } = this.state;
-    this.setState({ annEdit: !annEdit });
+  toggleEdit = () => {
+    const { edit } = this.state;
+    this.setState({ edit: !edit });
   };
 
   render() {
-    const { annEdit, isModerator } = this.state;
+    const { edit, isModerator } = this.state;
     return (
       <div>
-        {annEdit ? (
-          <AnnouncementForm edit={annEdit} toggleEdit={this.toggleEditAnn} />
+        {edit ? (
+          <AnnouncementForm edit={edit} toggleEdit={this.toggleEdit} />
         ) : (
           <Announcements
             isModerator={isModerator}
-            toggleEdit={this.toggleEditAnn}
+            toggleEdit={this.toggleEdit}
           />
         )}
       </div>
@@ -46,4 +46,4 @@ const mapStateToProps = state => {
   return { club: state.currentClub, user: state.user };
 };
 
-export default withRouter(connect(mapStateToProps)(AnnouncementFull));
+export default withRouter(connect(mapStateToProps)(AnnouncementHome));
