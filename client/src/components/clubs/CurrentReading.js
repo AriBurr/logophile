@@ -7,7 +7,7 @@ import SelectReadingDropdown from './SelectReadingDropdown';
 import styled from 'styled-components';
 import IntroFull from './IntroFull'
 
-import { Button, Grid, Header, Segment } from 'semantic-ui-react';
+import { Button, Grid, Segment } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   padding: 1%;

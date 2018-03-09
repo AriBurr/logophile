@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Announcements from './Announcements';
 import AnnouncementForm from './AnnouncementForm';
 
@@ -6,14 +6,8 @@ import { connect } from 'react-redux';
 import { fetchCurrentClub } from '../../actions/clubs';
 import { withRouter } from 'react-router-dom';
 
-
-
 class AnnouncementFull extends React.Component {
-  state = {
-      annEdit: false,
-      isModerator: false
-   };
-
+  state = { annEdit: false, isModerator: false };
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -31,9 +25,9 @@ class AnnouncementFull extends React.Component {
     this.setState({ annEdit: !annEdit });
   };
 
-  render () {
+  render() {
     const { annEdit, isModerator } = this.state;
-    return(
+    return (
       <div>
         {annEdit ? (
           <AnnouncementForm edit={annEdit} toggleEdit={this.toggleEditAnn} />
@@ -44,7 +38,7 @@ class AnnouncementFull extends React.Component {
           />
         )}
       </div>
-    )
+    );
   }
 }
 

@@ -5,31 +5,24 @@ import { Header, Segment, Button } from 'semantic-ui-react';
 import { fetchAnnouncement } from '../../actions/announcements';
 import { withRouter } from 'react-router-dom';
 
-
-
 const Wrapper = styled.div`
   padding: 1%;
 `;
 
 class Announcements extends React.Component {
-
-  componentDidMount(){
-    const clubId = parseInt(this.props.match.params.id, 10)
-    this.props.dispatch(fetchAnnouncement(clubId))
+  componentDidMount() {
+    const clubId = parseInt(this.props.match.params.id, 10);
+    this.props.dispatch(fetchAnnouncement(clubId));
   }
 
   render() {
-    const { announcement, isModerator, toggleEdit } = this.props
+    const { announcement, isModerator, toggleEdit } = this.props;
     return (
       <Wrapper>
         <Segment>
           <Header>Announcements</Header>
-          <p>
-            {announcement.body}
-          </p>
-          {isModerator &&
-            <Button onClick={() => toggleEdit()}>Edit</Button>
-          }
+          <p>{announcement.body}</p>
+          {isModerator && <Button onClick={() => toggleEdit()}>Edit</Button>}
         </Segment>
       </Wrapper>
     );

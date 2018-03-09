@@ -5,7 +5,6 @@ import { fetchClubs } from '../../actions/clubs';
 import { fetchUserClubs } from '../../actions/userClubs';
 import { paginateText } from '../../utils/modules';
 import BookCover from '../books/BookCover';
-import ClubForm from './ClubForm';
 import styled from 'styled-components';
 import { Divider, Grid } from 'semantic-ui-react';
 
@@ -64,10 +63,8 @@ class Clubs extends React.Component {
               </Grid.Row>
               <Grid.Row>
                 <Description>
-                  {paginateText(c.description, 240)}{" "}
-                  <Link to={`/clubs/${c.id}`}>
-                    (Read More)
-                  </Link>
+                  {paginateText(c.description, 240)}{' '}
+                  <Link to={`/clubs/${c.id}`}>(Read More)</Link>
                 </Description>
               </Grid.Row>
             </Grid.Column>

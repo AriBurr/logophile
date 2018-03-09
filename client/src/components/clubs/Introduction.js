@@ -3,16 +3,13 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { deleteClub } from '../../actions/clubs';
 import styled from 'styled-components';
-import { Button, Divider, Header, Segment } from 'semantic-ui-react';
+import { Button, Divider, Header } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   padding: 1%;
 `;
 
 const Introduction = ({ club, dispatch, history, isModerator, toggleEdit }) => {
-
-  console.log(club)
-
   const handleDelete = () => {
     dispatch(deleteClub(club));
     history.push('/clubs');
@@ -26,8 +23,12 @@ const Introduction = ({ club, dispatch, history, isModerator, toggleEdit }) => {
         <p>{club.description}</p>
         <Divider hidden />
         {isModerator && [
-          <Button key={1} onClick={() => toggleEdit()}>Edit</Button>,
-          <Button key={2} onClick={() => handleDelete()}>Delete</Button>
+          <Button key={1} onClick={() => toggleEdit()}>
+            Edit
+          </Button>,
+          <Button key={2} onClick={() => handleDelete()}>
+            Delete
+          </Button>
         ]}
       </div>
     </Wrapper>

@@ -1,18 +1,15 @@
-import React from 'react'
+import React from 'react';
 import Introduction from './Introduction';
 import ClubForm from './ClubForm';
 import { connect } from 'react-redux';
 import { fetchCurrentClub } from '../../actions/clubs';
 import { withRouter } from 'react-router-dom';
 
-
-
 class IntroFull extends React.Component {
   state = {
-      introEdit: false,
-      isModerator: false
-   };
-
+    introEdit: false,
+    isModerator: false
+  };
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -30,9 +27,9 @@ class IntroFull extends React.Component {
     this.setState({ introEdit: !introEdit });
   };
 
-  render () {
+  render() {
     const { introEdit, isModerator } = this.state;
-    return(
+    return (
       <div>
         {introEdit ? (
           <ClubForm edit={introEdit} toggleEdit={this.toggleEditIntro} />
@@ -43,7 +40,7 @@ class IntroFull extends React.Component {
           />
         )}
       </div>
-    )
+    );
   }
 }
 
