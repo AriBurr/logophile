@@ -45,7 +45,7 @@ class ClubForm extends React.Component {
             name={edit ? 'nameEdit' : 'name'}
             value={edit ? nameEdit : name}
             placeholder='Club Name'
-            width={6}
+            width={12}
           />
           <Form.TextArea
             type="text"
@@ -53,7 +53,7 @@ class ClubForm extends React.Component {
             name={edit ? 'descEdit' : 'description'}
             value={edit ? descEdit : description}
             placeholder='Club Description'
-            width={6}
+            width={12}
           />
           <Button type="submit">Submit</Button>
           {edit && <Button onClick={() => toggleEdit()}>Cancel</Button>}

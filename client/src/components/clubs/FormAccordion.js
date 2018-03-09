@@ -3,13 +3,12 @@ import ClubForm from './ClubForm';
 import { Accordion, Icon } from 'semantic-ui-react';
 
 class FormAccordion extends React.Component {
-  state = { activeIndex: 0 };
+  state = { activeIndex: -1 };
 
   handleClick = (e, titleProps) => {
     const { index } = titleProps;
     const { activeIndex } = this.state;
     const newIndex = activeIndex === index ? -1 : index;
-
     this.setState({ activeIndex: newIndex });
   };
 

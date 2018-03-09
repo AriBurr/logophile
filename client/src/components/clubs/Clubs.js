@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { fetchClubs } from '../../actions/clubs';
-import { fetchUserClubs } from '../../actions/userClubs';
 import { paginateText } from '../../utils/modules';
 import FormAccordion from './FormAccordion';
 import BookCover from '../books/BookCover';
+import MyClubs from '../library/MyClubs';
 import styled from 'styled-components';
-import { Divider, Grid } from 'semantic-ui-react';
+import { Button, Divider, Grid } from 'semantic-ui-react';
 
 const Description = styled.div`
   background-color: #f8f9fd;
@@ -33,11 +33,16 @@ const NoCover = styled.div`
 `;
 
 class Clubs extends React.Component {
+  state = { viewAll: 'true' };
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchClubs());
-    dispatch(fetchUserClubs());
   }
+
+  toggleClubView = () => {
+    this.setState({ viewAll: !this.state.viewAll });
+  };
 
   displayAllClubs = () => {
     return this.props.allClubs.map(c => {
@@ -77,10 +82,18 @@ class Clubs extends React.Component {
   };
 
   render() {
+    const { viewAll } = this.state;
     return (
       <Wrapper>
-        <FormAccordion />
-        <Grid>{this.displayAllClubs()}</Grid>
+        <Grid columns={2}>
+          <Grid.Column>
+            <FormAccordion />
+          </Grid.Column>
+          <Grid.Column textAlign='right'>
+            <Button onClick={() => this.toggleClubView()}>My Clubs</Button>
+          </Grid.Column>
+        </Grid>
+        <Grid>{viewAll ? this.displayAllClubs() : <MyClubs />}</Grid>
       </Wrapper>
     );
   }
@@ -90,7 +103,6 @@ const mapStateToProps = state => {
   return {
     allClubs: state.clubs,
     user: state.user,
-    userClubs: state.userClubs
   };
 };
 
