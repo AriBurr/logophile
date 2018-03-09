@@ -19,10 +19,12 @@ class Club < ApplicationRecord
   end
 
   def self.find_user_clubs(user_id)
-    select("clubs.id, clubs.name, clubs.description, memberships.is_moderator")
+    select("clubs.id, clubs.name, clubs.description, memberships.is_moderator, books.item")
+    .joins("LEFT JOIN readings ON clubs.id = readings.club_id")
+    .joins("LEFT JOIN books ON readings.book_id = books.id")
     .joins("INNER JOIN memberships ON clubs.id = memberships.club_id")
     .joins("INNER JOIN users ON memberships.user_id = users.id")
-    .where("users.id = #{user_id}")
+    .where("users.id = #{user_id} AND readings.is_current = true OR readings.is_current IS NULL")
   end
 
   def self.with_moderator_status(user_id, club)

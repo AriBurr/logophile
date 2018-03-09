@@ -46,15 +46,7 @@ class Clubs extends React.Component {
           <Divider />
           <Grid>
             <Grid.Column textAlign="center" width={4}>
-              {c.item ? (
-                <BookCover book={c} />
-              ) : (
-                <NoCover>
-                  <Divider />
-                  <em>This club has no reading selected, check back soon!</em>
-                  <Divider />
-                </NoCover>
-              )}
+              <BookCover book={c} />
             </Grid.Column>
             <Grid.Column width={12}>
               <Grid.Row>

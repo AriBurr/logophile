@@ -4,6 +4,8 @@ import { fetchUserClubs } from '../../actions/userClubs'
 import { Link } from 'react-router-dom'
 import { Segment, Grid, Card, Header } from 'semantic-ui-react';
 import styled from 'styled-components'
+import BookCover from '../books/BookCover';
+
 
 const Container = styled.div`
   height: 85vh;
@@ -42,7 +44,7 @@ class MyClubs extends React.Component {
           <Grid className='card' columns={2}>
               <Grid.Row stretched className='row-style'>
                 <Grid.Column className='columns'>
-                  <Segment basic>PLACEHOLDER IMAGE</Segment>
+                  <BookCover book={club} />
                 </Grid.Column>
                 <Grid.Column className='columns'>
                   <Header className='right-top'>{club.description}</Header>

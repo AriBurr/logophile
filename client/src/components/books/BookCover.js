@@ -2,6 +2,7 @@ import React from 'react';
 import noCover from '../../assets/default.jpg';
 import styled from 'styled-components';
 import { Container } from 'semantic-ui-react';
+import defaultCover from '../../assets/default_book_cover.jpg'
 
 const Image = styled.img`
   height: 198px;
@@ -19,11 +20,12 @@ const BookCover = ({ book }) => {
   book.item ? (data = book.item) : (data = book);
 
   const { volumeInfo } = data;
+  debugger
   return (
     <Container>
       <Image
-        src={volumeInfo.imageLinks ? volumeInfo.imageLinks.thumbnail : noCover}
-        alt={`${volumeInfo.title} cover`}
+        src={volumeInfo ? volumeInfo.imageLinks.thumbnail : defaultCover}
+        alt={volumeInfo ? `${volumeInfo.title} cover` : 'Default Cover'}
       />
     </Container>
   );
