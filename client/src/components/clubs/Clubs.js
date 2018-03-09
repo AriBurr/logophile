@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { fetchClubs } from '../../actions/clubs';
 import { fetchUserClubs } from '../../actions/userClubs';
 import { paginateText } from '../../utils/modules';
+import FormAccordion from './FormAccordion';
 import BookCover from '../books/BookCover';
 import styled from 'styled-components';
 import { Divider, Grid } from 'semantic-ui-react';
@@ -78,7 +79,7 @@ class Clubs extends React.Component {
   render() {
     return (
       <Wrapper>
-        <Divider hidden />
+        <FormAccordion />
         <Grid>{this.displayAllClubs()}</Grid>
       </Wrapper>
     );
