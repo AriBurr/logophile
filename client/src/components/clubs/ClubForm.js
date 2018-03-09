@@ -42,14 +42,18 @@ class ClubForm extends React.Component {
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
             onChange={this.handleChange}
-            name={ edit ? "nameEdit" : "name" }
+            name={edit ? 'nameEdit' : 'name'}
             value={edit ? nameEdit : name}
+            placeholder='Club Name'
+            width={12}
           />
           <Form.TextArea
             type="text"
             onChange={this.handleChange}
-            name={ edit ? "descEdit" : "description" }
+            name={edit ? 'descEdit' : 'description'}
             value={edit ? descEdit : description}
+            placeholder='Club Description'
+            width={12}
           />
           <Button type="submit">Submit</Button>
           {edit && <Button onClick={() => toggleEdit()}>Cancel</Button>}

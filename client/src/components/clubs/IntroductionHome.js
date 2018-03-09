@@ -1,19 +1,15 @@
-import React from 'react'
-import Announcements from './Announcements';
-import AnnouncementForm from './AnnouncementForm';
-
+import React from 'react';
+import Introduction from './Introduction';
+import ClubForm from './ClubForm';
 import { connect } from 'react-redux';
 import { fetchCurrentClub } from '../../actions/clubs';
 import { withRouter } from 'react-router-dom';
 
-
-
-class AnnouncementFull extends React.Component {
+class IntroFull extends React.Component {
   state = {
-      annEdit: false,
-      isModerator: false
-   };
-
+    introEdit: false,
+    isModerator: false
+  };
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -26,25 +22,25 @@ class AnnouncementFull extends React.Component {
     this.setState({ isModerator: club.is_moderator });
   };
 
-  toggleEditAnn = () => {
-    const { annEdit } = this.state;
-    this.setState({ annEdit: !annEdit });
+  toggleEditIntro = () => {
+    const { introEdit } = this.state;
+    this.setState({ introEdit: !introEdit });
   };
 
-  render () {
-    const { annEdit, isModerator } = this.state;
-    return(
+  render() {
+    const { introEdit, isModerator } = this.state;
+    return (
       <div>
-        {annEdit ? (
-          <AnnouncementForm edit={annEdit} toggleEdit={this.toggleEditAnn} />
+        {introEdit ? (
+          <ClubForm edit={introEdit} toggleEdit={this.toggleEditIntro} />
         ) : (
-          <Announcements
+          <Introduction
             isModerator={isModerator}
-            toggleEdit={this.toggleEditAnn}
+            toggleEdit={this.toggleEditIntro}
           />
         )}
       </div>
-    )
+    );
   }
 }
 
@@ -52,4 +48,4 @@ const mapStateToProps = state => {
   return { club: state.currentClub, user: state.user };
 };
 
-export default withRouter(connect(mapStateToProps)(AnnouncementFull));
+export default withRouter(connect(mapStateToProps)(IntroFull));

@@ -1,16 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCurrentClub } from '../../actions/clubs';
-import ClubBanner from './ClubBanner';
-import ClubForm from './ClubForm';
+import AnnouncementHome from './AnnouncementHome';
 import CurrentReading from './CurrentReading';
-import ClubSideNav from './ClubSideNav';
 import DiscussionPreview from './DiscussionPreview';
-import Introduction from './Introduction';
+import IntroductionHome from './IntroductionHome';
 import styled from 'styled-components';
 import { Grid } from 'semantic-ui-react';
-import IntroFull from './IntroFull'
-import AnnouncementFull from './AnnouncementFull'
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -19,9 +15,7 @@ const Wrapper = styled.div`
 `;
 
 class ClubHome extends React.Component {
-  state = {
-      isModerator: false
-   };
+  state = { isModerator: false };
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -35,27 +29,30 @@ class ClubHome extends React.Component {
   };
 
   render() {
-    const { annEdit, introEdit, isModerator } = this.state;
+    const { isModerator } = this.state;
     return (
       <Wrapper>
-        <ClubBanner />
-        <Grid className='container'>
-          <Grid.Column width={16}>
-            <Grid.Row>
-              <CurrentReading
-                clubID={this.props.match.params.id}
-                isModerator={isModerator}
-              />
-            </Grid.Row>
-            <Grid.Row>
-              <AnnouncementFull />
-            </Grid.Row>
-            <Grid.Row>
-            </Grid.Row>
-            <Grid.Row>
-              <DiscussionPreview />
-            </Grid.Row>
-          </Grid.Column>
+        <Grid className="container">
+          <Grid.Row>
+            <Grid columns={2}>
+              <Grid.Column>
+                <CurrentReading
+                  clubID={this.props.match.params.id}
+                  isModerator={isModerator}
+                />
+              </Grid.Column>
+              <Grid.Column>
+                <IntroductionHome />
+              </Grid.Column>
+            </Grid>
+          </Grid.Row>
+          <Grid.Row>
+            <AnnouncementHome />
+          </Grid.Row>
+          <Grid.Row />
+          <Grid.Row>
+            <DiscussionPreview />
+          </Grid.Row>
         </Grid>
       </Wrapper>
     );

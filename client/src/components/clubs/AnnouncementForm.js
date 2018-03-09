@@ -4,30 +4,29 @@ import styled from 'styled-components';
 import { Form, Button } from 'semantic-ui-react';
 import { editAnnouncement } from '../../actions/announcements';
 
-
 const Wrapper = styled.div`
   padding: 1%;
 `;
 
 class AnnouncementForm extends React.Component {
   state = {
-    body: this.props.announcement.body,
-  }
+    body: this.props.announcement.body
+  };
 
-  handleChange = (e) => {
+  handleChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
-  }
+  };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     const { body } = this.state;
     const { dispatch, edit, toggleEdit, club } = this.props;
     const ann = { body };
     this.setState({ name: '', description: '' });
-    edit && dispatch(editAnnouncement(club.id, ann))
+    edit && dispatch(editAnnouncement(club.id, ann));
     edit && toggleEdit();
-  }
+  };
 
   render() {
     const { body } = this.state;
@@ -38,7 +37,7 @@ class AnnouncementForm extends React.Component {
           <Form.TextArea
             type="text"
             onChange={this.handleChange}
-            name={ edit && "body" }
+            name={edit && 'body'}
             value={edit && body}
           />
           {edit && <Button onClick={() => toggleEdit()}>Cancel</Button>}

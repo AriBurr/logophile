@@ -39,9 +39,8 @@ const Container = styled.div`
 
 
 class MyClubs extends React.Component {
-
-  componentDidMount(){
-    this.props.dispatch(fetchUserClubs())
+  componentDidMount() {
+    this.props.dispatch(fetchUserClubs());
   }
 
   mapUserClubs = () => {
@@ -77,12 +76,12 @@ class MyClubs extends React.Component {
           </Grid.Row>
         </Grid>
       </Segment>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => {
-  return { userClubs:  state.userClubs}
-}
+const mapStateToProps = state => {
+  return { userClubs: state.userClubs };
+};
 
 export default connect(mapStateToProps)(MyClubs);
