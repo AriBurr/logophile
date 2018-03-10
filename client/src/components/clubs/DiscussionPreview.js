@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { ButtonAction } from '../../styles/styles';
 import { Grid, Header, Segment } from 'semantic-ui-react';
 
 const Topic = styled(Segment)`
@@ -20,13 +21,7 @@ class DiscussionPreview extends React.Component {
               <Header>Discussion Preview</Header>
             </Grid.Row>
             <Grid.Row>
-              <Segment as={Topic}>Discussion Topic</Segment>
-            </Grid.Row>
-            <Grid.Row>
-              <Segment as={Topic}>Discussion Topic</Segment>
-            </Grid.Row>
-            <Grid.Row>
-              <Segment as={Topic}>Discussion Topic</Segment>
+              <ButtonAction>Add Discussion Topic</ButtonAction>
             </Grid.Row>
           </Grid>
         </Segment>
