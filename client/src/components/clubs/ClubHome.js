@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCurrentClub } from '../../actions/clubs';
 import { fetchReadings } from '../../actions/readings';
+import { fetchDiscussion } from '../../actions/discussions';
 import AnnouncementHome from './AnnouncementHome';
 import CurrentReading from './CurrentReading';
-import DiscussionPreview from './DiscussionPreview';
+import DiscussionHome from './DiscussionHome';
 import IntroductionHome from './IntroductionHome';
 import styled from 'styled-components';
 import { Grid } from 'semantic-ui-react';
@@ -23,6 +24,7 @@ class ClubHome extends React.Component {
     const clubID = this.props.match.params.id;
     dispatch(fetchCurrentClub(clubID, this.setClubLoaded));
     dispatch(fetchReadings(clubID, this.setReadingsLoaded));
+    dispatch(fetchDiscussion());
   }
 
   setReadingsLoaded = () => {
@@ -58,7 +60,7 @@ class ClubHome extends React.Component {
           </Grid.Row>
           <Grid.Row />
           <Grid.Row>
-            <DiscussionPreview />
+            <DiscussionHome />
           </Grid.Row>
         </Grid>
       </Wrapper>

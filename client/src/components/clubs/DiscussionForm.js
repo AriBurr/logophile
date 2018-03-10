@@ -21,12 +21,12 @@ class DiscussionForm extends React.Component {
     e.preventDefault();
     const { title, content, titleEdit, contentEdit } = this.state;
     const { edit, dispatch, reading, toggleEdit } = this.props;
-    const discussion = { title, content };
+    const discussion = { title, content, reading_id: reading.reading_id };
     const discussionEdit = { titleEdit, contentEdit };
     this.setState({ title: '', content: '' });
     edit
       ? dispatch(editDiscussion(this.props.discussion.id, discussionEdit))
-      : dispatch(addDiscussion(discussion, reading));
+      : dispatch(addDiscussion(discussion));
     edit && toggleEdit();
   };
 

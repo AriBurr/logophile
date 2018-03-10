@@ -8,7 +8,18 @@ const Wrapper = styled.div`
   padding: 1%;
 `;
 
-class DiscussionPreview extends React.Component {
+class DiscussionHome extends React.Component {
+  displayTopics = () => {
+    const { discussion } = this.props;
+    return discussion.map(d => {
+      return (
+        <Grid.Row>
+          {d.title}
+        </Grid.Row>
+      )
+    });
+  };
+
   render() {
     const { readings } = this.props;
     return (
@@ -16,13 +27,14 @@ class DiscussionPreview extends React.Component {
         <Segment>
           <Grid>
             <Grid.Row>
-              <Header>Discussion Preview</Header>
+              <Header>Discussion</Header>
             </Grid.Row>
             <Grid.Row>
               {readings.length !== 0 && (
                 <DiscussionForm reading={readings[0]} />
               )}
             </Grid.Row>
+            {this.displayTopics()}
           </Grid>
         </Segment>
       </Wrapper>
@@ -31,7 +43,7 @@ class DiscussionPreview extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { readings: state.readings };
+  return { readings: state.readings, discussion: state.discussions };
 };
 
-export default connect(mapStateToProps)(DiscussionPreview);
+export default connect(mapStateToProps)(DiscussionHome);

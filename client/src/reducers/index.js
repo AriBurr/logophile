@@ -5,6 +5,7 @@ import bookshelf from './bookshelf';
 import bookshelves from './bookshelves';
 import currentClub from './currentClub';
 import clubs from './clubs';
+import discussions from './discussions';
 import userClubs from './userClubs';
 import flash from './flash';
 import readings from './readings';
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   bookshelf,
   clubs,
   currentClub,
+  discussions,
   flash,
   readings,
   shelvings,

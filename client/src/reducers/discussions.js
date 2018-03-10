@@ -2,7 +2,7 @@ const discussion = (state = [], action) => {
   switch (action.type) {
     case 'ADD_DISCUSSION':
       return [...state, action.discussion];
-    case 'GET_BOOKSHELVES':
+    case 'GET_DISCUSSION':
       return action.discussion;
     case 'EDIT_DISCUSSION':
       return state.map(d => {
