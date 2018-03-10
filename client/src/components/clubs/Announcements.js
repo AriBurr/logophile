@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { Header, Segment, Button } from 'semantic-ui-react';
-import { fetchAnnouncement } from '../../actions/announcements';
 import { withRouter } from 'react-router-dom';
+import { fetchAnnouncement } from '../../actions/announcements';
+import styled from 'styled-components';
+import { ButtonAction } from '../../styles/styles';
+import { Header, Segment } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   padding: 1%;
@@ -22,7 +23,9 @@ class Announcements extends React.Component {
         <Segment>
           <Header>Announcements</Header>
           <p>{announcement.body}</p>
-          {isModerator && <Button onClick={() => toggleEdit()}>Edit</Button>}
+          {isModerator && (
+            <ButtonAction onClick={() => toggleEdit()}>Edit</ButtonAction>
+          )}
         </Segment>
       </Wrapper>
     );

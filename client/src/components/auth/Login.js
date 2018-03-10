@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { handleLogin } from '../../actions/auth';
 import styled from 'styled-components';
-import { ButtonStyle } from '../../styles/styles';
-import { Button, Form, Header, Segment } from 'semantic-ui-react';
+import { ButtonAction } from '../../styles/styles';
+import { Form, Header, Segment } from 'semantic-ui-react';
 
 const ComponentStyle = styled(Segment)`
   height: 100vh;
@@ -75,9 +75,7 @@ class Login extends Component {
           </Form.Field>
           <Link to="/register">Not a member? Register today!</Link>
           <Segment textAlign="center" basic>
-            <Button as={ButtonStyle} type="submit">
-              Submit
-            </Button>
+            <ButtonAction type="submit">Submit</ButtonAction>
           </Segment>
         </Form>
       </Segment>

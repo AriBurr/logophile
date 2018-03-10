@@ -1,20 +1,16 @@
 import React from 'react';
 import SearchBar from './SearchBar';
-import banner from '../assets/book-banner.jpg';
 import styled from 'styled-components';
 
-const Header = styled.div`
-  background-image: url(${banner});
-  background-size: cover;
-  background-position: center;
-  height: 200px;
-  width: 100%;
+const Wrapper = styled.div`
+  background-color: #f8f9fd;
+  height: 10vh;
 `;
 
 const Banner = ({ searchTerms }) => (
-  <Header>
+  <Wrapper>
     <SearchBar searchTerms={searchTerms} />
-  </Header>
+  </Wrapper>
 );
 
 export default Banner;

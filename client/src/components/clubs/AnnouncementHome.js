@@ -1,10 +1,9 @@
 import React from 'react';
-import Announcements from './Announcements';
-import AnnouncementForm from './AnnouncementForm';
-
 import { connect } from 'react-redux';
 import { fetchCurrentClub } from '../../actions/clubs';
 import { withRouter } from 'react-router-dom';
+import Announcements from './Announcements';
+import AnnouncementForm from './AnnouncementForm';
 
 class AnnouncementHome extends React.Component {
   state = { edit: false, isModerator: false };

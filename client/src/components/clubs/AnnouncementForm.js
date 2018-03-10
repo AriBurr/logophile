@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { Form, Button } from 'semantic-ui-react';
 import { editAnnouncement } from '../../actions/announcements';
+import styled from 'styled-components';
+import { ButtonAction, ButtonWarning } from '../../styles/styles';
+import { Form } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   padding: 1%;
@@ -40,8 +41,8 @@ class AnnouncementForm extends React.Component {
             name={edit && 'body'}
             value={edit && body}
           />
-          {edit && <Button onClick={() => toggleEdit()}>Cancel</Button>}
-          <Button type="submit">Submit</Button>
+        {edit && <ButtonWarning onClick={() => toggleEdit()}>Cancel</ButtonWarning>}
+          <ButtonAction type="submit">Submit</ButtonAction>
         </Form>
       </Wrapper>
     );

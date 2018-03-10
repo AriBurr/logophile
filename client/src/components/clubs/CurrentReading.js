@@ -5,8 +5,13 @@ import { objectCheck } from '../../utils/modules';
 import BookCover from '../books/BookCover';
 import SelectReadingDropdown from './SelectReadingDropdown';
 import styled from 'styled-components';
+import { ButtonAction } from '../../styles/styles';
+import { Grid} from 'semantic-ui-react';
 
-import { Button, Grid, Segment } from 'semantic-ui-react';
+const Container = styled.div`
+  border: 0;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+`;
 
 const Wrapper = styled.div`
   padding: 1%;
@@ -54,21 +59,21 @@ class CurrentReading extends React.Component {
     const { addingBook } = this.state;
     return (
       <Wrapper>
-        <Segment>
+        <Container>
           <Grid columns={2}>
             <Grid.Column textAlign='center'>
               {readings.length !== 0 && this.displayBookCover(readings[0])}
+              {isModerator && (
+                <ButtonAction onClick={this.toggleDropdown}>
+                  {addingBook ? 'Cancel' : 'Add New Reading'}
+                </ButtonAction>
+              )}
             </Grid.Column>
             <Grid.Column>
               {readings.length !== 0 && this.displayDesc(readings[0])}
-              {isModerator && (
-                <Button onClick={this.toggleDropdown}>
-                  {addingBook ? 'Cancel' : 'Add New Reading'}
-                </Button>
-              )}
             </Grid.Column>
           </Grid>
-        </Segment>
+        </Container>
         {addingBook && (
           <SelectReadingDropdown toggleDropdown={this.toggleDropdown} />
         )}

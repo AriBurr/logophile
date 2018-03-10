@@ -2,13 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { fetchClubs } from '../../actions/clubs';
-import { fetchUserClubs, joinClub } from '../../actions/userClubs';
+import { joinClub } from '../../actions/userClubs';
 import { paginateText } from '../../utils/modules';
 import FormAccordion from './FormAccordion';
 import BookCover from '../books/BookCover';
 import MyClubs from '../library/MyClubs';
 import styled from 'styled-components';
-
 import { Divider, Grid, Button } from 'semantic-ui-react';
 
 const Description = styled.div`
@@ -27,11 +26,6 @@ const Wrapper = styled.div`
   height: 100vh;
   overflow: auto;
   padding: 1%;
-`;
-const NoCover = styled.div`
-  height: 198px;
-  width: 128px;
-  padding-top: 25%;
 `;
 
 class Clubs extends React.Component {

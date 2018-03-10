@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import { fetchShelvings } from '../../actions/shelvings';
 import { addReading } from '../../actions/readings';
 import { archiveReading } from '../../actions/readings';
-import { ButtonStyle } from '../../styles/styles';
-import { Button, Dropdown, Grid, Header } from 'semantic-ui-react';
+import { ButtonAction } from '../../styles/styles';
+import { Dropdown, Grid, Header } from 'semantic-ui-react';
 
 class SelectReadingDropdown extends React.Component {
   state = {
@@ -128,13 +128,9 @@ class SelectReadingDropdown extends React.Component {
         <Grid.Column textAlign="center">
           {bookLoaded && [
             <Header key={1}>Add to Club</Header>,
-            <Button
-              key={2}
-              as={ButtonStyle}
-              onClick={() => this.handleSubmit()}
-            >
+            <ButtonAction key={2} onClick={() => this.handleSubmit()}>
               Go
-            </Button>
+            </ButtonAction>
           ]}
         </Grid.Column>
       </Grid>

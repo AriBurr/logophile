@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { addBook } from '../../actions/shelvings.js';
 import { editShelving } from '../../actions/shelvings';
 import styled from 'styled-components';
-import { ButtonStyle } from '../../styles/styles';
-import { Button, Dropdown } from 'semantic-ui-react';
+import { ButtonAction } from '../../styles/styles';
+import { Dropdown } from 'semantic-ui-react';
 
 const DropdownStyle = styled.div`
   &&& {
@@ -48,13 +48,12 @@ class BookshelfDropdown extends React.Component {
     return (
       <DropdownStyle>
         <span>
-          <Button
-            as={ButtonStyle}
+          <ButtonAction
             onClick={() => this.handleSubmit()}
             disabled={this.state.bookshelf.length < 1 ? true : false}
           >
             Select Bookshelf
-          </Button>
+          </ButtonAction>
           <Dropdown
             placeholder="Will Read"
             selection

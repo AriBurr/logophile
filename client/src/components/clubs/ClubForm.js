@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addClub, editClub } from '../../actions/clubs';
 import styled from 'styled-components';
-import { Button, Form } from 'semantic-ui-react';
+import { ButtonAction, ButtonWarning } from '../../styles/styles';
+import { Form } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   padding: 1%;
@@ -55,8 +56,8 @@ class ClubForm extends React.Component {
             placeholder='Club Description'
             width={12}
           />
-          <Button type="submit">Submit</Button>
-          {edit && <Button onClick={() => toggleEdit()}>Cancel</Button>}
+        <ButtonAction type="submit">Submit</ButtonAction>
+          {edit && <ButtonWarning onClick={() => toggleEdit()}>Cancel</ButtonWarning>}
         </Form>
       </Wrapper>
     );

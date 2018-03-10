@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { deleteClub } from '../../actions/clubs';
 import styled from 'styled-components';
-import { Button, Divider, Header } from 'semantic-ui-react';
+import { ButtonAction, ButtonWarning } from '../../styles/styles';
+import { Divider, Header } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   padding: 1%;
@@ -22,12 +23,12 @@ const Introduction = ({ club, dispatch, history, isModerator, toggleEdit }) => {
         <p>{club.description}</p>
         <Divider hidden />
         {isModerator && [
-          <Button key={1} onClick={() => toggleEdit()}>
+          <ButtonAction key={1} onClick={() => toggleEdit()}>
             Edit
-          </Button>,
-          <Button key={2} onClick={() => handleDelete()}>
+          </ButtonAction>,
+          <ButtonWarning key={2} onClick={() => handleDelete()}>
             Delete
-          </Button>
+          </ButtonWarning>
         ]}
       </div>
     </Wrapper>

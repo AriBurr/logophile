@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ButtonStyle } from '../styles/styles';
-import { Button, Form, Segment } from 'semantic-ui-react';
+import { ButtonAction } from '../styles/styles';
+import { Form, Segment } from 'semantic-ui-react';
 
 const FormContainer = styled(Form)`
+  margin: 0 auto;
   width: 60%;
-  margin: 5% auto 0 auto !important;
   text-align: center;
   position: relative;
 `;
@@ -30,7 +30,7 @@ class SearchBar extends React.Component {
     const { title, author, ibsn } = this.state;
     return (
       <Segment basic>
-        <Form as={FormContainer} onSubmit={this.handleSubmit}>
+        <FormContainer onSubmit={this.handleSubmit}>
           <Form.Group widths="equal">
             <Form.Input
               name="title"
@@ -50,11 +50,9 @@ class SearchBar extends React.Component {
               onChange={this.handleChange}
               placeholder="IBSN"
             />
-            <Button as={ButtonStyle} type="submit">
-              Submit
-            </Button>
+            <ButtonAction type="submit">Submit</ButtonAction>
           </Form.Group>
-        </Form>
+        </FormContainer>
       </Segment>
     );
   }

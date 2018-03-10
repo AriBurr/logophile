@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { registerUser } from '../../actions/auth';
 import { setFlash } from '../../actions/flash';
 import styled from 'styled-components';
-import { ButtonStyle } from '../../styles/styles';
-import { Button, Form, Header, Segment } from 'semantic-ui-react';
+import { ButtonAction } from '../../styles/styles';
+import { Form, Header, Segment } from 'semantic-ui-react';
 
 const ComponentStyle = styled(Segment)`
   span {
@@ -103,9 +103,7 @@ class Register extends Component {
           </Form.Field>
           <Link to="/login">Already a member? Sign in!</Link>
           <Segment basic textAlign="center">
-            <Button as={ButtonStyle} type="submit">
-              Submit
-            </Button>
+            <ButtonAction type="submit">Submit</ButtonAction>
           </Segment>
         </Form>
       </Segment>
