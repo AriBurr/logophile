@@ -15,16 +15,25 @@ const Image = styled.img`
   }
 `;
 
-const BookCover = ({ book }) => {
-  let data = null;
-  book.item ? (data = book.item) : (data = book);
+const ensureNormalData = (data) => {
+let normal = {}
+data.item || data.item === null ? normal = data : normal.item = data
+return normal
+}
 
-  const { volumeInfo } = data;
+const imagesAvailable = (data) => {
+  if(data.item === null) return
+  if (data.item.volumeInfo.imageLinks) return true
+  return false
+}
+
+const BookCover = ({ book }) => {
+  const data = ensureNormalData(book)
   return (
     <Container>
       <Image
-        src={volumeInfo.imageLinks ? volumeInfo.imageLinks.thumbnail : defaultCover}
-        alt={volumeInfo ? `${volumeInfo.title} cover` : 'Default Cover'}
+        src={imagesAvailable(data) ? data.item.volumeInfo.imageLinks.thumbnail : defaultCover}
+        alt={imagesAvailable(data) ? `${data.title} cover` : 'Default Cover'}
       />
     </Container>
   );

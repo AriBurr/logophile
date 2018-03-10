@@ -49,11 +49,9 @@ class MyClubs extends React.Component {
                 <Grid.Column width={4} className="columns">
                   <BookCover book={club} />
                 </Grid.Column>
-                <Grid.Column width={12} className="columns">
-                  <Header className="right-top">{club.description}</Header>
-                  <Segment basic className="right-bottom">
-                    {club.name}
-                  </Segment>
+                <Grid.Column width={12} className='columns'>
+                  <Header className='right-top'>{club.name}</Header>
+                  <Segment basic className='right-bottom'>{club.description}</Segment>
                 </Grid.Column>
               </Grid.Row>
             </Grid>
