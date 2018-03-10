@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import DiscussionForm from './DiscussionForm';
 import styled from 'styled-components';
 import { ButtonAction } from '../../styles/styles';
 import { Grid, Header, Segment } from 'semantic-ui-react';
@@ -21,7 +22,7 @@ class DiscussionPreview extends React.Component {
               <Header>Discussion Preview</Header>
             </Grid.Row>
             <Grid.Row>
-              <ButtonAction>Add Discussion Topic</ButtonAction>
+              <DiscussionForm />
             </Grid.Row>
           </Grid>
         </Segment>
