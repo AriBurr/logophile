@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchReadings } from '../../actions/readings';
 import { objectCheck } from '../../utils/modules';
 import BookCover from '../books/BookCover';
 import SelectReadingDropdown from './SelectReadingDropdown';
@@ -18,16 +17,7 @@ const Wrapper = styled.div`
 `;
 
 class CurrentReading extends React.Component {
-  state = { addingBook: false, readingsLoaded: false };
-
-  componentDidMount() {
-    const { clubID, dispatch } = this.props;
-    dispatch(fetchReadings(clubID, this.setReadingsLoaded));
-  }
-
-  setReadingsLoaded = () => {
-    this.setState({ readingsLoaded: true });
-  };
+  state = { addingBook: false };
 
   toggleDropdown = () => {
     const { addingBook } = this.state;
@@ -35,13 +25,13 @@ class CurrentReading extends React.Component {
   };
 
   displayBookCover = reading => {
-    const { readingsLoaded } = this.state;
+    const { readingsLoaded } = this.props;
     if (readingsLoaded && objectCheck(reading))
       return <BookCover book={reading} />;
   };
 
   displayDesc = reading => {
-    const { readingsLoaded } = this.state;
+    const { readingsLoaded } = this.props;
     if (readingsLoaded && objectCheck(reading))
       return (
         <div>

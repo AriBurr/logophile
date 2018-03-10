@@ -1,4 +1,4 @@
-class Api::BookshelvesController < ApiController
+class Api::DiscussionsController < ApiController
   before_action :require_login
   before_action :set_discussion, only: [:update, :destroy]
 
@@ -29,7 +29,7 @@ class Api::BookshelvesController < ApiController
 
   private
     def discussion_params
-      params.require(:discussion).permit(:title, :content)
+      params.require(:discussion).permit(:title, :content, :reading_id)
     end
 
     def set_discussion

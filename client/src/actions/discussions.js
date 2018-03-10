@@ -2,10 +2,11 @@ import axios from 'axios';
 import { setFlash } from '../actions/flash';
 import { setHeaders } from '../actions/headers';
 
-export const addDiscussion = discussion => {
+export const addDiscussion = (discussion, reading) => {
+  debugger
   return dispatch => {
     axios
-      .post('/api/discussions', { discussion }, setHeaders())
+      .post(`/api/discussions?reading_id=${reading.id}`, { discussion }, setHeaders())
       .then(res => dispatch({ type: 'ADD_DISCUSSION', discussion: res.data }))
       .catch(err =>
         dispatch(

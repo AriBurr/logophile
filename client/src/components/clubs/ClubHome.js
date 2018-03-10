@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCurrentClub } from '../../actions/clubs';
+import { fetchReadings } from '../../actions/readings';
 import AnnouncementHome from './AnnouncementHome';
 import CurrentReading from './CurrentReading';
 import DiscussionPreview from './DiscussionPreview';
@@ -15,13 +16,18 @@ const Wrapper = styled.div`
 `;
 
 class ClubHome extends React.Component {
-  state = { isModerator: false };
+  state = { isModerator: false, readingsLoaded: false };
 
   componentDidMount() {
     const { dispatch } = this.props;
     const clubID = this.props.match.params.id;
     dispatch(fetchCurrentClub(clubID, this.setClubLoaded));
+    dispatch(fetchReadings(clubID, this.setReadingsLoaded));
   }
+
+  setReadingsLoaded = () => {
+    this.setState({ readingsLoaded: true });
+  };
 
   setClubLoaded = () => {
     const { club } = this.props;
@@ -29,7 +35,7 @@ class ClubHome extends React.Component {
   };
 
   render() {
-    const { isModerator } = this.state;
+    const { isModerator, readingsLoaded } = this.state;
     return (
       <Wrapper>
         <Grid className="container">
@@ -39,6 +45,7 @@ class ClubHome extends React.Component {
                 <CurrentReading
                   clubID={this.props.match.params.id}
                   isModerator={isModerator}
+                  readingsLoaded={readingsLoaded}
                 />
               </Grid.Column>
               <Grid.Column>

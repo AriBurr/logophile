@@ -2,18 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import DiscussionForm from './DiscussionForm';
 import styled from 'styled-components';
-import { ButtonAction } from '../../styles/styles';
 import { Grid, Header, Segment } from 'semantic-ui-react';
 
-const Topic = styled(Segment)`
-  width: 100%;
-`;
 const Wrapper = styled.div`
   padding: 1%;
 `;
 
 class DiscussionPreview extends React.Component {
   render() {
+    const { readings } = this.props;
     return (
       <Wrapper>
         <Segment>
@@ -22,7 +19,9 @@ class DiscussionPreview extends React.Component {
               <Header>Discussion Preview</Header>
             </Grid.Row>
             <Grid.Row>
-              <DiscussionForm />
+              {readings.length !== 0 && (
+                <DiscussionForm reading={readings[0]} />
+              )}
             </Grid.Row>
           </Grid>
         </Segment>
@@ -31,4 +30,8 @@ class DiscussionPreview extends React.Component {
   }
 }
 
-export default connect()(DiscussionPreview);
+const mapStateToProps = state => {
+  return { readings: state.readings };
+};
+
+export default connect(mapStateToProps)(DiscussionPreview);
