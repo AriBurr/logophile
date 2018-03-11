@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { fetchComments } from '../../actions/comments';
 import CommentForm from './CommentForm';
 import DiscussionForm from './DiscussionForm';
 import styled from 'styled-components';
@@ -22,9 +23,14 @@ class DiscussionHome extends React.Component {
   state = { activeIndex: 0, comment: false };
 
   handleClick = (e, titleProps) => {
+    const { dispatch, discussion } = this.props;
     const { index } = titleProps;
     const { activeIndex } = this.state;
     const newIndex = activeIndex === index ? -1 : index;
+    const discussionID = discussion.filter(
+      d => d.title === e.target.innerText
+    )[0].id;
+    dispatch(fetchComments(discussionID));
     this.setState({ activeIndex: newIndex });
   };
 
@@ -33,8 +39,15 @@ class DiscussionHome extends React.Component {
     this.setState({ comment: !comment });
   };
 
+  displayComments = () => {
+    const { comments } = this.props;
+    return comments.map(c => {
+      return <div>{c.content}</div>;
+    });
+  };
+
   displayTopics = () => {
-    const { discussion } = this.props;
+    const { comments, discussion } = this.props;
     const { activeIndex, comment } = this.state;
     return discussion.map(d => {
       return (
@@ -55,6 +68,7 @@ class DiscussionHome extends React.Component {
               <ButtonAction onClick={this.toggleCommentForm}>
                 {comment ? 'Cancel' : 'Reply'}
               </ButtonAction>
+              {comments.length !== 0 && this.displayComments()}
             </Accordion.Content>
           </Accordion>
         </Grid.Row>
@@ -85,7 +99,11 @@ class DiscussionHome extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { readings: state.readings, discussion: state.discussions };
+  return {
+    readings: state.readings,
+    discussion: state.discussions,
+    comments: state.comments
+  };
 };
 
 export default connect(mapStateToProps)(DiscussionHome);

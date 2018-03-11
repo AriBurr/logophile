@@ -1,9 +1,9 @@
-const comment = (state = [], action) => {
+const comments = (state = [], action) => {
   switch (action.type) {
     case 'ADD_COMMENT':
       return [...state, action.comment];
     case 'GET_COMMENT':
-      return action.comment;
+      return action.comments;
     case 'EDIT_COMMENT':
       return state.map(c => {
         if (c.id === action.comment.id) return action.comment;
@@ -16,4 +16,4 @@ const comment = (state = [], action) => {
   }
 };
 
-export default comment;
+export default comments;

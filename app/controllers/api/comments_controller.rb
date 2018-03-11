@@ -1,9 +1,10 @@
-class Api::CommentsController < ApplicationController
+class Api::CommentsController < ApiController
   before_action :require_login
   before_action :set_comment, only: [:update, :destroy]
+  before_action :set_discussion, only: [:index]
 
   def index
-    render json: current_user.comments.all.order(created_at: :asc)
+    render json: @discussion.comments
   end
 
   def create
@@ -33,6 +34,10 @@ class Api::CommentsController < ApplicationController
     end
 
     def set_comment
-      @comment = current_user.comments.find(params[:id])
+      @comment = Comment.find(params[:id])
+    end
+
+    def set_discussion
+      @discussion = Discussion.find(params[:discussion_id])
     end
 end

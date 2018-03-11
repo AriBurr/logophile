@@ -18,10 +18,10 @@ export const addDiscussion = (discussion) => {
   };
 };
 
-export const fetchDiscussion = () => {
+export const fetchDiscussion = (reading) => {
   return dispatch => {
     axios
-      .get('/api/discussions/', setHeaders())
+      .get(`/api/discussions?reading_id=${reading.reading_id}`, setHeaders())
       .then(res => dispatch({ type: 'GET_DISCUSSION', discussion: res.data }))
       .catch(err =>
         setFlash(

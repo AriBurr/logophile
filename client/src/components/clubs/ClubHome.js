@@ -20,11 +20,17 @@ class ClubHome extends React.Component {
   state = { isModerator: false, readingsLoaded: false };
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, readings } = this.props;
+    const { readingsLoaded } = this.state;
     const clubID = this.props.match.params.id;
     dispatch(fetchCurrentClub(clubID, this.setClubLoaded));
     dispatch(fetchReadings(clubID, this.setReadingsLoaded));
-    dispatch(fetchDiscussion());
+  }
+
+  componentWillUpdate() {
+    const { dispatch, readings } = this.props;
+    const { readingsLoaded } = this.state;
+    readingsLoaded && dispatch(fetchDiscussion(readings[0]))
   }
 
   setReadingsLoaded = () => {
@@ -69,7 +75,7 @@ class ClubHome extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { club: state.currentClub };
+  return { club: state.currentClub, readings: state.readings };
 };
 
 export default connect(mapStateToProps)(ClubHome);

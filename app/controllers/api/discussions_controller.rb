@@ -1,9 +1,10 @@
 class Api::DiscussionsController < ApiController
   before_action :require_login
   before_action :set_discussion, only: [:update, :destroy]
+  before_action :set_reading, only: [:index]
 
   def index
-    render json: current_user.discussions.all.order(created_at: :asc)
+    render json: @reading.discussions
   end
 
   def create
@@ -34,6 +35,10 @@ class Api::DiscussionsController < ApiController
 
     def set_discussion
       @discussion = current_user.discussions.find(params[:id])
+    end
+
+    def set_reading
+      @reading = Reading.find(params[:reading_id])
     end
 
 end
