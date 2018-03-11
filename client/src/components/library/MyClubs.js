@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { Grid, Header, Segment } from 'semantic-ui-react';
 
 const Container = styled.div`
-  height: 100vh;
+  height: 100%;
   .parent-column {
     padding-bottom: 3%;
   }
@@ -15,6 +15,7 @@ const Container = styled.div`
     border: 1px solid black;
     border-radius: 0 !important;
     width: 100% !important;
+    height: 202px !important;
     .right-top {
       padding: 2%;
       font-weight: 800;

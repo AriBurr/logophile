@@ -23,6 +23,7 @@ return normal
 
 const imagesAvailable = (data) => {
   if(data.item === null) return
+  if (data.item.volumeInfo === undefined) return false
   if (data.item.volumeInfo.imageLinks) return true
   return false
 }
