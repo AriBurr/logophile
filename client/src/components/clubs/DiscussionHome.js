@@ -18,6 +18,22 @@ import {
 const Wrapper = styled.div`
   padding: 1%;
 `;
+const AccordionTitle = styled(Accordion.Title)`
+  background-color: rgba(147, 183, 190, 0.5);
+  padding-left: 1% !important;
+`;
+const AccordionContent = styled(Accordion.Content)`
+  padding-left: 1% !important;
+  padding-right: 1% !important;
+`;
+const CommentIndex = styled.p`
+  background-color: #FCF5C7;
+  padding: 1% !important;
+`;
+const Comment = styled.div`
+  padding-left: 1% !important;
+  padding-right: 1% !important;
+`;
 
 class DiscussionHome extends React.Component {
   state = { activeIndex: 0, comment: false };
@@ -41,8 +57,14 @@ class DiscussionHome extends React.Component {
 
   displayComments = () => {
     const { comments } = this.props;
-    return comments.map(c => {
-      return <div>{c.content}</div>;
+    return comments.map((c, i) => {
+      return (
+        <Comment>
+          <CommentIndex>Message {i + 1}</CommentIndex>
+          <p>{c.content}</p>
+          <br />
+        </Comment>
+      );
     });
   };
 
@@ -51,25 +73,24 @@ class DiscussionHome extends React.Component {
     const { activeIndex, comment } = this.state;
     return discussion.map(d => {
       return (
-        <Grid.Row key={d.id}>
-          <Accordion>
-            <Accordion.Title
+        <Grid.Row stretched key={d.id}>
+          <Accordion fluid>
+            <AccordionTitle
               active={activeIndex === d.id}
               index={d.id}
               onClick={this.handleClick}
             >
-              <Icon name="chevron down" />
               {d.title}
-            </Accordion.Title>
-            <Accordion.Content active={activeIndex === d.id}>
-              {d.content}
-              <Divider />
-              {comment && <CommentForm {...d} comment={comment} />}
+            </AccordionTitle>
+            <AccordionContent active={activeIndex === d.id}>
+              <p>{d.content}</p>
               <ButtonAction onClick={this.toggleCommentForm}>
                 {comment ? 'Cancel' : 'Reply'}
               </ButtonAction>
+              <Divider hidden />
+              {comment && <CommentForm {...d} comment={comment} />}
               {comments.length !== 0 && this.displayComments()}
-            </Accordion.Content>
+            </AccordionContent>
           </Accordion>
         </Grid.Row>
       );

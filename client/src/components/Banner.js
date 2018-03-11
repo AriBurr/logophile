@@ -3,7 +3,7 @@ import SearchBar from './SearchBar';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  background-color: #f8f9fd;
+  background-color: #F8F9FD;
   height: 10vh;
 `;
 
