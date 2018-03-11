@@ -1,22 +1,64 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import CommentForm from './CommentForm';
 import DiscussionForm from './DiscussionForm';
 import styled from 'styled-components';
-import { Grid, Header, Segment } from 'semantic-ui-react';
+import { ButtonAction } from '../../styles/styles';
+import {
+  Accordion,
+  Button,
+  Divider,
+  Grid,
+  Header,
+  Icon,
+  Segment
+} from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   padding: 1%;
 `;
 
 class DiscussionHome extends React.Component {
+  state = { activeIndex: 0, comment: false };
+
+  handleClick = (e, titleProps) => {
+    const { index } = titleProps;
+    const { activeIndex } = this.state;
+    const newIndex = activeIndex === index ? -1 : index;
+    this.setState({ activeIndex: newIndex });
+  };
+
+  toggleCommentForm = () => {
+    const { comment } = this.state;
+    this.setState({ comment: !comment });
+  };
+
   displayTopics = () => {
     const { discussion } = this.props;
+    const { activeIndex, comment } = this.state;
     return discussion.map(d => {
       return (
-        <Grid.Row>
-          {d.title}
+        <Grid.Row key={d.id}>
+          <Accordion>
+            <Accordion.Title
+              active={activeIndex === d.id}
+              index={d.id}
+              onClick={this.handleClick}
+            >
+              <Icon name="chevron down" />
+              {d.title}
+            </Accordion.Title>
+            <Accordion.Content active={activeIndex === d.id}>
+              {d.content}
+              <Divider />
+              {comment && <CommentForm {...d} comment={comment} />}
+              <ButtonAction onClick={this.toggleCommentForm}>
+                {comment ? 'Cancel' : 'Reply'}
+              </ButtonAction>
+            </Accordion.Content>
+          </Accordion>
         </Grid.Row>
-      )
+      );
     });
   };
 
