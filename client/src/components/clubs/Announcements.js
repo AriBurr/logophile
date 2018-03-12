@@ -8,6 +8,13 @@ import { Header, Segment } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   padding: 1%;
+  margin: 0 auto;
+  .header{
+    text-align: center;
+  }
+  .segment{
+    border-radius: 0px !important;
+  }
 `;
 
 class Announcements extends React.Component {

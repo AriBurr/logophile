@@ -5,7 +5,7 @@ import BookCover from '../books/BookCover';
 import SelectReadingDropdown from './SelectReadingDropdown';
 import styled from 'styled-components';
 import { ButtonAction } from '../../styles/styles';
-import { Grid} from 'semantic-ui-react';
+import { Grid, Header } from 'semantic-ui-react';
 
 const Container = styled.div`
   border: 0;
@@ -13,7 +13,11 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-  padding: 1%;
+  background: rgba(0, 0, 0, 0.025) !important;
+  .heading {
+    text-align: center;
+    color: #1C263D;
+  }
 `;
 
 class CurrentReading extends React.Component {
@@ -50,18 +54,25 @@ class CurrentReading extends React.Component {
     return (
       <Wrapper>
         <Container>
-          <Grid columns={2}>
-            <Grid.Column textAlign='center'>
-              {readings.length !== 0 && this.displayBookCover(readings[0])}
-              {isModerator && (
-                <ButtonAction onClick={this.toggleDropdown}>
-                  {addingBook ? 'Cancel' : 'Add New Reading'}
-                </ButtonAction>
-              )}
-            </Grid.Column>
-            <Grid.Column>
-              {readings.length !== 0 && this.displayDesc(readings[0])}
-            </Grid.Column>
+          <Grid>
+            <Grid.Row className="heading">
+              <Grid.Column>
+                <Header>We are currently Reading</Header>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column width={7} textAlign="center">
+                {readings.length !== 0 && this.displayBookCover(readings[0])}
+                {isModerator && (
+                  <ButtonAction onClick={this.toggleDropdown}>
+                    {addingBook ? 'Cancel' : 'Add New Reading'}
+                  </ButtonAction>
+                )}
+              </Grid.Column>
+              <Grid.Column width={9}>
+                {readings.length !== 0 && this.displayDesc(readings[0])}
+              </Grid.Column>
+            </Grid.Row>
           </Grid>
         </Container>
         {addingBook && (

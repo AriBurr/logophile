@@ -14,6 +14,13 @@ import {
   Segment
 } from 'semantic-ui-react';
 
+const Wrapper = styled.div`
+  padding: 1%;
+  width: 100%;
+  .text-wrapper{
+    padding: 3% !important;
+  }
+`;
 const AccordionTitle = styled(Accordion.Title)`
   background-color: rgba(147, 183, 190, 0.5);
   padding-left: 1% !important;
@@ -33,9 +40,6 @@ const Comment = styled.div`
 const Container = styled.div`
   border: 0;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
-`;
-const Wrapper = styled.div`
-  padding: 1%;
 `;
 
 class DiscussionHome extends React.Component {

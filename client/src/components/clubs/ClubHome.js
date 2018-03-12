@@ -8,12 +8,24 @@ import CurrentReading from './CurrentReading';
 import DiscussionHome from './DiscussionHome';
 import IntroductionHome from './IntroductionHome';
 import styled from 'styled-components';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Segment } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
-  height: 100vh;
-  overflow: auto;
+  height: 100%;
   padding: 1%;
+  .scroll-container{
+    width: 70%;
+    padding:3% !important;
+    margin: 0 auto !important;
+  }
+  .row{
+    width: 90% !important;
+  }
+  .grid-row{
+    width: 100%;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
 `;
 
 class ClubHome extends React.Component {
@@ -47,33 +59,31 @@ class ClubHome extends React.Component {
     const { isModerator, readingsLoaded } = this.state;
     return (
       <Wrapper>
-        <Grid className="container">
-          <Grid.Row>
-            <Grid columns={2}>
-              <Grid.Column>
-                <CurrentReading
-                  clubID={this.props.match.params.id}
-                  isModerator={isModerator}
-                  readingsLoaded={readingsLoaded}
-                />
-              </Grid.Column>
-              <Grid.Column>
-                <IntroductionHome />
-              </Grid.Column>
-            </Grid>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column textAlign='center'>
+        <Segment className='scroll-container'>
+          <Grid>
+            <Grid.Row>
+              <Grid columns={2} className='grid-row'>
+                <Grid.Column>
+                  <CurrentReading
+                    clubID={this.props.match.params.id}
+                    isModerator={isModerator}
+                    readingsLoaded={readingsLoaded}
+                    />
+                </Grid.Column>
+                <Grid.Column>
+                  <IntroductionHome />
+                </Grid.Column>
+              </Grid>
+            </Grid.Row>
+            <Grid.Row>
               <AnnouncementHome />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row />
-          <Grid.Row>
-            <Grid.Column>
+            </Grid.Row>
+            <Grid.Row />
+            <Grid.Row>
               <DiscussionHome />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+            </Grid.Row>
+          </Grid>
+        </Segment>
       </Wrapper>
     );
   }
