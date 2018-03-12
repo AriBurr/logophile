@@ -20,8 +20,7 @@ class ClubHome extends React.Component {
   state = { isModerator: false, readingsLoaded: false };
 
   componentDidMount() {
-    const { dispatch, readings } = this.props;
-    const { readingsLoaded } = this.state;
+    const { dispatch } = this.props;
     const clubID = this.props.match.params.id;
     dispatch(fetchCurrentClub(clubID, this.setClubLoaded));
     dispatch(fetchReadings(clubID, this.setReadingsLoaded));
@@ -62,11 +61,15 @@ class ClubHome extends React.Component {
             </Grid>
           </Grid.Row>
           <Grid.Row>
-            <AnnouncementHome />
+            <Grid.Column textAlign='center'>
+              <AnnouncementHome />
+            </Grid.Column>
           </Grid.Row>
           <Grid.Row />
           <Grid.Row>
-            <DiscussionHome />
+            <Grid.Column>
+              <DiscussionHome />
+            </Grid.Column>
           </Grid.Row>
         </Grid>
       </Wrapper>

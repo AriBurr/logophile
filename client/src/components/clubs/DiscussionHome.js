@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import { ButtonAction } from '../../styles/styles';
 import {
   Accordion,
-  Button,
   Divider,
   Grid,
   Header,
@@ -15,9 +14,6 @@ import {
   Segment
 } from 'semantic-ui-react';
 
-const Wrapper = styled.div`
-  padding: 1%;
-`;
 const AccordionTitle = styled(Accordion.Title)`
   background-color: rgba(147, 183, 190, 0.5);
   padding-left: 1% !important;
@@ -27,16 +23,23 @@ const AccordionContent = styled(Accordion.Content)`
   padding-right: 1% !important;
 `;
 const CommentIndex = styled.p`
-  background-color: #FCF5C7;
+  background-color: #fcf5c7;
   padding: 1% !important;
 `;
 const Comment = styled.div`
   padding-left: 1% !important;
   padding-right: 1% !important;
 `;
+const Container = styled.div`
+  border: 0;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+`;
+const Wrapper = styled.div`
+  padding: 1%;
+`;
 
 class DiscussionHome extends React.Component {
-  state = { activeIndex: 0, comment: false };
+  state = { activeIndex: 0, addComment: false, addDiscussion: false };
 
   handleClick = (e, titleProps) => {
     const { dispatch, discussion } = this.props;
@@ -51,15 +54,20 @@ class DiscussionHome extends React.Component {
   };
 
   toggleCommentForm = () => {
-    const { comment } = this.state;
-    this.setState({ comment: !comment });
+    const { addComment } = this.state;
+    this.setState({ addComment: !addComment });
+  };
+
+  toggleDiscussionForm = () => {
+    const { addDiscussion } = this.state;
+    this.setState({ addDiscussion: !addDiscussion });
   };
 
   displayComments = () => {
     const { comments } = this.props;
     return comments.map((c, i) => {
       return (
-        <Comment>
+        <Comment key={i}>
           <CommentIndex>Message {i + 1}</CommentIndex>
           <p>{c.content}</p>
           <br />
@@ -68,9 +76,9 @@ class DiscussionHome extends React.Component {
     });
   };
 
-  displayTopics = () => {
+  displayDiscussion = () => {
     const { comments, discussion } = this.props;
-    const { activeIndex, comment } = this.state;
+    const { activeIndex, addComment } = this.state;
     return discussion.map(d => {
       return (
         <Grid.Row stretched key={d.id}>
@@ -85,10 +93,10 @@ class DiscussionHome extends React.Component {
             <AccordionContent active={activeIndex === d.id}>
               <p>{d.content}</p>
               <ButtonAction onClick={this.toggleCommentForm}>
-                {comment ? 'Cancel' : 'Reply'}
+                {addComment ? 'Cancel' : 'Reply'}
               </ButtonAction>
               <Divider hidden />
-              {comment && <CommentForm {...d} comment={comment} />}
+              {addComment && <CommentForm {...d} addComment={addComment} />}
               {comments.length !== 0 && this.displayComments()}
             </AccordionContent>
           </Accordion>
@@ -99,21 +107,38 @@ class DiscussionHome extends React.Component {
 
   render() {
     const { readings } = this.props;
+    const { addDiscussion } = this.state;
     return (
       <Wrapper>
-        <Segment>
+        <Container>
           <Grid>
             <Grid.Row>
-              <Header>Discussion</Header>
+              <Grid columns={2}>
+                <Grid.Column textAlign="right">
+                  <Header>Discussion</Header>
+                </Grid.Column>
+                <Grid.Column textAlign="left">
+                  <em>Add a Discussion Topic</em>&nbsp;
+                  <Icon
+                    name="plus"
+                    size="small"
+                    onClick={this.toggleDiscussionForm}
+                  />
+                </Grid.Column>
+              </Grid>
             </Grid.Row>
-            <Grid.Row>
-              {readings.length !== 0 && (
-                <DiscussionForm reading={readings[0]} />
-              )}
+            <Grid.Row textAlign="center">
+              {addDiscussion &&
+                readings.length !== 0 && (
+                  <DiscussionForm
+                    toggleDiscussionForm={this.toggleDiscussionForm}
+                    reading={readings[0]}
+                  />
+                )}
             </Grid.Row>
-            {this.displayTopics()}
+            {this.displayDiscussion()}
           </Grid>
-        </Segment>
+        </Container>
       </Wrapper>
     );
   }

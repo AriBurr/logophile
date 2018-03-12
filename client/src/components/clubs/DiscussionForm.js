@@ -6,13 +6,15 @@ import { ButtonAction, ButtonWarning } from '../../styles/styles';
 import { Form } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
+  margin: 0 auto;
   padding: 1%;
+  width: 60%;
 `;
 
 class DiscussionForm extends React.Component {
   state = {
     title: '',
-    content: '',
+    content: ''
     // titleEdit: this.props.club.title,
     // contentEdit: this.props.club.content
   };
@@ -37,7 +39,7 @@ class DiscussionForm extends React.Component {
 
   render() {
     const { title, content, titleEdit, contentEdit } = this.state;
-    const { edit, toggleEdit } = this.props;
+    const { toggleDiscussionForm, edit, toggleEdit } = this.props;
     return (
       <Wrapper>
         <Form onSubmit={this.handleSubmit}>
@@ -45,17 +47,31 @@ class DiscussionForm extends React.Component {
             onChange={this.handleChange}
             name={edit ? 'titleEdit' : 'title'}
             value={edit ? titleEdit : title}
-            placeholder='Discussion Title'
+            placeholder="Discussion Title"
           />
           <Form.TextArea
             type="text"
             onChange={this.handleChange}
             name={edit ? 'contentEdit' : 'content'}
             value={edit ? contentEdit : content}
-            placeholder='Discussion Body'
+            placeholder="Discussion Body"
           />
-        <ButtonAction type="submit">Submit</ButtonAction>
-          {edit && <ButtonWarning onClick={() => toggleEdit()}>Cancel</ButtonWarning>}
+          {edit && (
+            <ButtonWarning floated="right" onClick={() => toggleEdit()}>
+              Cancel
+            </ButtonWarning>
+          )}
+          {addDiscussion && (
+            <ButtonWarning
+              floated="right"
+              onClick={() => toggleDiscussionForm()}
+            >
+              Cancel
+            </ButtonWarning>
+          )}
+          <ButtonAction floated="right" type="submit">
+            Submit
+          </ButtonAction>
         </Form>
       </Wrapper>
     );

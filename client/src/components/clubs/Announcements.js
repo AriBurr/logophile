@@ -20,13 +20,11 @@ class Announcements extends React.Component {
     const { announcement, isModerator, toggleEdit } = this.props;
     return (
       <Wrapper>
-        <Segment>
-          <Header>Announcements</Header>
-          <p>{announcement.body}</p>
-          {isModerator && (
-            <ButtonAction onClick={() => toggleEdit()}>Edit</ButtonAction>
-          )}
-        </Segment>
+        <Header>Announcements</Header>
+        <p>{announcement.body}</p>
+        {isModerator && (
+          <ButtonAction onClick={() => toggleEdit()}>Edit</ButtonAction>
+        )}
       </Wrapper>
     );
   }

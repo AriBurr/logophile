@@ -19,7 +19,7 @@ class CommentForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const { content, contentEdit } = this.state;
-    const { edit, dispatch, discussion, toggleEdit, id } = this.props;
+    const { edit, dispatch, toggleEdit, id } = this.props;
     const comment = { content, discussion_id: id };
     const commentEdit = { contentEdit };
     this.setState({ content: '' });

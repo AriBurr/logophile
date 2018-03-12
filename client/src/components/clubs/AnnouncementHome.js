@@ -4,6 +4,12 @@ import { fetchCurrentClub } from '../../actions/clubs';
 import { withRouter } from 'react-router-dom';
 import Announcements from './Announcements';
 import AnnouncementForm from './AnnouncementForm';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  border: 0;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+`;
 
 class AnnouncementHome extends React.Component {
   state = { edit: false, isModerator: false };
@@ -27,7 +33,7 @@ class AnnouncementHome extends React.Component {
   render() {
     const { edit, isModerator } = this.state;
     return (
-      <div>
+      <Container>
         {edit ? (
           <AnnouncementForm edit={edit} toggleEdit={this.toggleEdit} />
         ) : (
@@ -36,7 +42,7 @@ class AnnouncementHome extends React.Component {
             toggleEdit={this.toggleEdit}
           />
         )}
-      </div>
+      </Container>
     );
   }
 }
