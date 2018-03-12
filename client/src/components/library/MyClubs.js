@@ -43,16 +43,18 @@ class MyClubs extends React.Component {
   mapUserClubs = () => {
     return this.props.userClubs.map(club => {
       return (
-        <Grid.Column className="parent-column">
+        <Grid.Column key={club.id} className="parent-column">
           <Link to={`/clubs/${club.id}`} key={club.id}>
             <Grid className="card" columns={2}>
               <Grid.Row stretched className="row-style">
                 <Grid.Column width={4} className="columns">
                   <BookCover book={club} />
                 </Grid.Column>
-                <Grid.Column width={12} className='columns'>
-                  <Header className='right-top'>{club.name}</Header>
-                  <Segment basic className='right-bottom'>{club.description}</Segment>
+                <Grid.Column width={12} className="columns">
+                  <Header className="right-top">{club.name}</Header>
+                  <Segment basic className="right-bottom">
+                    {club.description}
+                  </Segment>
                 </Grid.Column>
               </Grid.Row>
             </Grid>

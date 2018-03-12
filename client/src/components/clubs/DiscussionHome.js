@@ -5,19 +5,12 @@ import CommentForm from './CommentForm';
 import DiscussionForm from './DiscussionForm';
 import styled from 'styled-components';
 import { ButtonAction } from '../../styles/styles';
-import {
-  Accordion,
-  Divider,
-  Grid,
-  Header,
-  Icon,
-  Segment
-} from 'semantic-ui-react';
+import { Accordion, Divider, Grid, Header, Icon } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   padding: 1%;
   width: 100%;
-  .text-wrapper{
+  .text-wrapper {
     padding: 3% !important;
   }
 `;

@@ -13,15 +13,15 @@ import { Grid, Segment } from 'semantic-ui-react';
 const Wrapper = styled.div`
   height: 100%;
   padding: 1%;
-  .scroll-container{
+  .scroll-container {
     width: 70%;
-    padding:3% !important;
+    padding: 3% !important;
     margin: 0 auto !important;
   }
-  .row{
+  .row {
     width: 90% !important;
   }
-  .grid-row{
+  .grid-row {
     width: 100%;
     margin: 0 auto !important;
     padding: 0 !important;
@@ -42,8 +42,8 @@ class ClubHome extends React.Component {
     const { dispatch, readings } = this.props;
     const { readingsLoaded } = this.state;
     //A Club should have a reading before fetching discussions
-    if(readings.length > 0)
-      readingsLoaded && dispatch(fetchDiscussion(readings[0]))
+    if (readings.length > 0)
+      readingsLoaded && dispatch(fetchDiscussion(readings[0]));
   }
 
   setReadingsLoaded = () => {
@@ -59,16 +59,16 @@ class ClubHome extends React.Component {
     const { isModerator, readingsLoaded } = this.state;
     return (
       <Wrapper>
-        <Segment className='scroll-container'>
+        <Segment className="scroll-container">
           <Grid>
             <Grid.Row>
-              <Grid columns={2} className='grid-row'>
+              <Grid columns={2} className="grid-row">
                 <Grid.Column>
                   <CurrentReading
                     clubID={this.props.match.params.id}
                     isModerator={isModerator}
                     readingsLoaded={readingsLoaded}
-                    />
+                  />
                 </Grid.Column>
                 <Grid.Column>
                   <IntroductionHome />
