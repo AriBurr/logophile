@@ -8,6 +8,7 @@ import FormAccordion from './FormAccordion';
 import BookCover from '../books/BookCover';
 import MyClubs from '../library/MyClubs';
 import styled from 'styled-components';
+import { ButtonAction } from '../../styles/styles';
 import { Divider, Grid, Button } from 'semantic-ui-react';
 
 const Description = styled.div`
@@ -26,6 +27,9 @@ const Wrapper = styled.div`
   height: 100vh;
   overflow: auto;
   padding: 1%;
+  .with-button{
+    padding-top: 5%;
+  }
 `;
 
 class Clubs extends React.Component {
@@ -61,8 +65,14 @@ class Clubs extends React.Component {
                   <Link to={`/clubs/${c.id}`}>
                     (Read More)
                   </Link>
-                  <Button onClick={() => this.props.dispatch(joinClub(c.id))}>Join this club!</Button>
                 </Description>
+              </Grid.Row>
+              <Grid.Row className='with-button'>
+                <ButtonAction
+                  onClick={() => this.props.dispatch(joinClub(c.id))}
+                >
+                  Join this club!
+                </ButtonAction>
               </Grid.Row>
             </Grid.Column>
           </Grid>

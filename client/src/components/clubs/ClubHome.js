@@ -29,7 +29,9 @@ class ClubHome extends React.Component {
   componentWillUpdate() {
     const { dispatch, readings } = this.props;
     const { readingsLoaded } = this.state;
-    readingsLoaded && dispatch(fetchDiscussion(readings[0]))
+    //A Club should have a reading before fetching discussions
+    if(readings.length > 0)
+      readingsLoaded && dispatch(fetchDiscussion(readings[0]))
   }
 
   setReadingsLoaded = () => {
