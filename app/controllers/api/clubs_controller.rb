@@ -1,6 +1,6 @@
 class Api::ClubsController < ApiController
   before_action :require_login
-  before_action :set_club, only: [:show, :update, :destroy], except: [:find_user_clubs]
+  before_action :set_club, only: %i[show update destroy], except: [:find_user_clubs]
 
   def index
     render json: Club.with_current_reading
@@ -39,12 +39,12 @@ class Api::ClubsController < ApiController
   end
 
   private
-    def club_params
-      params.require(:club).permit(:name, :description)
-    end
 
-    def set_club
-      @club = Club.find(params[:id])
-    end
+  def club_params
+    params.require(:club).permit(:name, :description)
+  end
 
+  def set_club
+    @club = Club.find(params[:id])
+  end
 end

@@ -16,11 +16,12 @@ class Api::ReadingsController < ApplicationController
   end
 
   private
-    def reading_params
-      params.require(:reading).permit(:book_id, :club_id, :is_current, :start_date, :finish_date)
-    end
+  
+  def reading_params
+    params.require(:reading).permit(:book_id, :club_id, :is_current, :start_date, :finish_date)
+  end
 
-    def set_club
-      @club = Club.find(params[:club_id])
-    end
+  def set_club
+    @club = Club.find(params[:club_id])
+  end
 end

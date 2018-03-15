@@ -53,8 +53,8 @@ class SelectReadingDropdown extends React.Component {
     const { bookshelves } = this.props;
     const { bookshelf } = this.state;
     if (bookshelf !== value) {
-      const shelf = bookshelves.filter(shelf => shelf.name === value);
-      this.fetchBooks(shelf[0]);
+      const shelf = bookshelves.find(shelf => shelf.name === value);
+      this.fetchBooks(shelf);
     }
     this.setState({ bookshelf: value });
     this.setState({ bookshelfLoaded: true });
@@ -68,7 +68,7 @@ class SelectReadingDropdown extends React.Component {
   handleSubmit = () => {
     const { club, dispatch, readings, shelvings, toggleDropdown } = this.props;
     const { bookID, startDate, endDate } = this.state;
-    const reading = shelvings.filter(b => b.id === bookID)[0];
+    const reading = shelvings.find(b => b.id === bookID);
     if (readings.length !== 0) {
       const confirm = window.confirm(
         'This will archive the current reading. Are you sure?'

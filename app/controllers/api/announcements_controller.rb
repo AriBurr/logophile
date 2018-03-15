@@ -16,12 +16,11 @@ class Api::AnnouncementsController < ApplicationController
 
   private
 
-    def announcement_params
-      params.require(:announcement).permit(:body, :club_id)
-    end
+  def announcement_params
+    params.require(:announcement).permit(:body, :club_id)
+  end
 
-    def set_club
-      @club = Club.find(params[:club_id])
-    end
-
+  def set_club
+    @club = Club.find(params[:club_id])
+  end
 end

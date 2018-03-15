@@ -28,12 +28,13 @@ class Api::BookshelvesController < ApiController
   end
 
   private
-    def bookshelf_params
-      params.require(:bookshelf).permit(:name, :count)
-    end
+  
+  def bookshelf_params
+    params.require(:bookshelf).permit(:name, :count)
+  end
 
-    def set_bookshelf
-      @shelf = current_user.bookshelves.find(params[:id])
-    end
+  def set_bookshelf
+    @shelf = current_user.bookshelves.find(params[:id])
+  end
 
 end

@@ -43,9 +43,7 @@ class DiscussionHome extends React.Component {
     const { index } = titleProps;
     const { activeIndex } = this.state;
     const newIndex = activeIndex === index ? -1 : index;
-    const discussionID = discussion.filter(
-      d => d.title === e.target.innerText
-    )[0].id;
+    const discussionID = discussion.find(d => d.title === e.target.innerText).id;
     dispatch(fetchComments(discussionID));
     this.setState({ activeIndex: newIndex });
   };
