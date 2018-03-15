@@ -30,10 +30,10 @@ class BookshelfDropdown extends React.Component {
     const { bookshelf } = this.state;
     const { book, editBook, bookshelves, dispatch } = this.props;
     if (editBook === undefined) {
-      const shelf = bookshelves.filter(shelf => shelf.name === bookshelf);
-      dispatch(addBook(book, shelf[0]));
+      const shelf = bookshelves.find(shelf => shelf.name === bookshelf);
+      dispatch(addBook(book, shelf));
     } else {
-      const shelf = bookshelves.filter(shelf => shelf.name === bookshelf)[0];
+      const shelf = bookshelves.find(shelf => shelf.name === bookshelf);
       const fromShelf = editBook.bookshelf_id;
       const shelving = {
         id: editBook.shelving_id,
