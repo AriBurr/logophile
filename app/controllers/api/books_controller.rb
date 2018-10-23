@@ -15,8 +15,8 @@ class Api::BooksController < ApiController
   end
 
   private
-    def book_params
-      params.require(:book).permit(:item)
-    end
 
+  def book_params
+    params.require(:book).permit(:item)
+  end
 end

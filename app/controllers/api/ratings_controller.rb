@@ -15,12 +15,12 @@ class Api::RatingsController < ApiController
   end
 
   private
-    def rating_params
-      params.require(:rating).permit(:value, :book_id, :user_id)
-    end
+  
+  def rating_params
+    params.require(:rating).permit(:value, :book_id, :user_id)
+  end
 
-    def set_book
-      @book = Book.find(params[:book_id])
-    end
-
+  def set_book
+    @book = Book.find(params[:book_id])
+  end
 end

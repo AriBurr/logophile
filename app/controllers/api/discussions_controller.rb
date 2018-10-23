@@ -29,16 +29,16 @@ class Api::DiscussionsController < ApiController
   end
 
   private
-    def discussion_params
-      params.require(:discussion).permit(:title, :content, :reading_id)
-    end
 
-    def set_discussion
-      @discussion = current_user.discussions.find(params[:id])
-    end
+  def discussion_params
+    params.require(:discussion).permit(:title, :content, :reading_id)
+  end
 
-    def set_reading
-      @reading = Reading.find(params[:reading_id])
-    end
+  def set_discussion
+    @discussion = current_user.discussions.find(params[:id])
+  end
 
+  def set_reading
+    @reading = Reading.find(params[:reading_id])
+  end
 end

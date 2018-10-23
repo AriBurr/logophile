@@ -11,8 +11,8 @@ class Api::MembershipsController < ApiController
   end
 
   private
-    def membership_params
-      params.require(:membership).permit(:user_id, :club_id, :is_moderator)
-    end
-
+  
+  def membership_params
+    params.require(:membership).permit(:user_id, :club_id, :is_moderator)
+  end
 end

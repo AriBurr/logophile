@@ -29,15 +29,16 @@ class Api::CommentsController < ApiController
   end
 
   private
-    def comment_params
-      params.require(:comment).permit(:content, :discussion_id)
-    end
+  
+  def comment_params
+    params.require(:comment).permit(:content, :discussion_id)
+  end
 
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
 
-    def set_discussion
-      @discussion = Discussion.find(params[:discussion_id])
-    end
+  def set_discussion
+    @discussion = Discussion.find(params[:discussion_id])
+  end
 end
