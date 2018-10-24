@@ -16,7 +16,7 @@ class Api::ReadingsController < ApplicationController
   end
 
   private
-  
+
   def reading_params
     params.require(:reading).permit(:book_id, :club_id, :is_current, :start_date, :finish_date)
   end

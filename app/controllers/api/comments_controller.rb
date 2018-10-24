@@ -1,6 +1,6 @@
 class Api::CommentsController < ApiController
   before_action :require_login
-  before_action :set_comment, only: [:update, :destroy]
+  before_action :set_comment, only: %i[update destroy]
   before_action :set_discussion, only: [:index]
 
   def index
@@ -29,7 +29,7 @@ class Api::CommentsController < ApiController
   end
 
   private
-  
+
   def comment_params
     params.require(:comment).permit(:content, :discussion_id)
   end

@@ -1,6 +1,6 @@
 class Api::BookshelvesController < ApiController
   before_action :require_login
-  before_action :set_bookshelf, only: [:update, :destroy]
+  before_action :set_bookshelf, only: %i[update destroy]
 
   def index
     render json: current_user.bookshelves.all.order(created_at: :asc)
@@ -28,7 +28,7 @@ class Api::BookshelvesController < ApiController
   end
 
   private
-  
+
   def bookshelf_params
     params.require(:bookshelf).permit(:name, :count)
   end
