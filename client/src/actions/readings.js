@@ -44,8 +44,7 @@ export const fetchReadings = (id, callback = {}) => {
       .get(`/api/readings?club_id=${id}`, setHeaders())
       .then(res => {
         dispatch({ type: 'GET_READINGS', readings: res.data });
-        if (typeof callback === 'function')
-          callback();
+        if (typeof callback === 'function') callback();
       })
       .catch(err => {
         dispatch(setFlash('Could not fetch readings!', 'red'));

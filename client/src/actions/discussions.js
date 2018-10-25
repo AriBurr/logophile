@@ -2,7 +2,7 @@ import axios from 'axios';
 import { setFlash } from '../actions/flash';
 import { setHeaders } from '../actions/headers';
 
-export const addDiscussion = (discussion) => {
+export const addDiscussion = discussion => {
   return dispatch => {
     axios
       .post(`/api/discussions/`, { discussion }, setHeaders())
@@ -18,7 +18,7 @@ export const addDiscussion = (discussion) => {
   };
 };
 
-export const fetchDiscussion = (reading) => {
+export const fetchDiscussion = reading => {
   return dispatch => {
     axios
       .get(`/api/discussions?reading_id=${reading.reading_id}`, setHeaders())
