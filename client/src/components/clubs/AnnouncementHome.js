@@ -13,7 +13,6 @@ const Container = styled.div`
   width: 97%;
 `;
 
-
 class AnnouncementHome extends React.Component {
   state = { edit: false, isModerator: false };
 

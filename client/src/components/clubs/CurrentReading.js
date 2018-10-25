@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   background: rgba(0, 0, 0, 0.025) !important;
   .heading {
     text-align: center;
-    color: #1C263D;
+    color: #1c263d;
   }
 `;
 
