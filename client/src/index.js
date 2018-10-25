@@ -16,12 +16,12 @@ injectGlobal`
   html :not(i) {
     font-family: 'Lato', sans-serif !important;
   }
-`
+`;
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <div id='content'>
+      <div id="content">
         <App />
       </div>
     </BrowserRouter>
