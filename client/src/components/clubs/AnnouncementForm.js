@@ -41,7 +41,9 @@ class AnnouncementForm extends React.Component {
             name={edit && 'body'}
             value={edit && body}
           />
-        {edit && <ButtonWarning onClick={() => toggleEdit()}>Cancel</ButtonWarning>}
+          {edit && (
+            <ButtonWarning onClick={() => toggleEdit()}>Cancel</ButtonWarning>
+          )}
           <ButtonAction type="submit">Submit</ButtonAction>
         </Form>
       </Wrapper>

@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   height: 100vh;
   overflow: auto;
   padding: 1%;
-  .with-button{
+  .with-button {
     padding-top: 5%;
   }
 `;
@@ -61,13 +61,11 @@ class Clubs extends React.Component {
               </Grid.Row>
               <Grid.Row>
                 <Description>
-                  {paginateText(c.description, 240)}{" "}
-                  <Link to={`/clubs/${c.id}`}>
-                    (Read More)
-                  </Link>
+                  {paginateText(c.description, 240)}{' '}
+                  <Link to={`/clubs/${c.id}`}>(Read More)</Link>
                 </Description>
               </Grid.Row>
-              <Grid.Row className='with-button'>
+              <Grid.Row className="with-button">
                 <ButtonAction
                   onClick={() => this.props.dispatch(joinClub(c.id))}
                 >

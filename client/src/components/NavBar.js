@@ -77,12 +77,10 @@ class NavBar extends Component {
       { match: '/clubs/', text: 'Your Clubs' }
     ];
     const headerText = data.filter(each => {
-      if (path === each.match)
-        return each.text;
-      return null
+      if (path === each.match) return each.text;
+      return null;
     });
-    if (headerText.length < 1)
-      return ''
+    if (headerText.length < 1) return '';
     return headerText[0].text;
   };
 
