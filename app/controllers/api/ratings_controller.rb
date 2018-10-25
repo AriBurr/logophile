@@ -1,6 +1,6 @@
 class Api::RatingsController < ApiController
   before_action :require_login
-  before_action :set_book, only: [:create, :update]
+  before_action :set_book, only: %i[create update]
 
   def create
     review = current_user.ratings.new(rating_params)
@@ -11,11 +11,10 @@ class Api::RatingsController < ApiController
     end
   end
 
-  def update
-  end
+  def update; end
 
   private
-  
+
   def rating_params
     params.require(:rating).permit(:value, :book_id, :user_id)
   end

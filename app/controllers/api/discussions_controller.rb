@@ -1,6 +1,6 @@
 class Api::DiscussionsController < ApiController
   before_action :require_login
-  before_action :set_discussion, only: [:update, :destroy]
+  before_action :set_discussion, only: %i[update destroy]
   before_action :set_reading, only: [:index]
 
   def index
