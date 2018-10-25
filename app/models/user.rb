@@ -24,9 +24,7 @@ class User < ApplicationRecord
 
   def self.valid_login?(email, password)
     user = find_by(email: email)
-    if user && user.authenticate(password)
-      user
-    end
+    user if user&.authenticate(password)
   end
 
   def allow_token_to_be_used_only_once
@@ -45,8 +43,8 @@ class User < ApplicationRecord
   private
 
   def build_default_bookshelves
-    Bookshelf.create(name: 'Read', user_id: self.id)
-    Bookshelf.create(name: 'Will Read', user_id: self.id)
+    Bookshelf.create(name: 'Read', user_id: id)
+    Bookshelf.create(name: 'Will Read', user_id: id)
   end
 
   def invalidate_token
