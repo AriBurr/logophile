@@ -18,7 +18,7 @@ class Api::ShelvingsController < ApiController
 
   def update
     shelving = Shelving.find(params[:id])
-    Bookshelf.handle_count(params[:shelf_id],params[:from_shelf].to_i)
+    Bookshelves::BookshelfBank.new(params[:shelf_id], params[:from_shelf]).call
     if shelving.update(shelving_params)
       render json: {
         shelves: current_user.bookshelves.order(created_at: :asc),
