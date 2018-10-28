@@ -8,7 +8,7 @@ class Api::ShelvingsController < ApiController
 
   def create
     shelving = @bookshelf.shelvings.new(shelving_params)
-    Bookshelf.change_count('inc', @bookshelf)
+    Bookshelves::BookshelfBank.new('inc', @bookshelf).change_count
     if shelving.save
       render json: shelving
     else
@@ -31,8 +31,9 @@ class Api::ShelvingsController < ApiController
 
   def destroy
     shelving = Shelving.find(params[:id].to_i)
+    bookshelf = Bookshelves::BookshelfBank.new('dec', @bookshelf).change_count
     if shelving.destroy
-      render json: Bookshelf.change_count('dec', @bookshelf)
+      render json: bookshelf
     else
       render json: { errors: shelf.errors.full_messages.join(', ')}, status: 422
     end
