@@ -20,18 +20,9 @@ class Book < ApplicationRecord
 
   def self.only_with_ratings
     distinct.select('books.item, r.book_id, COUNT(r.book_id) AS review_count, AVG(r.value)')
-    .joins('INNER JOIN ratings AS r ON books.id = r.book_id')
-    .group('r.book_id, books.item')
-    .order('avg DESC')
-    .limit('20')
-  end
-
-  def self.change_count(action, bookshelf)
-    case action
-      when 'inc'
-        bookshelf.update(book_count: bookshelf.book_count += 1)
-      when 'dec'
-        bookshelf.update(book_count: bookshelf.book_count -= 1)
-    end
+      .joins('INNER JOIN ratings AS r ON books.id = r.book_id')
+      .group('r.book_id, books.item')
+      .order('avg DESC')
+      .limit('20')
   end
 end
