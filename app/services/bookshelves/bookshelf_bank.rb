@@ -8,12 +8,9 @@ module Bookshelves
     attr_accessor :inbound, :outbound
 
     def call
-      binding.pry
       return if inbound == outbound
-      adding_to_shelf = bookshelf(inbound)
-      leaving_shelf = bookshelf(outbound)
-      increment(adding_to_shelf)
-      decrement(bookshelf(leaving_shelf))
+      increment(find_bookshelf(inbound))
+      decrement(find_bookshelf(outbound))
     end
 
     private
@@ -26,8 +23,8 @@ module Bookshelves
       shelf.update(book_count: shelf.book_count - 1)
     end
 
-    def bookshelf(id)
-      @_bookshelf ||= Bookshelf.find(id)
+    def find_bookshelf(id)
+      @_bookshelf = Bookshelf.find(id)
     end
   end
 end
